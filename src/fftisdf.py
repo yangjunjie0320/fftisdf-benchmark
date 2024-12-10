@@ -20,6 +20,12 @@ from pyscf.pbc.df.df_jk import _format_dms, _format_kpts_band, _format_jks
 PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 160000))
 
 def build(df_obj):
+    """
+    Build the FFT-ISDF object.
+    
+    Args:
+        df_obj: The FFT-ISDF object to build.
+    """
     log = logger.new_logger(df_obj, df_obj.verbose)
     pcell = df_obj.cell
 
@@ -48,6 +54,20 @@ def build(df_obj):
 
 def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
                exxdiv=None):
+    """
+    Get the J matrix for a set of k-points.
+    
+    Args:
+        df_obj: The FFT-ISDF object. 
+        dm_kpts: Density matrices at each k-point.
+        hermi: Whether the density matrices are Hermitian.
+        kpts: The k-points to calculate J for.
+        kpts_band: The k-points of the bands.
+        exxdiv: The divergence of the exchange functional (ignored).
+        
+    Returns:
+        The J matrix at the specified k-points.
+    """
     log = logger.new_logger(df_obj, df_obj.verbose)
     cell = df_obj.cell
     mesh = df_obj.mesh
@@ -144,16 +164,29 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     return _format_jks(vk_kpts, dms, input_band, kpts)
 
 class InterpolativeSeparableDensityFitting(FFTDF):
-    _isdf = None
+    """
+    Interpolated Separable Density Fitting (ISDF) with FFT
+    
+    Args:
+        cell: The cell object
+        kpts: The k-points to use
+        kmesh: The k-point mesh to use
+        c0: The c0 parameter for ISDF
+        m0: The m0 parameter for ISDF
+    """
     blksize = 8000  # block size for the aoR_loop
-
     lstsq_driver = "gelsy"
 
-    def __init__(self, cell, kpts, m0=None, c0=20.0):
-        super().__init__(cell, kpts)
-        self.m0 = m0 or [10, 10, 10]
-        self.c0 = c0
+    _isdf = None
+    _x = None
+    _w = None
 
+    def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=0.25, m0=0.0):
+        FFTDF.__init__(self, cell, kpts)
+        self.kmesh = kmesh
+        self.c0 = c0
+        self.m0 = m0
+        
     def build(self):
         log = logger.new_logger(self, self.verbose)
         log.info("\n")
@@ -348,20 +381,19 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         x2_s = x2_s.reshape(nimg, nip, nip)
         x2_s = x2_s.real
 
-        # lagrangian of the linear equation
-        l_s = x2_s * x2_s
-        l_s = l_s * l_s
-        l_q = phase.conj().T @ l_s.reshape(nimg, -1)
-        l_q = l_q.reshape(nkpt, nip, nip)
-        assert l_q.shape == (nkpt, nip, nip)
+        aq = phase.conj().T @ (x2_s * x2_s).reshape(nimg, -1)
+        aq = aq.reshape(nkpt, nip, nip)
+        assert aq.shape == (nkpt, nip, nip)
+
+        t1 = log.timer("building left-hand side", *t0)
+        return aq
     
-    def solve(self, a, b):
+    def solve(self, aq, bq):
         log = logger.new_logger(self, self.verbose)
         t0 = (process_clock(), perf_counter())
 
         nkpt = len(kpts)
-        nao = self.cell.nao_nr()
-        nip = a.shape[1]
+        nip = aq.shape[1]
 
         pcell = self.cell
         kmesh = self.kmesh
@@ -375,17 +407,17 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         coord = grids.coords
         ngrid = coord.shape[0]
 
-        gv = pcell.get_Gv(mesh)
         assert aq.shape == (nkpt, nip, nip)
         assert bq.shape == (nkpt, nip, ngrid)
 
         wq = []
-        for q in range(len(kpts)):
+        gv = pcell.get_Gv(mesh)
+
+        for q in range(nkpt):
             # solving the over-determined linear equation
             # aq @ zq = bq
-
-            a = aq[q] # the left-hand side of the linear equation
-            b = bq[q] # the right-hand side of the linear equation
+            a = aq[q]
+            b = bq[q]
             f = numpy.exp(-1j * numpy.dot(coord, kpts[q]))
             assert f.shape == (ngrid, )
 
@@ -401,12 +433,11 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             assert zeta.shape == (nip, ngrid)
 
             from pyscf.pbc.tools.pbc import ifft
-            zeta_q = ifft(zeta, mesh)
-            zeta_q *= f.conj()
+            w = ifft(zeta, mesh) * f.conj()
+            wq.append(w @ z.conj().T)
 
-            w = ifft(zeta_q, mesh) * f.conj()
-            w = w @ z.conj().T
-            wq.append(w)
+            log.info("finished w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
+            t0 = log.timer("w[%3d]", *t0)
 
         return wq
     
