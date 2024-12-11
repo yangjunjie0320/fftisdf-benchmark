@@ -1,19 +1,20 @@
 name: fftisdf
 channels:
   - defaults
-  - conda-forge  
+  - conda-forge
   - pytorch
 dependencies:
   - ase
-  - mp_api
+  - mp-api
   - python=3.9.18
   - numpy=1.26.3
   - scipy=1.11.4
   - h5py=3.9.0
-  - pyscf=2.2.1
   - mpi4py=3.1.4
   - cotengra=0.6.2
   - opt_einsum=3.3.0
   - pytorch=2.3.1
   - torchvision=0.18.1
   - torchaudio=2.3.1
+  - pip:
+    - pyscf==2.2.1
