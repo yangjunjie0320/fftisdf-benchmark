@@ -14,8 +14,44 @@ from pyscf.pbc.lib.kpts_helper import is_zero
 from pyscf.pbc.tools.k2gamma import get_phase
 from pyscf.pbc.df.df_jk import _format_dms, _format_kpts_band, _format_jks
 
+import line_profiler
+
 PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 160000))
 
+@line_profiler.profile
+def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
+    """
+    Build the FFT-ISDF object.
+    
+    Args:
+        df_obj: The FFT-ISDF object to build.
+    """
+    log = logger.new_logger(df_obj, df_obj.verbose)
+
+    cell = df_obj.cell
+    assert numpy.allclose(cell.get_kpts(kmesh), kpts)
+    nkpt = len(kpts)
+
+    # build the interpolation vectors
+    x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
+    nip, nao = x_k.shape[1:]
+    assert x_k.shape == (nkpt, nip, nao)
+    log.info(
+        "Number of interpolation points = %d, effective CISDF = %6.2f",
+        nip, nip / nao
+    )
+
+    # build the linear equation
+    a_k = df_obj._make_lhs(x_k, kpts=kpts, kmesh=kmesh)
+    b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
+
+    # solve the linear equation
+    w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
+    assert w_k.shape == (nkpt, nip, nip)
+
+    return x_k, w_k
+
+@line_profiler.profile
 def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
@@ -69,6 +105,7 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     t1 = log.timer("building right-hand side", *t0)
     return b_k
 
+@line_profiler.profile
 def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
@@ -106,38 +143,7 @@ def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     t1 = log.timer("building left-hand side", *t0)
     return a_k
 
-def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
-    """
-    Build the FFT-ISDF object.
-    
-    Args:
-        df_obj: The FFT-ISDF object to build.
-    """
-    log = logger.new_logger(df_obj, df_obj.verbose)
-
-    cell = df_obj.cell
-    assert numpy.allclose(cell.get_kpts(kmesh), kpts)
-    nkpt = len(kpts)
-
-    # build the interpolation vectors
-    x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
-    nip, nao = x_k.shape[1:]
-    assert x_k.shape == (nkpt, nip, nao)
-    log.info(
-        "Number of interpolation points = %d, effective CISDF = %6.2f",
-        nip, nip / nao
-    )
-
-    # build the linear equation
-    a_k = df_obj._make_lhs(x_k, kpts=kpts, kmesh=kmesh)
-    b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
-
-    # solve the linear equation
-    w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
-    assert w_k.shape == (nkpt, nip, nip)
-
-    return x_k, w_k
-
+@line_profiler.profile
 def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
                exxdiv=None):
     """
@@ -204,6 +210,7 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         vj_kpts = vj_kpts.real
     return _format_jks(vj_kpts, dms, input_band, kpts)
 
+@line_profiler.profile
 def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
                exxdiv=None):
     cell = df_obj.cell
@@ -262,7 +269,6 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
 
     vk_kpts = numpy.asarray(vk_kpts).reshape(nset, nkpt, nao, nao)
     return _format_jks(vk_kpts, dms, input_band, kpts)
-
 
 class InterpolativeSeparableDensityFitting(FFTDF):
     """
@@ -541,11 +547,11 @@ if __name__ == "__main__":
     cell.unit = 'aa'
     cell.precision = 1e-10
     cell.exp_to_discard = 0.1
-    cell.max_memory = 4000
-    cell.ke_cutoff = 10
+    cell.max_memory = PYSCF_MAX_MEMORY
+    cell.ke_cutoff = 200
     cell.build(dump_input=False)
 
-    kmesh = [4, 4, 4]
+    kmesh = [2, 2, 2]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
