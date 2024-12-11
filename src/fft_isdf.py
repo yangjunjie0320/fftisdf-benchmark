@@ -542,7 +542,7 @@ if __name__ == "__main__":
     cell.precision = 1e-10
     cell.exp_to_discard = 0.1
     cell.max_memory = 4000
-    cell.ke_cutoff = 20
+    cell.ke_cutoff = 10
     cell.build(dump_input=False)
 
     kmesh = [4, 4, 4]
@@ -554,7 +554,7 @@ if __name__ == "__main__":
     dm_kpts = scf_obj.get_init_guess()
 
     scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = 20.0
+    scf_obj.with_df.c0 = 40.0
     scf_obj.with_df.m0 = [15, 15, 15]
     scf_obj.with_df.verbose = 5
     scf_obj.with_df.tol = 1e-20
