@@ -1,12 +1,11 @@
 import os, sys, numpy, scipy
-from mp_api.client import MPRester as M
-
 API_KEY = os.getenv("MP_API_KEY", None)
 TMPDIR = os.getenv("TMPDIR", "/tmp")
 assert os.path.exists(TMPDIR), f"TMPDIR {TMPDIR} does not exist"
 
 def download_poscar(mid: str, name=None, path=None, is_conventional=False,
                     supercell_factor=None):
+    from mp_api.client import MPRester as M
     if path is None:
         path = TMPDIR
 
@@ -37,7 +36,8 @@ def ase_atoms_to_pyscf(ase_atoms):
     
 def cell_from_poscar(poscar_file: str):
     import ase
-    atoms = ase.io.read(poscar_file)
+    from ase.io import read
+    atoms = read(poscar_file)
 
     from pyscf.pbc import gto
     c = gto.Cell()
