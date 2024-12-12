@@ -90,12 +90,11 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     
     log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
     for ao_k, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
-        t_k = numpy.asarray([f @ x.T for f, x in zip(ao_k[0], x_k)])
+        t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
         assert t_k.shape == (nkpt, g1 - g0, nip)
 
         t_s = phase @ t_k.reshape(nkpt, -1)
         t_s = t_s.reshape(nimg, g1 - g0, nip)
-        t_s = t_s.real
 
         b_s = (t_s * t_s).reshape(nimg, -1)
         b_k[:, g0:g1, :] = (phase.T @ b_s).reshape(nkpt, g1 - g0, nip)
@@ -133,7 +132,6 @@ def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
 
     x2_s = phase @ x2_k.reshape(nkpt, -1)
     x2_s = x2_s.reshape(nimg, nip, nip)
-    x2_s = x2_s.real
 
     a_s = x2_s * x2_s
     a_k = phase.conj().T @ (a_s.reshape(nimg, -1))
@@ -373,9 +371,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     def _make_inp_vec(self, m0=None, c0=None, kpts=None, kmesh=None):
         if m0 is None:
             m0 = self.m0
-
-        print("m0 = %s" % m0)
-        print("c0 = %s" % c0)
         g0 = self.cell.gen_uniform_grids(m0)
 
         if c0 is None:
@@ -478,18 +473,12 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         coord = grids.coords
         ngrid = coord.shape[0]
 
-        assert a_q.shape == (nkpt, nip, nip)
-        assert b_q.shape == (nkpt, ngrid, nip)
-
         w_k = []
         gv = pcell.get_Gv(mesh)
 
-        for q in range(nkpt):
-            # solving the over-determined linear equation
-            # aq @ zq = bq
-            a = a_q[q]
-            b = b_q[q]
-            f = numpy.exp(-1j * numpy.dot(coord, kpts[q]))
+        for q, (a, b) in enumerate(zip(a_q, b_q)):
+            t = numpy.dot(coord, kpts[q])
+            f = numpy.exp(-1j * t)
             assert f.shape == (ngrid, )
 
             from scipy.linalg import lstsq
@@ -499,18 +488,19 @@ class InterpolativeSeparableDensityFitting(FFTDF):
                 a, b.T, cond=tol,
                 lapack_driver=lstsq_driver
             )
-            z = res[0].T
-            rank = res[2]
 
-            zeta = pbctools.fft((f[:, None] * z).T, mesh)
-            assert zeta.shape == (nip, ngrid)
+            z = res[0]
+            rank = res[2]
+            assert z.shape == (nip, ngrid)
+
+            zeta = pbctools.fft(z * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
             zeta *= pcell.vol / ngrid
             assert zeta.shape == (nip, ngrid)
 
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
-            w_k.append(coul @ z.conj())
+            w_k.append(coul @ z.conj().T)
 
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
             t0 = log.timer("w[%3d]" % q, *t0)
@@ -543,7 +533,7 @@ if __name__ == "__main__":
     from build import cell_from_poscar
 
     cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
-    cell.basis = 'gth-dzvp-molopt-sr'
+    cell.basis = 'gth-szv-molopt-sr'
     cell.pseudo = 'gth-pade'
     cell.verbose = 0
     cell.unit = 'aa'
@@ -567,6 +557,9 @@ if __name__ == "__main__":
     scf_obj.with_df.tol = 1e-10
     scf_obj.with_df.build()
 
+    w, x = scf_obj.with_df._w, scf_obj.with_df._x
+    print(w.shape, x.shape)
+
     log = logger.new_logger(None, 5)
     t0 = (process_clock(), perf_counter())
     vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
@@ -587,3 +580,56 @@ if __name__ == "__main__":
 
     err = abs(vk0 - vk1).max()
     print("-> ISDF c0 = % 6.4f, vk err = % 6.4e" % (c0, err))
+
+    from opt_einsum import contract as einsum
+
+    from pyscf.pbc.lib.kpts_helper import get_kconserv
+    from pyscf.pbc.lib.kpts_helper import get_kconserv_ria
+    vk = cell.get_kpts(kmesh)
+    kconserv3 = get_kconserv(cell, vk)
+    kconserv2 = get_kconserv_ria(cell, vk)
+    
+    df_obj = scf_obj.with_df
+    nao = cell.nao_nr()
+    for k1, vk1 in enumerate(vk):
+        for k2, vk2 in enumerate(vk):
+            q = kconserv2[k1, k2]
+            vq = vk[q]
+ 
+            for k3, vk3 in enumerate(vk):
+                k4 = kconserv3[k1, k2, k3]
+                vk4 = vk[k4]
+
+                eri_ref = df_obj.get_eri(kpts=[vk1, vk2, vk3, vk4], compact=False)
+                eri_ref = eri_ref.reshape(nao * nao, nao * nao)
+
+                x1, x2, x3, x4 = [x[k] for k in [k1, k2, k3, k4]]
+                eri_sol = einsum("IJ,Im,In,Jk,Jl->mnkl", w[q], x1.conj(), x2, x3.conj(), x4)
+                eri_sol = eri_sol.reshape(nao * nao, nao * nao)
+
+                eri = abs(eri_sol - eri_ref).max()
+                print(f"{k1 = :2d}, {k2 = :2d}, {k3 = :2d}, {k4 = :2d} {eri = :6.2e}")
+
+                if eri > 1e-4:
+
+                    print(" q = %2d, vq  = [%s]" % (q, ", ".join(f"{v: 6.4f}" for v in vq)))
+                    print("k1 = %2d, vk1 = [%s]" % (k1, ", ".join(f"{v: 6.4f}" for v in vk1)))
+                    print("k2 = %2d, vk2 = [%s]" % (k2, ", ".join(f"{v: 6.4f}" for v in vk2)))
+                    print("k3 = %2d, vk3 = [%s]" % (k3, ", ".join(f"{v: 6.4f}" for v in vk3)))
+                    print("k4 = %2d, vk4 = [%s]" % (k4, ", ".join(f"{v: 6.4f}" for v in vk4)))
+
+                    print(f"\n{eri_sol.shape = }")
+                    numpy.savetxt(cell.stdout, eri_sol[:10, :10].real, fmt="% 6.4e", delimiter=", ")
+
+                    print(f"\neri_sol.imag = ")
+                    numpy.savetxt(cell.stdout, eri_sol[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
+
+                    print(f"\n{eri_ref.shape = }")
+                    numpy.savetxt(cell.stdout, eri_ref[:10, :10].real, fmt="% 6.4e", delimiter=", ")
+
+                    print(f"\neri_ref.imag = ")
+                    numpy.savetxt(cell.stdout, eri_ref[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
+
+                    assert 1 == 2
+
+

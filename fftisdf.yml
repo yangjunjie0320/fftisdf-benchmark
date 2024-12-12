@@ -6,17 +6,15 @@ channels:
 dependencies:
   - ase
   - mp-api
-  - python=3.9.18
-  - numpy=1.26.3
-  - scipy=1.11.4
-  - h5py=3.9.0
-  - mpi4py=3.1.4
-  - cotengra=0.6.2
-  - opt_einsum=3.3.0
-  - pytorch=2.3.1
-  - torchvision=0.18.1
-  - torchaudio=2.3.1
+  - python
+  - numpy
+  - scipy
+  - h5py
+  - mpi4py
+  - cotengra
+  - opt_einsum
+  - pytorch
+  - torchvision
+  - torchaudio
   - line_profiler
-  - pip
-  - pip:
-    - pyscf
+  - pyscf
