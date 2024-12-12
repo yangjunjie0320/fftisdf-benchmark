@@ -185,7 +185,7 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
 
     x_k = df_obj._x
     w_k = df_obj._w
-    w0 = w_k[0].real
+    w0 = w_k[0] # .real
 
     nip = x_k.shape[1]
     assert x_k.shape == (nkpt, nip, nao)
@@ -256,8 +256,8 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         assert rhok.shape == (nkpt, nip, nip)
 
         rhos = phase @ rhok.reshape(nkpt, -1)
-        assert abs(rhos.imag).max() < 1e-10
-        rhos = rhos.real.reshape(nimg, nip, nip)
+        rhos = rhos.real
+        rhos = rhos.reshape(nimg, nip, nip)
 
         v_s = w_s * rhos.transpose(0, 2, 1)
         v_s = numpy.asarray(v_s).reshape(nimg, nip, nip)
@@ -265,7 +265,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         v_k = phase.T @ v_s.reshape(nimg, -1)
         v_k = v_k.reshape(nkpt, nip, nip)
 
-        vk_kpts.append([x.conj().T @ v @ x for x, v in zip(df_obj._x, v_k)])
+        vk_kpts.append([x.conj().T @ v @ x for x, v in zip(x_k, v_k)])
 
     vk_kpts = numpy.asarray(vk_kpts).reshape(nset, nkpt, nao, nao)
     return _format_jks(vk_kpts, dms, input_band, kpts)
@@ -318,11 +318,11 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         from pyscf.pbc.tools.pbc import mesh_to_cutoff
         from pyscf.pbc.tools.pbc import cutoff_to_mesh
         m0 = self.m0
-        k0 = mesh_to_cutoff(self.cell.a, m0)
-        k0 = max(k0)
-        log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
+        # k0 = mesh_to_cutoff(self.cell.a, m0)
+        # k0 = max(k0)
+        # log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
 
-        m0 = cutoff_to_mesh(self.cell.a, k0)
+        # m0 = cutoff_to_mesh(self.cell.a, k0)
         c0 = self.c0
         self.m0 = m0
         log.info("Final parent grid size = %s", m0)
@@ -373,6 +373,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     def _make_inp_vec(self, m0=None, c0=None, kpts=None, kmesh=None):
         if m0 is None:
             m0 = self.m0
+
+        print("m0 = %s" % m0)
+        print("c0 = %s" % c0)
         g0 = self.cell.gen_uniform_grids(m0)
 
         if c0 is None:
@@ -450,6 +453,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             
         return _make_lhs_incore(self, x_k, kpts=kpts, kmesh=kmesh)
     
+    @line_profiler.profile
     def solve(self, a_q, b_q, kpts=None, kmesh=None):
         log = logger.new_logger(self, self.verbose)
         t0 = (process_clock(), perf_counter())
@@ -527,43 +531,43 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         kpts, is_single_kpt = _check_kpts(self, kpts)
         if is_single_kpt:
             raise NotImplementedError
-        else:
-            vj = vk = None
-            if with_k:
-                vk = get_k_kpts(self, dm, hermi, kpts, kpts_band, exxdiv)
-            if with_j:
-                vj = get_j_kpts(self, dm, hermi, kpts, kpts_band)
+
+        vj = vk = None
+        if with_k:
+            vk = get_k_kpts(self, dm, hermi, kpts, kpts_band, exxdiv)
+        if with_j:
+            vj = get_j_kpts(self, dm, hermi, kpts, kpts_band)
         return vj, vk
 
 ISDF = InterpolativeSeparableDensityFitting
 
 if __name__ == "__main__":
+    DATA_PATH = os.getenv("DATA_PATH", None)
     from build import cell_from_poscar
 
-    cell = cell_from_poscar("../data/diamond-conv.vasp")
-    cell.basis = 'gth-szv-molopt-sr'
+    cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
+    cell.basis = 'gth-dzvp-molopt-sr'
     cell.pseudo = 'gth-pade'
     cell.verbose = 0
     cell.unit = 'aa'
-    cell.precision = 1e-10
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
-    cell.ke_cutoff = 200
+    cell.mesh = [5, 5, 5]
     cell.build(dump_input=False)
 
-    kmesh = [2, 2, 2]
+    kmesh = [4, 4, 4]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
     scf_obj = pyscf.pbc.scf.KRHF(cell, kpts=kpts)
     scf_obj.exxdiv = None
-    dm_kpts = scf_obj.get_init_guess()
+    dm_kpts = scf_obj.get_init_guess(key="1e")
 
     scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = 40.0
+    scf_obj.with_df.c0 = 60.0
     scf_obj.with_df.m0 = [15, 15, 15]
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.tol = 1e-20
+    scf_obj.with_df.tol = 1e-10
     scf_obj.with_df.build()
 
     log = logger.new_logger(None, 5)
@@ -574,6 +578,10 @@ if __name__ == "__main__":
 
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
+    scf_obj.with_df.verbose = 200
+    scf_obj.with_df.dump_flags()
+    scf_obj.with_df.check_sanity()
+    scf_obj.with_df.mesh = [5, 5, 5]
     vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     t1 = log.timer("-> FFTDF JK", *t0)
 
