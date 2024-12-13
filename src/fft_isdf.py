@@ -18,6 +18,22 @@ import line_profiler
 
 PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 160000))
 
+def s2k(m, p):
+    """Convert a matrix from the stripe form (in super-cell)
+    to the k-space form.
+    """
+    nimg, nkpt = p.shape
+    n = p.T.conj() @ m.reshape(nimg, -1)
+    return n.reshape(m.shape)
+
+def k2s(m, p):
+    """Convert a matrix from the k-space form to
+    stripe form (in super-cell).
+    """
+    nimg, nkpt = p.shape
+    n = p @ m.reshape(nkpt, -1)
+    return n.reshape(m.shape)
+
 @line_profiler.profile
 def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     """
@@ -93,11 +109,11 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
         t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
         assert t_k.shape == (nkpt, g1 - g0, nip)
 
-        t_s = phase @ t_k.reshape(nkpt, -1)
+        t_s = k2s(t_k, phase)
         t_s = t_s.reshape(nimg, g1 - g0, nip)
 
-        b_s = (t_s * t_s).reshape(nimg, -1)
-        b_k[:, g0:g1, :] = (phase.T @ b_s).reshape(nkpt, g1 - g0, nip)
+        b_s = (t_s * t_s)
+        b_k[:, g0:g1, :] = s2k(b_s, phase).conj()
 
         log.debug("finished aoR_loop[%8d:%8d]", g0, g1)
 
@@ -130,12 +146,11 @@ def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     x2_k = numpy.asarray([x.conj() @ x.T for x in x_k])
     assert x2_k.shape == (nkpt, nip, nip)
 
-    x2_s = phase @ x2_k.reshape(nkpt, -1)
-    x2_s = x2_s.reshape(nimg, nip, nip)
+    x2_s = k2s(x2_k, phase)
+    assert x2_s.shape == (nimg, nip, nip)
 
-    a_s = x2_s * x2_s
-    a_k = phase.conj().T @ (a_s.reshape(nimg, -1))
-    a_k = a_k.reshape(nkpt, nip, nip)
+    a_s = (x2_s * x2_s)
+    a_k = s2k(a_s, phase)
     assert a_k.shape == (nkpt, nip, nip)
 
     t1 = log.timer("building left-hand side", *t0)
@@ -238,30 +253,29 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     x_k = df_obj._x
     nip = x_k.shape[1]
 
-    w_k = df_obj._w
-    w_s = phase @ w_k.reshape(nkpt, -1)
+    w_s = k2s(df_obj._w, phase)
     w_s = w_s * numpy.sqrt(nkpt)
     w_s = w_s.reshape(nimg, nip, nip)
     
     assert x_k.shape == (nkpt, nip, nao)
-    assert w_k.shape == (nkpt, nip, nip)
     assert w_s.shape == (nimg, nip, nip)
 
     vk_kpts = []
     for dm in dms:
-        rhok = [x @ d @ x.conj().T for x, d in zip(x_k, dm)]
-        rhok = numpy.asarray(rhok) / nkpt
-        assert rhok.shape == (nkpt, nip, nip)
+        rho_k = [x @ d @ x.conj().T for x, d in zip(x_k, dm)]
+        rho_k = numpy.asarray(rho_k) / nkpt
+        assert rho_k.shape == (nkpt, nip, nip)
 
-        rhos = phase @ rhok.reshape(nkpt, -1)
-        rhos = rhos.reshape(nimg, nip, nip)
-        rhos = rhos.transpose(0, 2, 1)
+        rho_s = k2s(rho_k, phase)
+        assert rho_s.shape == (nimg, nip, nip)
+        rho_s = rho_s.transpose(0, 2, 1)
 
-        v_s = w_s * rhos.conj()
+        v_s = w_s * rho_s
         v_s = numpy.asarray(v_s).reshape(nimg, nip, nip)
 
-        v_k = phase.T @ v_s.reshape(nimg, -1)
-        v_k = v_k.reshape(nkpt, nip, nip)
+        # v_k = phase.T.conj() @ v_s.reshape(nimg, -1)
+        v_k = s2k(v_s, phase).conj()
+        assert v_k.shape == (nkpt, nip, nip)
 
         vk_kpts.append([x.conj().T @ v @ x for x, v in zip(x_k, v_k)])
 
@@ -485,8 +499,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             lstsq_driver = self.lstsq_driver
             tol = self.tol
             res = lstsq(
-                a, b.T, cond=tol,
-                lapack_driver=lstsq_driver
+                a, b.T, lapack_driver=lstsq_driver
             )
 
             z = res[0]
@@ -541,6 +554,7 @@ if __name__ == "__main__":
     cell.max_memory = PYSCF_MAX_MEMORY
     cell.mesh = [5, 5, 5]
     cell.build(dump_input=False)
+    nao = cell.nao_nr()
 
     kmesh = [4, 4, 4]
     nkpt = nimg = numpy.prod(kmesh)
@@ -563,6 +577,9 @@ if __name__ == "__main__":
     log = logger.new_logger(None, 5)
     t0 = (process_clock(), perf_counter())
     vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0 = vj0.reshape(nkpt, nao, nao)
+    vk0 = vk0.reshape(nkpt, nao, nao)
+
     c0 = scf_obj.with_df.c0
     t1 = log.timer("-> ISDF JK", *t0)
 
@@ -573,6 +590,8 @@ if __name__ == "__main__":
     scf_obj.with_df.check_sanity()
     scf_obj.with_df.mesh = [5, 5, 5]
     vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj1 = vj1.reshape(nkpt, nao, nao)
+    vk1 = vk1.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
 
     err = abs(vj0 - vj1).max()
@@ -581,55 +600,72 @@ if __name__ == "__main__":
     err = abs(vk0 - vk1).max()
     print("-> ISDF c0 = % 6.4f, vk err = % 6.4e" % (c0, err))
 
-    from opt_einsum import contract as einsum
+    for k in range(nkpt):
+        print("k = %d, kpt = %s" % (k, kpts[k]))
+        print("\nvk0 real = ")
+        numpy.savetxt(cell.stdout, vk0[k].real, fmt="% 6.4e", delimiter=", ")
+        print("\nvk0 imag = ")
+        numpy.savetxt(cell.stdout, vk0[k].imag, fmt="% 6.4e", delimiter=", ")
+        print("\nvk1 real = ")
+        numpy.savetxt(cell.stdout, vk1[k].real, fmt="% 6.4e", delimiter=", ")
+        print("\nvk1 imag = ")
+        numpy.savetxt(cell.stdout, vk1[k].imag, fmt="% 6.4e", delimiter=", ")
 
-    from pyscf.pbc.lib.kpts_helper import get_kconserv
-    from pyscf.pbc.lib.kpts_helper import get_kconserv_ria
-    vk = cell.get_kpts(kmesh)
-    kconserv3 = get_kconserv(cell, vk)
-    kconserv2 = get_kconserv_ria(cell, vk)
+        err = abs(vk0[k] - vk1[k]).max()
+        print("-> ISDF c0 = % 6.4f, vk err = % 6.4e" % (c0, err))
+
+        if err > 1e-4:
+            assert 1 == 2
+
+    # from opt_einsum import contract as einsum
+
+    # from pyscf.pbc.lib.kpts_helper import get_kconserv
+    # from pyscf.pbc.lib.kpts_helper import get_kconserv_ria
+    # vk = cell.get_kpts(kmesh)
+    # kconserv3 = get_kconserv(cell, vk)
+    # kconserv2 = get_kconserv_ria(cell, vk)
     
-    df_obj = scf_obj.with_df
-    nao = cell.nao_nr()
-    for k1, vk1 in enumerate(vk):
-        for k2, vk2 in enumerate(vk):
-            q = kconserv2[k1, k2]
-            vq = vk[q]
+    # df_obj = scf_obj.with_df
+    # nao = cell.nao_nr()
+    # for k1, vk1 in enumerate(vk):
+    #     for k2, vk2 in enumerate(vk):
+    #         q = kconserv2[k1, k2]
+    #         vq = vk[q]
  
-            for k3, vk3 in enumerate(vk):
-                k4 = kconserv3[k1, k2, k3]
-                vk4 = vk[k4]
+    #         for k3, vk3 in enumerate(vk):
+    #             k4 = kconserv3[k1, k2, k3]
+    #             vk4 = vk[k4]
 
-                eri_ref = df_obj.get_eri(kpts=[vk1, vk2, vk3, vk4], compact=False)
-                eri_ref = eri_ref.reshape(nao * nao, nao * nao)
+    #             eri_ref = df_obj.get_eri(kpts=[vk1, vk2, vk3, vk4], compact=False)
+    #             eri_ref = eri_ref.reshape(nao * nao, nao * nao)
 
-                x1, x2, x3, x4 = [x[k] for k in [k1, k2, k3, k4]]
-                eri_sol = einsum("IJ,Im,In,Jk,Jl->mnkl", w[q], x1.conj(), x2, x3.conj(), x4)
-                eri_sol = eri_sol.reshape(nao * nao, nao * nao)
+    #             x1, x2, x3, x4 = [x[k] for k in [k1, k2, k3, k4]]
+    #             eri_sol = einsum("IJ,Im,In,Jk,Jl->mnkl", w[q], x1.conj(), x2, x3.conj(), x4)
+    #             eri_sol = eri_sol.reshape(nao * nao, nao * nao)
 
-                eri = abs(eri_sol - eri_ref).max()
-                print(f"{k1 = :2d}, {k2 = :2d}, {k3 = :2d}, {k4 = :2d} {eri = :6.2e}")
+    #             eri = abs(eri_sol - eri_ref).max()
+    #             print(f"{k1 = :2d}, {k2 = :2d}, {k3 = :2d}, {k4 = :2d} {eri = :6.2e}")
 
-                if eri > 1e-4:
+    #             if eri > 1e-4:
 
-                    print(" q = %2d, vq  = [%s]" % (q, ", ".join(f"{v: 6.4f}" for v in vq)))
-                    print("k1 = %2d, vk1 = [%s]" % (k1, ", ".join(f"{v: 6.4f}" for v in vk1)))
-                    print("k2 = %2d, vk2 = [%s]" % (k2, ", ".join(f"{v: 6.4f}" for v in vk2)))
-                    print("k3 = %2d, vk3 = [%s]" % (k3, ", ".join(f"{v: 6.4f}" for v in vk3)))
-                    print("k4 = %2d, vk4 = [%s]" % (k4, ", ".join(f"{v: 6.4f}" for v in vk4)))
+    #                 print(" q = %2d, vq  = [%s]" % (q, ", ".join(f"{v: 6.4f}" for v in vq)))
+    #                 print("k1 = %2d, vk1 = [%s]" % (k1, ", ".join(f"{v: 6.4f}" for v in vk1)))
+    #                 print("k2 = %2d, vk2 = [%s]" % (k2, ", ".join(f"{v: 6.4f}" for v in vk2)))
+    #                 print("k3 = %2d, vk3 = [%s]" % (k3, ", ".join(f"{v: 6.4f}" for v in vk3)))
+    #                 print("k4 = %2d, vk4 = [%s]" % (k4, ", ".join(f"{v: 6.4f}" for v in vk4)))
 
-                    print(f"\n{eri_sol.shape = }")
-                    numpy.savetxt(cell.stdout, eri_sol[:10, :10].real, fmt="% 6.4e", delimiter=", ")
+    #                 print(f"\n{eri_sol.shape = }")
+    #                 numpy.savetxt(cell.stdout, eri_sol[:10, :10].real, fmt="% 6.4e", delimiter=", ")
 
-                    print(f"\neri_sol.imag = ")
-                    numpy.savetxt(cell.stdout, eri_sol[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
+    #                 print(f"\neri_sol.imag = ")
+    #                 numpy.savetxt(cell.stdout, eri_sol[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
 
-                    print(f"\n{eri_ref.shape = }")
-                    numpy.savetxt(cell.stdout, eri_ref[:10, :10].real, fmt="% 6.4e", delimiter=", ")
+    #                 print(f"\n{eri_ref.shape = }")
+    #                 numpy.savetxt(cell.stdout, eri_ref[:10, :10].real, fmt="% 6.4e", delimiter=", ")
 
-                    print(f"\neri_ref.imag = ")
-                    numpy.savetxt(cell.stdout, eri_ref[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
+    #                 print(f"\neri_ref.imag = ")
+    #                 numpy.savetxt(cell.stdout, eri_ref[:10, :10].imag, fmt="% 6.4e", delimiter=", ")
 
-                    assert 1 == 2
+    #                 assert 1 == 2
 
 
