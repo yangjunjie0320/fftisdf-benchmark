@@ -340,11 +340,11 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         from pyscf.pbc.tools.pbc import mesh_to_cutoff
         from pyscf.pbc.tools.pbc import cutoff_to_mesh
         m0 = self.m0
-        # k0 = mesh_to_cutoff(self.cell.a, m0)
-        # k0 = max(k0)
-        # log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
+        k0 = mesh_to_cutoff(self.cell.a, m0)
+        k0 = max(k0)
+        log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
 
-        # m0 = cutoff_to_mesh(self.cell.a, k0)
+        m0 = cutoff_to_mesh(self.cell.a, k0)
         c0 = self.c0
         self.m0 = m0
         log.info("Final parent grid size = %s", m0)
