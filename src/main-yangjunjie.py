@@ -10,6 +10,7 @@ from fft_isdf import ISDF
 
 DATA_PATH = os.getenv("DATA_PATH", None)
 PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
+PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
 
 def main(args):
     from build import cell_from_poscar
