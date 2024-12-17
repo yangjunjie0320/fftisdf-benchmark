@@ -25,7 +25,6 @@ def main(args):
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
     cell.ke_cutoff = args.ke_cutoff
-    cell.output = "out.log"
     cell.build(dump_input=False)
 
     log = logger.new_logger(sys.stdout, 5)
@@ -80,10 +79,10 @@ def main(args):
     t1 = log.timer("%s JK" % args.reference, *t0)
 
     err = abs(vj0 - vj1).max()
-    print("c0 = % 6.2f, vj err = % 6.4e" % (args.reference, c0, err))
+    print("%s: c0 = % 6.2f, vj err = % 6.4e" % (args.reference, c0, err))
 
     err = abs(vk0 - vk1).max()
-    print("c0 = % 6.2f, vk err = % 6.4e" % (args.reference, c0, err))
+    print("%s: c0 = % 6.2f, vk err = % 6.4e" % (args.reference, c0, err))
 
 
 if __name__ == "__main__":

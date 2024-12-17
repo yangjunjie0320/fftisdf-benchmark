@@ -283,16 +283,10 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     return _format_jks(vk_kpts, dms, input_band, kpts)
 
 class InterpolativeSeparableDensityFitting(FFTDF):
-    """
-    Interpolated Separable Density Fitting (ISDF) with FFT
-    
-    Args:
-        cell: The cell object
-        kpts: The k-points to use
-        kmesh: The k-point mesh to use
-        c0: The c0 parameter for ISDF
-        m0: The m0 parameter for ISDF
-    """
+    kmesh = None
+    c0 = 40.0
+    m0 = None
+
     tol = 1e-10
     blksize = 800
     lstsq_driver = "gelsy"
@@ -303,7 +297,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     _w = None
     _fswap = None
 
-    def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=0.25, m0=0.0):
+    _keys = ['_isdf', '_x', '_w', '_fswap']
+
+    def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0, m0=None):
         FFTDF.__init__(self, cell, kpts)
         self.kmesh = kmesh
         self.c0 = c0
