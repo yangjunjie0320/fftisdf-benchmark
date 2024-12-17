@@ -27,7 +27,8 @@ def main(args):
     cell.ke_cutoff = args.ke_cutoff
     cell.build(dump_input=False)
 
-    log = logger.new_logger(sys.stdout, 5)
+    stdout = open("out.log", "w")
+    log = logger.new_logger(stdout, 5)
     kmesh = [int(x) for x in args.kmesh.split("-")]
     kmesh = numpy.array(kmesh)
     nkpt = nimg = numpy.prod(kmesh)
