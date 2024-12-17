@@ -3,7 +3,8 @@ from pyscf.pbc.scf import KRHF
 
 from pyscf.lib import logger
 from pyscf.pbc.df import FFTDF, GDF
-from time import process_clock, perf_counter
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 
 from fft_isdf import ISDF
 
@@ -85,7 +86,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    import sys, os, argparse
+    import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
