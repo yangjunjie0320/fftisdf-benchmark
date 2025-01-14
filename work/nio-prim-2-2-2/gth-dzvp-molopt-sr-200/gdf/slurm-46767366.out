@@ -1,0 +1,99 @@
+OMP_NUM_THREADS = 20
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 204800
+TMPDIR = /central/scratch/yangjunjie//gdf/46767366/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//gdf/46767366/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = 0.1
+_cderi_to_save = /central/scratch/yangjunjie//gdf/46767366/cderi.chk
+len(kpts) = 8
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-3.24243283e-01 -2.29274798e-01  5.61606073e-01]
+ [ 2.68304197e-09  6.87824258e-01  0.00000000e+00]
+ [-3.24243280e-01  4.58549461e-01  5.61606073e-01]
+ [ 6.48486565e-01 -2.29274661e-01  0.00000000e+00]
+ [ 3.24243282e-01 -4.58549459e-01  5.61606073e-01]
+ [ 6.48486567e-01  4.58549597e-01  0.00000000e+00]
+ [ 3.24243285e-01  2.29274799e-01  5.61606073e-01]]
+    CPU time for j3c   3516.22 sec, wall time    209.05 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 14 / 39
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)      2.17 sec, wall time      0.11 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)      0.83 sec, wall time      0.04 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)      1.24 sec, wall time      0.06 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)      1.85 sec, wall time      0.09 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (4,*)      1.86 sec, wall time      0.09 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (5,*)      2.25 sec, wall time      0.11 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (6,*)      2.64 sec, wall time      0.13 sec
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+max_memory 204468 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (7,*)      3.11 sec, wall time      0.16 sec
+    CPU time for buf1       1.32 sec, wall time       0.07 sec
+    CPU time for ct11       1.25 sec, wall time       0.06 sec
+    CPU time for ct12       1.10 sec, wall time       0.05 sec
+    CPU time for buf2       0.01 sec, wall time       0.00 sec
+    CPU time for ct21       0.61 sec, wall time       0.03 sec
+    CPU time for ct22       0.88 sec, wall time       0.04 sec
+    CPU time for load      10.59 sec, wall time       0.53 sec
+    CPU time for get_k_kpts     15.98 sec, wall time      0.80 sec
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+    CPU time for get_j pass 1      1.89 sec, wall time      0.10 sec
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+max_memory 204464 MB, blksize 240
+    CPU time for get_j pass 2      1.62 sec, wall time      0.08 sec
+    CPU time for get_j      3.68 sec, wall time      0.18 sec

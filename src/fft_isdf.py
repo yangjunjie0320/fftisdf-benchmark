@@ -293,6 +293,8 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     wrap_around = False
 
     _isdf = None
+    _isdf_to_save = None
+
     _x = None
     _w = None
     _fswap = None
@@ -351,7 +353,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             isdf = tempfile.NamedTemporaryFile(dir=lib.param.TMPDIR)
             self._isdf = isdf.name
         
-        log.info("Saving ISDF results to %s", self._isdf)
+        log.info("Saving FFTISDF results to %s", self._isdf)
         from pyscf.lib.chkfile import dump
         dump(self._isdf, "x", self._x)
         dump(self._isdf, "w", self._w)
