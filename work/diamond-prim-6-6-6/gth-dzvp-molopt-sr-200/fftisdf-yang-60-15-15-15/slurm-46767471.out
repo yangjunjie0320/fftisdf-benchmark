@@ -643,3 +643,57 @@ w[188], rank = 1266 / 1560
     CPU time for w[188]     95.93 sec, wall time      6.86 sec
 w[189], rank = 1267 / 1560
     CPU time for w[189]     95.93 sec, wall time      6.78 sec
+w[190], rank = 1265 / 1560
+    CPU time for w[190]     95.69 sec, wall time      6.84 sec
+w[191], rank = 1256 / 1560
+    CPU time for w[191]     95.95 sec, wall time      6.78 sec
+w[192], rank = 1261 / 1560
+    CPU time for w[192]     95.74 sec, wall time      6.77 sec
+w[193], rank = 1262 / 1560
+    CPU time for w[193]     95.87 sec, wall time      6.80 sec
+w[194], rank = 1272 / 1560
+    CPU time for w[194]     95.63 sec, wall time      6.81 sec
+w[195], rank = 1274 / 1560
+    CPU time for w[195]     95.84 sec, wall time      6.77 sec
+w[196], rank = 1265 / 1560
+    CPU time for w[196]     95.85 sec, wall time      6.86 sec
+w[197], rank = 1262 / 1560
+    CPU time for w[197]     95.80 sec, wall time      6.74 sec
+w[198], rank = 1265 / 1560
+    CPU time for w[198]     95.52 sec, wall time      6.66 sec
+w[199], rank = 1267 / 1560
+    CPU time for w[199]     95.65 sec, wall time      6.78 sec
+w[200], rank = 1275 / 1560
+    CPU time for w[200]     96.42 sec, wall time      6.85 sec
+w[201], rank = 1265 / 1560
+    CPU time for w[201]     96.15 sec, wall time      6.72 sec
+w[202], rank = 1263 / 1560
+    CPU time for w[202]     96.25 sec, wall time      6.87 sec
+w[203], rank = 1260 / 1560
+    CPU time for w[203]     95.54 sec, wall time      6.74 sec
+w[204], rank = 1254 / 1560
+    CPU time for w[204]     95.76 sec, wall time      6.80 sec
+w[205], rank = 1264 / 1560
+    CPU time for w[205]     95.71 sec, wall time      6.80 sec
+w[206], rank = 1266 / 1560
+    CPU time for w[206]     95.76 sec, wall time      6.85 sec
+w[207], rank = 1264 / 1560
+    CPU time for w[207]     95.57 sec, wall time      6.79 sec
+w[208], rank = 1261 / 1560
+    CPU time for w[208]     95.81 sec, wall time      6.87 sec
+w[209], rank = 1252 / 1560
+    CPU time for w[209]     96.27 sec, wall time      6.85 sec
+w[210], rank = 1250 / 1560
+    CPU time for w[210]     96.27 sec, wall time      6.74 sec
+w[211], rank = 1261 / 1560
+    CPU time for w[211]     95.79 sec, wall time      6.77 sec
+w[212], rank = 1263 / 1560
+    CPU time for w[212]     95.85 sec, wall time      6.79 sec
+w[213], rank = 1264 / 1560
+    CPU time for w[213]     95.72 sec, wall time      6.75 sec
+w[214], rank = 1258 / 1560
+    CPU time for w[214]     95.60 sec, wall time      6.84 sec
+w[215], rank = 1250 / 1560
+    CPU time for w[215]     95.61 sec, wall time      6.70 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-60-15-15-15/46767471/isdf.chk
+    CPU time for building ISDF  25704.72 sec, wall time   1973.54 sec

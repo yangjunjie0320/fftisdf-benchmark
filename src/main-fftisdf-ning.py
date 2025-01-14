@@ -1,18 +1,74 @@
-import numpy, scipy, os, sys
-from pyscf.pbc.scf import KRHF
-
-from pyscf import lib
+import os, sys, pyscf, numpy, scipy
+from pyscf import lib 
 from pyscf.lib import logger
-from pyscf.pbc.df import FFTDF, GDF
-from pyscf.lib.logger import perf_counter
-from pyscf.lib.logger import process_clock
+from pyscf.isdf import isdf_local_k
 
-from fft_isdf import ISDF
+TMPDIR = pyscf.lib.param.TMPDIR
 
-TMPDIR = lib.param.TMPDIR
-DATA_PATH = os.getenv("DATA_PATH", None)
-PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
-PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+def ISDF(cell, kmesh=None, cisdf=None, rela_qr=1e-4, 
+         with_robust_fitting=True, direct=True,
+         build_V_K_bunchsize=28, chkfile=None):
+    direct = "outcore"
+    with_robust_fitting = False
+
+    t0 = (logger.process_clock(), logger.perf_counter())
+    log = logger.new_logger(cell, 10)
+
+    # print the isdf module information
+    from pyscf import isdf
+    import pyscf.isdf.isdf_local_k
+    log.info("ISDF module: %s" % pyscf.isdf.isdf_local_k.__file__)
+
+    if kmesh is None:
+        kmesh = [4, 4, 2]
+
+    natm = cell.natm
+    partition = [[x] for x in range(natm)]
+
+    isdf_obj = ISDF_Local_K(
+        cell.copy(deep=True), kmesh=kmesh, 
+        limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
+        aoR_cutoff=1e-12
+    )
+
+    isdf_obj.verbose = 10
+    pc = isdf_obj.prim_cell
+    sc = isdf_obj.cell
+
+    if chkfile is not None:
+        assert os.path.isfile(chkfile)
+        isdf_obj = None
+        log.debug("reading from %s", chkfile)
+
+        import pickle
+        with open(chkfile, "rb") as f:
+            isdf_obj = pickle.load(f)
+            log.debug("finished reading from %s", chkfile)
+                                                                                                                                                                     
+        isdf_obj.prim_cell = pc
+        isdf_obj.cell = sc
+
+        assert isdf_obj is not None
+        isdf_obj._build_buffer(c=cisdf, m=5, group=partition)
+        isdf_obj._build_fft_buffer()
+
+    else:
+        isdf_obj._isdf = None
+        isdf_obj._isdf_to_save = os.path.join(TMPDIR, "isdf.chk")
+        isdf_obj.build(c=cisdf, m=5, rela_cutoff=rela_qr, group=partition)
+
+        import pickle
+        with open(isdf_obj._isdf_to_save, "wb") as f:
+            pickle.dump(isdf_obj, f)
+            log.debug("finished saving to %s", isdf_obj._isdf_to_save)
+
+    log.info("effective c = %6.2f", (float(isdf_obj.naux) / isdf_obj.nao))
+    log.timer("ISDF build", *t0)
+
+    isdf_obj.chkfile = chkfile
+    return isdf_obj
 
 def main(args):
     from build import cell_from_poscar
