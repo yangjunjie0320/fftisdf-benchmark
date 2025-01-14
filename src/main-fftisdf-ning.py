@@ -1,23 +1,52 @@
-import os, sys, pyscf, numpy, scipy
-from pyscf import lib 
+import numpy, scipy, os, sys
+from pyscf.pbc.scf import KRHF
+
+from pyscf import lib
 from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
+
+TMPDIR = lib.param.TMPDIR
+DATA_PATH = os.getenv("DATA_PATH", None)
+PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
+PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+
+try:
+    from pyscf.lib import generate_pickle_methods
+    getstate, setstate = generate_pickle_methods(
+        excludes=(
+            '_isdf_to_save', 
+            '_isdf', 
+            'buffer_fft',
+            'buffer_cpu', 
+            'buffer_gpu', 
+            'buffer',
+            'cell', 
+            'prim_cell'
+        )
+    )   
+except ImportError:
+    import sys 
+    sys.stderr.write("pyscf.lib.generate_pickle_methods is not available, ISDF will not support pickle\n")
+    def raise_error(*args, **kwargs):
+        raise NotImplementedError("ISDF does not support pickle")
+    getstate = setstate = raise_error
+
 from pyscf.isdf import isdf_local_k
+class ISDF_Local_K(isdf_local_k.ISDF_Local_K):
+    __getstate__ = getstate
+    __setstate__ = setstate
 
-TMPDIR = pyscf.lib.param.TMPDIR
-
-def ISDF(cell, kmesh=None, cisdf=None, rela_qr=1e-4, 
-         with_robust_fitting=True, direct=True,
-         build_V_K_bunchsize=28, chkfile=None):
+def ISDF(cell, kmesh=None, c0=None, _isdf_to_save=None):
     direct = "outcore"
-    with_robust_fitting = False
+    rela_qr = 1e-4
+    aoR_cutoff = 1e-12
+    build_V_K_bunchsize = 160
 
     t0 = (logger.process_clock(), logger.perf_counter())
     log = logger.new_logger(cell, 10)
 
-    # print the isdf module information
-    from pyscf import isdf
-    import pyscf.isdf.isdf_local_k
-    log.info("ISDF module: %s" % pyscf.isdf.isdf_local_k.__file__)
+    log.info("ISDF module: %s" % isdf_local_k.__file__)
 
     if kmesh is None:
         kmesh = [4, 4, 2]
@@ -28,46 +57,25 @@ def ISDF(cell, kmesh=None, cisdf=None, rela_qr=1e-4,
     isdf_obj = ISDF_Local_K(
         cell.copy(deep=True), kmesh=kmesh, 
         limited_memory=True, direct=direct,
-        with_robust_fitting=with_robust_fitting,
+        with_robust_fitting=False,
         build_V_K_bunchsize=build_V_K_bunchsize,
-        aoR_cutoff=1e-12
+        aoR_cutoff=aoR_cutoff
     )
 
     isdf_obj.verbose = 10
-    pc = isdf_obj.prim_cell
-    sc = isdf_obj.cell
-
-    if chkfile is not None:
-        assert os.path.isfile(chkfile)
-        isdf_obj = None
-        log.debug("reading from %s", chkfile)
-
-        import pickle
-        with open(chkfile, "rb") as f:
-            isdf_obj = pickle.load(f)
-            log.debug("finished reading from %s", chkfile)
-                                                                                                                                                                     
-        isdf_obj.prim_cell = pc
-        isdf_obj.cell = sc
-
-        assert isdf_obj is not None
-        isdf_obj._build_buffer(c=cisdf, m=5, group=partition)
-        isdf_obj._build_fft_buffer()
-
-    else:
-        isdf_obj._isdf = None
-        isdf_obj._isdf_to_save = os.path.join(TMPDIR, "isdf.chk")
-        isdf_obj.build(c=cisdf, m=5, rela_cutoff=rela_qr, group=partition)
-
-        import pickle
-        with open(isdf_obj._isdf_to_save, "wb") as f:
-            pickle.dump(isdf_obj, f)
-            log.debug("finished saving to %s", isdf_obj._isdf_to_save)
+    isdf_obj._isdf = None
+    isdf_obj._isdf_to_save = _isdf_to_save
+    isdf_obj.build(c=c0, m=5, rela_cutoff=rela_qr, group=partition)
 
     log.info("effective c = %6.2f", (float(isdf_obj.naux) / isdf_obj.nao))
     log.timer("ISDF build", *t0)
 
-    isdf_obj.chkfile = chkfile
+    import pickle
+    with open(isdf_obj._isdf_to_save, "wb") as f:
+        pickle.dump(isdf_obj, f)
+        log.debug("finished saving to %s", isdf_obj._isdf_to_save)
+
+    isdf_obj._isdf = _isdf_to_save
     return isdf_obj
 
 def main(args):
@@ -86,7 +94,8 @@ def main(args):
     cell.build(dump_input=False)
 
     stdout = open("out.log", "w")
-    log = logger.new_logger(stdout, 5)
+    log = logger.Logger(stdout, 5)
+
     kmesh = [int(x) for x in args.kmesh.split("-")]
     kmesh = numpy.array(kmesh)
     nkpt = nimg = numpy.prod(kmesh)
@@ -98,51 +107,23 @@ def main(args):
     nao = dm_kpts.shape[-1]
     assert dm_kpts.shape == (nkpt, nao, nao)
 
-    scf_obj.with_df = ISDF(cell, kpts=kpts)
-
     t0 = (process_clock(), perf_counter())
-    c0 = args.c0
-    m0 = [int(x) for x in args.m0.split("-")]
-    m0 = numpy.array(m0)
-    scf_obj.with_df.c0 = c0
-    scf_obj.with_df.m0 = m0
-    scf_obj.with_df.verbose = 10
-    scf_obj.with_df.tol = 1e-10
-    scf_obj.with_df.build()
-    t1 = log.timer("build ISDF", *t0)
+    scf_obj.with_df = ISDF(
+        cell, kmesh=kmesh, c0=args.c0,
+        _isdf_to_save=os.path.join(TMPDIR, "isdf.chk")
+    )
+    t1 = log.timer("FFTISDF", *t0)
 
     t0 = (process_clock(), perf_counter())
     vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
-    t1 = log.timer("ISDF JK", *t0)
+    t1 = log.timer("FFTISDF JK", *t0)
+    log.info("chk file size: %6.2e GB" % (os.path.getsize(scf_obj.with_df._isdf) / 1e9))
 
-    t0 = (process_clock(), perf_counter())
-    if args.reference.lower() == "fft":
-        scf_obj.with_df = FFTDF(cell, kpts)
-    elif args.reference.lower() == "gdf":
-        scf_obj.with_df = GDF(cell, kpts)
-    else:
-        raise ValueError("Invalid reference: %s" % args.reference)
-    
-    t0 = (process_clock(), perf_counter())
-    scf_obj.with_df.verbose = 200
-    scf_obj.with_df.dump_flags()
-    scf_obj.with_df.check_sanity()
-    scf_obj.with_df.build()
-    t1 = log.timer("build %s" % args.reference, *t0)
-
-    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj0 = vj0.reshape(nkpt, nao, nao)
-    vk0 = vk0.reshape(nkpt, nao, nao)
-    t1 = log.timer("%s JK" % args.reference, *t0)
-
-    err = abs(vj0 - vj1).max()
-    print("%s: c0 = % 6.2f, vj err = % 6.4e" % (args.reference, c0, err))
-
-    err = abs(vk0 - vk1).max()
-    print("%s: c0 = % 6.2f, vk err = % 6.4e" % (args.reference, c0, err))
-
+    from pyscf.lib.chkfile import dump
+    dump("vjk.chk", "vj", vj1)
+    dump("vjk.chk", "vk", vk1)
 
 if __name__ == "__main__":
     import argparse
@@ -150,8 +131,6 @@ if __name__ == "__main__":
     parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
     parser.add_argument("--c0", type=float, default=20.0)
-    parser.add_argument("--m0", type=str, default="19-19-19")
-    parser.add_argument("--reference", type=str, default="fft")
     parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--pseudo", type=str, default="gth-pade")

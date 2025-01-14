@@ -4,12 +4,12 @@ channels:
   - conda-forge
   - pytorch
 dependencies:
-  - ase
-  - mp-api
-  - python
+  - python==3.9
   - numpy
   - scipy
   - h5py
+  - ase
+  - mp-api
   - mpi4py
   - cotengra
   - opt_einsum

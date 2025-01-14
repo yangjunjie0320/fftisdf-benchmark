@@ -28,7 +28,14 @@ if __name__ == "__main__":
         cmd += "--c0=%.2f --m0=%s " % (c0, m0)
     
     elif "fftisdf-ning" in method:
-        raise NotImplementedError
+        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-ning"))
+
+        cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-ning")
+        cmd += "python main.py "
+        cmd += "--cell=%s --kmesh=%s --basis=%s " % (args.cell, args.kmesh, args.basis)
+        cmd += "--ke_cutoff=%.2f --pseudo=gth-pade " % args.ke_cutoff
+        cmd += "\n"
 
     else:
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, method))

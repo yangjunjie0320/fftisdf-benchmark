@@ -24,20 +24,21 @@ function submit() {
     cd -
 }
 
-submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 gdf
-submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftdf
-submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
-submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
-submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15
+# submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 gdf
+# submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftdf
+# submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
+# submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
+# submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15
+submit diamond-prim 2-2-2 gth-dzvp-molopt-sr 200 fftisdf-ning-20
 
-submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 gdf
-submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftdf
-submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
-submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
-submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15
+# submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 gdf
+# submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftdf
+# submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
+# submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
+# submit diamond-prim 4-4-4 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15
 
-submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 gdf
-submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftdf
-submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
-submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
-submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15
+# submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 gdf
+# submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftdf
+# submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-20-15-15-15
+# submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-40-15-15-15
+# submit diamond-prim 6-6-6 gth-dzvp-molopt-sr 200 fftisdf-yang-60-15-15-15

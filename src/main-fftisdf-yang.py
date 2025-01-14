@@ -3,16 +3,15 @@ from pyscf.pbc.scf import KRHF
 
 from pyscf import lib
 from pyscf.lib import logger
-from pyscf.pbc.df import FFTDF, GDF
 from pyscf.lib.logger import perf_counter
 from pyscf.lib.logger import process_clock
-
-from fft_isdf import ISDF
 
 TMPDIR = lib.param.TMPDIR
 DATA_PATH = os.getenv("DATA_PATH", None)
 PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
 PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+
+from fft_isdf import ISDF
 
 def main(args):
     from build import cell_from_poscar
@@ -74,7 +73,6 @@ if __name__ == "__main__":
     parser.add_argument("--kmesh", type=str, default="2-2-2")
     parser.add_argument("--c0", type=float, default=20.0)
     parser.add_argument("--m0", type=str, default="19-19-19")
-    parser.add_argument("--reference", type=str, default="fft")
     parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--pseudo", type=str, default="gth-pade")
