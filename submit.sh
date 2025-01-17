@@ -44,22 +44,41 @@ function submit() {
 #     done
 # done
 
+# ke_cutoff=200
+# for cell in nio-prim nio-conv; do
+#     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
+#         for kmesh in 2-2-2 4-4-4 6-6-6; do
+#             for method in fftdf gdf; do
+#                 submit $cell $kmesh $basis $ke_cutoff $method
+#             done
+
+#             for c0 in 10 20 30 40; do
+#                 method=fftisdf-yang-$c0-19-19-19
+#                 submit $cell $kmesh $basis $ke_cutoff $method
+
+#                 method=fftisdf-ning-$c0
+#                 submit $cell $kmesh $basis $ke_cutoff $method
+#             done
+            
+#         done
+#     done
+# done
+
 ke_cutoff=200
-for cell in nio-prim nio-conv; do
+for cell in cacuo2-afm; do
     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
-        for kmesh in 2-2-2 4-4-4 6-6-6; do
-            for method in fftdf gdf; do
+        for kmesh in 2-2-2 4-4-4; do
+            for method in gdf; do
                 submit $cell $kmesh $basis $ke_cutoff $method
             done
 
             for c0 in 10 20 30 40; do
-                method=fftisdf-yang-$c0-19-19-19
+                method=fftisdf-yang-$c0-15-15-15
                 submit $cell $kmesh $basis $ke_cutoff $method
 
                 method=fftisdf-ning-$c0
                 submit $cell $kmesh $basis $ke_cutoff $method
             done
-            
         done
     done
 done

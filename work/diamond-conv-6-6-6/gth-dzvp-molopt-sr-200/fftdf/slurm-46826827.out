@@ -51,3 +51,5 @@ fft_jk: get_k_kpts max_memory 207416.696832  blksize 104
     CPU time for get_k_kpts: make_kpt (34,*)   7539.69 sec, wall time    640.45 sec
     CPU time for get_k_kpts: make_kpt (35,*)   7442.20 sec, wall time    628.88 sec
     CPU time for get_k_kpts: make_kpt (36,*)   7584.98 sec, wall time    639.33 sec
+    CPU time for get_k_kpts: make_kpt (37,*)   7412.16 sec, wall time    635.21 sec
+    CPU time for get_k_kpts: make_kpt (38,*)   7287.20 sec, wall time    631.99 sec

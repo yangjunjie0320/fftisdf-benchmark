@@ -440,3 +440,19 @@ w[ 87], rank = 1167 / 1170
     CPU time for w[ 87]   2439.74 sec, wall time    102.11 sec
 w[ 88], rank = 1163 / 1170
     CPU time for w[ 88]   2086.90 sec, wall time     83.59 sec
+w[ 89], rank = 1166 / 1170
+    CPU time for w[ 89]   3351.74 sec, wall time    145.76 sec
+w[ 90], rank = 1166 / 1170
+    CPU time for w[ 90]   2843.68 sec, wall time    124.06 sec
+w[ 91], rank = 1164 / 1170
+    CPU time for w[ 91]   2858.97 sec, wall time    126.46 sec
+w[ 92], rank = 1166 / 1170
+    CPU time for w[ 92]   2509.04 sec, wall time    106.52 sec
+w[ 93], rank = 1166 / 1170
+    CPU time for w[ 93]   2471.57 sec, wall time    102.71 sec
+w[ 94], rank = 1167 / 1170
+    CPU time for w[ 94]   2572.91 sec, wall time     98.64 sec
+w[ 95], rank = 1165 / 1170
+    CPU time for w[ 95]   2722.06 sec, wall time    113.84 sec
+w[ 96], rank = 1166 / 1170
+    CPU time for w[ 96]   2888.88 sec, wall time    125.93 sec

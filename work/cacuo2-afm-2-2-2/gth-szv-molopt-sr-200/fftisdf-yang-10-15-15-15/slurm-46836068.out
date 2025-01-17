@@ -1,0 +1,49 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15/46836068/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15/46836068/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 8
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.52270374]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.52270374]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.52270374]]
+Overwritten attributes  m0 c0 kmesh tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 995.52 / [209 209  87].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  95.62
+Final parent grid size = [35 35 15]
+
+Selecting interpolation points
+nkpts = 8, nao = 88, c0 =  10.00
+Parent grid mesh = [35 35 15], grid size = 18375
+    CPU time for select interpolation points    228.46 sec, wall time     16.93 sec
+Pivoted Cholesky rank = 3711, nip = 880, estimated error = 2.64e-02
+Number of interpolation points = 880, effective CISDF =  10.00
+    CPU time for building left-hand side      2.31 sec, wall time      0.07 sec
+
+kpt = 8, ngrid = 370025, nao = 88
+ngrid = 370025, blksize = 217738, nip = 880
+required disk space = 41 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-10-15-15-15/46836068/kxu0e497
+blksize = 217738, memory for aoR_loop = 24526 MB
+finished aoR_loop[       0:  217738]
+finished aoR_loop[  217738:  370025]
+    CPU time for building right-hand side    290.01 sec, wall time     51.60 sec

@@ -1823,3 +1823,18 @@ build_aux_basis_local wall time:    10.783183 CPU time:    73.955801
     CPU time for gen W [  10|[ 288: 320]    130.63 sec, wall time     62.01 sec
     CPU time for gen W [  11|[ 320: 352]    128.86 sec, wall time     61.99 sec
     CPU time for gen W [  12|[ 352: 384]    128.64 sec, wall time     62.00 sec
+    CPU time for gen W [  13|[ 384: 416]    128.39 sec, wall time     61.90 sec
+    CPU time for gen W [  14|[ 416: 441]    107.96 sec, wall time     48.85 sec
+    CPU time for gen W [  15|[   0:  32]    132.86 sec, wall time     62.71 sec
+    CPU time for gen W [  16|[  32:  64]    150.11 sec, wall time     65.37 sec
+    CPU time for gen W [  17|[  64:  96]    150.74 sec, wall time     65.31 sec
+    CPU time for gen W [  18|[  96: 128]    152.45 sec, wall time     64.77 sec
+    CPU time for gen W [  19|[ 128: 160]    148.10 sec, wall time     65.06 sec
+    CPU time for gen W [  20|[ 160: 192]    150.03 sec, wall time     65.58 sec
+    CPU time for gen W [  21|[ 192: 224]    149.88 sec, wall time     64.95 sec
+    CPU time for gen W [  22|[ 224: 256]    149.09 sec, wall time     65.94 sec
+    CPU time for gen W [  23|[ 256: 288]    149.62 sec, wall time     65.53 sec
+    CPU time for gen W [  24|[ 288: 320]    150.94 sec, wall time     65.42 sec
+    CPU time for gen W [  25|[ 320: 352]    148.48 sec, wall time     65.25 sec
+    CPU time for gen W [  26|[ 352: 384]    149.89 sec, wall time     65.70 sec
+    CPU time for gen W [  27|[ 384: 416]    160.00 sec, wall time     66.12 sec

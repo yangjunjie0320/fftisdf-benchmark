@@ -199,3 +199,21 @@ w[ 42], rank = 1560 / 1560
     CPU time for w[ 42]   3043.99 sec, wall time    106.87 sec
 w[ 43], rank = 1560 / 1560
     CPU time for w[ 43]   2539.45 sec, wall time     91.34 sec
+w[ 44], rank = 1560 / 1560
+    CPU time for w[ 44]   2458.31 sec, wall time     88.15 sec
+w[ 45], rank = 1560 / 1560
+    CPU time for w[ 45]   2655.72 sec, wall time     95.78 sec
+w[ 46], rank = 1560 / 1560
+    CPU time for w[ 46]   3352.28 sec, wall time    119.26 sec
+w[ 47], rank = 1560 / 1560
+    CPU time for w[ 47]   3061.68 sec, wall time    110.24 sec
+w[ 48], rank = 1560 / 1560
+    CPU time for w[ 48]   3808.52 sec, wall time    133.33 sec
+w[ 49], rank = 1560 / 1560
+    CPU time for w[ 49]   4214.07 sec, wall time    149.55 sec
+w[ 50], rank = 1560 / 1560
+    CPU time for w[ 50]   2582.75 sec, wall time     92.77 sec
+w[ 51], rank = 1560 / 1560
+    CPU time for w[ 51]   2409.83 sec, wall time     86.30 sec
+w[ 52], rank = 1560 / 1560
+    CPU time for w[ 52]   2556.49 sec, wall time     91.99 sec

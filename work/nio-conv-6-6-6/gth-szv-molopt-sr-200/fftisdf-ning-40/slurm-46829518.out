@@ -1885,3 +1885,23 @@ build_aux_basis_local wall time:     4.961104 CPU time:    56.602574
     CPU time for gen W [  72|[ 160: 192]    308.27 sec, wall time     89.15 sec
     CPU time for gen W [  73|[ 192: 224]    320.89 sec, wall time     88.62 sec
     CPU time for gen W [  74|[ 224: 256]    544.64 sec, wall time     95.72 sec
+    CPU time for gen W [  75|[ 256: 288]    306.57 sec, wall time     88.06 sec
+    CPU time for gen W [  76|[   0:  32]    308.84 sec, wall time     87.96 sec
+    CPU time for gen W [  77|[  32:  64]    307.04 sec, wall time     87.91 sec
+    CPU time for gen W [  78|[  64:  96]    307.92 sec, wall time     87.93 sec
+    CPU time for gen W [  79|[  96: 128]    306.21 sec, wall time     87.84 sec
+    CPU time for gen W [  80|[ 128: 160]    307.61 sec, wall time     87.95 sec
+    CPU time for gen W [  81|[ 160: 192]    306.67 sec, wall time     87.84 sec
+    CPU time for gen W [  82|[ 192: 224]    306.52 sec, wall time     87.89 sec
+    CPU time for gen W [  83|[ 224: 256]    381.51 sec, wall time     90.92 sec
+    CPU time for gen W [  84|[ 256: 288]    295.59 sec, wall time     87.69 sec
+     build_V_W_local wall time:  7323.043970 CPU time: 26908.094557
+Number of interpolation points = 569160, effective CISDF =  47.05
+    CPU time for ISDF build  27442.24 sec, wall time   7484.12 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-40/46829518/isdf.chk

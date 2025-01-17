@@ -398,3 +398,21 @@ w[ 52], rank = 1680 / 1680
     CPU time for w[ 52]   2867.23 sec, wall time    105.93 sec
 w[ 53], rank = 1680 / 1680
     CPU time for w[ 53]   2875.37 sec, wall time    104.79 sec
+w[ 54], rank = 1680 / 1680
+    CPU time for w[ 54]   2954.27 sec, wall time    105.81 sec
+w[ 55], rank = 1680 / 1680
+    CPU time for w[ 55]   2955.89 sec, wall time    105.37 sec
+w[ 56], rank = 1680 / 1680
+    CPU time for w[ 56]   2808.18 sec, wall time    100.20 sec
+w[ 57], rank = 1680 / 1680
+    CPU time for w[ 57]   2895.35 sec, wall time    104.03 sec
+w[ 58], rank = 1680 / 1680
+    CPU time for w[ 58]   2990.32 sec, wall time    107.18 sec
+w[ 59], rank = 1680 / 1680
+    CPU time for w[ 59]   3045.95 sec, wall time    111.71 sec
+w[ 60], rank = 1680 / 1680
+    CPU time for w[ 60]   2805.71 sec, wall time    100.97 sec
+w[ 61], rank = 1680 / 1680
+    CPU time for w[ 61]   3003.16 sec, wall time    107.77 sec
+w[ 62], rank = 1680 / 1680
+    CPU time for w[ 62]   2914.28 sec, wall time    104.66 sec

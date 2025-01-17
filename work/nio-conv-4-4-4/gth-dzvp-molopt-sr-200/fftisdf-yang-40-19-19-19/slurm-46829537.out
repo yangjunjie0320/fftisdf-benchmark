@@ -159,3 +159,9 @@ w[  7], rank = 5537 / 5551
     CPU time for w[  7]  10779.53 sec, wall time    371.03 sec
 w[  8], rank = 5539 / 5551
     CPU time for w[  8]  10650.29 sec, wall time    363.50 sec
+w[  9], rank = 5540 / 5551
+    CPU time for w[  9]  10713.59 sec, wall time    367.96 sec
+w[ 10], rank = 5545 / 5551
+    CPU time for w[ 10]  10604.25 sec, wall time    362.36 sec
+w[ 11], rank = 5540 / 5551
+    CPU time for w[ 11]  10773.62 sec, wall time    370.05 sec
