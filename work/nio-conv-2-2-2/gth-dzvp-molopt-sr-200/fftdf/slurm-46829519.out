@@ -16,3 +16,4 @@ Recommended ke_cutoff/mesh are 1172.14 / [123 123 123].
 fft_jk: get_k_kpts max_memory 241210.63424  blksize 156
     CPU time for get_k_kpts: make_kpt (0,*)  87763.51 sec, wall time   2864.32 sec
     CPU time for get_k_kpts: make_kpt (1,*)  80428.17 sec, wall time   2623.91 sec
+    CPU time for get_k_kpts: make_kpt (2,*)  81012.29 sec, wall time   2642.98 sec

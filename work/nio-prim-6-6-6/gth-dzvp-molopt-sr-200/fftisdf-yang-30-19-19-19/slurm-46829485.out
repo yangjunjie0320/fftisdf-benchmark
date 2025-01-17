@@ -456,3 +456,23 @@ w[ 95], rank = 1165 / 1170
     CPU time for w[ 95]   2722.06 sec, wall time    113.84 sec
 w[ 96], rank = 1166 / 1170
     CPU time for w[ 96]   2888.88 sec, wall time    125.93 sec
+w[ 97], rank = 1166 / 1170
+    CPU time for w[ 97]   2547.92 sec, wall time    113.60 sec
+w[ 98], rank = 1165 / 1170
+    CPU time for w[ 98]   2561.75 sec, wall time    109.89 sec
+w[ 99], rank = 1166 / 1170
+    CPU time for w[ 99]   2773.08 sec, wall time    122.88 sec
+w[100], rank = 1164 / 1170
+    CPU time for w[100]   2737.77 sec, wall time    113.89 sec
+w[101], rank = 1165 / 1170
+    CPU time for w[101]   2710.55 sec, wall time    109.10 sec
+w[102], rank = 1164 / 1170
+    CPU time for w[102]   2455.13 sec, wall time     96.04 sec
+w[103], rank = 1165 / 1170
+    CPU time for w[103]   2539.68 sec, wall time    107.07 sec
+w[104], rank = 1166 / 1170
+    CPU time for w[104]   2777.65 sec, wall time    111.89 sec
+w[105], rank = 1165 / 1170
+    CPU time for w[105]   2403.37 sec, wall time     93.38 sec
+w[106], rank = 1165 / 1170
+    CPU time for w[106]   2782.97 sec, wall time    123.25 sec

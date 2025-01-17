@@ -245,3 +245,5 @@ Parent grid mesh = [19 19 19], grid size = 6859
     CPU time for select interpolation points   2009.87 sec, wall time     69.17 sec
 Pivoted Cholesky rank = 5817, nip = 5817, estimated error = 1.00e-04
 Number of interpolation points = 5817, effective CISDF =  37.29
+/var/spool/slurmd/job46829547/slurm_script: line 40: 3389624 Killed                  python main.py --c0=40.00 --m0=19-19-19 --cell=nio-conv.vasp --kmesh=6-6-6 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46829547.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

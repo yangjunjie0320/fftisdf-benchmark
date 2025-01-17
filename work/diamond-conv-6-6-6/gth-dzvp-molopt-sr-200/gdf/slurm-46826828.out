@@ -231,3 +231,5 @@ len(kpts) = 216
  [ 7.78142021e-01  7.78142021e-01  4.66885213e-01]
  [ 7.78142021e-01  7.78142021e-01  6.22513617e-01]
  [ 7.78142021e-01  7.78142021e-01  7.78142021e-01]]
+/var/spool/slurmd/job46826828/slurm_script: line 40: 3592570 Killed                  python main.py --cell=diamond-conv.vasp --kmesh=6-6-6 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46826828.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

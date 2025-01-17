@@ -164,3 +164,11 @@ w[ 13], rank = 4680 / 4680
     CPU time for w[ 13]   8851.22 sec, wall time    305.04 sec
 w[ 14], rank = 4680 / 4680
     CPU time for w[ 14]   8657.30 sec, wall time    297.82 sec
+w[ 15], rank = 4680 / 4680
+    CPU time for w[ 15]   8846.30 sec, wall time    305.50 sec
+w[ 16], rank = 4680 / 4680
+    CPU time for w[ 16]   8877.21 sec, wall time    307.55 sec
+w[ 17], rank = 4680 / 4680
+    CPU time for w[ 17]   9002.72 sec, wall time    309.86 sec
+w[ 18], rank = 4680 / 4680
+    CPU time for w[ 18]   9029.66 sec, wall time    309.32 sec

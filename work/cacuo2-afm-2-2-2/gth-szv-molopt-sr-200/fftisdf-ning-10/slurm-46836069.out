@@ -1,0 +1,347 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46836069/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46836069/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  10.00
+       get_partition wall time:    10.232712 CPU time:     9.533430
+len of partition[   0] =  22632
+len of partition[   1] =  22632
+len of partition[   2] =  22632
+len of partition[   3] =  22632
+len of partition[   4] =  22441
+len of partition[   5] =  22521
+len of partition[   6] =  22438
+len of partition[   7] =  22352
+len of partition[   8] =  21688
+len of partition[   9] =  21626
+len of partition[  10] =  21626
+len of partition[  11] =  21564
+len of partition[  12] =  25929
+len of partition[  13] =  25736
+len of partition[  14] =  25788
+len of partition[  15] =  25788
+len of partition[  16] =  22632
+len of partition[  17] =  22632
+len of partition[  18] =  22632
+len of partition[  19] =  22632
+len of partition[  20] =  22441
+len of partition[  21] =  22521
+len of partition[  22] =  22438
+len of partition[  23] =  22352
+len of partition[  24] =  21688
+len of partition[  25] =  21626
+len of partition[  26] =  21626
+len of partition[  27] =  21564
+len of partition[  28] =  25929
+len of partition[  29] =  25736
+len of partition[  30] =  25788
+len of partition[  31] =  25788
+len of partition[  32] =  22632
+len of partition[  33] =  22632
+len of partition[  34] =  22632
+len of partition[  35] =  22632
+len of partition[  36] =  22441
+len of partition[  37] =  22521
+len of partition[  38] =  22438
+len of partition[  39] =  22352
+len of partition[  40] =  21688
+len of partition[  41] =  21626
+len of partition[  42] =  21626
+len of partition[  43] =  21564
+len of partition[  44] =  25929
+len of partition[  45] =  25736
+len of partition[  46] =  25788
+len of partition[  47] =  25788
+len of partition[  48] =  22632
+len of partition[  49] =  22632
+len of partition[  50] =  22632
+len of partition[  51] =  22632
+len of partition[  52] =  22441
+len of partition[  53] =  22521
+len of partition[  54] =  22438
+len of partition[  55] =  22352
+len of partition[  56] =  21688
+len of partition[  57] =  21626
+len of partition[  58] =  21626
+len of partition[  59] =  21564
+len of partition[  60] =  25929
+len of partition[  61] =  25736
+len of partition[  62] =  25788
+len of partition[  63] =  25788
+len of partition[  64] =  22632
+len of partition[  65] =  22632
+len of partition[  66] =  22632
+len of partition[  67] =  22632
+len of partition[  68] =  22441
+len of partition[  69] =  22521
+len of partition[  70] =  22438
+len of partition[  71] =  22352
+len of partition[  72] =  21688
+len of partition[  73] =  21626
+len of partition[  74] =  21626
+len of partition[  75] =  21564
+len of partition[  76] =  25929
+len of partition[  77] =  25736
+len of partition[  78] =  25788
+len of partition[  79] =  25788
+len of partition[  80] =  22632
+len of partition[  81] =  22632
+len of partition[  82] =  22632
+len of partition[  83] =  22632
+len of partition[  84] =  22441
+len of partition[  85] =  22521
+len of partition[  86] =  22438
+len of partition[  87] =  22352
+len of partition[  88] =  21688
+len of partition[  89] =  21626
+len of partition[  90] =  21626
+len of partition[  91] =  21564
+len of partition[  92] =  25929
+len of partition[  93] =  25736
+len of partition[  94] =  25788
+len of partition[  95] =  25788
+len of partition[  96] =  22632
+len of partition[  97] =  22632
+len of partition[  98] =  22632
+len of partition[  99] =  22632
+len of partition[ 100] =  22441
+len of partition[ 101] =  22521
+len of partition[ 102] =  22438
+len of partition[ 103] =  22352
+len of partition[ 104] =  21688
+len of partition[ 105] =  21626
+len of partition[ 106] =  21626
+len of partition[ 107] =  21564
+len of partition[ 108] =  25929
+len of partition[ 109] =  25736
+len of partition[ 110] =  25788
+len of partition[ 111] =  25788
+len of partition[ 112] =  22632
+len of partition[ 113] =  22632
+len of partition[ 114] =  22632
+len of partition[ 115] =  22632
+len of partition[ 116] =  22441
+len of partition[ 117] =  22521
+len of partition[ 118] =  22438
+len of partition[ 119] =  22352
+len of partition[ 120] =  21688
+len of partition[ 121] =  21626
+len of partition[ 122] =  21626
+len of partition[ 123] =  21564
+len of partition[ 124] =  25929
+len of partition[ 125] =  25736
+len of partition[ 126] =  25788
+len of partition[ 127] =  25788
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     7.437698 CPU time:   228.815621
+In _build_buffer: ISDF Local size of buffer = 762.420 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =   16
+select_IP_local_atm: npt_found =  179
+select_IP_local_atm: npt_found =  176
+select_IP_local_atm: npt_found =  173
+select_IP_local_atm: npt_found =  180
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  144
+select_IP_local_atm: npt_found =  144
+select_IP_local_atm: npt_found =  144
+select_IP_local_atm: npt_found =  144
+select_IP_local_step1 wall time:     2.333172 CPU time:    67.514474
+ build_aoRg_possible wall time:     0.054729 CPU time:     1.752243
+select_IP_local_step2 wall time:     0.000164 CPU time:     0.000180
+select_IP_local_step3 wall time:     0.003088 CPU time:     0.095701
+Memory usage for aoR  :   1867.238 MB
+Memory usage for aoRg :     11.400 MB
+            build_IP wall time:     2.391154 CPU time:    69.362599
+build_aux_basis_local wall time:     2.467212 CPU time:    73.203587
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      9.54 sec, wall time      6.12 sec
+    CPU time for gen W [   2|[  32:  64]      9.82 sec, wall time      5.87 sec
+    CPU time for gen W [   3|[  64:  96]      8.34 sec, wall time      4.88 sec
+    CPU time for gen W [   4|[  96: 128]     10.46 sec, wall time      5.66 sec
+    CPU time for gen W [   5|[ 128: 160]      8.15 sec, wall time      5.01 sec
+    CPU time for gen W [   6|[ 160: 179]      7.43 sec, wall time      3.47 sec
+    CPU time for gen W [   7|[   0:  32]      8.55 sec, wall time      5.31 sec
+    CPU time for gen W [   8|[  32:  64]      8.94 sec, wall time      5.27 sec
+    CPU time for gen W [   9|[  64:  96]      9.22 sec, wall time      5.31 sec
+    CPU time for gen W [  10|[  96: 128]      9.96 sec, wall time      5.52 sec
+    CPU time for gen W [  11|[ 128: 160]      7.78 sec, wall time      4.98 sec
+    CPU time for gen W [  12|[ 160: 176]      6.39 sec, wall time      3.26 sec
+    CPU time for gen W [  13|[   0:  32]      8.02 sec, wall time      5.26 sec
+    CPU time for gen W [  14|[  32:  64]     10.01 sec, wall time      5.55 sec
+    CPU time for gen W [  15|[  64:  96]      7.75 sec, wall time      4.97 sec
+    CPU time for gen W [  16|[  96: 128]      9.95 sec, wall time      5.42 sec
+    CPU time for gen W [  17|[ 128: 160]      7.88 sec, wall time      5.12 sec
+    CPU time for gen W [  18|[ 160: 173]      5.54 sec, wall time      2.55 sec
+    CPU time for gen W [  19|[   0:  32]      8.01 sec, wall time      5.26 sec
+    CPU time for gen W [  20|[  32:  64]     11.73 sec, wall time      7.28 sec
+    CPU time for gen W [  21|[  64:  96]      7.45 sec, wall time      3.85 sec
+    CPU time for gen W [  22|[  96: 128]      8.84 sec, wall time      5.10 sec
+    CPU time for gen W [  23|[ 128: 160]      7.75 sec, wall time      4.93 sec
+    CPU time for gen W [  24|[ 160: 180]      7.50 sec, wall time      3.78 sec
+    CPU time for gen W [  25|[   0:  32]      8.00 sec, wall time      5.25 sec
+    CPU time for gen W [  26|[  32:  64]     10.46 sec, wall time      6.01 sec
+    CPU time for gen W [  27|[  64:  96]      7.24 sec, wall time      4.49 sec
+    CPU time for gen W [  28|[  96: 121]      8.32 sec, wall time      4.27 sec
+    CPU time for gen W [  29|[   0:  32]      8.35 sec, wall time      5.29 sec
+    CPU time for gen W [  30|[  32:  64]      9.00 sec, wall time      5.29 sec
+    CPU time for gen W [  31|[  64:  96]      8.94 sec, wall time      5.26 sec
+    CPU time for gen W [  32|[  96: 121]      7.88 sec, wall time      4.22 sec
+    CPU time for gen W [  33|[   0:  32]      8.78 sec, wall time      5.29 sec
+    CPU time for gen W [  34|[  32:  64]      9.26 sec, wall time      5.32 sec
+    CPU time for gen W [  35|[  64:  96]      8.81 sec, wall time      5.26 sec
+    CPU time for gen W [  36|[  96: 121]      7.73 sec, wall time      4.19 sec
+    CPU time for gen W [  37|[   0:  32]      8.84 sec, wall time      5.25 sec
+    CPU time for gen W [  38|[  32:  64]      9.07 sec, wall time      5.27 sec
+    CPU time for gen W [  39|[  64:  96]      8.91 sec, wall time      5.26 sec
+    CPU time for gen W [  40|[  96: 121]      7.57 sec, wall time      4.17 sec
+    CPU time for gen W [  41|[   0:  32]      9.26 sec, wall time      5.31 sec
+    CPU time for gen W [  42|[  32:  64]      8.76 sec, wall time      5.26 sec
+    CPU time for gen W [  43|[  64:  96]      9.02 sec, wall time      5.29 sec
+    CPU time for gen W [  44|[  96: 121]      7.65 sec, wall time      4.18 sec
+    CPU time for gen W [  45|[   0:  32]      9.37 sec, wall time      5.31 sec
+    CPU time for gen W [  46|[  32:  64]      8.42 sec, wall time      5.19 sec
+    CPU time for gen W [  47|[  64:  96]      9.48 sec, wall time      5.33 sec
+    CPU time for gen W [  48|[  96: 121]      7.00 sec, wall time      4.08 sec
+    CPU time for gen W [  49|[   0:  32]      9.22 sec, wall time      5.30 sec
+    CPU time for gen W [  50|[  32:  64]      8.74 sec, wall time      5.25 sec
+    CPU time for gen W [  51|[  64:  96]      9.71 sec, wall time      5.40 sec
+    CPU time for gen W [  52|[  96: 121]      6.85 sec, wall time      4.09 sec
+    CPU time for gen W [  53|[   0:  32]      9.43 sec, wall time      5.33 sec
+    CPU time for gen W [  54|[  32:  64]      8.50 sec, wall time      5.21 sec
+    CPU time for gen W [  55|[  64:  96]      9.86 sec, wall time      5.39 sec
+    CPU time for gen W [  56|[  96: 121]      6.72 sec, wall time      4.06 sec
+    CPU time for gen W [  57|[   0:  32]      9.32 sec, wall time      5.31 sec
+    CPU time for gen W [  58|[  32:  64]      8.41 sec, wall time      5.20 sec
+    CPU time for gen W [  59|[  64:  96]      9.48 sec, wall time      5.33 sec
+    CPU time for gen W [  60|[  96: 128]      8.25 sec, wall time      5.18 sec
+    CPU time for gen W [  61|[ 128: 144]      5.54 sec, wall time      2.72 sec
+    CPU time for gen W [  62|[   0:  32]      9.14 sec, wall time      5.29 sec
+    CPU time for gen W [  63|[  32:  64]      9.47 sec, wall time      5.34 sec
+    CPU time for gen W [  64|[  64:  96]      8.26 sec, wall time      5.18 sec
+    CPU time for gen W [  65|[  96: 128]      9.00 sec, wall time      5.26 sec
+    CPU time for gen W [  66|[ 128: 144]      5.33 sec, wall time      2.69 sec
+    CPU time for gen W [  67|[   0:  32]      9.43 sec, wall time      5.32 sec
+    CPU time for gen W [  68|[  32:  64]      8.35 sec, wall time      5.19 sec
+    CPU time for gen W [  69|[  64:  96]      9.43 sec, wall time      5.32 sec
+    CPU time for gen W [  70|[  96: 128]      8.34 sec, wall time      5.16 sec
+    CPU time for gen W [  71|[ 128: 144]      6.34 sec, wall time      2.83 sec
+    CPU time for gen W [  72|[   0:  32]      8.28 sec, wall time      5.25 sec
+    CPU time for gen W [  73|[  32:  64]      9.94 sec, wall time      5.40 sec
+    CPU time for gen W [  74|[  64:  96]      7.99 sec, wall time      5.15 sec
+    CPU time for gen W [  75|[  96: 128]      9.20 sec, wall time      5.31 sec
+    CPU time for gen W [  76|[ 128: 144]      5.25 sec, wall time      2.68 sec
+     build_V_W_local wall time:   377.068006 CPU time:   650.745261
+Number of interpolation points = 18016, effective CISDF =  25.59
+    CPU time for ISDF build   1043.03 sec, wall time    401.13 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46836069/isdf.chk
