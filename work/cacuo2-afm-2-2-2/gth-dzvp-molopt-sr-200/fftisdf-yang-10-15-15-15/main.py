@@ -26,20 +26,24 @@ def main(args):
     kmesh = numpy.array(kmesh)
     kpts = cell.get_kpts(kmesh)
 
-    from pyscf.pbc.df.fft import FFTDF
-    df_obj = FFTDF(cell, kpts=kpts)
+    from fft_isdf import ISDF
+    df_obj = ISDF(cell, kpts=kpts)
+    df_obj.c0 = args.c0
+    df_obj.m0 = [int(x) for x in args.m0.split("-")]
+    df_obj.tol = 1e-8
     df_obj.verbose = 10
+    df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 
     from utils import get_jk_time
-    tmp = os.path.join(TMPDIR, "fftdf.chk")
-    os.system("touch %s" % tmp)
-    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=tmp)
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._isdf)
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
+    parser.add_argument("--c0", type=float, default=20.0)
+    parser.add_argument("--m0", type=str, default="19-19-19")
     parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--pseudo", type=str, default="gth-pade")

@@ -1,0 +1,220 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-15-15-15/46836097/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-15-15-15/46836097/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 64
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.26135187]
+ [0.         0.         0.52270374]
+ [0.         0.         0.78405561]
+ [0.         0.10779511 0.        ]
+ [0.         0.10779511 0.26135187]
+ [0.         0.10779511 0.52270374]
+ [0.         0.10779511 0.78405561]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.26135187]
+ [0.         0.21559021 0.52270374]
+ [0.         0.21559021 0.78405561]
+ [0.         0.32338532 0.        ]
+ [0.         0.32338532 0.26135187]
+ [0.         0.32338532 0.52270374]
+ [0.         0.32338532 0.78405561]
+ [0.10779511 0.         0.        ]
+ [0.10779511 0.         0.26135187]
+ [0.10779511 0.         0.52270374]
+ [0.10779511 0.         0.78405561]
+ [0.10779511 0.10779511 0.        ]
+ [0.10779511 0.10779511 0.26135187]
+ [0.10779511 0.10779511 0.52270374]
+ [0.10779511 0.10779511 0.78405561]
+ [0.10779511 0.21559021 0.        ]
+ [0.10779511 0.21559021 0.26135187]
+ [0.10779511 0.21559021 0.52270374]
+ [0.10779511 0.21559021 0.78405561]
+ [0.10779511 0.32338532 0.        ]
+ [0.10779511 0.32338532 0.26135187]
+ [0.10779511 0.32338532 0.52270374]
+ [0.10779511 0.32338532 0.78405561]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.26135187]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.         0.78405561]
+ [0.21559021 0.10779511 0.        ]
+ [0.21559021 0.10779511 0.26135187]
+ [0.21559021 0.10779511 0.52270374]
+ [0.21559021 0.10779511 0.78405561]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.26135187]
+ [0.21559021 0.21559021 0.52270374]
+ [0.21559021 0.21559021 0.78405561]
+ [0.21559021 0.32338532 0.        ]
+ [0.21559021 0.32338532 0.26135187]
+ [0.21559021 0.32338532 0.52270374]
+ [0.21559021 0.32338532 0.78405561]
+ [0.32338532 0.         0.        ]
+ [0.32338532 0.         0.26135187]
+ [0.32338532 0.         0.52270374]
+ [0.32338532 0.         0.78405561]
+ [0.32338532 0.10779511 0.        ]
+ [0.32338532 0.10779511 0.26135187]
+ [0.32338532 0.10779511 0.52270374]
+ [0.32338532 0.10779511 0.78405561]
+ [0.32338532 0.21559021 0.        ]
+ [0.32338532 0.21559021 0.26135187]
+ [0.32338532 0.21559021 0.52270374]
+ [0.32338532 0.21559021 0.78405561]
+ [0.32338532 0.32338532 0.        ]
+ [0.32338532 0.32338532 0.26135187]
+ [0.32338532 0.32338532 0.52270374]
+ [0.32338532 0.32338532 0.78405561]]
+Overwritten attributes  tol kmesh m0 c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  95.62
+Final parent grid size = [35 35 15]
+
+Selecting interpolation points
+nkpts = 64, nao = 260, c0 =  20.00
+Parent grid mesh = [35 35 15], grid size = 18375
+    CPU time for select interpolation points   3843.69 sec, wall time    180.80 sec
+Pivoted Cholesky rank = 10590, nip = 5200, estimated error = 7.29e-03
+Number of interpolation points = 5200, effective CISDF =  20.00
+    CPU time for building left-hand side    301.21 sec, wall time     24.16 sec
+
+kpt = 64, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 4059, nip = 5200
+required disk space = 1970 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-20-15-15-15/46836097/3t5mpnx4
+blksize = 4059, memory for aoR_loop = 21613 MB
+finished aoR_loop[       0:    4059]
+finished aoR_loop[    4059:    8118]
+finished aoR_loop[    8118:   12177]
+finished aoR_loop[   12177:   16236]
+finished aoR_loop[   16236:   20295]
+finished aoR_loop[   20295:   24354]
+finished aoR_loop[   24354:   28413]
+finished aoR_loop[   28413:   32472]
+finished aoR_loop[   32472:   36531]
+finished aoR_loop[   36531:   40590]
+finished aoR_loop[   40590:   44649]
+finished aoR_loop[   44649:   48708]
+finished aoR_loop[   48708:   52767]
+finished aoR_loop[   52767:   56826]
+finished aoR_loop[   56826:   60885]
+finished aoR_loop[   60885:   64944]
+finished aoR_loop[   64944:   69003]
+finished aoR_loop[   69003:   73062]
+finished aoR_loop[   73062:   77121]
+finished aoR_loop[   77121:   81180]
+finished aoR_loop[   81180:   85239]
+finished aoR_loop[   85239:   89298]
+finished aoR_loop[   89298:   93357]
+finished aoR_loop[   93357:   97416]
+finished aoR_loop[   97416:  101475]
+finished aoR_loop[  101475:  105534]
+finished aoR_loop[  105534:  109593]
+finished aoR_loop[  109593:  113652]
+finished aoR_loop[  113652:  117711]
+finished aoR_loop[  117711:  121770]
+finished aoR_loop[  121770:  125829]
+finished aoR_loop[  125829:  129888]
+finished aoR_loop[  129888:  133947]
+finished aoR_loop[  133947:  138006]
+finished aoR_loop[  138006:  142065]
+finished aoR_loop[  142065:  146124]
+finished aoR_loop[  146124:  150183]
+finished aoR_loop[  150183:  154242]
+finished aoR_loop[  154242:  158301]
+finished aoR_loop[  158301:  162360]
+finished aoR_loop[  162360:  166419]
+finished aoR_loop[  166419:  170478]
+finished aoR_loop[  170478:  174537]
+finished aoR_loop[  174537:  178596]
+finished aoR_loop[  178596:  182655]
+finished aoR_loop[  182655:  186714]
+finished aoR_loop[  186714:  190773]
+finished aoR_loop[  190773:  194832]
+finished aoR_loop[  194832:  198891]
+finished aoR_loop[  198891:  202950]
+finished aoR_loop[  202950:  207009]
+finished aoR_loop[  207009:  211068]
+finished aoR_loop[  211068:  215127]
+finished aoR_loop[  215127:  219186]
+finished aoR_loop[  219186:  223245]
+finished aoR_loop[  223245:  227304]
+finished aoR_loop[  227304:  231363]
+finished aoR_loop[  231363:  235422]
+finished aoR_loop[  235422:  239481]
+finished aoR_loop[  239481:  243540]
+finished aoR_loop[  243540:  247599]
+finished aoR_loop[  247599:  251658]
+finished aoR_loop[  251658:  255717]
+finished aoR_loop[  255717:  259776]
+finished aoR_loop[  259776:  263835]
+finished aoR_loop[  263835:  267894]
+finished aoR_loop[  267894:  271953]
+finished aoR_loop[  271953:  276012]
+finished aoR_loop[  276012:  280071]
+finished aoR_loop[  280071:  284130]
+finished aoR_loop[  284130:  288189]
+finished aoR_loop[  288189:  292248]
+finished aoR_loop[  292248:  296307]
+finished aoR_loop[  296307:  300366]
+finished aoR_loop[  300366:  304425]
+finished aoR_loop[  304425:  308484]
+finished aoR_loop[  308484:  312543]
+finished aoR_loop[  312543:  316602]
+finished aoR_loop[  316602:  320661]
+finished aoR_loop[  320661:  324720]
+finished aoR_loop[  324720:  328779]
+finished aoR_loop[  328779:  332838]
+finished aoR_loop[  332838:  336897]
+finished aoR_loop[  336897:  340956]
+finished aoR_loop[  340956:  345015]
+finished aoR_loop[  345015:  349074]
+finished aoR_loop[  349074:  353133]
+finished aoR_loop[  353133:  357192]
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cacuo2-afm-4-4-4/gth-dzvp-molopt-sr-200/fftisdf-yang-20-15-15-15/main.py", line 52, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cacuo2-afm-4-4-4/gth-dzvp-molopt-sr-200/fftisdf-yang-20-15-15-15/main.py", line 38, in main
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+  File "/home/junjiey/work/fftisdf-benchmark/src/utils.py", line 67, in get_jk_time
+    scf_obj.with_df = df_obj.build()
+                      ^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 349, in build
+    self._x, self._w = build(self, c0=c0, m0=m0, kpts=kpts, kmesh=kmesh)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 62, in build
+    b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 464, in _make_rhs
+    return _make_rhs_outcore(self, x_k, kpts=kpts, kmesh=kmesh, blksize=blksize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 116, in _make_rhs_outcore
+    b_k[:, g0:g1, :] = s2k(b_s, phase).conj()
+    ~~~^^^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/dataset.py", line 1022, in __setitem__
+    self.id.write(mspace, fspace, val, mtype, dxpl=self._dxpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5d.pyx", line 281, in h5py.h5d.DatasetID.write
+  File "h5py/_proxy.pyx", line 115, in h5py._proxy.dset_rw
+OSError: [Errno 122] Can't write data (file write failed: time = Fri Jan 17 04:32:18 2025
+, filename = '/central/scratch/yangjunjie/fftisdf-yang-20-15-15-15/46836097/3t5mpnx4', file descriptor = 4, errno = 122, error message = 'Disk quota exceeded', buf = 0x7efa01468910, total write size = 337708800, bytes this sub-write = 337708800, bytes actually written = 18446744073709551615, offset = 0)

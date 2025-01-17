@@ -1821,3 +1821,324 @@ build_aux_basis_local wall time:    19.208958 CPU time:   160.038350
     CPU time for gen W [   8|[ 224: 256]    444.80 sec, wall time     92.74 sec
     CPU time for gen W [   9|[ 256: 288]    409.90 sec, wall time     91.62 sec
     CPU time for gen W [  10|[ 288: 320]    384.28 sec, wall time     90.62 sec
+    CPU time for gen W [  11|[ 320: 352]    410.06 sec, wall time     93.46 sec
+    CPU time for gen W [  12|[ 352: 384]    392.45 sec, wall time     91.63 sec
+    CPU time for gen W [  13|[ 384: 416]    390.61 sec, wall time     90.67 sec
+    CPU time for gen W [  14|[ 416: 448]    456.86 sec, wall time     93.07 sec
+    CPU time for gen W [  15|[ 448: 480]    402.62 sec, wall time     91.00 sec
+    CPU time for gen W [  16|[ 480: 512]    395.30 sec, wall time     92.13 sec
+    CPU time for gen W [  17|[ 512: 544]    413.80 sec, wall time     96.00 sec
+    CPU time for gen W [  18|[ 544: 576]    431.95 sec, wall time     93.87 sec
+    CPU time for gen W [  19|[ 576: 608]    440.63 sec, wall time     93.23 sec
+    CPU time for gen W [  20|[ 608: 640]    443.10 sec, wall time     94.83 sec
+    CPU time for gen W [  21|[ 640: 672]    480.22 sec, wall time     93.92 sec
+    CPU time for gen W [  22|[ 672: 704]    385.55 sec, wall time     93.44 sec
+    CPU time for gen W [  23|[ 704: 736]    390.54 sec, wall time     91.51 sec
+    CPU time for gen W [  24|[ 736: 768]    408.71 sec, wall time     91.27 sec
+    CPU time for gen W [  25|[ 768: 800]    394.34 sec, wall time     90.94 sec
+    CPU time for gen W [  26|[ 800: 832]    396.19 sec, wall time     90.80 sec
+    CPU time for gen W [  27|[ 832: 864]    483.01 sec, wall time     95.64 sec
+    CPU time for gen W [  28|[ 864: 896]    516.00 sec, wall time     96.94 sec
+    CPU time for gen W [  29|[ 896: 928]    473.78 sec, wall time     94.53 sec
+    CPU time for gen W [  30|[ 928: 960]    484.71 sec, wall time     97.27 sec
+    CPU time for gen W [  31|[ 960: 992]    469.33 sec, wall time     93.39 sec
+    CPU time for gen W [  32|[ 992:1024]    508.60 sec, wall time     95.79 sec
+    CPU time for gen W [  33|[1024:1056]    466.46 sec, wall time     93.15 sec
+    CPU time for gen W [  34|[1056:1088]    473.95 sec, wall time     93.63 sec
+    CPU time for gen W [  35|[1088:1120]    502.47 sec, wall time     94.53 sec
+    CPU time for gen W [  36|[1120:1152]    400.52 sec, wall time     91.23 sec
+    CPU time for gen W [  37|[1152:1184]    409.05 sec, wall time     95.31 sec
+    CPU time for gen W [  38|[1184:1216]    387.99 sec, wall time     91.72 sec
+    CPU time for gen W [  39|[1216:1229]    268.74 sec, wall time     40.74 sec
+    CPU time for gen W [  40|[   0:  32]    397.32 sec, wall time     92.13 sec
+    CPU time for gen W [  41|[  32:  64]    407.76 sec, wall time     92.36 sec
+    CPU time for gen W [  42|[  64:  96]    397.98 sec, wall time     91.93 sec
+    CPU time for gen W [  43|[  96: 128]    397.97 sec, wall time     91.82 sec
+    CPU time for gen W [  44|[ 128: 160]    399.37 sec, wall time     91.76 sec
+    CPU time for gen W [  45|[ 160: 192]    403.97 sec, wall time     92.09 sec
+    CPU time for gen W [  46|[ 192: 224]    401.25 sec, wall time     92.02 sec
+    CPU time for gen W [  47|[ 224: 256]    412.60 sec, wall time     92.18 sec
+    CPU time for gen W [  48|[ 256: 288]    400.42 sec, wall time     91.60 sec
+    CPU time for gen W [  49|[ 288: 320]    407.36 sec, wall time     92.17 sec
+    CPU time for gen W [  50|[ 320: 352]    410.92 sec, wall time     92.39 sec
+    CPU time for gen W [  51|[ 352: 384]    406.96 sec, wall time     92.26 sec
+    CPU time for gen W [  52|[ 384: 416]    405.86 sec, wall time     91.91 sec
+    CPU time for gen W [  53|[ 416: 448]    410.67 sec, wall time     92.06 sec
+    CPU time for gen W [  54|[ 448: 480]    411.34 sec, wall time     92.16 sec
+    CPU time for gen W [  55|[ 480: 512]    410.93 sec, wall time     92.08 sec
+    CPU time for gen W [  56|[ 512: 544]    477.15 sec, wall time     94.23 sec
+    CPU time for gen W [  57|[ 544: 576]    407.27 sec, wall time     92.31 sec
+    CPU time for gen W [  58|[ 576: 608]    406.44 sec, wall time     92.26 sec
+    CPU time for gen W [  59|[ 608: 640]    405.62 sec, wall time     92.24 sec
+    CPU time for gen W [  60|[ 640: 672]    405.81 sec, wall time     92.22 sec
+    CPU time for gen W [  61|[ 672: 704]    405.71 sec, wall time     92.26 sec
+    CPU time for gen W [  62|[ 704: 720]    283.51 sec, wall time     48.64 sec
+    CPU time for gen W [  63|[   0:  32]    405.74 sec, wall time     92.40 sec
+    CPU time for gen W [  64|[  32:  64]    430.27 sec, wall time     92.88 sec
+    CPU time for gen W [  65|[  64:  96]    409.29 sec, wall time     92.08 sec
+    CPU time for gen W [  66|[  96: 128]    398.66 sec, wall time     91.57 sec
+    CPU time for gen W [  67|[ 128: 160]    396.65 sec, wall time     91.51 sec
+    CPU time for gen W [  68|[ 160: 192]    424.71 sec, wall time     92.82 sec
+    CPU time for gen W [  69|[ 192: 224]    411.13 sec, wall time     92.30 sec
+    CPU time for gen W [  70|[ 224: 256]    416.69 sec, wall time     93.15 sec
+    CPU time for gen W [  71|[ 256: 288]    411.38 sec, wall time     92.80 sec
+    CPU time for gen W [  72|[ 288: 320]    431.22 sec, wall time     92.42 sec
+    CPU time for gen W [  73|[ 320: 352]    409.77 sec, wall time     91.26 sec
+    CPU time for gen W [  74|[ 352: 384]    411.58 sec, wall time     91.37 sec
+    CPU time for gen W [  75|[ 384: 416]    412.05 sec, wall time     91.33 sec
+    CPU time for gen W [  76|[ 416: 448]    411.82 sec, wall time     91.26 sec
+    CPU time for gen W [  77|[ 448: 480]    408.10 sec, wall time     91.13 sec
+    CPU time for gen W [  78|[ 480: 512]    406.85 sec, wall time     91.35 sec
+    CPU time for gen W [  79|[ 512: 544]    405.61 sec, wall time     91.06 sec
+    CPU time for gen W [  80|[ 544: 576]    407.57 sec, wall time     91.05 sec
+    CPU time for gen W [  81|[ 576: 608]    406.57 sec, wall time     91.50 sec
+    CPU time for gen W [  82|[ 608: 640]    374.16 sec, wall time     90.00 sec
+    CPU time for gen W [  83|[ 640: 672]    372.78 sec, wall time     89.99 sec
+    CPU time for gen W [  84|[ 672: 704]    371.52 sec, wall time     90.06 sec
+    CPU time for gen W [  85|[ 704: 717]    237.70 sec, wall time     39.30 sec
+    CPU time for gen W [  86|[   0:  32]    402.53 sec, wall time     91.58 sec
+    CPU time for gen W [  87|[  32:  64]    377.45 sec, wall time     90.10 sec
+    CPU time for gen W [  88|[  64:  96]    379.14 sec, wall time     90.42 sec
+    CPU time for gen W [  89|[  96: 128]    392.40 sec, wall time     90.84 sec
+    CPU time for gen W [  90|[ 128: 160]    386.57 sec, wall time     90.80 sec
+    CPU time for gen W [  91|[ 160: 192]    394.09 sec, wall time     91.11 sec
+    CPU time for gen W [  92|[ 192: 224]    398.18 sec, wall time     91.48 sec
+    CPU time for gen W [  93|[ 224: 256]    404.30 sec, wall time     91.34 sec
+    CPU time for gen W [  94|[ 256: 288]    405.85 sec, wall time     91.49 sec
+    CPU time for gen W [  95|[ 288: 320]    726.81 sec, wall time    101.88 sec
+    CPU time for gen W [  96|[ 320: 352]    533.49 sec, wall time     95.68 sec
+    CPU time for gen W [  97|[ 352: 384]    396.64 sec, wall time     90.78 sec
+    CPU time for gen W [  98|[ 384: 416]    384.43 sec, wall time     90.39 sec
+    CPU time for gen W [  99|[ 416: 448]    381.02 sec, wall time     90.36 sec
+    CPU time for gen W [ 100|[ 448: 480]    388.21 sec, wall time     91.07 sec
+    CPU time for gen W [ 101|[ 480: 512]    474.95 sec, wall time     93.77 sec
+    CPU time for gen W [ 102|[ 512: 544]    373.98 sec, wall time     90.48 sec
+    CPU time for gen W [ 103|[ 544: 576]    375.67 sec, wall time     90.47 sec
+    CPU time for gen W [ 104|[ 576: 608]    378.30 sec, wall time     90.59 sec
+    CPU time for gen W [ 105|[ 608: 640]    375.65 sec, wall time     90.47 sec
+    CPU time for gen W [ 106|[ 640: 672]    378.57 sec, wall time     90.66 sec
+    CPU time for gen W [ 107|[ 672: 704]    382.19 sec, wall time     90.74 sec
+    CPU time for gen W [ 108|[ 704: 736]    430.35 sec, wall time     92.26 sec
+    CPU time for gen W [ 109|[ 736: 744]    224.23 sec, wall time     26.63 sec
+    CPU time for gen W [ 110|[   0:  32]    369.74 sec, wall time     90.20 sec
+    CPU time for gen W [ 111|[  32:  64]    432.31 sec, wall time     92.18 sec
+    CPU time for gen W [ 112|[  64:  96]    452.53 sec, wall time     92.85 sec
+    CPU time for gen W [ 113|[  96: 128]    390.69 sec, wall time     91.04 sec
+    CPU time for gen W [ 114|[ 128: 160]    379.38 sec, wall time     90.71 sec
+    CPU time for gen W [ 115|[ 160: 192]    491.22 sec, wall time     94.48 sec
+    CPU time for gen W [ 116|[ 192: 224]    383.45 sec, wall time     90.75 sec
+    CPU time for gen W [ 117|[ 224: 256]    383.00 sec, wall time     90.63 sec
+    CPU time for gen W [ 118|[ 256: 288]    497.51 sec, wall time     94.35 sec
+    CPU time for gen W [ 119|[ 288: 320]    517.65 sec, wall time     95.08 sec
+    CPU time for gen W [ 120|[ 320: 352]    438.98 sec, wall time     92.32 sec
+    CPU time for gen W [ 121|[ 352: 384]    453.03 sec, wall time     92.69 sec
+    CPU time for gen W [ 122|[ 384: 416]    437.87 sec, wall time     92.21 sec
+    CPU time for gen W [ 123|[ 416: 448]    491.01 sec, wall time     94.15 sec
+    CPU time for gen W [ 124|[ 448: 480]    745.76 sec, wall time    102.39 sec
+    CPU time for gen W [ 125|[ 480: 512]    390.37 sec, wall time     91.12 sec
+    CPU time for gen W [ 126|[ 512: 544]    379.49 sec, wall time     90.86 sec
+    CPU time for gen W [ 127|[ 544: 576]    407.69 sec, wall time     91.38 sec
+    CPU time for gen W [ 128|[ 576: 608]    383.86 sec, wall time     90.82 sec
+    CPU time for gen W [ 129|[ 608: 640]    389.55 sec, wall time     90.95 sec
+    CPU time for gen W [ 130|[ 640: 672]    389.04 sec, wall time     91.03 sec
+    CPU time for gen W [ 131|[ 672: 704]    533.28 sec, wall time     95.69 sec
+    CPU time for gen W [ 132|[ 704: 721]    295.48 sec, wall time     51.13 sec
+    CPU time for gen W [ 133|[   0:  32]    479.35 sec, wall time     94.06 sec
+    CPU time for gen W [ 134|[  32:  64]   8670.16 sec, wall time    359.76 sec
+    CPU time for gen W [ 135|[  64:  96]    439.98 sec, wall time     92.42 sec
+    CPU time for gen W [ 136|[  96: 128]    402.55 sec, wall time     91.31 sec
+    CPU time for gen W [ 137|[ 128: 160]    401.59 sec, wall time     91.38 sec
+    CPU time for gen W [ 138|[ 160: 192]    449.20 sec, wall time     92.84 sec
+    CPU time for gen W [ 139|[ 192: 224]    388.95 sec, wall time     90.98 sec
+    CPU time for gen W [ 140|[ 224: 256]    392.97 sec, wall time     91.12 sec
+    CPU time for gen W [ 141|[ 256: 288]    401.11 sec, wall time     91.47 sec
+    CPU time for gen W [ 142|[ 288: 320]   4753.91 sec, wall time    232.88 sec
+    CPU time for gen W [ 143|[ 320: 352]    472.04 sec, wall time     93.76 sec
+    CPU time for gen W [ 144|[ 352: 384]    386.87 sec, wall time     90.75 sec
+    CPU time for gen W [ 145|[ 384: 416]    389.54 sec, wall time     91.02 sec
+    CPU time for gen W [ 146|[ 416: 448]    388.56 sec, wall time     91.04 sec
+    CPU time for gen W [ 147|[ 448: 480]   1546.73 sec, wall time    128.63 sec
+    CPU time for gen W [ 148|[ 480: 512]    375.45 sec, wall time     90.57 sec
+    CPU time for gen W [ 149|[ 512: 519]    193.41 sec, wall time     23.30 sec
+    CPU time for gen W [ 150|[   0:  32]    404.51 sec, wall time     91.61 sec
+    CPU time for gen W [ 151|[  32:  64]    438.58 sec, wall time     92.76 sec
+    CPU time for gen W [ 152|[  64:  96]    398.32 sec, wall time     91.38 sec
+    CPU time for gen W [ 153|[  96: 128]    404.11 sec, wall time     91.41 sec
+    CPU time for gen W [ 154|[ 128: 160]    374.13 sec, wall time     90.52 sec
+    CPU time for gen W [ 155|[ 160: 192]    470.91 sec, wall time     93.71 sec
+    CPU time for gen W [ 156|[ 192: 224]    367.49 sec, wall time     90.36 sec
+    CPU time for gen W [ 157|[ 224: 256]    371.47 sec, wall time     90.63 sec
+    CPU time for gen W [ 158|[ 256: 288]    422.80 sec, wall time     92.29 sec
+    CPU time for gen W [ 159|[ 288: 320]    376.55 sec, wall time     90.54 sec
+    CPU time for gen W [ 160|[ 320: 352]    377.17 sec, wall time     90.58 sec
+    CPU time for gen W [ 161|[ 352: 384]    511.66 sec, wall time     95.40 sec
+    CPU time for gen W [ 162|[ 384: 416]    388.86 sec, wall time     91.40 sec
+    CPU time for gen W [ 163|[ 416: 448]    391.87 sec, wall time     91.46 sec
+    CPU time for gen W [ 164|[ 448: 480]    389.33 sec, wall time     91.46 sec
+    CPU time for gen W [ 165|[ 480: 512]    430.83 sec, wall time     92.73 sec
+    CPU time for gen W [ 166|[ 512: 544]    391.90 sec, wall time     91.09 sec
+    CPU time for gen W [ 167|[ 544: 576]   1377.79 sec, wall time    123.08 sec
+    CPU time for gen W [ 168|[ 576: 608]    378.56 sec, wall time     90.64 sec
+    CPU time for gen W [ 169|[ 608: 640]    522.13 sec, wall time     95.59 sec
+    CPU time for gen W [ 170|[ 640: 672]    432.18 sec, wall time     92.53 sec
+    CPU time for gen W [ 171|[ 672: 704]    426.40 sec, wall time     92.13 sec
+    CPU time for gen W [ 172|[ 704: 720]    297.98 sec, wall time     48.73 sec
+    CPU time for gen W [ 173|[   0:  32]    406.33 sec, wall time     91.71 sec
+    CPU time for gen W [ 174|[  32:  64]    516.73 sec, wall time     95.87 sec
+    CPU time for gen W [ 175|[  64:  96]    450.16 sec, wall time     93.54 sec
+    CPU time for gen W [ 176|[  96: 128]    419.77 sec, wall time     92.55 sec
+    CPU time for gen W [ 177|[ 128: 160]    380.29 sec, wall time     91.97 sec
+    CPU time for gen W [ 178|[ 160: 192]    379.31 sec, wall time     91.88 sec
+    CPU time for gen W [ 179|[ 192: 224]    501.39 sec, wall time     95.04 sec
+    CPU time for gen W [ 180|[ 224: 256]    396.63 sec, wall time     91.04 sec
+    CPU time for gen W [ 181|[ 256: 288]    385.19 sec, wall time     90.80 sec
+    CPU time for gen W [ 182|[ 288: 320]    384.20 sec, wall time     90.86 sec
+    CPU time for gen W [ 183|[ 320: 352]    384.19 sec, wall time     91.02 sec
+    CPU time for gen W [ 184|[ 352: 384]    864.20 sec, wall time    106.53 sec
+    CPU time for gen W [ 185|[ 384: 416]    843.93 sec, wall time    106.76 sec
+    CPU time for gen W [ 186|[ 416: 448]   1012.83 sec, wall time    111.45 sec
+    CPU time for gen W [ 187|[ 448: 480]    396.17 sec, wall time     91.50 sec
+    CPU time for gen W [ 188|[ 480: 512]   1563.31 sec, wall time    129.39 sec
+    CPU time for gen W [ 189|[ 512: 544]    416.45 sec, wall time     91.91 sec
+    CPU time for gen W [ 190|[ 544: 576]   1526.09 sec, wall time    128.67 sec
+    CPU time for gen W [ 191|[ 576: 608]    404.52 sec, wall time     91.65 sec
+    CPU time for gen W [ 192|[ 608: 640]    576.01 sec, wall time     97.26 sec
+    CPU time for gen W [ 193|[ 640: 672]    420.12 sec, wall time     92.15 sec
+    CPU time for gen W [ 194|[ 672: 704]    540.28 sec, wall time     96.64 sec
+    CPU time for gen W [ 195|[ 704: 719]    300.48 sec, wall time     46.96 sec
+     build_V_W_local wall time: 18190.591808 CPU time: 99407.275312
+Number of interpolation points = 1315224, effective CISDF =  39.03
+    CPU time for ISDF build 101108.87 sec, wall time  18416.17 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-40/46829548/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064748791338592e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015075076713747e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543723053520393e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174843141091176e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557336174362502e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.50633126597133e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175250544919303e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015051976037454e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1104210884127497e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.112622061150148e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0805095262966802e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.094428991876839e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762406241010463e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.489321559115359 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494185665761166e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691035554658271e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124668435393623e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101071234811318e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3021949178682046e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984130999538365e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.739361989640901e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878749008521822e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214347148628483e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7166607172228143e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543724076953654e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762402403447007e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932156431949303 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1163449192544852e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702878686568517e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.023061019963769e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124674895504714e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063078792285869e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953867686849045e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984124962700543e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.017483659351666e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.049418153066146e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691039373362009e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702894610188014e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2344936900650768e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424547127243284e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866719827422159e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618324520848e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557338370522423e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101066148601962e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155656313436 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0230604052917313e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424555675960574e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4957828017858726e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0276266539951405e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.748066874238119e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.266382599826598e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331216011292e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175249004484877e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.887881695417093e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214346271103578e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063076037545067e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953871676713675e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866717898409654e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618262070618e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480670438940808e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663822723108002e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9992861559624568e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5127804335601897e-08 5 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064748791338592e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015075076713747e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543723053520393e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174843141091176e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557336174362502e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.50633126597133e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175250544919303e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015051976037454e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1104210884127497e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.112622061150148e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0805095262966802e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.094428991876839e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762406241010463e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.489321559115359 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494185665761166e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691035554658271e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124668435393623e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101071234811318e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3021949178682046e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984130999538365e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.739361989640901e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878749008521822e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214347148628483e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7166607172228143e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543724076953654e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762402403447007e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932156431949303 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1163449192544852e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702878686568517e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.023061019963769e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124674895504714e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063078792285869e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953867686849045e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984124962700543e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.017483659351666e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.049418153066146e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691039373362009e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702894610188014e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2344936900650768e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424547127243284e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866719827422159e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618324520848e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557338370522423e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101066148601962e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155656313436 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0230604052917313e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424555675960574e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4957828017858726e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0276266539951405e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.748066874238119e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.266382599826598e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331216011292e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175249004484877e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.887881695417093e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214346271103578e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063076037545067e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953871676713675e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866717898409654e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618262070618e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480670438940808e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663822723108002e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9992861559624568e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5127804335601897e-08 5 5 2

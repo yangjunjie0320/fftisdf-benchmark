@@ -1859,3 +1859,179 @@ build_aux_basis_local wall time:    10.783183 CPU time:    73.955801
     CPU time for gen W [  46|[  96: 128]    126.97 sec, wall time     61.05 sec
     CPU time for gen W [  47|[ 128: 160]    127.26 sec, wall time     61.06 sec
     CPU time for gen W [  48|[ 160: 192]    126.88 sec, wall time     61.05 sec
+    CPU time for gen W [  49|[ 192: 224]    126.29 sec, wall time     61.00 sec
+    CPU time for gen W [  50|[ 224: 256]    126.78 sec, wall time     61.04 sec
+    CPU time for gen W [  51|[ 256: 288]    127.48 sec, wall time     61.84 sec
+    CPU time for gen W [  52|[ 288: 320]    125.92 sec, wall time     60.97 sec
+    CPU time for gen W [  53|[ 320: 352]    126.34 sec, wall time     61.06 sec
+    CPU time for gen W [  54|[ 352: 384]    127.84 sec, wall time     61.13 sec
+    CPU time for gen W [  55|[ 384: 416]    126.50 sec, wall time     61.03 sec
+    CPU time for gen W [  56|[ 416: 441]    106.48 sec, wall time     48.24 sec
+    CPU time for gen W [  57|[   0:  32]    126.77 sec, wall time     61.45 sec
+    CPU time for gen W [  58|[  32:  64]    127.24 sec, wall time     61.03 sec
+    CPU time for gen W [  59|[  64:  96]    125.82 sec, wall time     60.87 sec
+    CPU time for gen W [  60|[  96: 128]    127.16 sec, wall time     60.97 sec
+    CPU time for gen W [  61|[ 128: 160]    126.14 sec, wall time     60.93 sec
+    CPU time for gen W [  62|[ 160: 192]    127.02 sec, wall time     61.05 sec
+    CPU time for gen W [  63|[ 192: 224]    126.72 sec, wall time     61.11 sec
+    CPU time for gen W [  64|[ 224: 256]    127.45 sec, wall time     61.22 sec
+    CPU time for gen W [  65|[   0:  32]    130.08 sec, wall time     62.63 sec
+    CPU time for gen W [  66|[  32:  64]    129.61 sec, wall time     61.99 sec
+    CPU time for gen W [  67|[  64:  96]    129.27 sec, wall time     62.09 sec
+    CPU time for gen W [  68|[  96: 128]    129.33 sec, wall time     62.09 sec
+    CPU time for gen W [  69|[ 128: 160]    129.97 sec, wall time     62.14 sec
+    CPU time for gen W [  70|[ 160: 192]    129.30 sec, wall time     62.19 sec
+    CPU time for gen W [  71|[ 192: 224]    129.92 sec, wall time     62.35 sec
+    CPU time for gen W [  72|[ 224: 256]    128.77 sec, wall time     61.96 sec
+    CPU time for gen W [  73|[   0:  32]    129.03 sec, wall time     62.28 sec
+    CPU time for gen W [  74|[  32:  64]    129.86 sec, wall time     62.15 sec
+    CPU time for gen W [  75|[  64:  96]    128.44 sec, wall time     61.49 sec
+    CPU time for gen W [  76|[  96: 128]    129.50 sec, wall time     62.09 sec
+    CPU time for gen W [  77|[ 128: 160]    129.04 sec, wall time     62.01 sec
+    CPU time for gen W [  78|[ 160: 192]    129.59 sec, wall time     61.99 sec
+    CPU time for gen W [  79|[ 192: 224]    129.22 sec, wall time     61.96 sec
+    CPU time for gen W [  80|[ 224: 256]    128.72 sec, wall time     62.41 sec
+    CPU time for gen W [  81|[   0:  32]    131.13 sec, wall time     63.55 sec
+    CPU time for gen W [  82|[  32:  64]    129.44 sec, wall time     61.76 sec
+    CPU time for gen W [  83|[  64:  96]    129.75 sec, wall time     62.15 sec
+    CPU time for gen W [  84|[  96: 128]    130.67 sec, wall time     63.47 sec
+    CPU time for gen W [  85|[ 128: 160]    128.17 sec, wall time     60.53 sec
+    CPU time for gen W [  86|[ 160: 192]    129.61 sec, wall time     62.17 sec
+    CPU time for gen W [  87|[ 192: 224]    129.63 sec, wall time     62.32 sec
+    CPU time for gen W [  88|[ 224: 256]    129.95 sec, wall time     62.33 sec
+     build_V_W_local wall time:  5416.606079 CPU time: 11451.491963
+Number of interpolation points = 601344, effective CISDF =  17.85
+    CPU time for ISDF build  12063.66 sec, wall time   5563.69 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46829542/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064749381144602e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015068198332127e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.054372328745003e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174837479435347e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.255733859950596e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331574405163e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175253431499183e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.001505023168893e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1104203778700139e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1126230159419492e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0805091710253123e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.094429258330365e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762407414110187e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155911534814 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494189842369303e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691044976322174e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.312466890723847e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101069555599049e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3021949775427084e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.298413086769926e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7393616706398062e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878765883911797e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214340552051107e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.716660897711322e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543723827153542e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762397844772557e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932156431977814 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1163449433911574e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.070289209791753e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0230617169381226e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124664917374767e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063078896369329e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953860206721401e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984129646454095e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174833347983172e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494178814939084e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691058675119152e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702876616394502e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.234494192864313e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424545087208516e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866716982475721e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618825855863e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557339484214969e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101065378384747e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155656283904 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.023059390722454e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424564349577987e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.495782743499153e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0276262773584597e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480671198749638e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663823791697694e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331594527955e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175253348232438e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878862695359544e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214342813288962e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063082247855053e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.29538735502146e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866718675565923e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064616988783695e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480674907588426e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663822247793802e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.999285774282642e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5127808228321298e-08 5 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064749381144602e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0015068198332127e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.054372328745003e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174837479435347e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.255733859950596e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331574405163e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175253431499183e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.001505023168893e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1104203778700139e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1126230159419492e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0805091710253123e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.094429258330365e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762407414110187e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155911534814 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494189842369303e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691044976322174e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.312466890723847e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101069555599049e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3021949775427084e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.298413086769926e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7393616706398062e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878765883911797e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214340552051107e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.716660897711322e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0543723827153542e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0762397844772557e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932156431977814 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1163449433911574e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.070289209791753e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0230617169381226e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124664917374767e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063078896369329e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2953860206721401e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2984129646454095e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0174833347983172e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0494178814939084e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0691058675119152e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0702876616394502e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.234494192864313e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424545087208516e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866716982475721e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064618825855863e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2557339484214969e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3101065378384747e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.48932155656283904 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.023059390722454e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2424564349577987e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.495782743499153e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0276262773584597e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480671198749638e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663823791697694e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.506331594527955e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0175253348232438e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.8878862695359544e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7214342813288962e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3063082247855053e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.29538735502146e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4866718675565923e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0064616988783695e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7480674907588426e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2663822247793802e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.999285774282642e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5127808228321298e-08 5 5 2

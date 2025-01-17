@@ -1905,3 +1905,23 @@ Number of interpolation points = 569160, effective CISDF =  47.05
 /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
   warnings.warn(msg)
 finished saving to /central/scratch/yangjunjie//fftisdf-ning-40/46829518/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731212790578 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731108794488 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.413414915666928e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731293230388 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731310320573 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731208431842 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731298312034 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4134229245758822e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731188525255 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.413449756238794e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731212790578 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731108794488 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.413414915666928e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731293230388 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731310320573 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731208431842 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731298312034 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4134229245758822e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  0.20254731188525255 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.413449756238794e-08 5 4 1

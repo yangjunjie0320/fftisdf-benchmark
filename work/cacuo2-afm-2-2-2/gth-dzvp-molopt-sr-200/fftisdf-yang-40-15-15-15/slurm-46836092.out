@@ -1,0 +1,68 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-40-15-15-15/46836092/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-40-15-15-15/46836092/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 8
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.52270374]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.52270374]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.52270374]]
+Overwritten attributes  c0 m0 kmesh tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  95.62
+Final parent grid size = [35 35 15]
+
+Selecting interpolation points
+nkpts = 8, nao = 260, c0 =  40.00
+Parent grid mesh = [35 35 15], grid size = 18375
+    CPU time for select interpolation points    599.14 sec, wall time     31.76 sec
+Pivoted Cholesky rank = 9216, nip = 9216, estimated error = 1.00e-04
+Number of interpolation points = 9216, effective CISDF =  35.45
+    CPU time for building left-hand side    110.98 sec, wall time      9.98 sec
+
+kpt = 8, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 19826, nip = 9216
+required disk space = 436 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-40-15-15-15/46836092/1gzqnaaz
+blksize = 19826, memory for aoR_loop = 23387 MB
+finished aoR_loop[       0:   19826]
+finished aoR_loop[   19826:   39652]
+finished aoR_loop[   39652:   59478]
+finished aoR_loop[   59478:   79304]
+finished aoR_loop[   79304:   99130]
+finished aoR_loop[   99130:  118956]
+finished aoR_loop[  118956:  138782]
+finished aoR_loop[  138782:  158608]
+finished aoR_loop[  158608:  178434]
+finished aoR_loop[  178434:  198260]
+finished aoR_loop[  198260:  218086]
+finished aoR_loop[  218086:  237912]
+finished aoR_loop[  237912:  257738]
+finished aoR_loop[  257738:  277564]
+finished aoR_loop[  277564:  297390]
+finished aoR_loop[  297390:  317216]
+finished aoR_loop[  317216:  337042]
+finished aoR_loop[  337042:  356868]
+finished aoR_loop[  356868:  370025]
+    CPU time for building right-hand side   4327.67 sec, wall time    705.43 sec
+/var/spool/slurmd/job46836092/slurm_script: line 40: 3453716 Killed                  python main.py --c0=40.00 --m0=15-15-15 --cell=cacuo2-afm.vasp --kmesh=2-2-2 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46836092.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

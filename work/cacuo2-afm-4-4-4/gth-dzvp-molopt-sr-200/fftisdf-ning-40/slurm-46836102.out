@@ -1,0 +1,1500 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-40/46836102/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-40/46836102/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  40.00
+       get_partition wall time:    54.695961 CPU time:    54.572773
+len of partition[   0] =  22632
+len of partition[   1] =  22632
+len of partition[   2] =  22632
+len of partition[   3] =  22632
+len of partition[   4] =  22441
+len of partition[   5] =  22521
+len of partition[   6] =  22438
+len of partition[   7] =  22352
+len of partition[   8] =  21688
+len of partition[   9] =  21626
+len of partition[  10] =  21626
+len of partition[  11] =  21564
+len of partition[  12] =  25929
+len of partition[  13] =  25736
+len of partition[  14] =  25788
+len of partition[  15] =  25788
+len of partition[  16] =  22632
+len of partition[  17] =  22632
+len of partition[  18] =  22632
+len of partition[  19] =  22632
+len of partition[  20] =  22441
+len of partition[  21] =  22521
+len of partition[  22] =  22438
+len of partition[  23] =  22352
+len of partition[  24] =  21688
+len of partition[  25] =  21626
+len of partition[  26] =  21626
+len of partition[  27] =  21564
+len of partition[  28] =  25929
+len of partition[  29] =  25736
+len of partition[  30] =  25788
+len of partition[  31] =  25788
+len of partition[  32] =  22632
+len of partition[  33] =  22632
+len of partition[  34] =  22632
+len of partition[  35] =  22632
+len of partition[  36] =  22441
+len of partition[  37] =  22521
+len of partition[  38] =  22438
+len of partition[  39] =  22352
+len of partition[  40] =  21688
+len of partition[  41] =  21626
+len of partition[  42] =  21626
+len of partition[  43] =  21564
+len of partition[  44] =  25929
+len of partition[  45] =  25736
+len of partition[  46] =  25788
+len of partition[  47] =  25788
+len of partition[  48] =  22632
+len of partition[  49] =  22632
+len of partition[  50] =  22632
+len of partition[  51] =  22632
+len of partition[  52] =  22441
+len of partition[  53] =  22521
+len of partition[  54] =  22438
+len of partition[  55] =  22352
+len of partition[  56] =  21688
+len of partition[  57] =  21626
+len of partition[  58] =  21626
+len of partition[  59] =  21564
+len of partition[  60] =  25929
+len of partition[  61] =  25736
+len of partition[  62] =  25788
+len of partition[  63] =  25788
+len of partition[  64] =  22632
+len of partition[  65] =  22632
+len of partition[  66] =  22632
+len of partition[  67] =  22632
+len of partition[  68] =  22441
+len of partition[  69] =  22521
+len of partition[  70] =  22438
+len of partition[  71] =  22352
+len of partition[  72] =  21688
+len of partition[  73] =  21626
+len of partition[  74] =  21626
+len of partition[  75] =  21564
+len of partition[  76] =  25929
+len of partition[  77] =  25736
+len of partition[  78] =  25788
+len of partition[  79] =  25788
+len of partition[  80] =  22632
+len of partition[  81] =  22632
+len of partition[  82] =  22632
+len of partition[  83] =  22632
+len of partition[  84] =  22441
+len of partition[  85] =  22521
+len of partition[  86] =  22438
+len of partition[  87] =  22352
+len of partition[  88] =  21688
+len of partition[  89] =  21626
+len of partition[  90] =  21626
+len of partition[  91] =  21564
+len of partition[  92] =  25929
+len of partition[  93] =  25736
+len of partition[  94] =  25788
+len of partition[  95] =  25788
+len of partition[  96] =  22632
+len of partition[  97] =  22632
+len of partition[  98] =  22632
+len of partition[  99] =  22632
+len of partition[ 100] =  22441
+len of partition[ 101] =  22521
+len of partition[ 102] =  22438
+len of partition[ 103] =  22352
+len of partition[ 104] =  21688
+len of partition[ 105] =  21626
+len of partition[ 106] =  21626
+len of partition[ 107] =  21564
+len of partition[ 108] =  25929
+len of partition[ 109] =  25736
+len of partition[ 110] =  25788
+len of partition[ 111] =  25788
+len of partition[ 112] =  22632
+len of partition[ 113] =  22632
+len of partition[ 114] =  22632
+len of partition[ 115] =  22632
+len of partition[ 116] =  22441
+len of partition[ 117] =  22521
+len of partition[ 118] =  22438
+len of partition[ 119] =  22352
+len of partition[ 120] =  21688
+len of partition[ 121] =  21626
+len of partition[ 122] =  21626
+len of partition[ 123] =  21564
+len of partition[ 124] =  25929
+len of partition[ 125] =  25736
+len of partition[ 126] =  25788
+len of partition[ 127] =  25788
+len of partition[ 128] =  22632
+len of partition[ 129] =  22632
+len of partition[ 130] =  22632
+len of partition[ 131] =  22632
+len of partition[ 132] =  22441
+len of partition[ 133] =  22521
+len of partition[ 134] =  22438
+len of partition[ 135] =  22352
+len of partition[ 136] =  21688
+len of partition[ 137] =  21626
+len of partition[ 138] =  21626
+len of partition[ 139] =  21564
+len of partition[ 140] =  25929
+len of partition[ 141] =  25736
+len of partition[ 142] =  25788
+len of partition[ 143] =  25788
+len of partition[ 144] =  22632
+len of partition[ 145] =  22632
+len of partition[ 146] =  22632
+len of partition[ 147] =  22632
+len of partition[ 148] =  22441
+len of partition[ 149] =  22521
+len of partition[ 150] =  22438
+len of partition[ 151] =  22352
+len of partition[ 152] =  21688
+len of partition[ 153] =  21626
+len of partition[ 154] =  21626
+len of partition[ 155] =  21564
+len of partition[ 156] =  25929
+len of partition[ 157] =  25736
+len of partition[ 158] =  25788
+len of partition[ 159] =  25788
+len of partition[ 160] =  22632
+len of partition[ 161] =  22632
+len of partition[ 162] =  22632
+len of partition[ 163] =  22632
+len of partition[ 164] =  22441
+len of partition[ 165] =  22521
+len of partition[ 166] =  22438
+len of partition[ 167] =  22352
+len of partition[ 168] =  21688
+len of partition[ 169] =  21626
+len of partition[ 170] =  21626
+len of partition[ 171] =  21564
+len of partition[ 172] =  25929
+len of partition[ 173] =  25736
+len of partition[ 174] =  25788
+len of partition[ 175] =  25788
+len of partition[ 176] =  22632
+len of partition[ 177] =  22632
+len of partition[ 178] =  22632
+len of partition[ 179] =  22632
+len of partition[ 180] =  22441
+len of partition[ 181] =  22521
+len of partition[ 182] =  22438
+len of partition[ 183] =  22352
+len of partition[ 184] =  21688
+len of partition[ 185] =  21626
+len of partition[ 186] =  21626
+len of partition[ 187] =  21564
+len of partition[ 188] =  25929
+len of partition[ 189] =  25736
+len of partition[ 190] =  25788
+len of partition[ 191] =  25788
+len of partition[ 192] =  22632
+len of partition[ 193] =  22632
+len of partition[ 194] =  22632
+len of partition[ 195] =  22632
+len of partition[ 196] =  22441
+len of partition[ 197] =  22521
+len of partition[ 198] =  22438
+len of partition[ 199] =  22352
+len of partition[ 200] =  21688
+len of partition[ 201] =  21626
+len of partition[ 202] =  21626
+len of partition[ 203] =  21564
+len of partition[ 204] =  25929
+len of partition[ 205] =  25736
+len of partition[ 206] =  25788
+len of partition[ 207] =  25788
+len of partition[ 208] =  22632
+len of partition[ 209] =  22632
+len of partition[ 210] =  22632
+len of partition[ 211] =  22632
+len of partition[ 212] =  22441
+len of partition[ 213] =  22521
+len of partition[ 214] =  22438
+len of partition[ 215] =  22352
+len of partition[ 216] =  21688
+len of partition[ 217] =  21626
+len of partition[ 218] =  21626
+len of partition[ 219] =  21564
+len of partition[ 220] =  25929
+len of partition[ 221] =  25736
+len of partition[ 222] =  25788
+len of partition[ 223] =  25788
+len of partition[ 224] =  22632
+len of partition[ 225] =  22632
+len of partition[ 226] =  22632
+len of partition[ 227] =  22632
+len of partition[ 228] =  22441
+len of partition[ 229] =  22521
+len of partition[ 230] =  22438
+len of partition[ 231] =  22352
+len of partition[ 232] =  21688
+len of partition[ 233] =  21626
+len of partition[ 234] =  21626
+len of partition[ 235] =  21564
+len of partition[ 236] =  25929
+len of partition[ 237] =  25736
+len of partition[ 238] =  25788
+len of partition[ 239] =  25788
+len of partition[ 240] =  22632
+len of partition[ 241] =  22632
+len of partition[ 242] =  22632
+len of partition[ 243] =  22632
+len of partition[ 244] =  22441
+len of partition[ 245] =  22521
+len of partition[ 246] =  22438
+len of partition[ 247] =  22352
+len of partition[ 248] =  21688
+len of partition[ 249] =  21626
+len of partition[ 250] =  21626
+len of partition[ 251] =  21564
+len of partition[ 252] =  25929
+len of partition[ 253] =  25736
+len of partition[ 254] =  25788
+len of partition[ 255] =  25788
+len of partition[ 256] =  22632
+len of partition[ 257] =  22632
+len of partition[ 258] =  22632
+len of partition[ 259] =  22632
+len of partition[ 260] =  22441
+len of partition[ 261] =  22521
+len of partition[ 262] =  22438
+len of partition[ 263] =  22352
+len of partition[ 264] =  21688
+len of partition[ 265] =  21626
+len of partition[ 266] =  21626
+len of partition[ 267] =  21564
+len of partition[ 268] =  25929
+len of partition[ 269] =  25736
+len of partition[ 270] =  25788
+len of partition[ 271] =  25788
+len of partition[ 272] =  22632
+len of partition[ 273] =  22632
+len of partition[ 274] =  22632
+len of partition[ 275] =  22632
+len of partition[ 276] =  22441
+len of partition[ 277] =  22521
+len of partition[ 278] =  22438
+len of partition[ 279] =  22352
+len of partition[ 280] =  21688
+len of partition[ 281] =  21626
+len of partition[ 282] =  21626
+len of partition[ 283] =  21564
+len of partition[ 284] =  25929
+len of partition[ 285] =  25736
+len of partition[ 286] =  25788
+len of partition[ 287] =  25788
+len of partition[ 288] =  22632
+len of partition[ 289] =  22632
+len of partition[ 290] =  22632
+len of partition[ 291] =  22632
+len of partition[ 292] =  22441
+len of partition[ 293] =  22521
+len of partition[ 294] =  22438
+len of partition[ 295] =  22352
+len of partition[ 296] =  21688
+len of partition[ 297] =  21626
+len of partition[ 298] =  21626
+len of partition[ 299] =  21564
+len of partition[ 300] =  25929
+len of partition[ 301] =  25736
+len of partition[ 302] =  25788
+len of partition[ 303] =  25788
+len of partition[ 304] =  22632
+len of partition[ 305] =  22632
+len of partition[ 306] =  22632
+len of partition[ 307] =  22632
+len of partition[ 308] =  22441
+len of partition[ 309] =  22521
+len of partition[ 310] =  22438
+len of partition[ 311] =  22352
+len of partition[ 312] =  21688
+len of partition[ 313] =  21626
+len of partition[ 314] =  21626
+len of partition[ 315] =  21564
+len of partition[ 316] =  25929
+len of partition[ 317] =  25736
+len of partition[ 318] =  25788
+len of partition[ 319] =  25788
+len of partition[ 320] =  22632
+len of partition[ 321] =  22632
+len of partition[ 322] =  22632
+len of partition[ 323] =  22632
+len of partition[ 324] =  22441
+len of partition[ 325] =  22521
+len of partition[ 326] =  22438
+len of partition[ 327] =  22352
+len of partition[ 328] =  21688
+len of partition[ 329] =  21626
+len of partition[ 330] =  21626
+len of partition[ 331] =  21564
+len of partition[ 332] =  25929
+len of partition[ 333] =  25736
+len of partition[ 334] =  25788
+len of partition[ 335] =  25788
+len of partition[ 336] =  22632
+len of partition[ 337] =  22632
+len of partition[ 338] =  22632
+len of partition[ 339] =  22632
+len of partition[ 340] =  22441
+len of partition[ 341] =  22521
+len of partition[ 342] =  22438
+len of partition[ 343] =  22352
+len of partition[ 344] =  21688
+len of partition[ 345] =  21626
+len of partition[ 346] =  21626
+len of partition[ 347] =  21564
+len of partition[ 348] =  25929
+len of partition[ 349] =  25736
+len of partition[ 350] =  25788
+len of partition[ 351] =  25788
+len of partition[ 352] =  22632
+len of partition[ 353] =  22632
+len of partition[ 354] =  22632
+len of partition[ 355] =  22632
+len of partition[ 356] =  22441
+len of partition[ 357] =  22521
+len of partition[ 358] =  22438
+len of partition[ 359] =  22352
+len of partition[ 360] =  21688
+len of partition[ 361] =  21626
+len of partition[ 362] =  21626
+len of partition[ 363] =  21564
+len of partition[ 364] =  25929
+len of partition[ 365] =  25736
+len of partition[ 366] =  25788
+len of partition[ 367] =  25788
+len of partition[ 368] =  22632
+len of partition[ 369] =  22632
+len of partition[ 370] =  22632
+len of partition[ 371] =  22632
+len of partition[ 372] =  22441
+len of partition[ 373] =  22521
+len of partition[ 374] =  22438
+len of partition[ 375] =  22352
+len of partition[ 376] =  21688
+len of partition[ 377] =  21626
+len of partition[ 378] =  21626
+len of partition[ 379] =  21564
+len of partition[ 380] =  25929
+len of partition[ 381] =  25736
+len of partition[ 382] =  25788
+len of partition[ 383] =  25788
+len of partition[ 384] =  22632
+len of partition[ 385] =  22632
+len of partition[ 386] =  22632
+len of partition[ 387] =  22632
+len of partition[ 388] =  22441
+len of partition[ 389] =  22521
+len of partition[ 390] =  22438
+len of partition[ 391] =  22352
+len of partition[ 392] =  21688
+len of partition[ 393] =  21626
+len of partition[ 394] =  21626
+len of partition[ 395] =  21564
+len of partition[ 396] =  25929
+len of partition[ 397] =  25736
+len of partition[ 398] =  25788
+len of partition[ 399] =  25788
+len of partition[ 400] =  22632
+len of partition[ 401] =  22632
+len of partition[ 402] =  22632
+len of partition[ 403] =  22632
+len of partition[ 404] =  22441
+len of partition[ 405] =  22521
+len of partition[ 406] =  22438
+len of partition[ 407] =  22352
+len of partition[ 408] =  21688
+len of partition[ 409] =  21626
+len of partition[ 410] =  21626
+len of partition[ 411] =  21564
+len of partition[ 412] =  25929
+len of partition[ 413] =  25736
+len of partition[ 414] =  25788
+len of partition[ 415] =  25788
+len of partition[ 416] =  22632
+len of partition[ 417] =  22632
+len of partition[ 418] =  22632
+len of partition[ 419] =  22632
+len of partition[ 420] =  22441
+len of partition[ 421] =  22521
+len of partition[ 422] =  22438
+len of partition[ 423] =  22352
+len of partition[ 424] =  21688
+len of partition[ 425] =  21626
+len of partition[ 426] =  21626
+len of partition[ 427] =  21564
+len of partition[ 428] =  25929
+len of partition[ 429] =  25736
+len of partition[ 430] =  25788
+len of partition[ 431] =  25788
+len of partition[ 432] =  22632
+len of partition[ 433] =  22632
+len of partition[ 434] =  22632
+len of partition[ 435] =  22632
+len of partition[ 436] =  22441
+len of partition[ 437] =  22521
+len of partition[ 438] =  22438
+len of partition[ 439] =  22352
+len of partition[ 440] =  21688
+len of partition[ 441] =  21626
+len of partition[ 442] =  21626
+len of partition[ 443] =  21564
+len of partition[ 444] =  25929
+len of partition[ 445] =  25736
+len of partition[ 446] =  25788
+len of partition[ 447] =  25788
+len of partition[ 448] =  22632
+len of partition[ 449] =  22632
+len of partition[ 450] =  22632
+len of partition[ 451] =  22632
+len of partition[ 452] =  22441
+len of partition[ 453] =  22521
+len of partition[ 454] =  22438
+len of partition[ 455] =  22352
+len of partition[ 456] =  21688
+len of partition[ 457] =  21626
+len of partition[ 458] =  21626
+len of partition[ 459] =  21564
+len of partition[ 460] =  25929
+len of partition[ 461] =  25736
+len of partition[ 462] =  25788
+len of partition[ 463] =  25788
+len of partition[ 464] =  22632
+len of partition[ 465] =  22632
+len of partition[ 466] =  22632
+len of partition[ 467] =  22632
+len of partition[ 468] =  22441
+len of partition[ 469] =  22521
+len of partition[ 470] =  22438
+len of partition[ 471] =  22352
+len of partition[ 472] =  21688
+len of partition[ 473] =  21626
+len of partition[ 474] =  21626
+len of partition[ 475] =  21564
+len of partition[ 476] =  25929
+len of partition[ 477] =  25736
+len of partition[ 478] =  25788
+len of partition[ 479] =  25788
+len of partition[ 480] =  22632
+len of partition[ 481] =  22632
+len of partition[ 482] =  22632
+len of partition[ 483] =  22632
+len of partition[ 484] =  22441
+len of partition[ 485] =  22521
+len of partition[ 486] =  22438
+len of partition[ 487] =  22352
+len of partition[ 488] =  21688
+len of partition[ 489] =  21626
+len of partition[ 490] =  21626
+len of partition[ 491] =  21564
+len of partition[ 492] =  25929
+len of partition[ 493] =  25736
+len of partition[ 494] =  25788
+len of partition[ 495] =  25788
+len of partition[ 496] =  22632
+len of partition[ 497] =  22632
+len of partition[ 498] =  22632
+len of partition[ 499] =  22632
+len of partition[ 500] =  22441
+len of partition[ 501] =  22521
+len of partition[ 502] =  22438
+len of partition[ 503] =  22352
+len of partition[ 504] =  21688
+len of partition[ 505] =  21626
+len of partition[ 506] =  21626
+len of partition[ 507] =  21564
+len of partition[ 508] =  25929
+len of partition[ 509] =  25736
+len of partition[ 510] =  25788
+len of partition[ 511] =  25788
+len of partition[ 512] =  22632
+len of partition[ 513] =  22632
+len of partition[ 514] =  22632
+len of partition[ 515] =  22632
+len of partition[ 516] =  22441
+len of partition[ 517] =  22521
+len of partition[ 518] =  22438
+len of partition[ 519] =  22352
+len of partition[ 520] =  21688
+len of partition[ 521] =  21626
+len of partition[ 522] =  21626
+len of partition[ 523] =  21564
+len of partition[ 524] =  25929
+len of partition[ 525] =  25736
+len of partition[ 526] =  25788
+len of partition[ 527] =  25788
+len of partition[ 528] =  22632
+len of partition[ 529] =  22632
+len of partition[ 530] =  22632
+len of partition[ 531] =  22632
+len of partition[ 532] =  22441
+len of partition[ 533] =  22521
+len of partition[ 534] =  22438
+len of partition[ 535] =  22352
+len of partition[ 536] =  21688
+len of partition[ 537] =  21626
+len of partition[ 538] =  21626
+len of partition[ 539] =  21564
+len of partition[ 540] =  25929
+len of partition[ 541] =  25736
+len of partition[ 542] =  25788
+len of partition[ 543] =  25788
+len of partition[ 544] =  22632
+len of partition[ 545] =  22632
+len of partition[ 546] =  22632
+len of partition[ 547] =  22632
+len of partition[ 548] =  22441
+len of partition[ 549] =  22521
+len of partition[ 550] =  22438
+len of partition[ 551] =  22352
+len of partition[ 552] =  21688
+len of partition[ 553] =  21626
+len of partition[ 554] =  21626
+len of partition[ 555] =  21564
+len of partition[ 556] =  25929
+len of partition[ 557] =  25736
+len of partition[ 558] =  25788
+len of partition[ 559] =  25788
+len of partition[ 560] =  22632
+len of partition[ 561] =  22632
+len of partition[ 562] =  22632
+len of partition[ 563] =  22632
+len of partition[ 564] =  22441
+len of partition[ 565] =  22521
+len of partition[ 566] =  22438
+len of partition[ 567] =  22352
+len of partition[ 568] =  21688
+len of partition[ 569] =  21626
+len of partition[ 570] =  21626
+len of partition[ 571] =  21564
+len of partition[ 572] =  25929
+len of partition[ 573] =  25736
+len of partition[ 574] =  25788
+len of partition[ 575] =  25788
+len of partition[ 576] =  22632
+len of partition[ 577] =  22632
+len of partition[ 578] =  22632
+len of partition[ 579] =  22632
+len of partition[ 580] =  22441
+len of partition[ 581] =  22521
+len of partition[ 582] =  22438
+len of partition[ 583] =  22352
+len of partition[ 584] =  21688
+len of partition[ 585] =  21626
+len of partition[ 586] =  21626
+len of partition[ 587] =  21564
+len of partition[ 588] =  25929
+len of partition[ 589] =  25736
+len of partition[ 590] =  25788
+len of partition[ 591] =  25788
+len of partition[ 592] =  22632
+len of partition[ 593] =  22632
+len of partition[ 594] =  22632
+len of partition[ 595] =  22632
+len of partition[ 596] =  22441
+len of partition[ 597] =  22521
+len of partition[ 598] =  22438
+len of partition[ 599] =  22352
+len of partition[ 600] =  21688
+len of partition[ 601] =  21626
+len of partition[ 602] =  21626
+len of partition[ 603] =  21564
+len of partition[ 604] =  25929
+len of partition[ 605] =  25736
+len of partition[ 606] =  25788
+len of partition[ 607] =  25788
+len of partition[ 608] =  22632
+len of partition[ 609] =  22632
+len of partition[ 610] =  22632
+len of partition[ 611] =  22632
+len of partition[ 612] =  22441
+len of partition[ 613] =  22521
+len of partition[ 614] =  22438
+len of partition[ 615] =  22352
+len of partition[ 616] =  21688
+len of partition[ 617] =  21626
+len of partition[ 618] =  21626
+len of partition[ 619] =  21564
+len of partition[ 620] =  25929
+len of partition[ 621] =  25736
+len of partition[ 622] =  25788
+len of partition[ 623] =  25788
+len of partition[ 624] =  22632
+len of partition[ 625] =  22632
+len of partition[ 626] =  22632
+len of partition[ 627] =  22632
+len of partition[ 628] =  22441
+len of partition[ 629] =  22521
+len of partition[ 630] =  22438
+len of partition[ 631] =  22352
+len of partition[ 632] =  21688
+len of partition[ 633] =  21626
+len of partition[ 634] =  21626
+len of partition[ 635] =  21564
+len of partition[ 636] =  25929
+len of partition[ 637] =  25736
+len of partition[ 638] =  25788
+len of partition[ 639] =  25788
+len of partition[ 640] =  22632
+len of partition[ 641] =  22632
+len of partition[ 642] =  22632
+len of partition[ 643] =  22632
+len of partition[ 644] =  22441
+len of partition[ 645] =  22521
+len of partition[ 646] =  22438
+len of partition[ 647] =  22352
+len of partition[ 648] =  21688
+len of partition[ 649] =  21626
+len of partition[ 650] =  21626
+len of partition[ 651] =  21564
+len of partition[ 652] =  25929
+len of partition[ 653] =  25736
+len of partition[ 654] =  25788
+len of partition[ 655] =  25788
+len of partition[ 656] =  22632
+len of partition[ 657] =  22632
+len of partition[ 658] =  22632
+len of partition[ 659] =  22632
+len of partition[ 660] =  22441
+len of partition[ 661] =  22521
+len of partition[ 662] =  22438
+len of partition[ 663] =  22352
+len of partition[ 664] =  21688
+len of partition[ 665] =  21626
+len of partition[ 666] =  21626
+len of partition[ 667] =  21564
+len of partition[ 668] =  25929
+len of partition[ 669] =  25736
+len of partition[ 670] =  25788
+len of partition[ 671] =  25788
+len of partition[ 672] =  22632
+len of partition[ 673] =  22632
+len of partition[ 674] =  22632
+len of partition[ 675] =  22632
+len of partition[ 676] =  22441
+len of partition[ 677] =  22521
+len of partition[ 678] =  22438
+len of partition[ 679] =  22352
+len of partition[ 680] =  21688
+len of partition[ 681] =  21626
+len of partition[ 682] =  21626
+len of partition[ 683] =  21564
+len of partition[ 684] =  25929
+len of partition[ 685] =  25736
+len of partition[ 686] =  25788
+len of partition[ 687] =  25788
+len of partition[ 688] =  22632
+len of partition[ 689] =  22632
+len of partition[ 690] =  22632
+len of partition[ 691] =  22632
+len of partition[ 692] =  22441
+len of partition[ 693] =  22521
+len of partition[ 694] =  22438
+len of partition[ 695] =  22352
+len of partition[ 696] =  21688
+len of partition[ 697] =  21626
+len of partition[ 698] =  21626
+len of partition[ 699] =  21564
+len of partition[ 700] =  25929
+len of partition[ 701] =  25736
+len of partition[ 702] =  25788
+len of partition[ 703] =  25788
+len of partition[ 704] =  22632
+len of partition[ 705] =  22632
+len of partition[ 706] =  22632
+len of partition[ 707] =  22632
+len of partition[ 708] =  22441
+len of partition[ 709] =  22521
+len of partition[ 710] =  22438
+len of partition[ 711] =  22352
+len of partition[ 712] =  21688
+len of partition[ 713] =  21626
+len of partition[ 714] =  21626
+len of partition[ 715] =  21564
+len of partition[ 716] =  25929
+len of partition[ 717] =  25736
+len of partition[ 718] =  25788
+len of partition[ 719] =  25788
+len of partition[ 720] =  22632
+len of partition[ 721] =  22632
+len of partition[ 722] =  22632
+len of partition[ 723] =  22632
+len of partition[ 724] =  22441
+len of partition[ 725] =  22521
+len of partition[ 726] =  22438
+len of partition[ 727] =  22352
+len of partition[ 728] =  21688
+len of partition[ 729] =  21626
+len of partition[ 730] =  21626
+len of partition[ 731] =  21564
+len of partition[ 732] =  25929
+len of partition[ 733] =  25736
+len of partition[ 734] =  25788
+len of partition[ 735] =  25788
+len of partition[ 736] =  22632
+len of partition[ 737] =  22632
+len of partition[ 738] =  22632
+len of partition[ 739] =  22632
+len of partition[ 740] =  22441
+len of partition[ 741] =  22521
+len of partition[ 742] =  22438
+len of partition[ 743] =  22352
+len of partition[ 744] =  21688
+len of partition[ 745] =  21626
+len of partition[ 746] =  21626
+len of partition[ 747] =  21564
+len of partition[ 748] =  25929
+len of partition[ 749] =  25736
+len of partition[ 750] =  25788
+len of partition[ 751] =  25788
+len of partition[ 752] =  22632
+len of partition[ 753] =  22632
+len of partition[ 754] =  22632
+len of partition[ 755] =  22632
+len of partition[ 756] =  22441
+len of partition[ 757] =  22521
+len of partition[ 758] =  22438
+len of partition[ 759] =  22352
+len of partition[ 760] =  21688
+len of partition[ 761] =  21626
+len of partition[ 762] =  21626
+len of partition[ 763] =  21564
+len of partition[ 764] =  25929
+len of partition[ 765] =  25736
+len of partition[ 766] =  25788
+len of partition[ 767] =  25788
+len of partition[ 768] =  22632
+len of partition[ 769] =  22632
+len of partition[ 770] =  22632
+len of partition[ 771] =  22632
+len of partition[ 772] =  22441
+len of partition[ 773] =  22521
+len of partition[ 774] =  22438
+len of partition[ 775] =  22352
+len of partition[ 776] =  21688
+len of partition[ 777] =  21626
+len of partition[ 778] =  21626
+len of partition[ 779] =  21564
+len of partition[ 780] =  25929
+len of partition[ 781] =  25736
+len of partition[ 782] =  25788
+len of partition[ 783] =  25788
+len of partition[ 784] =  22632
+len of partition[ 785] =  22632
+len of partition[ 786] =  22632
+len of partition[ 787] =  22632
+len of partition[ 788] =  22441
+len of partition[ 789] =  22521
+len of partition[ 790] =  22438
+len of partition[ 791] =  22352
+len of partition[ 792] =  21688
+len of partition[ 793] =  21626
+len of partition[ 794] =  21626
+len of partition[ 795] =  21564
+len of partition[ 796] =  25929
+len of partition[ 797] =  25736
+len of partition[ 798] =  25788
+len of partition[ 799] =  25788
+len of partition[ 800] =  22632
+len of partition[ 801] =  22632
+len of partition[ 802] =  22632
+len of partition[ 803] =  22632
+len of partition[ 804] =  22441
+len of partition[ 805] =  22521
+len of partition[ 806] =  22438
+len of partition[ 807] =  22352
+len of partition[ 808] =  21688
+len of partition[ 809] =  21626
+len of partition[ 810] =  21626
+len of partition[ 811] =  21564
+len of partition[ 812] =  25929
+len of partition[ 813] =  25736
+len of partition[ 814] =  25788
+len of partition[ 815] =  25788
+len of partition[ 816] =  22632
+len of partition[ 817] =  22632
+len of partition[ 818] =  22632
+len of partition[ 819] =  22632
+len of partition[ 820] =  22441
+len of partition[ 821] =  22521
+len of partition[ 822] =  22438
+len of partition[ 823] =  22352
+len of partition[ 824] =  21688
+len of partition[ 825] =  21626
+len of partition[ 826] =  21626
+len of partition[ 827] =  21564
+len of partition[ 828] =  25929
+len of partition[ 829] =  25736
+len of partition[ 830] =  25788
+len of partition[ 831] =  25788
+len of partition[ 832] =  22632
+len of partition[ 833] =  22632
+len of partition[ 834] =  22632
+len of partition[ 835] =  22632
+len of partition[ 836] =  22441
+len of partition[ 837] =  22521
+len of partition[ 838] =  22438
+len of partition[ 839] =  22352
+len of partition[ 840] =  21688
+len of partition[ 841] =  21626
+len of partition[ 842] =  21626
+len of partition[ 843] =  21564
+len of partition[ 844] =  25929
+len of partition[ 845] =  25736
+len of partition[ 846] =  25788
+len of partition[ 847] =  25788
+len of partition[ 848] =  22632
+len of partition[ 849] =  22632
+len of partition[ 850] =  22632
+len of partition[ 851] =  22632
+len of partition[ 852] =  22441
+len of partition[ 853] =  22521
+len of partition[ 854] =  22438
+len of partition[ 855] =  22352
+len of partition[ 856] =  21688
+len of partition[ 857] =  21626
+len of partition[ 858] =  21626
+len of partition[ 859] =  21564
+len of partition[ 860] =  25929
+len of partition[ 861] =  25736
+len of partition[ 862] =  25788
+len of partition[ 863] =  25788
+len of partition[ 864] =  22632
+len of partition[ 865] =  22632
+len of partition[ 866] =  22632
+len of partition[ 867] =  22632
+len of partition[ 868] =  22441
+len of partition[ 869] =  22521
+len of partition[ 870] =  22438
+len of partition[ 871] =  22352
+len of partition[ 872] =  21688
+len of partition[ 873] =  21626
+len of partition[ 874] =  21626
+len of partition[ 875] =  21564
+len of partition[ 876] =  25929
+len of partition[ 877] =  25736
+len of partition[ 878] =  25788
+len of partition[ 879] =  25788
+len of partition[ 880] =  22632
+len of partition[ 881] =  22632
+len of partition[ 882] =  22632
+len of partition[ 883] =  22632
+len of partition[ 884] =  22441
+len of partition[ 885] =  22521
+len of partition[ 886] =  22438
+len of partition[ 887] =  22352
+len of partition[ 888] =  21688
+len of partition[ 889] =  21626
+len of partition[ 890] =  21626
+len of partition[ 891] =  21564
+len of partition[ 892] =  25929
+len of partition[ 893] =  25736
+len of partition[ 894] =  25788
+len of partition[ 895] =  25788
+len of partition[ 896] =  22632
+len of partition[ 897] =  22632
+len of partition[ 898] =  22632
+len of partition[ 899] =  22632
+len of partition[ 900] =  22441
+len of partition[ 901] =  22521
+len of partition[ 902] =  22438
+len of partition[ 903] =  22352
+len of partition[ 904] =  21688
+len of partition[ 905] =  21626
+len of partition[ 906] =  21626
+len of partition[ 907] =  21564
+len of partition[ 908] =  25929
+len of partition[ 909] =  25736
+len of partition[ 910] =  25788
+len of partition[ 911] =  25788
+len of partition[ 912] =  22632
+len of partition[ 913] =  22632
+len of partition[ 914] =  22632
+len of partition[ 915] =  22632
+len of partition[ 916] =  22441
+len of partition[ 917] =  22521
+len of partition[ 918] =  22438
+len of partition[ 919] =  22352
+len of partition[ 920] =  21688
+len of partition[ 921] =  21626
+len of partition[ 922] =  21626
+len of partition[ 923] =  21564
+len of partition[ 924] =  25929
+len of partition[ 925] =  25736
+len of partition[ 926] =  25788
+len of partition[ 927] =  25788
+len of partition[ 928] =  22632
+len of partition[ 929] =  22632
+len of partition[ 930] =  22632
+len of partition[ 931] =  22632
+len of partition[ 932] =  22441
+len of partition[ 933] =  22521
+len of partition[ 934] =  22438
+len of partition[ 935] =  22352
+len of partition[ 936] =  21688
+len of partition[ 937] =  21626
+len of partition[ 938] =  21626
+len of partition[ 939] =  21564
+len of partition[ 940] =  25929
+len of partition[ 941] =  25736
+len of partition[ 942] =  25788
+len of partition[ 943] =  25788
+len of partition[ 944] =  22632
+len of partition[ 945] =  22632
+len of partition[ 946] =  22632
+len of partition[ 947] =  22632
+len of partition[ 948] =  22441
+len of partition[ 949] =  22521
+len of partition[ 950] =  22438
+len of partition[ 951] =  22352
+len of partition[ 952] =  21688
+len of partition[ 953] =  21626
+len of partition[ 954] =  21626
+len of partition[ 955] =  21564
+len of partition[ 956] =  25929
+len of partition[ 957] =  25736
+len of partition[ 958] =  25788
+len of partition[ 959] =  25788
+len of partition[ 960] =  22632
+len of partition[ 961] =  22632
+len of partition[ 962] =  22632
+len of partition[ 963] =  22632
+len of partition[ 964] =  22441
+len of partition[ 965] =  22521
+len of partition[ 966] =  22438
+len of partition[ 967] =  22352
+len of partition[ 968] =  21688
+len of partition[ 969] =  21626
+len of partition[ 970] =  21626
+len of partition[ 971] =  21564
+len of partition[ 972] =  25929
+len of partition[ 973] =  25736
+len of partition[ 974] =  25788
+len of partition[ 975] =  25788
+len of partition[ 976] =  22632
+len of partition[ 977] =  22632
+len of partition[ 978] =  22632
+len of partition[ 979] =  22632
+len of partition[ 980] =  22441
+len of partition[ 981] =  22521
+len of partition[ 982] =  22438
+len of partition[ 983] =  22352
+len of partition[ 984] =  21688
+len of partition[ 985] =  21626
+len of partition[ 986] =  21626
+len of partition[ 987] =  21564
+len of partition[ 988] =  25929
+len of partition[ 989] =  25736
+len of partition[ 990] =  25788
+len of partition[ 991] =  25788
+len of partition[ 992] =  22632
+len of partition[ 993] =  22632
+len of partition[ 994] =  22632
+len of partition[ 995] =  22632
+len of partition[ 996] =  22441
+len of partition[ 997] =  22521
+len of partition[ 998] =  22438
+len of partition[ 999] =  22352
+len of partition[1000] =  21688
+len of partition[1001] =  21626
+len of partition[1002] =  21626
+len of partition[1003] =  21564
+len of partition[1004] =  25929
+len of partition[1005] =  25736
+len of partition[1006] =  25788
+len of partition[1007] =  25788
+len of partition[1008] =  22632
+len of partition[1009] =  22632
+len of partition[1010] =  22632
+len of partition[1011] =  22632
+len of partition[1012] =  22441
+len of partition[1013] =  22521
+len of partition[1014] =  22438
+len of partition[1015] =  22352
+len of partition[1016] =  21688
+len of partition[1017] =  21626
+len of partition[1018] =  21626
+len of partition[1019] =  21564
+len of partition[1020] =  25929
+len of partition[1021] =  25736
+len of partition[1022] =  25788
+len of partition[1023] =  25788
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:    51.133342 CPU time:   657.490843
+In _build_buffer: ISDF Local size of buffer = 11024.702 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =   16
+select_IP_local_atm: npt_found =  646
+select_IP_local_atm: npt_found =  635
+select_IP_local_atm: npt_found =  630
+select_IP_local_atm: npt_found =  629
+select_IP_local_atm: npt_found =  546
+select_IP_local_atm: npt_found =  547
+select_IP_local_atm: npt_found =  561
+select_IP_local_atm: npt_found =  554
+select_IP_local_atm: npt_found =  661
+select_IP_local_atm: npt_found =  644
+select_IP_local_atm: npt_found =  664
+select_IP_local_atm: npt_found =  641
+select_IP_local_atm: npt_found =  784
+select_IP_local_atm: npt_found =  683
+select_IP_local_atm: npt_found =  768
+select_IP_local_atm: npt_found =  769
+select_IP_local_step1 wall time:   338.604081 CPU time:  9768.775642
+ build_aoRg_possible wall time:     0.880485 CPU time:     0.878273
+select_IP_local_step2 wall time:     0.000150 CPU time:     0.000165
+select_IP_local_step3 wall time:     0.002633 CPU time:     0.002619
+Memory usage for aoR  :  15712.074 MB
+Memory usage for aoRg :    443.201 MB
+            build_IP wall time:   339.487350 CPU time:  9769.656699
+build_aux_basis_local wall time:    24.531110 CPU time:   349.548578
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]   5128.02 sec, wall time    197.61 sec
+    CPU time for gen W [   2|[  32:  64]   8713.66 sec, wall time    313.55 sec
+    CPU time for gen W [   3|[  64:  96]   2700.12 sec, wall time    119.15 sec
+    CPU time for gen W [   4|[  96: 128]   1476.87 sec, wall time     79.90 sec
+    CPU time for gen W [   5|[ 128: 160]   1794.51 sec, wall time     90.35 sec
+    CPU time for gen W [   6|[ 160: 192]   7156.96 sec, wall time    265.68 sec
+    CPU time for gen W [   7|[ 192: 224]    177.82 sec, wall time     37.33 sec
+    CPU time for gen W [   8|[ 224: 256]    173.30 sec, wall time     37.71 sec
+    CPU time for gen W [   9|[ 256: 288]    756.77 sec, wall time     56.40 sec
+    CPU time for gen W [  10|[ 288: 320]   2359.06 sec, wall time    108.53 sec
+    CPU time for gen W [  11|[ 320: 352]    195.11 sec, wall time     37.56 sec
+    CPU time for gen W [  12|[ 352: 384]   2161.44 sec, wall time    101.55 sec
+    CPU time for gen W [  13|[ 384: 416]    870.92 sec, wall time     59.62 sec
+    CPU time for gen W [  14|[ 416: 448]    178.85 sec, wall time     37.28 sec
+    CPU time for gen W [  15|[ 448: 480]    173.30 sec, wall time     37.15 sec
+    CPU time for gen W [  16|[ 480: 512]    900.69 sec, wall time     61.03 sec
+    CPU time for gen W [  17|[ 512: 544]    337.03 sec, wall time     42.39 sec
+    CPU time for gen W [  18|[ 544: 576]   3038.29 sec, wall time    130.01 sec
+    CPU time for gen W [  19|[ 576: 608]    170.72 sec, wall time     36.84 sec
+    CPU time for gen W [  20|[ 608: 640]    343.43 sec, wall time     42.97 sec
+    CPU time for gen W [  21|[ 640: 646]     80.32 sec, wall time      8.54 sec
+    CPU time for gen W [  22|[   0:  32]   2179.18 sec, wall time    102.42 sec
+    CPU time for gen W [  23|[  32:  64]    913.99 sec, wall time     60.98 sec
+    CPU time for gen W [  24|[  64:  96]    379.97 sec, wall time     44.38 sec
+    CPU time for gen W [  25|[  96: 128]   2498.59 sec, wall time    112.57 sec
+    CPU time for gen W [  26|[ 128: 160]   1204.29 sec, wall time     70.73 sec
+    CPU time for gen W [  27|[ 160: 192]    171.49 sec, wall time     37.21 sec
+    CPU time for gen W [  28|[ 192: 224]    998.12 sec, wall time     64.06 sec
+    CPU time for gen W [  29|[ 224: 256]    175.16 sec, wall time     37.36 sec
+    CPU time for gen W [  30|[ 256: 288]   1032.06 sec, wall time     65.82 sec
+    CPU time for gen W [  31|[ 288: 320]    173.97 sec, wall time     37.14 sec
+    CPU time for gen W [  32|[ 320: 352]    590.30 sec, wall time     50.17 sec
+    CPU time for gen W [  33|[ 352: 384]    453.87 sec, wall time     45.77 sec
+    CPU time for gen W [  34|[ 384: 416]    407.42 sec, wall time     44.86 sec
+    CPU time for gen W [  35|[ 416: 448]    174.37 sec, wall time     37.21 sec
+    CPU time for gen W [  36|[ 448: 480]    172.65 sec, wall time     37.18 sec
+    CPU time for gen W [  37|[ 480: 512]    172.65 sec, wall time     37.18 sec
+    CPU time for gen W [  38|[ 512: 544]   1410.97 sec, wall time     77.56 sec
+    CPU time for gen W [  39|[ 544: 576]   1976.33 sec, wall time     95.67 sec
+    CPU time for gen W [  40|[ 576: 608]    656.07 sec, wall time     53.10 sec
+    CPU time for gen W [  41|[ 608: 635]    250.48 sec, wall time     35.15 sec
+    CPU time for gen W [  42|[   0:  32]    257.13 sec, wall time     39.98 sec
+    CPU time for gen W [  43|[  32:  64]    223.92 sec, wall time     39.27 sec
+    CPU time for gen W [  44|[  64:  96]   1058.64 sec, wall time     66.50 sec
+    CPU time for gen W [  45|[  96: 128]    172.18 sec, wall time     37.36 sec
+    CPU time for gen W [  46|[ 128: 160]   1199.47 sec, wall time     70.68 sec
+    CPU time for gen W [  47|[ 160: 192]    172.80 sec, wall time     37.68 sec
+    CPU time for gen W [  48|[ 192: 224]    703.74 sec, wall time     54.58 sec
+    CPU time for gen W [  49|[ 224: 256]    952.44 sec, wall time     63.34 sec
+    CPU time for gen W [  50|[ 256: 288]  34202.23 sec, wall time   1183.49 sec
+    CPU time for gen W [  51|[ 288: 320]    229.45 sec, wall time     38.77 sec
+    CPU time for gen W [  52|[ 320: 352]    177.45 sec, wall time     37.19 sec
+    CPU time for gen W [  53|[ 352: 384]    172.43 sec, wall time     37.37 sec
+    CPU time for gen W [  54|[ 384: 416]    174.06 sec, wall time     37.07 sec
+    CPU time for gen W [  55|[ 416: 448]    174.03 sec, wall time     37.53 sec
+    CPU time for gen W [  56|[ 448: 480]    487.80 sec, wall time     47.87 sec
+    CPU time for gen W [  57|[ 480: 512]    172.97 sec, wall time     37.23 sec
+    CPU time for gen W [  58|[ 512: 544]    172.00 sec, wall time     37.20 sec
+    CPU time for gen W [  59|[ 544: 576]    175.06 sec, wall time     37.44 sec
+    CPU time for gen W [  60|[ 576: 608]    168.55 sec, wall time     36.55 sec
+    CPU time for gen W [  61|[ 608: 630]    146.51 sec, wall time     26.07 sec
+    CPU time for gen W [  62|[   0:  32]    212.43 sec, wall time     38.94 sec
+    CPU time for gen W [  63|[  32:  64]    182.85 sec, wall time     38.28 sec
+    CPU time for gen W [  64|[  64:  96]    183.37 sec, wall time     37.44 sec
+    CPU time for gen W [  65|[  96: 128]    176.09 sec, wall time     37.31 sec
+    CPU time for gen W [  66|[ 128: 160]    432.31 sec, wall time     46.40 sec
+    CPU time for gen W [  67|[ 160: 192]    171.13 sec, wall time     36.89 sec
+    CPU time for gen W [  68|[ 192: 224]    174.90 sec, wall time     37.96 sec
+    CPU time for gen W [  69|[ 224: 256]    176.35 sec, wall time     37.22 sec
+    CPU time for gen W [  70|[ 256: 288]    172.52 sec, wall time     36.90 sec
+    CPU time for gen W [  71|[ 288: 320]    172.41 sec, wall time     37.37 sec
+    CPU time for gen W [  72|[ 320: 352]    638.71 sec, wall time     52.53 sec
+    CPU time for gen W [  73|[ 352: 384]    172.11 sec, wall time     36.94 sec
+    CPU time for gen W [  74|[ 384: 416]    173.79 sec, wall time     36.96 sec
+    CPU time for gen W [  75|[ 416: 448]    456.43 sec, wall time     46.19 sec
+    CPU time for gen W [  76|[ 448: 480]  12442.04 sec, wall time    446.17 sec
+    CPU time for gen W [  77|[ 480: 512]  30647.67 sec, wall time   1057.87 sec
+    CPU time for gen W [  78|[ 512: 544]   1525.24 sec, wall time     80.54 sec
+    CPU time for gen W [  79|[ 544: 576]    172.41 sec, wall time     36.99 sec
+    CPU time for gen W [  80|[ 576: 608]    176.53 sec, wall time     37.36 sec
+    CPU time for gen W [  81|[ 608: 629]    657.03 sec, wall time     42.17 sec
+    CPU time for gen W [  82|[   0:  32]    171.93 sec, wall time     36.93 sec
+    CPU time for gen W [  83|[  32:  64]    172.76 sec, wall time     36.92 sec
+    CPU time for gen W [  84|[  64:  96]    170.67 sec, wall time     36.85 sec
+    CPU time for gen W [  85|[  96: 128]    171.49 sec, wall time     36.91 sec
+    CPU time for gen W [  86|[ 128: 160]    196.16 sec, wall time     37.69 sec
+    CPU time for gen W [  87|[ 160: 192]    671.96 sec, wall time     53.77 sec
+    CPU time for gen W [  88|[ 192: 224]    169.68 sec, wall time     36.72 sec
+    CPU time for gen W [  89|[ 224: 256]    172.45 sec, wall time     37.12 sec
+    CPU time for gen W [  90|[ 256: 288]    173.24 sec, wall time     37.15 sec
+    CPU time for gen W [  91|[ 288: 320]    173.98 sec, wall time     37.04 sec
+    CPU time for gen W [  92|[ 320: 352]   9109.52 sec, wall time    335.27 sec
+    CPU time for gen W [  93|[ 352: 384]    171.87 sec, wall time     36.97 sec
+    CPU time for gen W [  94|[ 384: 416]    174.77 sec, wall time     37.45 sec
+    CPU time for gen W [  95|[ 416: 448]    171.86 sec, wall time     36.88 sec
+    CPU time for gen W [  96|[ 448: 480]   1594.45 sec, wall time     82.93 sec
+    CPU time for gen W [  97|[ 480: 512]    493.87 sec, wall time     47.66 sec
+    CPU time for gen W [  98|[ 512: 544]   2156.06 sec, wall time    101.55 sec
+    CPU time for gen W [  99|[ 544: 546]    789.31 sec, wall time     27.57 sec
+    CPU time for gen W [ 100|[   0:  32]    225.14 sec, wall time     39.41 sec
+    CPU time for gen W [ 101|[  32:  64]    361.27 sec, wall time     43.26 sec
+    CPU time for gen W [ 102|[  64:  96]    420.39 sec, wall time     45.96 sec
+    CPU time for gen W [ 103|[  96: 128]    168.89 sec, wall time     37.20 sec
+    CPU time for gen W [ 104|[ 128: 160]    174.11 sec, wall time     37.34 sec
+    CPU time for gen W [ 105|[ 160: 192]    173.65 sec, wall time     37.32 sec
+    CPU time for gen W [ 106|[ 192: 224]    171.60 sec, wall time     36.79 sec
+    CPU time for gen W [ 107|[ 224: 256]   1794.77 sec, wall time     89.99 sec
+    CPU time for gen W [ 108|[ 256: 288]    231.85 sec, wall time     39.27 sec
+    CPU time for gen W [ 109|[ 288: 320]    173.53 sec, wall time     37.26 sec
+    CPU time for gen W [ 110|[ 320: 352]    173.12 sec, wall time     37.22 sec
+    CPU time for gen W [ 111|[ 352: 384]    681.74 sec, wall time     53.87 sec
+    CPU time for gen W [ 112|[ 384: 416]    172.63 sec, wall time     37.86 sec
+    CPU time for gen W [ 113|[ 416: 448]    173.08 sec, wall time     37.53 sec
+    CPU time for gen W [ 114|[ 448: 480]    635.76 sec, wall time     52.50 sec
+    CPU time for gen W [ 115|[ 480: 512]    172.09 sec, wall time     37.21 sec
+    CPU time for gen W [ 116|[ 512: 544]    174.28 sec, wall time     37.25 sec
+    CPU time for gen W [ 117|[ 544: 547]     61.26 sec, wall time      4.86 sec
+    CPU time for gen W [ 118|[   0:  32]    824.12 sec, wall time     58.44 sec
+    CPU time for gen W [ 119|[  32:  64]    175.49 sec, wall time     37.34 sec
+    CPU time for gen W [ 120|[  64:  96]    172.39 sec, wall time     37.21 sec
+    CPU time for gen W [ 121|[  96: 128]    921.46 sec, wall time     61.65 sec
+    CPU time for gen W [ 122|[ 128: 160]    170.20 sec, wall time     36.98 sec
+    CPU time for gen W [ 123|[ 160: 192]   1135.66 sec, wall time     69.28 sec
+    CPU time for gen W [ 124|[ 192: 224]    645.38 sec, wall time     52.92 sec
+    CPU time for gen W [ 125|[ 224: 256]    179.63 sec, wall time     37.91 sec
+    CPU time for gen W [ 126|[ 256: 288]    178.89 sec, wall time     37.32 sec
+    CPU time for gen W [ 127|[ 288: 320]    177.68 sec, wall time     37.63 sec
+    CPU time for gen W [ 128|[ 320: 352]    493.90 sec, wall time     49.48 sec
+    CPU time for gen W [ 129|[ 352: 384]    177.33 sec, wall time     38.25 sec
+    CPU time for gen W [ 130|[ 384: 416]    209.41 sec, wall time     40.15 sec
+    CPU time for gen W [ 131|[ 416: 448]    551.21 sec, wall time     51.22 sec
+    CPU time for gen W [ 132|[ 448: 480]   3871.64 sec, wall time    164.78 sec
+    CPU time for gen W [ 133|[ 480: 512]   4685.01 sec, wall time    198.33 sec
+    CPU time for gen W [ 134|[ 512: 544]   7039.20 sec, wall time    270.85 sec
+    CPU time for gen W [ 135|[ 544: 561]   7445.82 sec, wall time    266.39 sec
+    CPU time for gen W [ 136|[   0:  32]   1277.30 sec, wall time     74.56 sec
+    CPU time for gen W [ 137|[  32:  64]   2658.20 sec, wall time    120.30 sec
+    CPU time for gen W [ 138|[  64:  96]    179.23 sec, wall time     37.73 sec
+    CPU time for gen W [ 139|[  96: 128]    175.77 sec, wall time     37.29 sec
+    CPU time for gen W [ 140|[ 128: 160]    185.71 sec, wall time     37.67 sec
+    CPU time for gen W [ 141|[ 160: 192]    174.51 sec, wall time     37.49 sec
+    CPU time for gen W [ 142|[ 192: 224]    176.14 sec, wall time     37.30 sec
+    CPU time for gen W [ 143|[ 224: 256]    176.26 sec, wall time     37.36 sec
+    CPU time for gen W [ 144|[ 256: 288]    174.95 sec, wall time     37.27 sec
+    CPU time for gen W [ 145|[ 288: 320]    175.67 sec, wall time     37.34 sec
+    CPU time for gen W [ 146|[ 320: 352]    177.04 sec, wall time     37.46 sec
+    CPU time for gen W [ 147|[ 352: 384]    172.67 sec, wall time     37.41 sec
+    CPU time for gen W [ 148|[ 384: 416]    174.60 sec, wall time     37.27 sec
+    CPU time for gen W [ 149|[ 416: 448]    175.25 sec, wall time     37.28 sec
+    CPU time for gen W [ 150|[ 448: 480]    175.66 sec, wall time     37.32 sec
+    CPU time for gen W [ 151|[ 480: 512]    173.37 sec, wall time     37.55 sec
+    CPU time for gen W [ 152|[ 512: 544]   1767.69 sec, wall time     91.24 sec
+    CPU time for gen W [ 153|[ 544: 554]   1668.02 sec, wall time     65.13 sec
+    CPU time for gen W [ 154|[   0:  32]   1227.28 sec, wall time     71.41 sec
+    CPU time for gen W [ 155|[  32:  64]   1605.94 sec, wall time     85.80 sec
+    CPU time for gen W [ 156|[  64:  96]    181.80 sec, wall time     37.48 sec
+    CPU time for gen W [ 157|[  96: 128]    182.50 sec, wall time     37.10 sec
+    CPU time for gen W [ 158|[ 128: 160]    186.35 sec, wall time     37.68 sec
+    CPU time for gen W [ 159|[ 160: 192]    187.57 sec, wall time     37.78 sec
+    CPU time for gen W [ 160|[ 192: 224]    183.96 sec, wall time     37.14 sec
+    CPU time for gen W [ 161|[ 224: 256]    186.34 sec, wall time     37.17 sec
+    CPU time for gen W [ 162|[ 256: 288]   1644.23 sec, wall time     87.25 sec
+    CPU time for gen W [ 163|[ 288: 320]    210.86 sec, wall time     38.86 sec
+    CPU time for gen W [ 164|[ 320: 352]    188.57 sec, wall time     37.32 sec
+    CPU time for gen W [ 165|[ 352: 384]    631.05 sec, wall time     51.62 sec
+    CPU time for gen W [ 166|[ 384: 416]    186.99 sec, wall time     37.78 sec
+    CPU time for gen W [ 167|[ 416: 448]    423.21 sec, wall time     47.65 sec
+    CPU time for gen W [ 168|[ 448: 480]    186.80 sec, wall time     37.86 sec
+    CPU time for gen W [ 169|[ 480: 512]    185.47 sec, wall time     38.12 sec
+    CPU time for gen W [ 170|[ 512: 544]    185.64 sec, wall time     37.72 sec
+    CPU time for gen W [ 171|[ 544: 576]    200.88 sec, wall time     38.33 sec
+    CPU time for gen W [ 172|[ 576: 608]    202.87 sec, wall time     37.79 sec
+    CPU time for gen W [ 173|[ 608: 640]    530.61 sec, wall time     51.26 sec
+    CPU time for gen W [ 174|[ 640: 661]    169.09 sec, wall time     26.10 sec
+    CPU time for gen W [ 175|[   0:  32]    204.31 sec, wall time     37.78 sec
+    CPU time for gen W [ 176|[  32:  64]    205.77 sec, wall time     37.94 sec
+    CPU time for gen W [ 177|[  64:  96]    828.06 sec, wall time     59.58 sec
+    CPU time for gen W [ 178|[  96: 128]    192.80 sec, wall time     37.57 sec
+    CPU time for gen W [ 179|[ 128: 160]    193.93 sec, wall time     37.35 sec
+    CPU time for gen W [ 180|[ 160: 192]    196.00 sec, wall time     37.50 sec
+    CPU time for gen W [ 181|[ 192: 224]    195.46 sec, wall time     37.58 sec
+    CPU time for gen W [ 182|[ 224: 256]    191.78 sec, wall time     37.29 sec
+    CPU time for gen W [ 183|[ 256: 288]    317.86 sec, wall time     42.95 sec
+    CPU time for gen W [ 184|[ 288: 320]    191.44 sec, wall time     37.83 sec
+    CPU time for gen W [ 185|[ 320: 352]    195.91 sec, wall time     38.56 sec
+    CPU time for gen W [ 186|[ 352: 384]    192.73 sec, wall time     38.31 sec
+    CPU time for gen W [ 187|[ 384: 416]    188.71 sec, wall time     37.67 sec
+    CPU time for gen W [ 188|[ 416: 448]    181.46 sec, wall time     37.37 sec
+    CPU time for gen W [ 189|[ 448: 480]    644.98 sec, wall time     56.67 sec
+    CPU time for gen W [ 190|[ 480: 512]    179.65 sec, wall time     37.34 sec
+    CPU time for gen W [ 191|[ 512: 544]    177.44 sec, wall time     37.05 sec
+    CPU time for gen W [ 192|[ 544: 576]   1553.98 sec, wall time     94.31 sec
+    CPU time for gen W [ 193|[ 576: 608]    761.94 sec, wall time     56.27 sec
+    CPU time for gen W [ 194|[ 608: 640]    177.49 sec, wall time     38.19 sec
+    CPU time for gen W [ 195|[ 640: 644]   1181.04 sec, wall time     51.07 sec
+    CPU time for gen W [ 196|[   0:  32]    175.23 sec, wall time     37.88 sec
+    CPU time for gen W [ 197|[  32:  64]   2470.42 sec, wall time    122.08 sec
+    CPU time for gen W [ 198|[  64:  96]    175.23 sec, wall time     37.55 sec
+    CPU time for gen W [ 199|[  96: 128]    176.36 sec, wall time     37.60 sec
+    CPU time for gen W [ 200|[ 128: 160]   8333.94 sec, wall time    334.21 sec
+    CPU time for gen W [ 201|[ 160: 192]    839.50 sec, wall time     59.24 sec
+    CPU time for gen W [ 202|[ 192: 224]   3301.73 sec, wall time    150.54 sec
+    CPU time for gen W [ 203|[ 224: 256]    867.90 sec, wall time     69.56 sec
+    CPU time for gen W [ 204|[ 256: 288]    170.93 sec, wall time     36.97 sec
+    CPU time for gen W [ 205|[ 288: 320]   1126.28 sec, wall time     80.34 sec
+    CPU time for gen W [ 206|[ 320: 352]    172.42 sec, wall time     37.29 sec
+    CPU time for gen W [ 207|[ 352: 384]    169.00 sec, wall time     37.04 sec
+    CPU time for gen W [ 208|[ 384: 416]    484.86 sec, wall time     52.23 sec
+    CPU time for gen W [ 209|[ 416: 448]   1213.14 sec, wall time     71.08 sec
+    CPU time for gen W [ 210|[ 448: 480]    656.39 sec, wall time     57.93 sec
+    CPU time for gen W [ 211|[ 480: 512]    172.39 sec, wall time     37.58 sec
+    CPU time for gen W [ 212|[ 512: 544]   1503.47 sec, wall time     90.40 sec
+    CPU time for gen W [ 213|[ 544: 576]    171.34 sec, wall time     37.16 sec
+    CPU time for gen W [ 214|[ 576: 608]   1323.90 sec, wall time     83.92 sec
+    CPU time for gen W [ 215|[ 608: 640]    181.57 sec, wall time     37.65 sec
+    CPU time for gen W [ 216|[ 640: 664]    149.03 sec, wall time     28.71 sec
+    CPU time for gen W [ 217|[   0:  32]    552.36 sec, wall time     55.18 sec
+    CPU time for gen W [ 218|[  32:  64]    172.76 sec, wall time     37.38 sec
+    CPU time for gen W [ 219|[  64:  96]    177.99 sec, wall time     37.36 sec
+    CPU time for gen W [ 220|[  96: 128]    589.72 sec, wall time     56.16 sec
+    CPU time for gen W [ 221|[ 128: 160]    168.96 sec, wall time     36.85 sec
+    CPU time for gen W [ 222|[ 160: 192]   1630.28 sec, wall time     97.46 sec
+    CPU time for gen W [ 223|[ 192: 224]    174.01 sec, wall time     37.25 sec
+    CPU time for gen W [ 224|[ 224: 256]   1157.21 sec, wall time     78.89 sec
+    CPU time for gen W [ 225|[ 256: 288]    169.60 sec, wall time     37.16 sec
+    CPU time for gen W [ 226|[ 288: 320]   1498.55 sec, wall time     90.40 sec
+    CPU time for gen W [ 227|[ 320: 352]    182.79 sec, wall time     39.89 sec
+    CPU time for gen W [ 228|[ 352: 384]    177.61 sec, wall time     37.64 sec
+    CPU time for gen W [ 229|[ 384: 416]    451.19 sec, wall time     50.58 sec
+    CPU time for gen W [ 230|[ 416: 448]    170.28 sec, wall time     36.68 sec
+    CPU time for gen W [ 231|[ 448: 480]    170.75 sec, wall time     36.65 sec
+    CPU time for gen W [ 232|[ 480: 512]    753.83 sec, wall time     63.53 sec
+    CPU time for gen W [ 233|[ 512: 544]    168.87 sec, wall time     36.73 sec
+    CPU time for gen W [ 234|[ 544: 576]    629.28 sec, wall time     51.71 sec
+    CPU time for gen W [ 235|[ 576: 608]    303.23 sec, wall time     49.49 sec
+    CPU time for gen W [ 236|[ 608: 640]    900.17 sec, wall time     60.68 sec
+    CPU time for gen W [ 237|[ 640: 641]     48.02 sec, wall time      2.40 sec
+    CPU time for gen W [ 238|[   0:  32]    237.34 sec, wall time     39.88 sec
+    CPU time for gen W [ 239|[  32:  64]    346.51 sec, wall time     46.22 sec
+    CPU time for gen W [ 240|[  64:  96]    175.55 sec, wall time     37.79 sec
+    CPU time for gen W [ 241|[  96: 128]    172.90 sec, wall time     37.42 sec
+    CPU time for gen W [ 242|[ 128: 160]   1031.54 sec, wall time     77.23 sec
+    CPU time for gen W [ 243|[ 160: 192]    168.86 sec, wall time     36.59 sec
+    CPU time for gen W [ 244|[ 192: 224]    174.45 sec, wall time     36.92 sec
+    CPU time for gen W [ 245|[ 224: 256]    198.38 sec, wall time     37.54 sec
+    CPU time for gen W [ 246|[ 256: 288]    183.10 sec, wall time     37.23 sec
+    CPU time for gen W [ 247|[ 288: 320]    169.61 sec, wall time     36.60 sec
+    CPU time for gen W [ 248|[ 320: 352]    170.88 sec, wall time     36.60 sec
+    CPU time for gen W [ 249|[ 352: 384]    253.02 sec, wall time     39.44 sec
+    CPU time for gen W [ 250|[ 384: 416]    175.60 sec, wall time     37.92 sec
+    CPU time for gen W [ 251|[ 416: 448]    178.14 sec, wall time     37.64 sec
+    CPU time for gen W [ 252|[ 448: 480]    575.55 sec, wall time     50.41 sec
+    CPU time for gen W [ 253|[ 480: 512]    231.34 sec, wall time     39.44 sec
+    CPU time for gen W [ 254|[ 512: 544]    181.58 sec, wall time     38.01 sec
+    CPU time for gen W [ 255|[ 544: 576]    519.93 sec, wall time     49.16 sec
+    CPU time for gen W [ 256|[ 576: 608]    251.88 sec, wall time     40.21 sec
+    CPU time for gen W [ 257|[ 608: 640]    179.56 sec, wall time     37.54 sec
+    CPU time for gen W [ 258|[ 640: 672]    836.41 sec, wall time     58.83 sec
+    CPU time for gen W [ 259|[ 672: 704]    176.15 sec, wall time     37.80 sec
+    CPU time for gen W [ 260|[ 704: 736]    200.40 sec, wall time     38.55 sec
+    CPU time for gen W [ 261|[ 736: 768]    519.43 sec, wall time     49.21 sec
+    CPU time for gen W [ 262|[ 768: 784]    141.15 sec, wall time     20.66 sec
+    CPU time for gen W [ 263|[   0:  32]    183.72 sec, wall time     37.81 sec
+    CPU time for gen W [ 264|[  32:  64]    180.03 sec, wall time     37.67 sec
+    CPU time for gen W [ 265|[  64:  96]    251.78 sec, wall time     40.00 sec
+    CPU time for gen W [ 266|[  96: 128]    186.41 sec, wall time     37.79 sec
+    CPU time for gen W [ 267|[ 128: 160]    332.86 sec, wall time     42.62 sec
+    CPU time for gen W [ 268|[ 160: 192]    479.93 sec, wall time     47.86 sec
+    CPU time for gen W [ 269|[ 192: 224]    183.10 sec, wall time     37.47 sec
+    CPU time for gen W [ 270|[ 224: 256]    188.65 sec, wall time     37.91 sec
+    CPU time for gen W [ 271|[ 256: 288]    179.76 sec, wall time     37.51 sec
+    CPU time for gen W [ 272|[ 288: 320]    190.65 sec, wall time     38.33 sec
+    CPU time for gen W [ 273|[ 320: 352]    218.22 sec, wall time     38.73 sec
+    CPU time for gen W [ 274|[ 352: 384]    184.18 sec, wall time     37.92 sec
+    CPU time for gen W [ 275|[ 384: 416]    502.43 sec, wall time     47.88 sec
+    CPU time for gen W [ 276|[ 416: 448]    278.85 sec, wall time     40.50 sec
+    CPU time for gen W [ 277|[ 448: 480]    227.78 sec, wall time     38.76 sec
+    CPU time for gen W [ 278|[ 480: 512]    184.81 sec, wall time     37.59 sec
+    CPU time for gen W [ 279|[ 512: 544]    262.03 sec, wall time     40.45 sec
+    CPU time for gen W [ 280|[ 544: 576]    229.08 sec, wall time     39.69 sec
+    CPU time for gen W [ 281|[ 576: 608]    186.49 sec, wall time     38.10 sec
+    CPU time for gen W [ 282|[ 608: 640]    190.18 sec, wall time     38.32 sec
+    CPU time for gen W [ 283|[ 640: 672]    330.89 sec, wall time     43.48 sec
+    CPU time for gen W [ 284|[ 672: 683]    115.89 sec, wall time     14.51 sec
+    CPU time for gen W [ 285|[   0:  32]    184.46 sec, wall time     37.95 sec
+    CPU time for gen W [ 286|[  32:  64]    248.38 sec, wall time     40.16 sec
+    CPU time for gen W [ 287|[  64:  96]    193.38 sec, wall time     38.55 sec
+    CPU time for gen W [ 288|[  96: 128]    189.16 sec, wall time     38.12 sec
+    CPU time for gen W [ 289|[ 128: 160]    198.01 sec, wall time     38.64 sec
+    CPU time for gen W [ 290|[ 160: 192]    216.16 sec, wall time     39.26 sec
+    CPU time for gen W [ 291|[ 192: 224]    200.16 sec, wall time     38.38 sec
+    CPU time for gen W [ 292|[ 224: 256]    211.90 sec, wall time     38.64 sec
+    CPU time for gen W [ 293|[ 256: 288]    201.44 sec, wall time     38.65 sec
+    CPU time for gen W [ 294|[ 288: 320]    193.56 sec, wall time     37.95 sec
+    CPU time for gen W [ 295|[ 320: 352]    196.18 sec, wall time     38.18 sec
+    CPU time for gen W [ 296|[ 352: 384]    205.16 sec, wall time     38.80 sec
+    CPU time for gen W [ 297|[ 384: 416]    193.74 sec, wall time     37.89 sec
+    CPU time for gen W [ 298|[ 416: 448]    180.06 sec, wall time     37.59 sec
+    CPU time for gen W [ 299|[ 448: 480]    511.62 sec, wall time     48.68 sec
+    CPU time for gen W [ 300|[ 480: 512]    197.08 sec, wall time     37.88 sec
+    CPU time for gen W [ 301|[ 512: 544]    201.02 sec, wall time     38.13 sec
+    CPU time for gen W [ 302|[ 544: 576]    205.56 sec, wall time     38.62 sec
+    CPU time for gen W [ 303|[ 576: 608]    205.26 sec, wall time     38.20 sec
+    CPU time for gen W [ 304|[ 608: 640]    189.89 sec, wall time     37.81 sec
+    CPU time for gen W [ 305|[ 640: 672]    203.21 sec, wall time     38.46 sec
+    CPU time for gen W [ 306|[ 672: 704]    202.06 sec, wall time     38.16 sec
+    CPU time for gen W [ 307|[ 704: 736]    203.18 sec, wall time     38.22 sec
+    CPU time for gen W [ 308|[ 736: 768]    202.43 sec, wall time     38.39 sec
+    CPU time for gen W [ 309|[   0:  32]    248.12 sec, wall time     40.30 sec
+    CPU time for gen W [ 310|[  32:  64]    390.44 sec, wall time     44.94 sec
+    CPU time for gen W [ 311|[  64:  96]    189.11 sec, wall time     38.47 sec
+    CPU time for gen W [ 312|[  96: 128]    183.33 sec, wall time     37.88 sec
+    CPU time for gen W [ 313|[ 128: 160]    178.80 sec, wall time     37.81 sec
+    CPU time for gen W [ 314|[ 160: 192]    191.43 sec, wall time     38.48 sec
+    CPU time for gen W [ 315|[ 192: 224]   1067.81 sec, wall time     66.47 sec
+    CPU time for gen W [ 316|[ 224: 256]    311.58 sec, wall time     42.28 sec
+    CPU time for gen W [ 317|[ 256: 288]    473.81 sec, wall time     47.76 sec
+    CPU time for gen W [ 318|[ 288: 320]    184.53 sec, wall time     38.25 sec
+    CPU time for gen W [ 319|[ 320: 352]    186.29 sec, wall time     37.99 sec
+    CPU time for gen W [ 320|[ 352: 384]    179.24 sec, wall time     37.83 sec
+    CPU time for gen W [ 321|[ 384: 416]    185.35 sec, wall time     38.41 sec
+    CPU time for gen W [ 322|[ 416: 448]    187.03 sec, wall time     37.93 sec
+    CPU time for gen W [ 323|[ 448: 480]    180.94 sec, wall time     37.92 sec
+    CPU time for gen W [ 324|[ 480: 512]    194.36 sec, wall time     38.68 sec
+    CPU time for gen W [ 325|[ 512: 544]    187.85 sec, wall time     37.97 sec
+    CPU time for gen W [ 326|[ 544: 576]    177.96 sec, wall time     37.78 sec
+    CPU time for gen W [ 327|[ 576: 608]    191.07 sec, wall time     38.46 sec
+    CPU time for gen W [ 328|[ 608: 640]    276.57 sec, wall time     40.94 sec
+    CPU time for gen W [ 329|[ 640: 672]    889.98 sec, wall time     61.04 sec
+    CPU time for gen W [ 330|[ 672: 704]   1609.80 sec, wall time     84.07 sec
+    CPU time for gen W [ 331|[ 704: 736]    560.49 sec, wall time     50.09 sec
+    CPU time for gen W [ 332|[ 736: 768]    184.05 sec, wall time     38.12 sec
+    CPU time for gen W [ 333|[ 768: 769]     55.08 sec, wall time      2.74 sec
+     build_V_W_local wall time: 19878.006946 CPU time: 284764.896235
+Number of interpolation points = 663168, effective CISDF =  39.85
+    CPU time for ISDF build 295630.25 sec, wall time  20363.52 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-40/46836102/isdf.chk

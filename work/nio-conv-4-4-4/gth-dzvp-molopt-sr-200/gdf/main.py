@@ -29,7 +29,8 @@ def main(args):
     from pyscf.pbc.df import GDF
     df_obj = GDF(cell, kpts=kpts)
     df_obj.verbose = 10
-    df_obj._cderi_to_save = os.path.join(TMPDIR, "gdf.chk")
+    # df_obj._cderi_to_save = os.path.join(TMPDIR, "gdf.chk")
+    df_obj._cderi = "/central/scratch/yangjunjie//gdf/46829530/gdf.chk"
 
     from utils import get_jk_time
     get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi_to_save)
