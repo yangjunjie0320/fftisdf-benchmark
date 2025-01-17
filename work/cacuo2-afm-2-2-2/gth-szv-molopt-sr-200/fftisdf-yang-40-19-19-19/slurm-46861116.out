@@ -56,3 +56,5 @@ w[  0], rank = 3494 / 3520
     CPU time for w[  0]   4237.95 sec, wall time    200.65 sec
 w[  1], rank = 3488 / 3520
     CPU time for w[  1]   4246.22 sec, wall time    191.82 sec
+w[  2], rank = 3495 / 3520
+    CPU time for w[  2]   4260.08 sec, wall time    189.59 sec

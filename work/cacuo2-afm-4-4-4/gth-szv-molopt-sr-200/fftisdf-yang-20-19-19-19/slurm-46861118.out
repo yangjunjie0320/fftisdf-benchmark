@@ -90,3 +90,15 @@ Final parent grid size = [45 45 19]
 Selecting interpolation points
 nkpts = 64, nao = 88, c0 =  20.00
 Parent grid mesh = [45 45 19], grid size = 38475
+    CPU time for select interpolation points   5215.73 sec, wall time    351.75 sec
+Pivoted Cholesky rank = 4778, nip = 1760, estimated error = 7.95e-03
+Number of interpolation points = 1760, effective CISDF =  20.00
+    CPU time for building left-hand side     34.26 sec, wall time      2.25 sec
+
+kpt = 64, ngrid = 370025, nao = 88
+ngrid = 370025, blksize = 13420, nip = 1760
+required disk space = 666 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-20-19-19-19/46861118/3wte2p4h
+blksize = 13420, memory for aoR_loop = 24186 MB
+finished aoR_loop[       0:   13420]
+finished aoR_loop[   13420:   26840]
