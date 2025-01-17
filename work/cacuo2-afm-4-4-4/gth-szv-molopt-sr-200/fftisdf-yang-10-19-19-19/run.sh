@@ -36,5 +36,5 @@ python -c "import numpy; print(numpy.__version__)"
 
 export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 
-# cp /home/junjiey/work/fftisdf-benchmark//src/main-gdf.py main.py
-python main.py --cell=nio-conv.vasp --kmesh=6-6-6 --basis=gth-szv-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade 
+cp /home/junjiey/work/fftisdf-benchmark//src/main-fftisdf-yang.py main.py
+python main.py --c0=10.00 --m0=19-19-19 --cell=cacuo2-afm.vasp --kmesh=4-4-4 --basis=gth-szv-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade 

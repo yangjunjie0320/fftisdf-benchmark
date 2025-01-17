@@ -15,7 +15,7 @@ def main(args):
     cell = cell_from_poscar(path)
     cell.basis = args.basis
     cell.pseudo = args.pseudo
-    cell.verbose = 0
+    cell.verbose = 10
     cell.unit = 'aa'
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
@@ -29,10 +29,11 @@ def main(args):
     from pyscf.pbc.df import GDF
     df_obj = GDF(cell, kpts=kpts)
     df_obj.verbose = 10
-    df_obj._cderi_to_save = os.path.join(TMPDIR, "gdf.chk")
+    df_obj._cderi_to_save = None
+    df_obj._cderi = "/central/scratch/yangjunjie//gdf/46829510/gdf.chk" 
 
     from utils import get_jk_time
-    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi_to_save)
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi)
 
 if __name__ == "__main__":
     import argparse
