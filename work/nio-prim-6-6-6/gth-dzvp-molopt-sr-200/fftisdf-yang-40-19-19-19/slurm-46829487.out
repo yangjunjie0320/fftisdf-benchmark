@@ -639,3 +639,7 @@ w[185], rank = 1478 / 1560
     CPU time for w[185]   2013.87 sec, wall time     67.00 sec
 w[186], rank = 1469 / 1560
     CPU time for w[186]   1889.11 sec, wall time     63.42 sec
+w[187], rank = 1477 / 1560
+    CPU time for w[187]   1894.15 sec, wall time     63.48 sec
+w[188], rank = 1475 / 1560
+    CPU time for w[188]   1928.10 sec, wall time     64.71 sec

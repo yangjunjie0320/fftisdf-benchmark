@@ -772,3 +772,25 @@ Number of interpolation points = 336896, effective CISDF =  33.74
 /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
   warnings.warn(msg)
 finished saving to /central/scratch/yangjunjie//fftisdf-ning-30/46829536/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1445056069536734e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0082006340894623e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3215602450083263e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124488342271412e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3023553368249608e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2780344523369291 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1278726057273314e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.144504955044618e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124491857023641e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1278727684443944e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5154849860130307e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1445056069536734e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0082006340894623e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3215602450083263e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124488342271412e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3023553368249608e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2780344523369291 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1278726057273314e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.144504955044618e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3124491857023641e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1278727684443944e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.5154849860130307e-08 3 3 1

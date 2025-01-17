@@ -390,3 +390,5 @@ w[ 41], rank = 2225 / 2240
     CPU time for w[ 41]   4653.38 sec, wall time    165.23 sec
 w[ 42], rank = 2224 / 2240
     CPU time for w[ 42]   4394.39 sec, wall time    156.50 sec
+w[ 43], rank = 2222 / 2240
+    CPU time for w[ 43]   4334.93 sec, wall time    155.56 sec

@@ -668,3 +668,8 @@ build_aux_basis_local wall time:    13.859481 CPU time:   174.130186
     CPU time for gen W [  71|[ 256: 288]    109.03 sec, wall time     20.06 sec
     CPU time for gen W [  72|[ 288: 320]     87.69 sec, wall time     19.44 sec
     CPU time for gen W [  73|[ 320: 352]     87.80 sec, wall time     19.43 sec
+    CPU time for gen W [  74|[ 352: 384]     85.98 sec, wall time     19.28 sec
+    CPU time for gen W [  75|[ 384: 416]     86.32 sec, wall time     19.23 sec
+    CPU time for gen W [  76|[ 416: 448]     89.25 sec, wall time     19.35 sec
+    CPU time for gen W [  77|[ 448: 480]   1293.23 sec, wall time     60.62 sec
+    CPU time for gen W [  78|[ 480: 512]     85.30 sec, wall time     19.40 sec

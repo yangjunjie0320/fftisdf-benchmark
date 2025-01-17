@@ -438,3 +438,5 @@ w[ 72], rank = 1680 / 1680
     CPU time for w[ 72]   2855.79 sec, wall time    103.39 sec
 w[ 73], rank = 1680 / 1680
     CPU time for w[ 73]   3027.89 sec, wall time    110.76 sec
+w[ 74], rank = 1680 / 1680
+    CPU time for w[ 74]   2800.54 sec, wall time    100.37 sec

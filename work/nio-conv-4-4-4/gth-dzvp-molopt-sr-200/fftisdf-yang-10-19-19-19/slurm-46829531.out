@@ -237,3 +237,7 @@ w[ 61], rank = 1560 / 1560
     CPU time for w[ 61]   2630.60 sec, wall time     95.49 sec
 w[ 62], rank = 1560 / 1560
     CPU time for w[ 62]   2549.96 sec, wall time     91.35 sec
+w[ 63], rank = 1560 / 1560
+    CPU time for w[ 63]   4145.02 sec, wall time    146.23 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-10-19-19-19/46829531/tmp.chk
+    CPU time for building ISDF 196325.20 sec, wall time   7234.98 sec
