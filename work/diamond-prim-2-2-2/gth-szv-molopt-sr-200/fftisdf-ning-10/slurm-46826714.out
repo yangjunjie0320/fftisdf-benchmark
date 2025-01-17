@@ -1,0 +1,68 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826714/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826714/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  10.00
+       get_partition wall time:     1.052433 CPU time:     6.620365
+len of partition[   0] =  17978
+len of partition[   1] =  17959
+len of partition[   2] =  17978
+len of partition[   3] =  17959
+len of partition[   4] =  17978
+len of partition[   5] =  17959
+len of partition[   6] =  17978
+len of partition[   7] =  17959
+len of partition[   8] =  17978
+len of partition[   9] =  17959
+len of partition[  10] =  17978
+len of partition[  11] =  17959
+len of partition[  12] =  17978
+len of partition[  13] =  17959
+len of partition[  14] =  17978
+len of partition[  15] =  17959
+             get_aoR wall time:     0.171220 CPU time:     5.053253
+In _build_buffer: ISDF Local size of buffer = 72.401 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_step1 wall time:     0.180167 CPU time:     5.727734
+ build_aoRg_possible wall time:     0.000442 CPU time:     0.000444
+select_IP_local_step2 wall time:     0.000072 CPU time:     0.000080
+select_IP_local_step3 wall time:     0.000200 CPU time:     0.000202
+Memory usage for aoR  :     17.548 MB
+Memory usage for aoRg :      0.119 MB
+            build_IP wall time:     0.180881 CPU time:     5.728459
+build_aux_basis_local wall time:     0.056245 CPU time:     1.799034
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      6.27 sec, wall time      0.51 sec
+    CPU time for gen W [   2|[  32:  64]      0.97 sec, wall time      0.45 sec
+    CPU time for gen W [   3|[  64:  96]      1.00 sec, wall time      0.46 sec
+    CPU time for gen W [   4|[  96: 121]      0.88 sec, wall time      0.37 sec
+    CPU time for gen W [   5|[   0:  32]      1.02 sec, wall time      0.47 sec
+    CPU time for gen W [   6|[  32:  64]      1.07 sec, wall time      0.52 sec
+    CPU time for gen W [   7|[  64:  96]      1.06 sec, wall time      0.50 sec
+    CPU time for gen W [   8|[  96: 121]      0.88 sec, wall time      0.36 sec
+     build_V_W_local wall time:     3.655334 CPU time:    13.657774
+Number of interpolation points = 1936, effective CISDF =  30.25
+    CPU time for ISDF build     37.98 sec, wall time      5.28 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46826714/isdf.chk

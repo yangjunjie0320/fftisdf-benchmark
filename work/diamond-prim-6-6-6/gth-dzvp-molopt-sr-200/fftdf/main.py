@@ -1,21 +1,14 @@
-import numpy, scipy, os, sys
-from pyscf.pbc.scf import KRHF
+import os, sys
+import numpy, scipy
+import pyscf
 
-from pyscf import lib
-from pyscf.lib import logger
-from pyscf.pbc.df import FFTDF, GDF
-from pyscf.lib.logger import perf_counter
-from pyscf.lib.logger import process_clock
-
-from fft_isdf import ISDF
-
-TMPDIR = lib.param.TMPDIR
+TMPDIR = os.getenv("TMPDIR", None)
 DATA_PATH = os.getenv("DATA_PATH", None)
 PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
 PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
 
 def main(args):
-    from build import cell_from_poscar
+    from utils import cell_from_poscar
     path = os.path.join(DATA_PATH, args.cell)
     assert os.path.exists(path), "Cell file not found: %s" % path
 
@@ -29,39 +22,18 @@ def main(args):
     cell.ke_cutoff = args.ke_cutoff
     cell.build(dump_input=False)
 
-    stdout = open("out.log", "w")
-    log = logger.Logger(stdout, 5)
-
     kmesh = [int(x) for x in args.kmesh.split("-")]
     kmesh = numpy.array(kmesh)
-    nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
-    scf_obj = KRHF(cell, kpts=kpts)
-    scf_obj.exxdiv = None
-    dm_kpts = scf_obj.get_init_guess(key="1e")
-    nao = dm_kpts.shape[-1]
-    assert dm_kpts.shape == (nkpt, nao, nao)
+    from pyscf.pbc.df.fft import FFTDF
+    df_obj = FFTDF(cell, kpts=kpts)
+    df_obj.verbose = 10
 
-    scf_obj.with_df = FFTDF(cell, kpts=kpts)
-    t0 = (process_clock(), perf_counter())
-    scf_obj.with_df.verbose = 10
-    scf_obj.with_df.tol = 1e-10
-    scf_obj.with_df.ke_cutoff = args.ke_cutoff
-    scf_obj.with_df.build()
-    t1 = log.timer("FFTDF", *t0)
-
-    t0 = (process_clock(), perf_counter())
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
-    t1 = log.timer("FFTDF JK", *t0)
-
-    log.info("chk file size: %6.2e GB" % (0.0))
-
-    from pyscf.lib.chkfile import dump
-    dump("vjk.chk", "vj", vj1)
-    dump("vjk.chk", "vk", vk1)
+    from utils import get_jk_time
+    tmp = os.path.join(TMPDIR, "fftdf.chk")
+    os.system("touch %s" % tmp)
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=tmp)
 
 if __name__ == "__main__":
     import argparse

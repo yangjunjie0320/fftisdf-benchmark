@@ -1,0 +1,200 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46826762/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46826762/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  20.00
+       get_partition wall time:     5.492516 CPU time:     5.481020
+len of partition[   0] =  17978
+len of partition[   1] =  17959
+len of partition[   2] =  17978
+len of partition[   3] =  17959
+len of partition[   4] =  17978
+len of partition[   5] =  17959
+len of partition[   6] =  17978
+len of partition[   7] =  17959
+len of partition[   8] =  17978
+len of partition[   9] =  17959
+len of partition[  10] =  17978
+len of partition[  11] =  17959
+len of partition[  12] =  17978
+len of partition[  13] =  17959
+len of partition[  14] =  17978
+len of partition[  15] =  17959
+len of partition[  16] =  17978
+len of partition[  17] =  17959
+len of partition[  18] =  17978
+len of partition[  19] =  17959
+len of partition[  20] =  17978
+len of partition[  21] =  17959
+len of partition[  22] =  17978
+len of partition[  23] =  17959
+len of partition[  24] =  17978
+len of partition[  25] =  17959
+len of partition[  26] =  17978
+len of partition[  27] =  17959
+len of partition[  28] =  17978
+len of partition[  29] =  17959
+len of partition[  30] =  17978
+len of partition[  31] =  17959
+len of partition[  32] =  17978
+len of partition[  33] =  17959
+len of partition[  34] =  17978
+len of partition[  35] =  17959
+len of partition[  36] =  17978
+len of partition[  37] =  17959
+len of partition[  38] =  17978
+len of partition[  39] =  17959
+len of partition[  40] =  17978
+len of partition[  41] =  17959
+len of partition[  42] =  17978
+len of partition[  43] =  17959
+len of partition[  44] =  17978
+len of partition[  45] =  17959
+len of partition[  46] =  17978
+len of partition[  47] =  17959
+len of partition[  48] =  17978
+len of partition[  49] =  17959
+len of partition[  50] =  17978
+len of partition[  51] =  17959
+len of partition[  52] =  17978
+len of partition[  53] =  17959
+len of partition[  54] =  17978
+len of partition[  55] =  17959
+len of partition[  56] =  17978
+len of partition[  57] =  17959
+len of partition[  58] =  17978
+len of partition[  59] =  17959
+len of partition[  60] =  17978
+len of partition[  61] =  17959
+len of partition[  62] =  17978
+len of partition[  63] =  17959
+len of partition[  64] =  17978
+len of partition[  65] =  17959
+len of partition[  66] =  17978
+len of partition[  67] =  17959
+len of partition[  68] =  17978
+len of partition[  69] =  17959
+len of partition[  70] =  17978
+len of partition[  71] =  17959
+len of partition[  72] =  17978
+len of partition[  73] =  17959
+len of partition[  74] =  17978
+len of partition[  75] =  17959
+len of partition[  76] =  17978
+len of partition[  77] =  17959
+len of partition[  78] =  17978
+len of partition[  79] =  17959
+len of partition[  80] =  17978
+len of partition[  81] =  17959
+len of partition[  82] =  17978
+len of partition[  83] =  17959
+len of partition[  84] =  17978
+len of partition[  85] =  17959
+len of partition[  86] =  17978
+len of partition[  87] =  17959
+len of partition[  88] =  17978
+len of partition[  89] =  17959
+len of partition[  90] =  17978
+len of partition[  91] =  17959
+len of partition[  92] =  17978
+len of partition[  93] =  17959
+len of partition[  94] =  17978
+len of partition[  95] =  17959
+len of partition[  96] =  17978
+len of partition[  97] =  17959
+len of partition[  98] =  17978
+len of partition[  99] =  17959
+len of partition[ 100] =  17978
+len of partition[ 101] =  17959
+len of partition[ 102] =  17978
+len of partition[ 103] =  17959
+len of partition[ 104] =  17978
+len of partition[ 105] =  17959
+len of partition[ 106] =  17978
+len of partition[ 107] =  17959
+len of partition[ 108] =  17978
+len of partition[ 109] =  17959
+len of partition[ 110] =  17978
+len of partition[ 111] =  17959
+len of partition[ 112] =  17978
+len of partition[ 113] =  17959
+len of partition[ 114] =  17978
+len of partition[ 115] =  17959
+len of partition[ 116] =  17978
+len of partition[ 117] =  17959
+len of partition[ 118] =  17978
+len of partition[ 119] =  17959
+len of partition[ 120] =  17978
+len of partition[ 121] =  17959
+len of partition[ 122] =  17978
+len of partition[ 123] =  17959
+len of partition[ 124] =  17978
+len of partition[ 125] =  17959
+len of partition[ 126] =  17978
+len of partition[ 127] =  17959
+             get_aoR wall time:     1.171039 CPU time:    26.175769
+In _build_buffer: ISDF Local size of buffer = 734.682 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  441
+select_IP_local_atm: npt_found =  441
+select_IP_local_step1 wall time:     1.238574 CPU time:    38.276086
+ build_aoRg_possible wall time:     0.031397 CPU time:     1.020048
+select_IP_local_step2 wall time:     0.000182 CPU time:     0.000201
+select_IP_local_step3 wall time:     0.000379 CPU time:     0.000381
+Memory usage for aoR  :    454.476 MB
+Memory usage for aoRg :     11.179 MB
+            build_IP wall time:     1.270533 CPU time:    39.296716
+build_aux_basis_local wall time:     0.735740 CPU time:    12.186483
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]     16.97 sec, wall time      3.34 sec
+    CPU time for gen W [   2|[  32:  64]     11.66 sec, wall time      3.14 sec
+    CPU time for gen W [   3|[  64:  96]     12.96 sec, wall time      3.24 sec
+    CPU time for gen W [   4|[  96: 128]     12.33 sec, wall time      3.20 sec
+    CPU time for gen W [   5|[ 128: 160]     12.56 sec, wall time      3.21 sec
+    CPU time for gen W [   6|[ 160: 192]     12.36 sec, wall time      3.18 sec
+    CPU time for gen W [   7|[ 192: 224]     12.94 sec, wall time      3.21 sec
+    CPU time for gen W [   8|[ 224: 256]     12.74 sec, wall time      3.24 sec
+    CPU time for gen W [   9|[ 256: 288]     12.37 sec, wall time      3.19 sec
+    CPU time for gen W [  10|[ 288: 320]     12.56 sec, wall time      3.17 sec
+    CPU time for gen W [  11|[ 320: 352]     12.47 sec, wall time      3.16 sec
+    CPU time for gen W [  12|[ 352: 384]     11.93 sec, wall time      3.24 sec
+    CPU time for gen W [  13|[ 384: 416]     12.20 sec, wall time      3.30 sec
+    CPU time for gen W [  14|[ 416: 441]     11.51 sec, wall time      2.80 sec
+    CPU time for gen W [  15|[   0:  32]     12.63 sec, wall time      3.25 sec
+    CPU time for gen W [  16|[  32:  64]     13.72 sec, wall time      3.42 sec
+    CPU time for gen W [  17|[  64:  96]     10.65 sec, wall time      3.27 sec
+    CPU time for gen W [  18|[  96: 128]     11.97 sec, wall time      3.19 sec
+    CPU time for gen W [  19|[ 128: 160]     12.33 sec, wall time      3.21 sec
+    CPU time for gen W [  20|[ 160: 192]     12.50 sec, wall time      3.14 sec
+    CPU time for gen W [  21|[ 192: 224]     11.75 sec, wall time      3.16 sec
+    CPU time for gen W [  22|[ 224: 256]     11.83 sec, wall time      3.16 sec
+    CPU time for gen W [  23|[ 256: 288]     12.35 sec, wall time      3.19 sec
+    CPU time for gen W [  24|[ 288: 320]     12.35 sec, wall time      3.15 sec
+    CPU time for gen W [  25|[ 320: 352]     12.19 sec, wall time      3.22 sec
+    CPU time for gen W [  26|[ 352: 384]     12.18 sec, wall time      3.22 sec
+    CPU time for gen W [  27|[ 384: 416]     12.51 sec, wall time      3.26 sec
+    CPU time for gen W [  28|[ 416: 441]     10.71 sec, wall time      2.52 sec
+     build_V_W_local wall time:    89.005910 CPU time:   347.500719
+Number of interpolation points = 56448, effective CISDF =  33.92
+    CPU time for ISDF build    438.58 sec, wall time     98.41 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-20/46826762/isdf.chk

@@ -29,13 +29,13 @@ if __name__ == "__main__":
     
     elif "fftisdf-ning" in method:
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-ning"))
+        method = method.split("-")
 
         cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
         cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-ning")
+        c0 = float(method[2])
         cmd += "python main.py "
-        cmd += "--cell=%s --kmesh=%s --basis=%s " % (args.cell, args.kmesh, args.basis)
-        cmd += "--ke_cutoff=%.2f --pseudo=gth-pade " % args.ke_cutoff
-        cmd += "\n"
+        cmd += "--c0=%.2f " % c0
 
     else:
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, method))

@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --time=01:00:00
+#SBATCH --time=20:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=20
-#SBATCH --mem=200GB
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=240GB
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
@@ -38,5 +38,4 @@ export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 
 export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 cp /home/junjiey/work/fftisdf-benchmark//src/main-fftisdf-ning.py main.py
-python main.py --cell=diamond-prim.vasp --kmesh=2-2-2 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade 
---cell=diamond-prim.vasp --kmesh=2-2-2 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade 
+python main.py --c0=20.00 --cell=diamond-prim.vasp --kmesh=2-2-2 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade 

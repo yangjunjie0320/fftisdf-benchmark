@@ -553,7 +553,7 @@ ISDF = InterpolativeSeparableDensityFitting
 
 if __name__ == "__main__":
     DATA_PATH = os.getenv("DATA_PATH", None)
-    from build import cell_from_poscar
+    from src.utils import cell_from_poscar
 
     cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
     cell.basis = 'gth-dzvp-molopt-sr'

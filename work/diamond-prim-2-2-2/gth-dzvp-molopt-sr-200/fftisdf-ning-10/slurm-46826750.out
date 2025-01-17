@@ -1,0 +1,76 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826750/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826750/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  10.00
+       get_partition wall time:     0.723796 CPU time:     3.414404
+len of partition[   0] =  17978
+len of partition[   1] =  17959
+len of partition[   2] =  17978
+len of partition[   3] =  17959
+len of partition[   4] =  17978
+len of partition[   5] =  17959
+len of partition[   6] =  17978
+len of partition[   7] =  17959
+len of partition[   8] =  17978
+len of partition[   9] =  17959
+len of partition[  10] =  17978
+len of partition[  11] =  17959
+len of partition[  12] =  17978
+len of partition[  13] =  17959
+len of partition[  14] =  17978
+len of partition[  15] =  17959
+             get_aoR wall time:     0.347937 CPU time:    10.496849
+In _build_buffer: ISDF Local size of buffer = 76.805 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  256
+select_IP_local_atm: npt_found =  256
+select_IP_local_step1 wall time:     5.005688 CPU time:   154.877426
+ build_aoRg_possible wall time:     0.009698 CPU time:     0.318631
+select_IP_local_step2 wall time:     0.000182 CPU time:     0.000195
+select_IP_local_step3 wall time:     0.000360 CPU time:     0.000363
+Memory usage for aoR  :     57.032 MB
+Memory usage for aoRg :      0.816 MB
+            build_IP wall time:     5.015928 CPU time:   155.196615
+build_aux_basis_local wall time:     0.225683 CPU time:     6.716914
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      6.67 sec, wall time      0.45 sec
+    CPU time for gen W [   2|[  32:  64]      2.79 sec, wall time      0.36 sec
+    CPU time for gen W [   3|[  64:  96]      3.01 sec, wall time      0.40 sec
+    CPU time for gen W [   4|[  96: 128]      3.26 sec, wall time      0.45 sec
+    CPU time for gen W [   5|[ 128: 160]      2.97 sec, wall time      0.38 sec
+    CPU time for gen W [   6|[ 160: 192]      2.92 sec, wall time      0.37 sec
+    CPU time for gen W [   7|[ 192: 224]      2.96 sec, wall time      0.38 sec
+    CPU time for gen W [   8|[ 224: 256]      3.42 sec, wall time      0.41 sec
+    CPU time for gen W [   9|[   0:  32]      2.52 sec, wall time      0.39 sec
+    CPU time for gen W [  10|[  32:  64]      3.04 sec, wall time      0.38 sec
+    CPU time for gen W [  11|[  64:  96]      2.91 sec, wall time      0.39 sec
+    CPU time for gen W [  12|[  96: 128]      2.96 sec, wall time      0.38 sec
+    CPU time for gen W [  13|[ 128: 160]      2.99 sec, wall time      0.38 sec
+    CPU time for gen W [  14|[ 160: 192]      2.94 sec, wall time      0.38 sec
+    CPU time for gen W [  15|[ 192: 224]      2.96 sec, wall time      0.38 sec
+    CPU time for gen W [  16|[ 224: 256]      2.92 sec, wall time      0.37 sec
+     build_V_W_local wall time:     6.259427 CPU time:    51.537723
+Number of interpolation points = 4096, effective CISDF =  19.69
+    CPU time for ISDF build    232.51 sec, wall time     12.75 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46826750/isdf.chk

@@ -1,0 +1,594 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826790/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46826790/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  10.00
+       get_partition wall time:    13.375244 CPU time:    13.343429
+len of partition[   0] =  11616
+len of partition[   1] =  11236
+len of partition[   2] =  11598
+len of partition[   3] =  11210
+len of partition[   4] =  11508
+len of partition[   5] =  11158
+len of partition[   6] =  11600
+len of partition[   7] =  11199
+len of partition[   8] =  11616
+len of partition[   9] =  11236
+len of partition[  10] =  11598
+len of partition[  11] =  11210
+len of partition[  12] =  11508
+len of partition[  13] =  11158
+len of partition[  14] =  11600
+len of partition[  15] =  11199
+len of partition[  16] =  11616
+len of partition[  17] =  11236
+len of partition[  18] =  11598
+len of partition[  19] =  11210
+len of partition[  20] =  11508
+len of partition[  21] =  11158
+len of partition[  22] =  11600
+len of partition[  23] =  11199
+len of partition[  24] =  11616
+len of partition[  25] =  11236
+len of partition[  26] =  11598
+len of partition[  27] =  11210
+len of partition[  28] =  11508
+len of partition[  29] =  11158
+len of partition[  30] =  11600
+len of partition[  31] =  11199
+len of partition[  32] =  11616
+len of partition[  33] =  11236
+len of partition[  34] =  11598
+len of partition[  35] =  11210
+len of partition[  36] =  11508
+len of partition[  37] =  11158
+len of partition[  38] =  11600
+len of partition[  39] =  11199
+len of partition[  40] =  11616
+len of partition[  41] =  11236
+len of partition[  42] =  11598
+len of partition[  43] =  11210
+len of partition[  44] =  11508
+len of partition[  45] =  11158
+len of partition[  46] =  11600
+len of partition[  47] =  11199
+len of partition[  48] =  11616
+len of partition[  49] =  11236
+len of partition[  50] =  11598
+len of partition[  51] =  11210
+len of partition[  52] =  11508
+len of partition[  53] =  11158
+len of partition[  54] =  11600
+len of partition[  55] =  11199
+len of partition[  56] =  11616
+len of partition[  57] =  11236
+len of partition[  58] =  11598
+len of partition[  59] =  11210
+len of partition[  60] =  11508
+len of partition[  61] =  11158
+len of partition[  62] =  11600
+len of partition[  63] =  11199
+len of partition[  64] =  11616
+len of partition[  65] =  11236
+len of partition[  66] =  11598
+len of partition[  67] =  11210
+len of partition[  68] =  11508
+len of partition[  69] =  11158
+len of partition[  70] =  11600
+len of partition[  71] =  11199
+len of partition[  72] =  11616
+len of partition[  73] =  11236
+len of partition[  74] =  11598
+len of partition[  75] =  11210
+len of partition[  76] =  11508
+len of partition[  77] =  11158
+len of partition[  78] =  11600
+len of partition[  79] =  11199
+len of partition[  80] =  11616
+len of partition[  81] =  11236
+len of partition[  82] =  11598
+len of partition[  83] =  11210
+len of partition[  84] =  11508
+len of partition[  85] =  11158
+len of partition[  86] =  11600
+len of partition[  87] =  11199
+len of partition[  88] =  11616
+len of partition[  89] =  11236
+len of partition[  90] =  11598
+len of partition[  91] =  11210
+len of partition[  92] =  11508
+len of partition[  93] =  11158
+len of partition[  94] =  11600
+len of partition[  95] =  11199
+len of partition[  96] =  11616
+len of partition[  97] =  11236
+len of partition[  98] =  11598
+len of partition[  99] =  11210
+len of partition[ 100] =  11508
+len of partition[ 101] =  11158
+len of partition[ 102] =  11600
+len of partition[ 103] =  11199
+len of partition[ 104] =  11616
+len of partition[ 105] =  11236
+len of partition[ 106] =  11598
+len of partition[ 107] =  11210
+len of partition[ 108] =  11508
+len of partition[ 109] =  11158
+len of partition[ 110] =  11600
+len of partition[ 111] =  11199
+len of partition[ 112] =  11616
+len of partition[ 113] =  11236
+len of partition[ 114] =  11598
+len of partition[ 115] =  11210
+len of partition[ 116] =  11508
+len of partition[ 117] =  11158
+len of partition[ 118] =  11600
+len of partition[ 119] =  11199
+len of partition[ 120] =  11616
+len of partition[ 121] =  11236
+len of partition[ 122] =  11598
+len of partition[ 123] =  11210
+len of partition[ 124] =  11508
+len of partition[ 125] =  11158
+len of partition[ 126] =  11600
+len of partition[ 127] =  11199
+len of partition[ 128] =  11616
+len of partition[ 129] =  11236
+len of partition[ 130] =  11598
+len of partition[ 131] =  11210
+len of partition[ 132] =  11508
+len of partition[ 133] =  11158
+len of partition[ 134] =  11600
+len of partition[ 135] =  11199
+len of partition[ 136] =  11616
+len of partition[ 137] =  11236
+len of partition[ 138] =  11598
+len of partition[ 139] =  11210
+len of partition[ 140] =  11508
+len of partition[ 141] =  11158
+len of partition[ 142] =  11600
+len of partition[ 143] =  11199
+len of partition[ 144] =  11616
+len of partition[ 145] =  11236
+len of partition[ 146] =  11598
+len of partition[ 147] =  11210
+len of partition[ 148] =  11508
+len of partition[ 149] =  11158
+len of partition[ 150] =  11600
+len of partition[ 151] =  11199
+len of partition[ 152] =  11616
+len of partition[ 153] =  11236
+len of partition[ 154] =  11598
+len of partition[ 155] =  11210
+len of partition[ 156] =  11508
+len of partition[ 157] =  11158
+len of partition[ 158] =  11600
+len of partition[ 159] =  11199
+len of partition[ 160] =  11616
+len of partition[ 161] =  11236
+len of partition[ 162] =  11598
+len of partition[ 163] =  11210
+len of partition[ 164] =  11508
+len of partition[ 165] =  11158
+len of partition[ 166] =  11600
+len of partition[ 167] =  11199
+len of partition[ 168] =  11616
+len of partition[ 169] =  11236
+len of partition[ 170] =  11598
+len of partition[ 171] =  11210
+len of partition[ 172] =  11508
+len of partition[ 173] =  11158
+len of partition[ 174] =  11600
+len of partition[ 175] =  11199
+len of partition[ 176] =  11616
+len of partition[ 177] =  11236
+len of partition[ 178] =  11598
+len of partition[ 179] =  11210
+len of partition[ 180] =  11508
+len of partition[ 181] =  11158
+len of partition[ 182] =  11600
+len of partition[ 183] =  11199
+len of partition[ 184] =  11616
+len of partition[ 185] =  11236
+len of partition[ 186] =  11598
+len of partition[ 187] =  11210
+len of partition[ 188] =  11508
+len of partition[ 189] =  11158
+len of partition[ 190] =  11600
+len of partition[ 191] =  11199
+len of partition[ 192] =  11616
+len of partition[ 193] =  11236
+len of partition[ 194] =  11598
+len of partition[ 195] =  11210
+len of partition[ 196] =  11508
+len of partition[ 197] =  11158
+len of partition[ 198] =  11600
+len of partition[ 199] =  11199
+len of partition[ 200] =  11616
+len of partition[ 201] =  11236
+len of partition[ 202] =  11598
+len of partition[ 203] =  11210
+len of partition[ 204] =  11508
+len of partition[ 205] =  11158
+len of partition[ 206] =  11600
+len of partition[ 207] =  11199
+len of partition[ 208] =  11616
+len of partition[ 209] =  11236
+len of partition[ 210] =  11598
+len of partition[ 211] =  11210
+len of partition[ 212] =  11508
+len of partition[ 213] =  11158
+len of partition[ 214] =  11600
+len of partition[ 215] =  11199
+len of partition[ 216] =  11616
+len of partition[ 217] =  11236
+len of partition[ 218] =  11598
+len of partition[ 219] =  11210
+len of partition[ 220] =  11508
+len of partition[ 221] =  11158
+len of partition[ 222] =  11600
+len of partition[ 223] =  11199
+len of partition[ 224] =  11616
+len of partition[ 225] =  11236
+len of partition[ 226] =  11598
+len of partition[ 227] =  11210
+len of partition[ 228] =  11508
+len of partition[ 229] =  11158
+len of partition[ 230] =  11600
+len of partition[ 231] =  11199
+len of partition[ 232] =  11616
+len of partition[ 233] =  11236
+len of partition[ 234] =  11598
+len of partition[ 235] =  11210
+len of partition[ 236] =  11508
+len of partition[ 237] =  11158
+len of partition[ 238] =  11600
+len of partition[ 239] =  11199
+len of partition[ 240] =  11616
+len of partition[ 241] =  11236
+len of partition[ 242] =  11598
+len of partition[ 243] =  11210
+len of partition[ 244] =  11508
+len of partition[ 245] =  11158
+len of partition[ 246] =  11600
+len of partition[ 247] =  11199
+len of partition[ 248] =  11616
+len of partition[ 249] =  11236
+len of partition[ 250] =  11598
+len of partition[ 251] =  11210
+len of partition[ 252] =  11508
+len of partition[ 253] =  11158
+len of partition[ 254] =  11600
+len of partition[ 255] =  11199
+len of partition[ 256] =  11616
+len of partition[ 257] =  11236
+len of partition[ 258] =  11598
+len of partition[ 259] =  11210
+len of partition[ 260] =  11508
+len of partition[ 261] =  11158
+len of partition[ 262] =  11600
+len of partition[ 263] =  11199
+len of partition[ 264] =  11616
+len of partition[ 265] =  11236
+len of partition[ 266] =  11598
+len of partition[ 267] =  11210
+len of partition[ 268] =  11508
+len of partition[ 269] =  11158
+len of partition[ 270] =  11600
+len of partition[ 271] =  11199
+len of partition[ 272] =  11616
+len of partition[ 273] =  11236
+len of partition[ 274] =  11598
+len of partition[ 275] =  11210
+len of partition[ 276] =  11508
+len of partition[ 277] =  11158
+len of partition[ 278] =  11600
+len of partition[ 279] =  11199
+len of partition[ 280] =  11616
+len of partition[ 281] =  11236
+len of partition[ 282] =  11598
+len of partition[ 283] =  11210
+len of partition[ 284] =  11508
+len of partition[ 285] =  11158
+len of partition[ 286] =  11600
+len of partition[ 287] =  11199
+len of partition[ 288] =  11616
+len of partition[ 289] =  11236
+len of partition[ 290] =  11598
+len of partition[ 291] =  11210
+len of partition[ 292] =  11508
+len of partition[ 293] =  11158
+len of partition[ 294] =  11600
+len of partition[ 295] =  11199
+len of partition[ 296] =  11616
+len of partition[ 297] =  11236
+len of partition[ 298] =  11598
+len of partition[ 299] =  11210
+len of partition[ 300] =  11508
+len of partition[ 301] =  11158
+len of partition[ 302] =  11600
+len of partition[ 303] =  11199
+len of partition[ 304] =  11616
+len of partition[ 305] =  11236
+len of partition[ 306] =  11598
+len of partition[ 307] =  11210
+len of partition[ 308] =  11508
+len of partition[ 309] =  11158
+len of partition[ 310] =  11600
+len of partition[ 311] =  11199
+len of partition[ 312] =  11616
+len of partition[ 313] =  11236
+len of partition[ 314] =  11598
+len of partition[ 315] =  11210
+len of partition[ 316] =  11508
+len of partition[ 317] =  11158
+len of partition[ 318] =  11600
+len of partition[ 319] =  11199
+len of partition[ 320] =  11616
+len of partition[ 321] =  11236
+len of partition[ 322] =  11598
+len of partition[ 323] =  11210
+len of partition[ 324] =  11508
+len of partition[ 325] =  11158
+len of partition[ 326] =  11600
+len of partition[ 327] =  11199
+len of partition[ 328] =  11616
+len of partition[ 329] =  11236
+len of partition[ 330] =  11598
+len of partition[ 331] =  11210
+len of partition[ 332] =  11508
+len of partition[ 333] =  11158
+len of partition[ 334] =  11600
+len of partition[ 335] =  11199
+len of partition[ 336] =  11616
+len of partition[ 337] =  11236
+len of partition[ 338] =  11598
+len of partition[ 339] =  11210
+len of partition[ 340] =  11508
+len of partition[ 341] =  11158
+len of partition[ 342] =  11600
+len of partition[ 343] =  11199
+len of partition[ 344] =  11616
+len of partition[ 345] =  11236
+len of partition[ 346] =  11598
+len of partition[ 347] =  11210
+len of partition[ 348] =  11508
+len of partition[ 349] =  11158
+len of partition[ 350] =  11600
+len of partition[ 351] =  11199
+len of partition[ 352] =  11616
+len of partition[ 353] =  11236
+len of partition[ 354] =  11598
+len of partition[ 355] =  11210
+len of partition[ 356] =  11508
+len of partition[ 357] =  11158
+len of partition[ 358] =  11600
+len of partition[ 359] =  11199
+len of partition[ 360] =  11616
+len of partition[ 361] =  11236
+len of partition[ 362] =  11598
+len of partition[ 363] =  11210
+len of partition[ 364] =  11508
+len of partition[ 365] =  11158
+len of partition[ 366] =  11600
+len of partition[ 367] =  11199
+len of partition[ 368] =  11616
+len of partition[ 369] =  11236
+len of partition[ 370] =  11598
+len of partition[ 371] =  11210
+len of partition[ 372] =  11508
+len of partition[ 373] =  11158
+len of partition[ 374] =  11600
+len of partition[ 375] =  11199
+len of partition[ 376] =  11616
+len of partition[ 377] =  11236
+len of partition[ 378] =  11598
+len of partition[ 379] =  11210
+len of partition[ 380] =  11508
+len of partition[ 381] =  11158
+len of partition[ 382] =  11600
+len of partition[ 383] =  11199
+len of partition[ 384] =  11616
+len of partition[ 385] =  11236
+len of partition[ 386] =  11598
+len of partition[ 387] =  11210
+len of partition[ 388] =  11508
+len of partition[ 389] =  11158
+len of partition[ 390] =  11600
+len of partition[ 391] =  11199
+len of partition[ 392] =  11616
+len of partition[ 393] =  11236
+len of partition[ 394] =  11598
+len of partition[ 395] =  11210
+len of partition[ 396] =  11508
+len of partition[ 397] =  11158
+len of partition[ 398] =  11600
+len of partition[ 399] =  11199
+len of partition[ 400] =  11616
+len of partition[ 401] =  11236
+len of partition[ 402] =  11598
+len of partition[ 403] =  11210
+len of partition[ 404] =  11508
+len of partition[ 405] =  11158
+len of partition[ 406] =  11600
+len of partition[ 407] =  11199
+len of partition[ 408] =  11616
+len of partition[ 409] =  11236
+len of partition[ 410] =  11598
+len of partition[ 411] =  11210
+len of partition[ 412] =  11508
+len of partition[ 413] =  11158
+len of partition[ 414] =  11600
+len of partition[ 415] =  11199
+len of partition[ 416] =  11616
+len of partition[ 417] =  11236
+len of partition[ 418] =  11598
+len of partition[ 419] =  11210
+len of partition[ 420] =  11508
+len of partition[ 421] =  11158
+len of partition[ 422] =  11600
+len of partition[ 423] =  11199
+len of partition[ 424] =  11616
+len of partition[ 425] =  11236
+len of partition[ 426] =  11598
+len of partition[ 427] =  11210
+len of partition[ 428] =  11508
+len of partition[ 429] =  11158
+len of partition[ 430] =  11600
+len of partition[ 431] =  11199
+len of partition[ 432] =  11616
+len of partition[ 433] =  11236
+len of partition[ 434] =  11598
+len of partition[ 435] =  11210
+len of partition[ 436] =  11508
+len of partition[ 437] =  11158
+len of partition[ 438] =  11600
+len of partition[ 439] =  11199
+len of partition[ 440] =  11616
+len of partition[ 441] =  11236
+len of partition[ 442] =  11598
+len of partition[ 443] =  11210
+len of partition[ 444] =  11508
+len of partition[ 445] =  11158
+len of partition[ 446] =  11600
+len of partition[ 447] =  11199
+len of partition[ 448] =  11616
+len of partition[ 449] =  11236
+len of partition[ 450] =  11598
+len of partition[ 451] =  11210
+len of partition[ 452] =  11508
+len of partition[ 453] =  11158
+len of partition[ 454] =  11600
+len of partition[ 455] =  11199
+len of partition[ 456] =  11616
+len of partition[ 457] =  11236
+len of partition[ 458] =  11598
+len of partition[ 459] =  11210
+len of partition[ 460] =  11508
+len of partition[ 461] =  11158
+len of partition[ 462] =  11600
+len of partition[ 463] =  11199
+len of partition[ 464] =  11616
+len of partition[ 465] =  11236
+len of partition[ 466] =  11598
+len of partition[ 467] =  11210
+len of partition[ 468] =  11508
+len of partition[ 469] =  11158
+len of partition[ 470] =  11600
+len of partition[ 471] =  11199
+len of partition[ 472] =  11616
+len of partition[ 473] =  11236
+len of partition[ 474] =  11598
+len of partition[ 475] =  11210
+len of partition[ 476] =  11508
+len of partition[ 477] =  11158
+len of partition[ 478] =  11600
+len of partition[ 479] =  11199
+len of partition[ 480] =  11616
+len of partition[ 481] =  11236
+len of partition[ 482] =  11598
+len of partition[ 483] =  11210
+len of partition[ 484] =  11508
+len of partition[ 485] =  11158
+len of partition[ 486] =  11600
+len of partition[ 487] =  11199
+len of partition[ 488] =  11616
+len of partition[ 489] =  11236
+len of partition[ 490] =  11598
+len of partition[ 491] =  11210
+len of partition[ 492] =  11508
+len of partition[ 493] =  11158
+len of partition[ 494] =  11600
+len of partition[ 495] =  11199
+len of partition[ 496] =  11616
+len of partition[ 497] =  11236
+len of partition[ 498] =  11598
+len of partition[ 499] =  11210
+len of partition[ 500] =  11508
+len of partition[ 501] =  11158
+len of partition[ 502] =  11600
+len of partition[ 503] =  11199
+len of partition[ 504] =  11616
+len of partition[ 505] =  11236
+len of partition[ 506] =  11598
+len of partition[ 507] =  11210
+len of partition[ 508] =  11508
+len of partition[ 509] =  11158
+len of partition[ 510] =  11600
+len of partition[ 511] =  11199
+             get_aoR wall time:     2.920929 CPU time:    78.830262
+In _build_buffer: ISDF Local size of buffer = 1607.240 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    8
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  121
+select_IP_local_step1 wall time:    14.214472 CPU time:   439.152938
+ build_aoRg_possible wall time:     0.024565 CPU time:     0.766105
+select_IP_local_step2 wall time:     0.000171 CPU time:     0.000180
+select_IP_local_step3 wall time:     0.000641 CPU time:     0.031545
+Memory usage for aoR  :   1051.278 MB
+Memory usage for aoRg :     11.259 MB
+            build_IP wall time:    14.239849 CPU time:   439.950767
+build_aux_basis_local wall time:     1.072176 CPU time:    30.174298
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]     11.39 sec, wall time      7.28 sec
+    CPU time for gen W [   2|[  32:  64]      8.78 sec, wall time      6.24 sec
+    CPU time for gen W [   3|[  64:  96]      9.33 sec, wall time      6.45 sec
+    CPU time for gen W [   4|[  96: 121]      8.89 sec, wall time      5.93 sec
+    CPU time for gen W [   5|[   0:  32]      9.00 sec, wall time      6.82 sec
+    CPU time for gen W [   6|[  32:  64]      9.96 sec, wall time      6.75 sec
+    CPU time for gen W [   7|[  64:  96]      9.37 sec, wall time      6.50 sec
+    CPU time for gen W [   8|[  96: 121]      7.32 sec, wall time      4.88 sec
+    CPU time for gen W [   9|[   0:  32]     10.42 sec, wall time      7.19 sec
+    CPU time for gen W [  10|[  32:  64]      9.17 sec, wall time      6.31 sec
+    CPU time for gen W [  11|[  64:  96]      9.13 sec, wall time      6.24 sec
+    CPU time for gen W [  12|[  96: 121]      7.64 sec, wall time      5.17 sec
+    CPU time for gen W [  13|[   0:  32]      9.92 sec, wall time      7.05 sec
+    CPU time for gen W [  14|[  32:  64]      8.46 sec, wall time      5.92 sec
+    CPU time for gen W [  15|[  64:  96]     10.04 sec, wall time      6.77 sec
+    CPU time for gen W [  16|[  96: 121]      7.87 sec, wall time      5.14 sec
+    CPU time for gen W [  17|[   0:  32]     10.70 sec, wall time      7.47 sec
+    CPU time for gen W [  18|[  32:  64]      8.44 sec, wall time      5.91 sec
+    CPU time for gen W [  19|[  64:  96]     10.41 sec, wall time      7.14 sec
+    CPU time for gen W [  20|[  96: 121]      6.92 sec, wall time      4.51 sec
+    CPU time for gen W [  21|[   0:  32]      9.35 sec, wall time      6.47 sec
+    CPU time for gen W [  22|[  32:  64]     10.22 sec, wall time      6.66 sec
+    CPU time for gen W [  23|[  64:  96]      9.39 sec, wall time      6.49 sec
+    CPU time for gen W [  24|[  96: 121]      8.00 sec, wall time      5.22 sec
+    CPU time for gen W [  25|[   0:  32]     10.40 sec, wall time      7.15 sec
+    CPU time for gen W [  26|[  32:  64]      9.63 sec, wall time      6.73 sec
+    CPU time for gen W [  27|[  64:  96]      8.07 sec, wall time      5.53 sec
+    CPU time for gen W [  28|[  96: 121]      8.30 sec, wall time      5.52 sec
+    CPU time for gen W [  29|[   0:  32]     10.06 sec, wall time      6.79 sec
+    CPU time for gen W [  30|[  32:  64]      9.53 sec, wall time      6.64 sec
+    CPU time for gen W [  31|[  64:  96]      9.54 sec, wall time      6.63 sec
+    CPU time for gen W [  32|[  96: 121]      7.01 sec, wall time      4.57 sec
+     build_V_W_local wall time:   200.076421 CPU time:   293.204558
+Number of interpolation points = 61952, effective CISDF =  30.25
+    CPU time for ISDF build    876.14 sec, wall time    236.00 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46826790/isdf.chk

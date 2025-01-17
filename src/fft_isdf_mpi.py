@@ -138,7 +138,7 @@ class WithMPI(InterpolativeSeparableDensityFitting):
 ISDF = WithMPI
 
 if __name__ == "__main__":
-    from build import cell_from_poscar
+    from src.utils import cell_from_poscar
 
     cell = cell_from_poscar("../data/diamond-conv.vasp")
     cell.basis = 'gth-szv-molopt-sr'
