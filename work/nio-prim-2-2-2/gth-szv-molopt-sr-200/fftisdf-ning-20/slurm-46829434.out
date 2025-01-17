@@ -1,0 +1,93 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46829434/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46829434/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  20.00
+       get_partition wall time:     1.463786 CPU time:     6.922593
+len of partition[   0] =  23285
+len of partition[   1] =  27368
+len of partition[   2] =  23285
+len of partition[   3] =  27368
+len of partition[   4] =  23285
+len of partition[   5] =  27368
+len of partition[   6] =  23285
+len of partition[   7] =  27368
+len of partition[   8] =  23285
+len of partition[   9] =  27368
+len of partition[  10] =  23285
+len of partition[  11] =  27368
+len of partition[  12] =  23285
+len of partition[  13] =  27368
+len of partition[  14] =  23285
+len of partition[  15] =  27368
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     0.262244 CPU time:     8.033344
+In _build_buffer: ISDF Local size of buffer = 158.689 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  361
+select_IP_local_atm: npt_found =  169
+select_IP_local_step1 wall time:     0.509168 CPU time:    16.073303
+ build_aoRg_possible wall time:     0.001164 CPU time:     0.032013
+select_IP_local_step2 wall time:     0.000088 CPU time:     0.000093
+select_IP_local_step3 wall time:     0.000331 CPU time:     0.031290
+Memory usage for aoR  :     43.284 MB
+Memory usage for aoRg :      0.455 MB
+            build_IP wall time:     0.510751 CPU time:    16.136699
+build_aux_basis_local wall time:     0.221407 CPU time:     6.943957
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      7.47 sec, wall time      0.84 sec
+    CPU time for gen W [   2|[  32:  64]      3.49 sec, wall time      0.76 sec
+    CPU time for gen W [   3|[  64:  96]      3.53 sec, wall time      0.77 sec
+    CPU time for gen W [   4|[  96: 128]      3.57 sec, wall time      0.77 sec
+    CPU time for gen W [   5|[ 128: 160]      3.53 sec, wall time      0.76 sec
+    CPU time for gen W [   6|[ 160: 192]      3.53 sec, wall time      0.76 sec
+    CPU time for gen W [   7|[ 192: 224]      3.51 sec, wall time      0.76 sec
+    CPU time for gen W [   8|[ 224: 256]      4.25 sec, wall time      0.81 sec
+    CPU time for gen W [   9|[ 256: 288]      2.87 sec, wall time      0.73 sec
+    CPU time for gen W [  10|[ 288: 320]      3.54 sec, wall time      0.75 sec
+    CPU time for gen W [  11|[ 320: 352]      3.57 sec, wall time      0.76 sec
+    CPU time for gen W [  12|[ 352: 361]      2.58 sec, wall time      0.23 sec
+    CPU time for gen W [  13|[   0:  32]      4.02 sec, wall time      1.08 sec
+    CPU time for gen W [  14|[  32:  64]      3.66 sec, wall time      0.91 sec
+    CPU time for gen W [  15|[  64:  96]      3.51 sec, wall time      0.75 sec
+    CPU time for gen W [  16|[  96: 128]      3.55 sec, wall time      0.75 sec
+    CPU time for gen W [  17|[ 128: 160]      3.50 sec, wall time      0.75 sec
+    CPU time for gen W [  18|[ 160: 169]      2.58 sec, wall time      0.23 sec
+     build_V_W_local wall time:    13.180584 CPU time:    66.771738
+Number of interpolation points = 4240, effective CISDF =  37.86
+    CPU time for ISDF build    111.60 sec, wall time     15.86 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-20/46829434/isdf.chk

@@ -1,0 +1,87 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46829432/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-10/46829432/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  10.00
+       get_partition wall time:     1.498820 CPU time:     6.830854
+len of partition[   0] =  23285
+len of partition[   1] =  27368
+len of partition[   2] =  23285
+len of partition[   3] =  27368
+len of partition[   4] =  23285
+len of partition[   5] =  27368
+len of partition[   6] =  23285
+len of partition[   7] =  27368
+len of partition[   8] =  23285
+len of partition[   9] =  27368
+len of partition[  10] =  23285
+len of partition[  11] =  27368
+len of partition[  12] =  23285
+len of partition[  13] =  27368
+len of partition[  14] =  23285
+len of partition[  15] =  27368
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     0.275018 CPU time:     8.415122
+In _build_buffer: ISDF Local size of buffer = 102.580 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  225
+select_IP_local_atm: npt_found =  121
+select_IP_local_step1 wall time:     0.310290 CPU time:     9.747161
+ build_aoRg_possible wall time:     0.000753 CPU time:     0.031621
+select_IP_local_step2 wall time:     0.000073 CPU time:     0.000077
+select_IP_local_step3 wall time:     0.000201 CPU time:     0.000201
+Memory usage for aoR  :     43.284 MB
+Memory usage for aoRg :      0.297 MB
+            build_IP wall time:     0.311318 CPU time:     9.779060
+build_aux_basis_local wall time:     0.155969 CPU time:     4.881508
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      7.50 sec, wall time      1.25 sec
+    CPU time for gen W [   2|[  32:  64]      2.01 sec, wall time      0.84 sec
+    CPU time for gen W [   3|[  64:  96]      2.07 sec, wall time      0.78 sec
+    CPU time for gen W [   4|[  96: 128]      2.11 sec, wall time      0.78 sec
+    CPU time for gen W [   5|[ 128: 160]      2.09 sec, wall time      0.78 sec
+    CPU time for gen W [   6|[ 160: 192]      2.07 sec, wall time      0.76 sec
+    CPU time for gen W [   7|[ 192: 224]      2.07 sec, wall time      0.76 sec
+    CPU time for gen W [   8|[ 224: 225]      0.76 sec, wall time      0.04 sec
+    CPU time for gen W [   9|[   0:  32]      5.36 sec, wall time      1.08 sec
+    CPU time for gen W [  10|[  32:  64]      2.31 sec, wall time      0.98 sec
+    CPU time for gen W [  11|[  64:  96]      2.09 sec, wall time      0.77 sec
+    CPU time for gen W [  12|[  96: 121]      1.88 sec, wall time      0.60 sec
+     build_V_W_local wall time:     9.416609 CPU time:    32.843927
+Number of interpolation points = 2768, effective CISDF =  24.71
+    CPU time for ISDF build     69.26 sec, wall time     11.88 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-10/46829432/isdf.chk

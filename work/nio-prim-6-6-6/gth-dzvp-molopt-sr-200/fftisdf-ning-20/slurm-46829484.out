@@ -1,0 +1,732 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46829484/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46829484/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  20.00
+       get_partition wall time:    25.530121 CPU time:    25.488972
+len of partition[   0] =  23285
+len of partition[   1] =  27368
+len of partition[   2] =  23285
+len of partition[   3] =  27368
+len of partition[   4] =  23285
+len of partition[   5] =  27368
+len of partition[   6] =  23285
+len of partition[   7] =  27368
+len of partition[   8] =  23285
+len of partition[   9] =  27368
+len of partition[  10] =  23285
+len of partition[  11] =  27368
+len of partition[  12] =  23285
+len of partition[  13] =  27368
+len of partition[  14] =  23285
+len of partition[  15] =  27368
+len of partition[  16] =  23285
+len of partition[  17] =  27368
+len of partition[  18] =  23285
+len of partition[  19] =  27368
+len of partition[  20] =  23285
+len of partition[  21] =  27368
+len of partition[  22] =  23285
+len of partition[  23] =  27368
+len of partition[  24] =  23285
+len of partition[  25] =  27368
+len of partition[  26] =  23285
+len of partition[  27] =  27368
+len of partition[  28] =  23285
+len of partition[  29] =  27368
+len of partition[  30] =  23285
+len of partition[  31] =  27368
+len of partition[  32] =  23285
+len of partition[  33] =  27368
+len of partition[  34] =  23285
+len of partition[  35] =  27368
+len of partition[  36] =  23285
+len of partition[  37] =  27368
+len of partition[  38] =  23285
+len of partition[  39] =  27368
+len of partition[  40] =  23285
+len of partition[  41] =  27368
+len of partition[  42] =  23285
+len of partition[  43] =  27368
+len of partition[  44] =  23285
+len of partition[  45] =  27368
+len of partition[  46] =  23285
+len of partition[  47] =  27368
+len of partition[  48] =  23285
+len of partition[  49] =  27368
+len of partition[  50] =  23285
+len of partition[  51] =  27368
+len of partition[  52] =  23285
+len of partition[  53] =  27368
+len of partition[  54] =  23285
+len of partition[  55] =  27368
+len of partition[  56] =  23285
+len of partition[  57] =  27368
+len of partition[  58] =  23285
+len of partition[  59] =  27368
+len of partition[  60] =  23285
+len of partition[  61] =  27368
+len of partition[  62] =  23285
+len of partition[  63] =  27368
+len of partition[  64] =  23285
+len of partition[  65] =  27368
+len of partition[  66] =  23285
+len of partition[  67] =  27368
+len of partition[  68] =  23285
+len of partition[  69] =  27368
+len of partition[  70] =  23285
+len of partition[  71] =  27368
+len of partition[  72] =  23285
+len of partition[  73] =  27368
+len of partition[  74] =  23285
+len of partition[  75] =  27368
+len of partition[  76] =  23285
+len of partition[  77] =  27368
+len of partition[  78] =  23285
+len of partition[  79] =  27368
+len of partition[  80] =  23285
+len of partition[  81] =  27368
+len of partition[  82] =  23285
+len of partition[  83] =  27368
+len of partition[  84] =  23285
+len of partition[  85] =  27368
+len of partition[  86] =  23285
+len of partition[  87] =  27368
+len of partition[  88] =  23285
+len of partition[  89] =  27368
+len of partition[  90] =  23285
+len of partition[  91] =  27368
+len of partition[  92] =  23285
+len of partition[  93] =  27368
+len of partition[  94] =  23285
+len of partition[  95] =  27368
+len of partition[  96] =  23285
+len of partition[  97] =  27368
+len of partition[  98] =  23285
+len of partition[  99] =  27368
+len of partition[ 100] =  23285
+len of partition[ 101] =  27368
+len of partition[ 102] =  23285
+len of partition[ 103] =  27368
+len of partition[ 104] =  23285
+len of partition[ 105] =  27368
+len of partition[ 106] =  23285
+len of partition[ 107] =  27368
+len of partition[ 108] =  23285
+len of partition[ 109] =  27368
+len of partition[ 110] =  23285
+len of partition[ 111] =  27368
+len of partition[ 112] =  23285
+len of partition[ 113] =  27368
+len of partition[ 114] =  23285
+len of partition[ 115] =  27368
+len of partition[ 116] =  23285
+len of partition[ 117] =  27368
+len of partition[ 118] =  23285
+len of partition[ 119] =  27368
+len of partition[ 120] =  23285
+len of partition[ 121] =  27368
+len of partition[ 122] =  23285
+len of partition[ 123] =  27368
+len of partition[ 124] =  23285
+len of partition[ 125] =  27368
+len of partition[ 126] =  23285
+len of partition[ 127] =  27368
+len of partition[ 128] =  23285
+len of partition[ 129] =  27368
+len of partition[ 130] =  23285
+len of partition[ 131] =  27368
+len of partition[ 132] =  23285
+len of partition[ 133] =  27368
+len of partition[ 134] =  23285
+len of partition[ 135] =  27368
+len of partition[ 136] =  23285
+len of partition[ 137] =  27368
+len of partition[ 138] =  23285
+len of partition[ 139] =  27368
+len of partition[ 140] =  23285
+len of partition[ 141] =  27368
+len of partition[ 142] =  23285
+len of partition[ 143] =  27368
+len of partition[ 144] =  23285
+len of partition[ 145] =  27368
+len of partition[ 146] =  23285
+len of partition[ 147] =  27368
+len of partition[ 148] =  23285
+len of partition[ 149] =  27368
+len of partition[ 150] =  23285
+len of partition[ 151] =  27368
+len of partition[ 152] =  23285
+len of partition[ 153] =  27368
+len of partition[ 154] =  23285
+len of partition[ 155] =  27368
+len of partition[ 156] =  23285
+len of partition[ 157] =  27368
+len of partition[ 158] =  23285
+len of partition[ 159] =  27368
+len of partition[ 160] =  23285
+len of partition[ 161] =  27368
+len of partition[ 162] =  23285
+len of partition[ 163] =  27368
+len of partition[ 164] =  23285
+len of partition[ 165] =  27368
+len of partition[ 166] =  23285
+len of partition[ 167] =  27368
+len of partition[ 168] =  23285
+len of partition[ 169] =  27368
+len of partition[ 170] =  23285
+len of partition[ 171] =  27368
+len of partition[ 172] =  23285
+len of partition[ 173] =  27368
+len of partition[ 174] =  23285
+len of partition[ 175] =  27368
+len of partition[ 176] =  23285
+len of partition[ 177] =  27368
+len of partition[ 178] =  23285
+len of partition[ 179] =  27368
+len of partition[ 180] =  23285
+len of partition[ 181] =  27368
+len of partition[ 182] =  23285
+len of partition[ 183] =  27368
+len of partition[ 184] =  23285
+len of partition[ 185] =  27368
+len of partition[ 186] =  23285
+len of partition[ 187] =  27368
+len of partition[ 188] =  23285
+len of partition[ 189] =  27368
+len of partition[ 190] =  23285
+len of partition[ 191] =  27368
+len of partition[ 192] =  23285
+len of partition[ 193] =  27368
+len of partition[ 194] =  23285
+len of partition[ 195] =  27368
+len of partition[ 196] =  23285
+len of partition[ 197] =  27368
+len of partition[ 198] =  23285
+len of partition[ 199] =  27368
+len of partition[ 200] =  23285
+len of partition[ 201] =  27368
+len of partition[ 202] =  23285
+len of partition[ 203] =  27368
+len of partition[ 204] =  23285
+len of partition[ 205] =  27368
+len of partition[ 206] =  23285
+len of partition[ 207] =  27368
+len of partition[ 208] =  23285
+len of partition[ 209] =  27368
+len of partition[ 210] =  23285
+len of partition[ 211] =  27368
+len of partition[ 212] =  23285
+len of partition[ 213] =  27368
+len of partition[ 214] =  23285
+len of partition[ 215] =  27368
+len of partition[ 216] =  23285
+len of partition[ 217] =  27368
+len of partition[ 218] =  23285
+len of partition[ 219] =  27368
+len of partition[ 220] =  23285
+len of partition[ 221] =  27368
+len of partition[ 222] =  23285
+len of partition[ 223] =  27368
+len of partition[ 224] =  23285
+len of partition[ 225] =  27368
+len of partition[ 226] =  23285
+len of partition[ 227] =  27368
+len of partition[ 228] =  23285
+len of partition[ 229] =  27368
+len of partition[ 230] =  23285
+len of partition[ 231] =  27368
+len of partition[ 232] =  23285
+len of partition[ 233] =  27368
+len of partition[ 234] =  23285
+len of partition[ 235] =  27368
+len of partition[ 236] =  23285
+len of partition[ 237] =  27368
+len of partition[ 238] =  23285
+len of partition[ 239] =  27368
+len of partition[ 240] =  23285
+len of partition[ 241] =  27368
+len of partition[ 242] =  23285
+len of partition[ 243] =  27368
+len of partition[ 244] =  23285
+len of partition[ 245] =  27368
+len of partition[ 246] =  23285
+len of partition[ 247] =  27368
+len of partition[ 248] =  23285
+len of partition[ 249] =  27368
+len of partition[ 250] =  23285
+len of partition[ 251] =  27368
+len of partition[ 252] =  23285
+len of partition[ 253] =  27368
+len of partition[ 254] =  23285
+len of partition[ 255] =  27368
+len of partition[ 256] =  23285
+len of partition[ 257] =  27368
+len of partition[ 258] =  23285
+len of partition[ 259] =  27368
+len of partition[ 260] =  23285
+len of partition[ 261] =  27368
+len of partition[ 262] =  23285
+len of partition[ 263] =  27368
+len of partition[ 264] =  23285
+len of partition[ 265] =  27368
+len of partition[ 266] =  23285
+len of partition[ 267] =  27368
+len of partition[ 268] =  23285
+len of partition[ 269] =  27368
+len of partition[ 270] =  23285
+len of partition[ 271] =  27368
+len of partition[ 272] =  23285
+len of partition[ 273] =  27368
+len of partition[ 274] =  23285
+len of partition[ 275] =  27368
+len of partition[ 276] =  23285
+len of partition[ 277] =  27368
+len of partition[ 278] =  23285
+len of partition[ 279] =  27368
+len of partition[ 280] =  23285
+len of partition[ 281] =  27368
+len of partition[ 282] =  23285
+len of partition[ 283] =  27368
+len of partition[ 284] =  23285
+len of partition[ 285] =  27368
+len of partition[ 286] =  23285
+len of partition[ 287] =  27368
+len of partition[ 288] =  23285
+len of partition[ 289] =  27368
+len of partition[ 290] =  23285
+len of partition[ 291] =  27368
+len of partition[ 292] =  23285
+len of partition[ 293] =  27368
+len of partition[ 294] =  23285
+len of partition[ 295] =  27368
+len of partition[ 296] =  23285
+len of partition[ 297] =  27368
+len of partition[ 298] =  23285
+len of partition[ 299] =  27368
+len of partition[ 300] =  23285
+len of partition[ 301] =  27368
+len of partition[ 302] =  23285
+len of partition[ 303] =  27368
+len of partition[ 304] =  23285
+len of partition[ 305] =  27368
+len of partition[ 306] =  23285
+len of partition[ 307] =  27368
+len of partition[ 308] =  23285
+len of partition[ 309] =  27368
+len of partition[ 310] =  23285
+len of partition[ 311] =  27368
+len of partition[ 312] =  23285
+len of partition[ 313] =  27368
+len of partition[ 314] =  23285
+len of partition[ 315] =  27368
+len of partition[ 316] =  23285
+len of partition[ 317] =  27368
+len of partition[ 318] =  23285
+len of partition[ 319] =  27368
+len of partition[ 320] =  23285
+len of partition[ 321] =  27368
+len of partition[ 322] =  23285
+len of partition[ 323] =  27368
+len of partition[ 324] =  23285
+len of partition[ 325] =  27368
+len of partition[ 326] =  23285
+len of partition[ 327] =  27368
+len of partition[ 328] =  23285
+len of partition[ 329] =  27368
+len of partition[ 330] =  23285
+len of partition[ 331] =  27368
+len of partition[ 332] =  23285
+len of partition[ 333] =  27368
+len of partition[ 334] =  23285
+len of partition[ 335] =  27368
+len of partition[ 336] =  23285
+len of partition[ 337] =  27368
+len of partition[ 338] =  23285
+len of partition[ 339] =  27368
+len of partition[ 340] =  23285
+len of partition[ 341] =  27368
+len of partition[ 342] =  23285
+len of partition[ 343] =  27368
+len of partition[ 344] =  23285
+len of partition[ 345] =  27368
+len of partition[ 346] =  23285
+len of partition[ 347] =  27368
+len of partition[ 348] =  23285
+len of partition[ 349] =  27368
+len of partition[ 350] =  23285
+len of partition[ 351] =  27368
+len of partition[ 352] =  23285
+len of partition[ 353] =  27368
+len of partition[ 354] =  23285
+len of partition[ 355] =  27368
+len of partition[ 356] =  23285
+len of partition[ 357] =  27368
+len of partition[ 358] =  23285
+len of partition[ 359] =  27368
+len of partition[ 360] =  23285
+len of partition[ 361] =  27368
+len of partition[ 362] =  23285
+len of partition[ 363] =  27368
+len of partition[ 364] =  23285
+len of partition[ 365] =  27368
+len of partition[ 366] =  23285
+len of partition[ 367] =  27368
+len of partition[ 368] =  23285
+len of partition[ 369] =  27368
+len of partition[ 370] =  23285
+len of partition[ 371] =  27368
+len of partition[ 372] =  23285
+len of partition[ 373] =  27368
+len of partition[ 374] =  23285
+len of partition[ 375] =  27368
+len of partition[ 376] =  23285
+len of partition[ 377] =  27368
+len of partition[ 378] =  23285
+len of partition[ 379] =  27368
+len of partition[ 380] =  23285
+len of partition[ 381] =  27368
+len of partition[ 382] =  23285
+len of partition[ 383] =  27368
+len of partition[ 384] =  23285
+len of partition[ 385] =  27368
+len of partition[ 386] =  23285
+len of partition[ 387] =  27368
+len of partition[ 388] =  23285
+len of partition[ 389] =  27368
+len of partition[ 390] =  23285
+len of partition[ 391] =  27368
+len of partition[ 392] =  23285
+len of partition[ 393] =  27368
+len of partition[ 394] =  23285
+len of partition[ 395] =  27368
+len of partition[ 396] =  23285
+len of partition[ 397] =  27368
+len of partition[ 398] =  23285
+len of partition[ 399] =  27368
+len of partition[ 400] =  23285
+len of partition[ 401] =  27368
+len of partition[ 402] =  23285
+len of partition[ 403] =  27368
+len of partition[ 404] =  23285
+len of partition[ 405] =  27368
+len of partition[ 406] =  23285
+len of partition[ 407] =  27368
+len of partition[ 408] =  23285
+len of partition[ 409] =  27368
+len of partition[ 410] =  23285
+len of partition[ 411] =  27368
+len of partition[ 412] =  23285
+len of partition[ 413] =  27368
+len of partition[ 414] =  23285
+len of partition[ 415] =  27368
+len of partition[ 416] =  23285
+len of partition[ 417] =  27368
+len of partition[ 418] =  23285
+len of partition[ 419] =  27368
+len of partition[ 420] =  23285
+len of partition[ 421] =  27368
+len of partition[ 422] =  23285
+len of partition[ 423] =  27368
+len of partition[ 424] =  23285
+len of partition[ 425] =  27368
+len of partition[ 426] =  23285
+len of partition[ 427] =  27368
+len of partition[ 428] =  23285
+len of partition[ 429] =  27368
+len of partition[ 430] =  23285
+len of partition[ 431] =  27368
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     5.034445 CPU time:    55.670185
+In _build_buffer: ISDF Local size of buffer = 4884.816 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  724
+select_IP_local_atm: npt_found =  438
+select_IP_local_step1 wall time:     1.436846 CPU time:    43.350673
+ build_aoRg_possible wall time:     0.101611 CPU time:     1.992375
+select_IP_local_step2 wall time:     0.000161 CPU time:     0.000171
+select_IP_local_step3 wall time:     0.000376 CPU time:     0.000372
+Memory usage for aoR  :   2250.619 MB
+Memory usage for aoRg :     51.750 MB
+            build_IP wall time:     1.538994 CPU time:    45.343592
+build_aux_basis_local wall time:     2.637389 CPU time:    25.476358
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]     84.39 sec, wall time     18.36 sec
+    CPU time for gen W [   2|[  32:  64]     88.32 sec, wall time     18.36 sec
+    CPU time for gen W [   3|[  64:  96]     81.89 sec, wall time     18.11 sec
+    CPU time for gen W [   4|[  96: 128]     83.76 sec, wall time     18.30 sec
+    CPU time for gen W [   5|[ 128: 160]     81.91 sec, wall time     18.15 sec
+    CPU time for gen W [   6|[ 160: 192]     82.44 sec, wall time     18.15 sec
+    CPU time for gen W [   7|[ 192: 224]     82.55 sec, wall time     18.15 sec
+    CPU time for gen W [   8|[ 224: 256]     86.04 sec, wall time     18.29 sec
+    CPU time for gen W [   9|[ 256: 288]     82.51 sec, wall time     18.16 sec
+    CPU time for gen W [  10|[ 288: 320]     82.68 sec, wall time     18.17 sec
+    CPU time for gen W [  11|[ 320: 352]     83.56 sec, wall time     18.18 sec
+    CPU time for gen W [  12|[ 352: 384]     83.24 sec, wall time     18.16 sec
+    CPU time for gen W [  13|[ 384: 416]     83.06 sec, wall time     18.19 sec
+    CPU time for gen W [  14|[ 416: 448]     83.69 sec, wall time     18.22 sec
+    CPU time for gen W [  15|[ 448: 480]     82.62 sec, wall time     18.17 sec
+    CPU time for gen W [  16|[ 480: 512]     83.29 sec, wall time     18.21 sec
+    CPU time for gen W [  17|[ 512: 544]     83.00 sec, wall time     18.19 sec
+    CPU time for gen W [  18|[ 544: 576]     83.36 sec, wall time     18.26 sec
+    CPU time for gen W [  19|[ 576: 608]     81.69 sec, wall time     18.13 sec
+    CPU time for gen W [  20|[ 608: 640]     82.88 sec, wall time     18.15 sec
+    CPU time for gen W [  21|[ 640: 672]     82.96 sec, wall time     18.18 sec
+    CPU time for gen W [  22|[ 672: 704]     82.44 sec, wall time     18.13 sec
+    CPU time for gen W [  23|[ 704: 724]     67.99 sec, wall time     11.82 sec
+    CPU time for gen W [  24|[   0:  32]     83.04 sec, wall time     18.19 sec
+    CPU time for gen W [  25|[  32:  64]     92.04 sec, wall time     18.46 sec
+    CPU time for gen W [  26|[  64:  96]     82.33 sec, wall time     18.12 sec
+    CPU time for gen W [  27|[  96: 128]     82.82 sec, wall time     18.13 sec
+    CPU time for gen W [  28|[ 128: 160]     83.78 sec, wall time     18.21 sec
+    CPU time for gen W [  29|[ 160: 192]     83.02 sec, wall time     18.15 sec
+    CPU time for gen W [  30|[ 192: 224]     82.82 sec, wall time     18.18 sec
+    CPU time for gen W [  31|[ 224: 256]     94.14 sec, wall time     18.52 sec
+    CPU time for gen W [  32|[ 256: 288]     86.66 sec, wall time     18.27 sec
+    CPU time for gen W [  33|[ 288: 320]     83.89 sec, wall time     18.16 sec
+    CPU time for gen W [  34|[ 320: 352]     83.05 sec, wall time     18.13 sec
+    CPU time for gen W [  35|[ 352: 384]     93.54 sec, wall time     18.63 sec
+    CPU time for gen W [  36|[ 384: 416]     82.41 sec, wall time     18.09 sec
+    CPU time for gen W [  37|[ 416: 438]     72.10 sec, wall time     12.90 sec
+     build_V_W_local wall time:   662.336668 CPU time:  3086.726958
+Number of interpolation points = 250992, effective CISDF =  29.79
+    CPU time for ISDF build   3253.94 sec, wall time    701.05 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-20/46829484/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  2.703147871513497e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3362649098349754e-08 0 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9596315040744803e-08 0 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3899277565647017e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.1437492780940356e-08 0 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2543241925965495e-08 0 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7148942052803473e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8183391842517835e-08 0 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0819549811637142e-08 0 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.027195744076643e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4436107871613849e-08 0 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.320995466127559e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7135126033358597e-08 0 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.296841757059959e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3542412713748186e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0344935148248504e-08 1 0 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3899218775868804e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2146750461305108e-08 1 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.331531570587409e-08 1 0 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6754843909591422e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6722966312010115e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.776513998619561e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.030386022673249e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4570708170609302e-08 1 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4634703083008448e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4977797857818577e-08 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6316699638928582e-08 1 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2467822252562506e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.738325627360908e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2472107688581355e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2411971204244624e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7656292478362042e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8932037543508285e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6905687511298223e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6387813503726938e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.208166256436776e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.172012888463827e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.275741480846301e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.407505089897669e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.714891368660533e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.694802752640669e-08 2 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1085918998760359e-08 2 0 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0477008487706878e-08 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.305560464939466e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.099672569144901e-08 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.192233118647484e-08 2 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.220135248753116e-08 2 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5041942436355983e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3817299832076372e-08 2 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4701560607789458e-08 2 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0487065839212869e-08 2 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8191536091683656e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2939493712622293e-08 2 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1321190235282943e-08 2 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.726078135630419e-08 2 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.126373390727342e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6668813968004868e-08 2 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.712802909920477e-08 2 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4337900278448397e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.288592440031835e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3705070781310286e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3714194719028047e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.027195125127262e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7839283655703457 3 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.1964533743823626e-08 3 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7383310563515258e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2120454440396095e-08 3 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2318950083922903e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0287320686989006e-08 3 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.819157089023669e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2939514529304036e-08 3 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1065168475932767e-08 3 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.942659754670382e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4886191362921318e-08 3 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.2615292744344925e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.728395930545162e-08 3 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.5907846251959205e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3157953360499068e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.3209996488928735e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.713517162883031e-08 4 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8932144735541518e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.518771188842127e-08 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.12638107624624e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.731261671522643e-08 4 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.2615315753717686e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.728399084966307e-08 4 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.381918748779087e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.945051546215301e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.717147449566859e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2513980041384385e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.296849858912483e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4231075312911736e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.305577485346327e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.3981000777118204e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.288603614426492e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5635004327617718e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.590790600971361e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3478140653843355e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.7171510806900334e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.682624378192038e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.7207594991151243e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.999980630580293e-08 5 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.703147871513497e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3362649098349754e-08 0 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9596315040744803e-08 0 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3899277565647017e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.1437492780940356e-08 0 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2543241925965495e-08 0 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7148942052803473e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8183391842517835e-08 0 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0819549811637142e-08 0 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.027195744076643e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4436107871613849e-08 0 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.320995466127559e-08 0 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7135126033358597e-08 0 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.296841757059959e-08 0 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3542412713748186e-08 0 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0344935148248504e-08 1 0 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3899218775868804e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2146750461305108e-08 1 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.331531570587409e-08 1 0 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6754843909591422e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6722966312010115e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.776513998619561e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.030386022673249e-08 1 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4570708170609302e-08 1 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4634703083008448e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4977797857818577e-08 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6316699638928582e-08 1 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2467822252562506e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.738325627360908e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2472107688581355e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2411971204244624e-08 1 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7656292478362042e-08 1 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8932037543508285e-08 1 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6905687511298223e-08 1 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6387813503726938e-08 1 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.208166256436776e-08 1 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.172012888463827e-08 1 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.275741480846301e-08 1 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.407505089897669e-08 1 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.714891368660533e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.694802752640669e-08 2 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1085918998760359e-08 2 0 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0477008487706878e-08 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.305560464939466e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.099672569144901e-08 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.192233118647484e-08 2 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.220135248753116e-08 2 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5041942436355983e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.3817299832076372e-08 2 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4701560607789458e-08 2 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0487065839212869e-08 2 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8191536091683656e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2939493712622293e-08 2 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1321190235282943e-08 2 3 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.726078135630419e-08 2 4 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.126373390727342e-08 2 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6668813968004868e-08 2 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.712802909920477e-08 2 4 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4337900278448397e-08 2 5 0
+Warning: In _1e_operator_k2gamma max abs of diff =  3.288592440031835e-08 2 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3705070781310286e-08 2 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3714194719028047e-08 2 5 3
+Warning: In _1e_operator_k2gamma max abs of diff =  3.027195125127262e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7839283655703457 3 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.1964533743823626e-08 3 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.7383310563515258e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2120454440396095e-08 3 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2318950083922903e-08 3 1 3
+Warning: In _1e_operator_k2gamma max abs of diff =  1.0287320686989006e-08 3 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.819157089023669e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.2939514529304036e-08 3 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.1065168475932767e-08 3 2 3
+Warning: In _1e_operator_k2gamma max abs of diff =  2.942659754670382e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4886191362921318e-08 3 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.2615292744344925e-08 3 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.728395930545162e-08 3 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.5907846251959205e-08 3 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3157953360499068e-08 3 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.3209996488928735e-08 4 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.713517162883031e-08 4 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.8932144735541518e-08 4 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.518771188842127e-08 4 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.12638107624624e-08 4 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.731261671522643e-08 4 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.2615315753717686e-08 4 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.728399084966307e-08 4 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.381918748779087e-08 4 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.945051546215301e-08 4 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.717147449566859e-08 4 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2513980041384385e-08 4 5 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.296849858912483e-08 5 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4231075312911736e-08 5 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.305577485346327e-08 5 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  3.3981000777118204e-08 5 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.288603614426492e-08 5 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5635004327617718e-08 5 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.590790600971361e-08 5 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.3478140653843355e-08 5 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.7171510806900334e-08 5 4 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.682624378192038e-08 5 4 2
+Warning: In _1e_operator_k2gamma max abs of diff =  3.7207594991151243e-08 5 5 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.999980630580293e-08 5 5 2

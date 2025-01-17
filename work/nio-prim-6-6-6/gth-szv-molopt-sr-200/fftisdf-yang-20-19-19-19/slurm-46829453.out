@@ -1,0 +1,692 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-19-19-19/46829453/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-19-19-19/46829453/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [37 37 37] (50653 PWs)
+len(kpts) = 216
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.08081094e-01 -7.64249325e-02  1.87202024e-01]
+ [-2.16162188e-01 -1.52849865e-01  3.74404049e-01]
+ [-3.24243283e-01 -2.29274798e-01  5.61606073e-01]
+ [-4.32324377e-01 -3.05699730e-01  7.48808097e-01]
+ [-5.40405471e-01 -3.82124663e-01  9.36010122e-01]
+ [ 8.94347323e-10  2.29274753e-01  0.00000000e+00]
+ [-1.08081093e-01  1.52849820e-01  1.87202024e-01]
+ [-2.16162187e-01  7.64248877e-02  3.74404049e-01]
+ [-3.24243282e-01 -4.48371855e-08  5.61606073e-01]
+ [-4.32324376e-01 -7.64249773e-02  7.48808097e-01]
+ [-5.40405470e-01 -1.52849910e-01  9.36010122e-01]
+ [ 1.78869465e-09  4.58549505e-01  0.00000000e+00]
+ [-1.08081092e-01  3.82124573e-01  1.87202024e-01]
+ [-2.16162187e-01  3.05699640e-01  3.74404049e-01]
+ [-3.24243281e-01  2.29274708e-01  5.61606073e-01]
+ [-4.32324375e-01  1.52849775e-01  7.48808097e-01]
+ [-5.40405469e-01  7.64248428e-02  9.36010122e-01]
+ [ 2.68304197e-09  6.87824258e-01  0.00000000e+00]
+ [-1.08081091e-01  6.11399326e-01  1.87202024e-01]
+ [-2.16162186e-01  5.34974393e-01  3.74404049e-01]
+ [-3.24243280e-01  4.58549461e-01  5.61606073e-01]
+ [-4.32324374e-01  3.82124528e-01  7.48808097e-01]
+ [-5.40405468e-01  3.05699596e-01  9.36010122e-01]
+ [ 3.57738929e-09  9.17099011e-01  0.00000000e+00]
+ [-1.08081091e-01  8.40674078e-01  1.87202024e-01]
+ [-2.16162185e-01  7.64249146e-01  3.74404049e-01]
+ [-3.24243279e-01  6.87824213e-01  5.61606073e-01]
+ [-4.32324373e-01  6.11399281e-01  7.48808097e-01]
+ [-5.40405467e-01  5.34974348e-01  9.36010122e-01]
+ [ 4.47173661e-09  1.14637376e+00  0.00000000e+00]
+ [-1.08081090e-01  1.06994883e+00  1.87202024e-01]
+ [-2.16162184e-01  9.93523898e-01  3.74404049e-01]
+ [-3.24243278e-01  9.17098966e-01  5.61606073e-01]
+ [-4.32324372e-01  8.40674033e-01  7.48808097e-01]
+ [-5.40405466e-01  7.64249101e-01  9.36010122e-01]
+ [ 2.16162188e-01 -7.64248872e-02  0.00000000e+00]
+ [ 1.08081094e-01 -1.52849820e-01  1.87202024e-01]
+ [-1.64115940e-10 -2.29274752e-01  3.74404049e-01]
+ [-1.08081094e-01 -3.05699685e-01  5.61606073e-01]
+ [-2.16162189e-01 -3.82124617e-01  7.48808097e-01]
+ [-3.24243283e-01 -4.58549550e-01  9.36010122e-01]
+ [ 2.16162189e-01  1.52849866e-01  0.00000000e+00]
+ [ 1.08081095e-01  7.64249330e-02  1.87202024e-01]
+ [ 7.30231378e-10  5.16351942e-10  3.74404049e-01]
+ [-1.08081093e-01 -7.64249320e-02  5.61606073e-01]
+ [-2.16162188e-01 -1.52849864e-01  7.48808097e-01]
+ [-3.24243282e-01 -2.29274797e-01  9.36010122e-01]
+ [ 2.16162190e-01  3.82124618e-01  0.00000000e+00]
+ [ 1.08081096e-01  3.05699686e-01  1.87202024e-01]
+ [ 1.62457870e-09  2.29274753e-01  3.74404049e-01]
+ [-1.08081093e-01  1.52849821e-01  5.61606073e-01]
+ [-2.16162187e-01  7.64248882e-02  7.48808097e-01]
+ [-3.24243281e-01 -4.43208336e-08  9.36010122e-01]
+ [ 2.16162191e-01  6.11399371e-01  0.00000000e+00]
+ [ 1.08081097e-01  5.34974438e-01  1.87202024e-01]
+ [ 2.51892601e-09  4.58549506e-01  3.74404049e-01]
+ [-1.08081092e-01  3.82124573e-01  5.61606073e-01]
+ [-2.16162186e-01  3.05699641e-01  7.48808097e-01]
+ [-3.24243280e-01  2.29274708e-01  9.36010122e-01]
+ [ 2.16162192e-01  8.40674124e-01  0.00000000e+00]
+ [ 1.08081098e-01  7.64249191e-01  1.87202024e-01]
+ [ 3.41327336e-09  6.87824259e-01  3.74404049e-01]
+ [-1.08081091e-01  6.11399326e-01  5.61606073e-01]
+ [-2.16162185e-01  5.34974394e-01  7.48808097e-01]
+ [-3.24243279e-01  4.58549461e-01  9.36010122e-01]
+ [ 2.16162193e-01  1.06994888e+00  0.00000000e+00]
+ [ 1.08081098e-01  9.93523944e-01  1.87202024e-01]
+ [ 4.30762068e-09  9.17099011e-01  3.74404049e-01]
+ [-1.08081090e-01  8.40674079e-01  5.61606073e-01]
+ [-2.16162184e-01  7.64249146e-01  7.48808097e-01]
+ [-3.24243278e-01  6.87824214e-01  9.36010122e-01]
+ [ 4.32324376e-01 -1.52849774e-01  0.00000000e+00]
+ [ 3.24243282e-01 -2.29274707e-01  1.87202024e-01]
+ [ 2.16162188e-01 -3.05699639e-01  3.74404049e-01]
+ [ 1.08081094e-01 -3.82124572e-01  5.61606073e-01]
+ [-3.28231881e-10 -4.58549504e-01  7.48808097e-01]
+ [-1.08081094e-01 -5.34974437e-01  9.36010122e-01]
+ [ 4.32324377e-01  7.64249784e-02  0.00000000e+00]
+ [ 3.24243283e-01  4.58698894e-08  1.87202024e-01]
+ [ 2.16162189e-01 -7.64248866e-02  3.74404049e-01]
+ [ 1.08081095e-01 -1.52849819e-01  5.61606073e-01]
+ [ 5.66115438e-10 -2.29274752e-01  7.48808097e-01]
+ [-1.08081094e-01 -3.05699684e-01  9.36010122e-01]
+ [ 4.32324378e-01  3.05699731e-01  0.00000000e+00]
+ [ 3.24243284e-01  2.29274799e-01  1.87202024e-01]
+ [ 2.16162190e-01  1.52849866e-01  3.74404049e-01]
+ [ 1.08081096e-01  7.64249335e-02  5.61606073e-01]
+ [ 1.46046276e-09  1.03270388e-09  7.48808097e-01]
+ [-1.08081093e-01 -7.64249315e-02  9.36010122e-01]
+ [ 4.32324379e-01  5.34974484e-01  0.00000000e+00]
+ [ 3.24243285e-01  4.58549551e-01  1.87202024e-01]
+ [ 2.16162191e-01  3.82124619e-01  3.74404049e-01]
+ [ 1.08081097e-01  3.05699686e-01  5.61606073e-01]
+ [ 2.35481007e-09  2.29274754e-01  7.48808097e-01]
+ [-1.08081092e-01  1.52849821e-01  9.36010122e-01]
+ [ 4.32324380e-01  7.64249236e-01  0.00000000e+00]
+ [ 3.24243286e-01  6.87824304e-01  1.87202024e-01]
+ [ 2.16162192e-01  6.11399371e-01  3.74404049e-01]
+ [ 1.08081097e-01  5.34974439e-01  5.61606073e-01]
+ [ 3.24915739e-09  4.58549506e-01  7.48808097e-01]
+ [-1.08081091e-01  3.82124574e-01  9.36010122e-01]
+ [ 4.32324381e-01  9.93523989e-01  0.00000000e+00]
+ [ 3.24243287e-01  9.17099057e-01  1.87202024e-01]
+ [ 2.16162192e-01  8.40674124e-01  3.74404049e-01]
+ [ 1.08081098e-01  7.64249192e-01  5.61606073e-01]
+ [ 4.14350471e-09  6.87824259e-01  7.48808097e-01]
+ [-1.08081090e-01  6.11399327e-01  9.36010122e-01]
+ [ 6.48486565e-01 -2.29274661e-01  0.00000000e+00]
+ [ 5.40405470e-01 -3.05699594e-01  1.87202024e-01]
+ [ 4.32324376e-01 -3.82124526e-01  3.74404049e-01]
+ [ 3.24243282e-01 -4.58549459e-01  5.61606073e-01]
+ [ 2.16162188e-01 -5.34974391e-01  7.48808097e-01]
+ [ 1.08081094e-01 -6.11399324e-01  9.36010122e-01]
+ [ 6.48486565e-01  9.12234269e-08  0.00000000e+00]
+ [ 5.40405471e-01 -7.64248413e-02  1.87202024e-01]
+ [ 4.32324377e-01 -1.52849774e-01  3.74404049e-01]
+ [ 3.24243283e-01 -2.29274706e-01  5.61606073e-01]
+ [ 2.16162189e-01 -3.05699639e-01  7.48808097e-01]
+ [ 1.08081095e-01 -3.82124571e-01  9.36010122e-01]
+ [ 6.48486566e-01  2.29274844e-01  0.00000000e+00]
+ [ 5.40405472e-01  1.52849911e-01  1.87202024e-01]
+ [ 4.32324378e-01  7.64249789e-02  3.74404049e-01]
+ [ 3.24243284e-01  4.63862413e-08  5.61606073e-01]
+ [ 2.16162190e-01 -7.64248861e-02  7.48808097e-01]
+ [ 1.08081095e-01 -1.52849819e-01  9.36010122e-01]
+ [ 6.48486567e-01  4.58549597e-01  0.00000000e+00]
+ [ 5.40405473e-01  3.82124664e-01  1.87202024e-01]
+ [ 4.32324379e-01  3.05699732e-01  3.74404049e-01]
+ [ 3.24243285e-01  2.29274799e-01  5.61606073e-01]
+ [ 2.16162191e-01  1.52849867e-01  7.48808097e-01]
+ [ 1.08081096e-01  7.64249341e-02  9.36010122e-01]
+ [ 6.48486568e-01  6.87824349e-01  0.00000000e+00]
+ [ 5.40405474e-01  6.11399417e-01  1.87202024e-01]
+ [ 4.32324380e-01  5.34974484e-01  3.74404049e-01]
+ [ 3.24243286e-01  4.58549552e-01  5.61606073e-01]
+ [ 2.16162191e-01  3.82124619e-01  7.48808097e-01]
+ [ 1.08081097e-01  3.05699687e-01  9.36010122e-01]
+ [ 6.48486569e-01  9.17099102e-01  0.00000000e+00]
+ [ 5.40405475e-01  8.40674169e-01  1.87202024e-01]
+ [ 4.32324381e-01  7.64249237e-01  3.74404049e-01]
+ [ 3.24243286e-01  6.87824304e-01  5.61606073e-01]
+ [ 2.16162192e-01  6.11399372e-01  7.48808097e-01]
+ [ 1.08081098e-01  5.34974439e-01  9.36010122e-01]
+ [ 8.64648753e-01 -3.05699549e-01  0.00000000e+00]
+ [ 7.56567659e-01 -3.82124481e-01  1.87202024e-01]
+ [ 6.48486564e-01 -4.58549414e-01  3.74404049e-01]
+ [ 5.40405470e-01 -5.34974346e-01  5.61606073e-01]
+ [ 4.32324376e-01 -6.11399279e-01  7.48808097e-01]
+ [ 3.24243282e-01 -6.87824211e-01  9.36010122e-01]
+ [ 8.64648754e-01 -7.64247959e-02  0.00000000e+00]
+ [ 7.56567659e-01 -1.52849728e-01  1.87202024e-01]
+ [ 6.48486565e-01 -2.29274661e-01  3.74404049e-01]
+ [ 5.40405471e-01 -3.05699593e-01  5.61606073e-01]
+ [ 4.32324377e-01 -3.82124526e-01  7.48808097e-01]
+ [ 3.24243283e-01 -4.58549458e-01  9.36010122e-01]
+ [ 8.64648754e-01  1.52849957e-01  0.00000000e+00]
+ [ 7.56567660e-01  7.64250242e-02  1.87202024e-01]
+ [ 6.48486566e-01  9.17397788e-08  3.74404049e-01]
+ [ 5.40405472e-01 -7.64248408e-02  5.61606073e-01]
+ [ 4.32324378e-01 -1.52849773e-01  7.48808097e-01]
+ [ 3.24243284e-01 -2.29274706e-01  9.36010122e-01]
+ [ 8.64648755e-01  3.82124709e-01  0.00000000e+00]
+ [ 7.56567661e-01  3.05699777e-01  1.87202024e-01]
+ [ 6.48486567e-01  2.29274844e-01  3.74404049e-01]
+ [ 5.40405473e-01  1.52849912e-01  5.61606073e-01]
+ [ 4.32324379e-01  7.64249794e-02  7.48808097e-01]
+ [ 3.24243285e-01  4.69025933e-08  9.36010122e-01]
+ [ 8.64648756e-01  6.11399462e-01  0.00000000e+00]
+ [ 7.56567662e-01  5.34974530e-01  1.87202024e-01]
+ [ 6.48486568e-01  4.58549597e-01  3.74404049e-01]
+ [ 5.40405474e-01  3.82124665e-01  5.61606073e-01]
+ [ 4.32324380e-01  3.05699732e-01  7.48808097e-01]
+ [ 3.24243285e-01  2.29274800e-01  9.36010122e-01]
+ [ 8.64648757e-01  8.40674215e-01  0.00000000e+00]
+ [ 7.56567663e-01  7.64249282e-01  1.87202024e-01]
+ [ 6.48486569e-01  6.87824350e-01  3.74404049e-01]
+ [ 5.40405475e-01  6.11399417e-01  5.61606073e-01]
+ [ 4.32324380e-01  5.34974485e-01  7.48808097e-01]
+ [ 3.24243286e-01  4.58549552e-01  9.36010122e-01]
+ [ 1.08081094e+00 -3.82124436e-01  0.00000000e+00]
+ [ 9.72729847e-01 -4.58549368e-01  1.87202024e-01]
+ [ 8.64648753e-01 -5.34974301e-01  3.74404049e-01]
+ [ 7.56567658e-01 -6.11399233e-01  5.61606073e-01]
+ [ 6.48486564e-01 -6.87824166e-01  7.48808097e-01]
+ [ 5.40405470e-01 -7.64249098e-01  9.36010122e-01]
+ [ 1.08081094e+00 -1.52849683e-01  0.00000000e+00]
+ [ 9.72729848e-01 -2.29274616e-01  1.87202024e-01]
+ [ 8.64648753e-01 -3.05699548e-01  3.74404049e-01]
+ [ 7.56567659e-01 -3.82124481e-01  5.61606073e-01]
+ [ 6.48486565e-01 -4.58549413e-01  7.48808097e-01]
+ [ 5.40405471e-01 -5.34974346e-01  9.36010122e-01]
+ [ 1.08081094e+00  7.64250696e-02  0.00000000e+00]
+ [ 9.72729849e-01  1.37093316e-07  1.87202024e-01]
+ [ 8.64648754e-01 -7.64247954e-02  3.74404049e-01]
+ [ 7.56567660e-01 -1.52849728e-01  5.61606073e-01]
+ [ 6.48486566e-01 -2.29274660e-01  7.48808097e-01]
+ [ 5.40405472e-01 -3.05699593e-01  9.36010122e-01]
+ [ 1.08081094e+00  3.05699822e-01  0.00000000e+00]
+ [ 9.72729849e-01  2.29274890e-01  1.87202024e-01]
+ [ 8.64648755e-01  1.52849957e-01  3.74404049e-01]
+ [ 7.56567661e-01  7.64250248e-02  5.61606073e-01]
+ [ 6.48486567e-01  9.22561308e-08  7.48808097e-01]
+ [ 5.40405473e-01 -7.64248402e-02  9.36010122e-01]
+ [ 1.08081094e+00  5.34974575e-01  0.00000000e+00]
+ [ 9.72729850e-01  4.58549642e-01  1.87202024e-01]
+ [ 8.64648756e-01  3.82124710e-01  3.74404049e-01]
+ [ 7.56567662e-01  3.05699777e-01  5.61606073e-01]
+ [ 6.48486568e-01  2.29274845e-01  7.48808097e-01]
+ [ 5.40405474e-01  1.52849912e-01  9.36010122e-01]
+ [ 1.08081095e+00  7.64249328e-01  0.00000000e+00]
+ [ 9.72729851e-01  6.87824395e-01  1.87202024e-01]
+ [ 8.64648757e-01  6.11399463e-01  3.74404049e-01]
+ [ 7.56567663e-01  5.34974530e-01  5.61606073e-01]
+ [ 6.48486569e-01  4.58549598e-01  7.48808097e-01]
+ [ 5.40405475e-01  3.82124665e-01  9.36010122e-01]]
+Overwritten attributes  tol c0 kmesh m0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [37 37 37]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 26 Eh.
+Recommended ke_cutoff/mesh are 1167.63 / [89 89 89].
+
+kmesh = [6 6 6]
+Input parent grid mesh = [19, 19, 19], ke_cutoff = 182.46
+Final parent grid size = [21 19 21]
+
+Selecting interpolation points
+nkpts = 216, nao = 14, c0 =  20.00
+Parent grid mesh = [21 19 21], grid size = 8379
+    CPU time for select interpolation points   1540.90 sec, wall time     67.42 sec
+Pivoted Cholesky rank = 1193, nip = 280, estimated error = 3.00e-02
+Number of interpolation points = 280, effective CISDF =  20.00
+    CPU time for building left-hand side     41.21 sec, wall time      1.32 sec
+
+kpt = 216, ngrid = 50653, nao = 14
+ngrid = 50653, blksize = 25325, nip = 280
+required disk space = 49 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-20-19-19-19/46829453/ceptlzgt
+blksize = 25325, memory for aoR_loop = 24506 MB
+finished aoR_loop[       0:   25325]
+finished aoR_loop[   25325:   50650]
+finished aoR_loop[   50650:   50653]
+    CPU time for building right-hand side    717.12 sec, wall time     88.17 sec
+w[  0], rank =  280 /  280
+    CPU time for w[  0]    431.61 sec, wall time     13.89 sec
+w[  1], rank =  280 /  280
+    CPU time for w[  1]    418.16 sec, wall time     13.75 sec
+w[  2], rank =  280 /  280
+    CPU time for w[  2]    450.29 sec, wall time     14.71 sec
+w[  3], rank =  280 /  280
+    CPU time for w[  3]    509.60 sec, wall time     16.52 sec
+w[  4], rank =  280 /  280
+    CPU time for w[  4]    353.04 sec, wall time     11.66 sec
+w[  5], rank =  280 /  280
+    CPU time for w[  5]    381.79 sec, wall time     12.62 sec
+w[  6], rank =  280 /  280
+    CPU time for w[  6]    390.13 sec, wall time     12.73 sec
+w[  7], rank =  280 /  280
+    CPU time for w[  7]    480.91 sec, wall time     15.72 sec
+w[  8], rank =  280 /  280
+    CPU time for w[  8]    400.14 sec, wall time     13.08 sec
+w[  9], rank =  280 /  280
+    CPU time for w[  9]    382.69 sec, wall time     12.53 sec
+w[ 10], rank =  280 /  280
+    CPU time for w[ 10]    417.62 sec, wall time     13.59 sec
+w[ 11], rank =  280 /  280
+    CPU time for w[ 11]    437.68 sec, wall time     14.36 sec
+w[ 12], rank =  280 /  280
+    CPU time for w[ 12]    397.13 sec, wall time     13.03 sec
+w[ 13], rank =  280 /  280
+    CPU time for w[ 13]    471.07 sec, wall time     15.47 sec
+w[ 14], rank =  280 /  280
+    CPU time for w[ 14]    380.81 sec, wall time     12.59 sec
+w[ 15], rank =  280 /  280
+    CPU time for w[ 15]    427.75 sec, wall time     13.89 sec
+w[ 16], rank =  280 /  280
+    CPU time for w[ 16]    429.97 sec, wall time     14.10 sec
+w[ 17], rank =  280 /  280
+    CPU time for w[ 17]    485.46 sec, wall time     15.86 sec
+w[ 18], rank =  280 /  280
+    CPU time for w[ 18]    486.55 sec, wall time     16.11 sec
+w[ 19], rank =  280 /  280
+    CPU time for w[ 19]    404.47 sec, wall time     13.26 sec
+w[ 20], rank =  280 /  280
+    CPU time for w[ 20]    471.49 sec, wall time     15.39 sec
+w[ 21], rank =  280 /  280
+    CPU time for w[ 21]    474.96 sec, wall time     15.31 sec
+w[ 22], rank =  280 /  280
+    CPU time for w[ 22]    404.59 sec, wall time     13.18 sec
+w[ 23], rank =  280 /  280
+    CPU time for w[ 23]    369.80 sec, wall time     12.12 sec
+w[ 24], rank =  280 /  280
+    CPU time for w[ 24]    345.33 sec, wall time     11.37 sec
+w[ 25], rank =  280 /  280
+    CPU time for w[ 25]    404.01 sec, wall time     13.16 sec
+w[ 26], rank =  280 /  280
+    CPU time for w[ 26]    397.55 sec, wall time     13.15 sec
+w[ 27], rank =  280 /  280
+    CPU time for w[ 27]    466.59 sec, wall time     15.27 sec
+w[ 28], rank =  280 /  280
+    CPU time for w[ 28]    415.20 sec, wall time     13.59 sec
+w[ 29], rank =  280 /  280
+    CPU time for w[ 29]    433.74 sec, wall time     14.35 sec
+w[ 30], rank =  280 /  280
+    CPU time for w[ 30]    374.63 sec, wall time     12.28 sec
+w[ 31], rank =  280 /  280
+    CPU time for w[ 31]    401.27 sec, wall time     13.21 sec
+w[ 32], rank =  280 /  280
+    CPU time for w[ 32]    450.03 sec, wall time     14.74 sec
+w[ 33], rank =  280 /  280
+    CPU time for w[ 33]    460.66 sec, wall time     15.20 sec
+w[ 34], rank =  280 /  280
+    CPU time for w[ 34]    397.10 sec, wall time     12.97 sec
+w[ 35], rank =  280 /  280
+    CPU time for w[ 35]    414.67 sec, wall time     13.49 sec
+w[ 36], rank =  280 /  280
+    CPU time for w[ 36]    442.40 sec, wall time     14.53 sec
+w[ 37], rank =  280 /  280
+    CPU time for w[ 37]    379.50 sec, wall time     12.44 sec
+w[ 38], rank =  280 /  280
+    CPU time for w[ 38]    390.44 sec, wall time     12.78 sec
+w[ 39], rank =  280 /  280
+    CPU time for w[ 39]    488.51 sec, wall time     16.17 sec
+w[ 40], rank =  280 /  280
+    CPU time for w[ 40]    384.57 sec, wall time     12.58 sec
+w[ 41], rank =  280 /  280
+    CPU time for w[ 41]    392.70 sec, wall time     12.89 sec
+w[ 42], rank =  280 /  280
+    CPU time for w[ 42]    393.10 sec, wall time     12.84 sec
+w[ 43], rank =  280 /  280
+    CPU time for w[ 43]    402.53 sec, wall time     13.32 sec
+w[ 44], rank =  280 /  280
+    CPU time for w[ 44]    391.28 sec, wall time     12.82 sec
+w[ 45], rank =  280 /  280
+    CPU time for w[ 45]    378.76 sec, wall time     12.45 sec
+w[ 46], rank =  280 /  280
+    CPU time for w[ 46]    419.03 sec, wall time     13.73 sec
+w[ 47], rank =  280 /  280
+    CPU time for w[ 47]    448.31 sec, wall time     14.91 sec
+w[ 48], rank =  280 /  280
+    CPU time for w[ 48]    480.01 sec, wall time     15.81 sec
+w[ 49], rank =  280 /  280
+    CPU time for w[ 49]    372.73 sec, wall time     12.16 sec
+w[ 50], rank =  280 /  280
+    CPU time for w[ 50]    395.85 sec, wall time     13.02 sec
+w[ 51], rank =  280 /  280
+    CPU time for w[ 51]    438.23 sec, wall time     14.36 sec
+w[ 52], rank =  280 /  280
+    CPU time for w[ 52]    421.71 sec, wall time     13.81 sec
+w[ 53], rank =  280 /  280
+    CPU time for w[ 53]    380.85 sec, wall time     12.55 sec
+w[ 54], rank =  280 /  280
+    CPU time for w[ 54]    407.00 sec, wall time     13.43 sec
+w[ 55], rank =  280 /  280
+    CPU time for w[ 55]    464.91 sec, wall time     15.18 sec
+w[ 56], rank =  280 /  280
+    CPU time for w[ 56]    386.24 sec, wall time     12.61 sec
+w[ 57], rank =  280 /  280
+    CPU time for w[ 57]    400.09 sec, wall time     13.20 sec
+w[ 58], rank =  280 /  280
+    CPU time for w[ 58]    396.55 sec, wall time     12.91 sec
+w[ 59], rank =  280 /  280
+    CPU time for w[ 59]    390.88 sec, wall time     12.78 sec
+w[ 60], rank =  280 /  280
+    CPU time for w[ 60]    450.87 sec, wall time     14.82 sec
+w[ 61], rank =  280 /  280
+    CPU time for w[ 61]    370.25 sec, wall time     12.22 sec
+w[ 62], rank =  280 /  280
+    CPU time for w[ 62]    395.31 sec, wall time     13.02 sec
+w[ 63], rank =  280 /  280
+    CPU time for w[ 63]    395.04 sec, wall time     12.97 sec
+w[ 64], rank =  280 /  280
+    CPU time for w[ 64]    430.35 sec, wall time     14.07 sec
+w[ 65], rank =  280 /  280
+    CPU time for w[ 65]    423.56 sec, wall time     13.94 sec
+w[ 66], rank =  280 /  280
+    CPU time for w[ 66]    315.25 sec, wall time     10.53 sec
+w[ 67], rank =  280 /  280
+    CPU time for w[ 67]    456.03 sec, wall time     15.19 sec
+w[ 68], rank =  280 /  280
+    CPU time for w[ 68]    446.49 sec, wall time     15.97 sec
+w[ 69], rank =  280 /  280
+    CPU time for w[ 69]    417.87 sec, wall time     13.93 sec
+w[ 70], rank =  280 /  280
+    CPU time for w[ 70]    445.95 sec, wall time     14.97 sec
+w[ 71], rank =  280 /  280
+    CPU time for w[ 71]    502.67 sec, wall time     16.59 sec
+w[ 72], rank =  280 /  280
+    CPU time for w[ 72]    533.22 sec, wall time     18.21 sec
+w[ 73], rank =  280 /  280
+    CPU time for w[ 73]    528.60 sec, wall time     17.68 sec
+w[ 74], rank =  280 /  280
+    CPU time for w[ 74]    455.64 sec, wall time     15.06 sec
+w[ 75], rank =  280 /  280
+    CPU time for w[ 75]    439.18 sec, wall time     14.62 sec
+w[ 76], rank =  280 /  280
+    CPU time for w[ 76]    363.45 sec, wall time     12.00 sec
+w[ 77], rank =  280 /  280
+    CPU time for w[ 77]    363.03 sec, wall time     11.98 sec
+w[ 78], rank =  280 /  280
+    CPU time for w[ 78]    441.84 sec, wall time     14.57 sec
+w[ 79], rank =  280 /  280
+    CPU time for w[ 79]    474.84 sec, wall time     15.82 sec
+w[ 80], rank =  280 /  280
+    CPU time for w[ 80]    365.33 sec, wall time     12.20 sec
+w[ 81], rank =  280 /  280
+    CPU time for w[ 81]    420.24 sec, wall time     14.22 sec
+w[ 82], rank =  280 /  280
+    CPU time for w[ 82]    446.94 sec, wall time     15.34 sec
+w[ 83], rank =  280 /  280
+    CPU time for w[ 83]    395.25 sec, wall time     13.06 sec
+w[ 84], rank =  280 /  280
+    CPU time for w[ 84]    440.01 sec, wall time     14.40 sec
+w[ 85], rank =  280 /  280
+    CPU time for w[ 85]    469.93 sec, wall time     15.43 sec
+w[ 86], rank =  280 /  280
+    CPU time for w[ 86]    343.26 sec, wall time     11.58 sec
+w[ 87], rank =  280 /  280
+    CPU time for w[ 87]    493.71 sec, wall time     16.81 sec
+w[ 88], rank =  280 /  280
+    CPU time for w[ 88]    439.61 sec, wall time     14.97 sec
+w[ 89], rank =  280 /  280
+    CPU time for w[ 89]    363.73 sec, wall time     12.25 sec
+w[ 90], rank =  280 /  280
+    CPU time for w[ 90]    297.27 sec, wall time     10.07 sec
+w[ 91], rank =  280 /  280
+    CPU time for w[ 91]    492.86 sec, wall time     16.92 sec
+w[ 92], rank =  280 /  280
+    CPU time for w[ 92]    492.00 sec, wall time     16.32 sec
+w[ 93], rank =  280 /  280
+    CPU time for w[ 93]    435.27 sec, wall time     14.39 sec
+w[ 94], rank =  280 /  280
+    CPU time for w[ 94]    387.35 sec, wall time     12.73 sec
+w[ 95], rank =  280 /  280
+    CPU time for w[ 95]    480.08 sec, wall time     16.15 sec
+w[ 96], rank =  280 /  280
+    CPU time for w[ 96]    436.40 sec, wall time     14.30 sec
+w[ 97], rank =  280 /  280
+    CPU time for w[ 97]    548.57 sec, wall time     18.50 sec
+w[ 98], rank =  280 /  280
+    CPU time for w[ 98]    432.69 sec, wall time     14.24 sec
+w[ 99], rank =  280 /  280
+    CPU time for w[ 99]    371.92 sec, wall time     12.64 sec
+w[100], rank =  280 /  280
+    CPU time for w[100]    522.61 sec, wall time     17.52 sec
+w[101], rank =  280 /  280
+    CPU time for w[101]    350.00 sec, wall time     11.49 sec
+w[102], rank =  280 /  280
+    CPU time for w[102]    388.37 sec, wall time     12.91 sec
+w[103], rank =  280 /  280
+    CPU time for w[103]    429.47 sec, wall time     14.22 sec
+w[104], rank =  280 /  280
+    CPU time for w[104]    390.14 sec, wall time     12.97 sec
+w[105], rank =  280 /  280
+    CPU time for w[105]    379.76 sec, wall time     12.58 sec
+w[106], rank =  280 /  280
+    CPU time for w[106]    386.81 sec, wall time     13.03 sec
+w[107], rank =  280 /  280
+    CPU time for w[107]    508.27 sec, wall time     17.22 sec
+w[108], rank =  280 /  280
+    CPU time for w[108]    355.94 sec, wall time     11.61 sec
+w[109], rank =  280 /  280
+    CPU time for w[109]    405.13 sec, wall time     13.33 sec
+w[110], rank =  280 /  280
+    CPU time for w[110]    374.69 sec, wall time     12.32 sec
+w[111], rank =  280 /  280
+    CPU time for w[111]    379.73 sec, wall time     12.44 sec
+w[112], rank =  280 /  280
+    CPU time for w[112]    405.29 sec, wall time     13.44 sec
+w[113], rank =  280 /  280
+    CPU time for w[113]    462.20 sec, wall time     15.42 sec
+w[114], rank =  280 /  280
+    CPU time for w[114]    402.83 sec, wall time     13.28 sec
+w[115], rank =  280 /  280
+    CPU time for w[115]    422.34 sec, wall time     13.82 sec
+w[116], rank =  280 /  280
+    CPU time for w[116]    389.59 sec, wall time     12.80 sec
+w[117], rank =  280 /  280
+    CPU time for w[117]    393.84 sec, wall time     12.96 sec
+w[118], rank =  280 /  280
+    CPU time for w[118]    407.90 sec, wall time     13.35 sec
+w[119], rank =  280 /  280
+    CPU time for w[119]    432.36 sec, wall time     14.19 sec
+w[120], rank =  280 /  280
+    CPU time for w[120]    431.62 sec, wall time     14.28 sec
+w[121], rank =  280 /  280
+    CPU time for w[121]    399.18 sec, wall time     13.17 sec
+w[122], rank =  280 /  280
+    CPU time for w[122]    448.67 sec, wall time     14.74 sec
+w[123], rank =  280 /  280
+    CPU time for w[123]    375.09 sec, wall time     12.29 sec
+w[124], rank =  280 /  280
+    CPU time for w[124]    398.39 sec, wall time     13.15 sec
+w[125], rank =  280 /  280
+    CPU time for w[125]    398.31 sec, wall time     13.05 sec
+w[126], rank =  280 /  280
+    CPU time for w[126]    482.88 sec, wall time     15.73 sec
+w[127], rank =  280 /  280
+    CPU time for w[127]    440.65 sec, wall time     14.42 sec
+w[128], rank =  280 /  280
+    CPU time for w[128]    379.27 sec, wall time     12.43 sec
+w[129], rank =  280 /  280
+    CPU time for w[129]    440.81 sec, wall time     14.33 sec
+w[130], rank =  280 /  280
+    CPU time for w[130]    429.10 sec, wall time     14.07 sec
+w[131], rank =  280 /  280
+    CPU time for w[131]    408.36 sec, wall time     13.34 sec
+w[132], rank =  280 /  280
+    CPU time for w[132]    420.69 sec, wall time     13.69 sec
+w[133], rank =  280 /  280
+    CPU time for w[133]    385.74 sec, wall time     12.64 sec
+w[134], rank =  280 /  280
+    CPU time for w[134]    460.37 sec, wall time     15.08 sec
+w[135], rank =  280 /  280
+    CPU time for w[135]    389.93 sec, wall time     12.89 sec
+w[136], rank =  280 /  280
+    CPU time for w[136]    454.27 sec, wall time     14.90 sec
+w[137], rank =  280 /  280
+    CPU time for w[137]    494.42 sec, wall time     16.19 sec
+w[138], rank =  280 /  280
+    CPU time for w[138]    414.58 sec, wall time     13.59 sec
+w[139], rank =  280 /  280
+    CPU time for w[139]    492.36 sec, wall time     16.26 sec
+w[140], rank =  280 /  280
+    CPU time for w[140]    446.88 sec, wall time     14.79 sec
+w[141], rank =  280 /  280
+    CPU time for w[141]    487.42 sec, wall time     16.02 sec
+w[142], rank =  280 /  280
+    CPU time for w[142]    472.42 sec, wall time     15.60 sec
+w[143], rank =  280 /  280
+    CPU time for w[143]    445.28 sec, wall time     14.57 sec
+w[144], rank =  280 /  280
+    CPU time for w[144]    380.24 sec, wall time     12.43 sec
+w[145], rank =  280 /  280
+    CPU time for w[145]    375.31 sec, wall time     12.32 sec
+w[146], rank =  280 /  280
+    CPU time for w[146]    379.49 sec, wall time     12.41 sec
+w[147], rank =  280 /  280
+    CPU time for w[147]    431.32 sec, wall time     14.11 sec
+w[148], rank =  280 /  280
+    CPU time for w[148]    407.76 sec, wall time     13.37 sec
+w[149], rank =  280 /  280
+    CPU time for w[149]    392.30 sec, wall time     12.80 sec
+w[150], rank =  280 /  280
+    CPU time for w[150]    416.56 sec, wall time     13.73 sec
+w[151], rank =  280 /  280
+    CPU time for w[151]    404.47 sec, wall time     13.21 sec
+w[152], rank =  280 /  280
+    CPU time for w[152]    400.68 sec, wall time     13.15 sec
+w[153], rank =  280 /  280
+    CPU time for w[153]    432.46 sec, wall time     14.29 sec
+w[154], rank =  280 /  280
+    CPU time for w[154]    470.66 sec, wall time     15.57 sec
+w[155], rank =  280 /  280
+    CPU time for w[155]    390.79 sec, wall time     12.84 sec
+w[156], rank =  280 /  280
+    CPU time for w[156]    388.51 sec, wall time     12.80 sec
+w[157], rank =  280 /  280
+    CPU time for w[157]    481.63 sec, wall time     15.76 sec
+w[158], rank =  280 /  280
+    CPU time for w[158]    465.58 sec, wall time     15.22 sec
+w[159], rank =  280 /  280
+    CPU time for w[159]    400.97 sec, wall time     13.15 sec
+w[160], rank =  280 /  280
+    CPU time for w[160]    392.97 sec, wall time     12.86 sec
+w[161], rank =  280 /  280
+    CPU time for w[161]    372.06 sec, wall time     12.37 sec
+w[162], rank =  280 /  280
+    CPU time for w[162]    469.26 sec, wall time     15.45 sec
+w[163], rank =  280 /  280
+    CPU time for w[163]    390.64 sec, wall time     12.86 sec
+w[164], rank =  280 /  280
+    CPU time for w[164]    426.25 sec, wall time     13.94 sec
+w[165], rank =  280 /  280
+    CPU time for w[165]    469.11 sec, wall time     15.37 sec
+w[166], rank =  280 /  280
+    CPU time for w[166]    495.95 sec, wall time     16.21 sec
+w[167], rank =  280 /  280
+    CPU time for w[167]    458.32 sec, wall time     14.93 sec
+w[168], rank =  280 /  280
+    CPU time for w[168]    371.53 sec, wall time     12.09 sec
+w[169], rank =  280 /  280
+    CPU time for w[169]    404.64 sec, wall time     13.23 sec
+w[170], rank =  280 /  280
+    CPU time for w[170]    420.59 sec, wall time     13.75 sec
+w[171], rank =  280 /  280
+    CPU time for w[171]    358.28 sec, wall time     11.71 sec
+w[172], rank =  280 /  280
+    CPU time for w[172]    394.66 sec, wall time     12.91 sec
+w[173], rank =  280 /  280
+    CPU time for w[173]    388.82 sec, wall time     12.73 sec
+w[174], rank =  280 /  280
+    CPU time for w[174]    428.04 sec, wall time     14.10 sec
+w[175], rank =  280 /  280
+    CPU time for w[175]    366.99 sec, wall time     12.08 sec
+w[176], rank =  280 /  280
+    CPU time for w[176]    417.83 sec, wall time     13.71 sec
+w[177], rank =  280 /  280
+    CPU time for w[177]    366.21 sec, wall time     11.93 sec
+w[178], rank =  280 /  280
+    CPU time for w[178]    420.01 sec, wall time     13.79 sec
+w[179], rank =  280 /  280
+    CPU time for w[179]    365.72 sec, wall time     12.01 sec
+w[180], rank =  280 /  280
+    CPU time for w[180]    493.84 sec, wall time     16.29 sec
+w[181], rank =  280 /  280
+    CPU time for w[181]    480.90 sec, wall time     15.96 sec
+w[182], rank =  280 /  280
+    CPU time for w[182]    542.65 sec, wall time     17.64 sec
+w[183], rank =  280 /  280
+    CPU time for w[183]    420.26 sec, wall time     13.74 sec
+w[184], rank =  280 /  280
+    CPU time for w[184]    422.95 sec, wall time     13.83 sec
+w[185], rank =  280 /  280
+    CPU time for w[185]    509.93 sec, wall time     16.61 sec
+w[186], rank =  280 /  280
+    CPU time for w[186]    390.71 sec, wall time     12.77 sec
+w[187], rank =  280 /  280
+    CPU time for w[187]    479.18 sec, wall time     15.73 sec
+w[188], rank =  280 /  280
+    CPU time for w[188]    372.23 sec, wall time     12.19 sec
+w[189], rank =  280 /  280
+    CPU time for w[189]    455.48 sec, wall time     14.97 sec
+w[190], rank =  280 /  280
+    CPU time for w[190]    450.46 sec, wall time     14.94 sec
+w[191], rank =  280 /  280
+    CPU time for w[191]    484.27 sec, wall time     15.91 sec
+w[192], rank =  280 /  280
+    CPU time for w[192]    371.34 sec, wall time     12.19 sec
+w[193], rank =  280 /  280
+    CPU time for w[193]    467.65 sec, wall time     15.42 sec
+w[194], rank =  280 /  280
+    CPU time for w[194]    417.53 sec, wall time     13.77 sec
+w[195], rank =  280 /  280
+    CPU time for w[195]    444.60 sec, wall time     14.62 sec
+w[196], rank =  280 /  280
+    CPU time for w[196]    422.53 sec, wall time     13.84 sec
+w[197], rank =  280 /  280
+    CPU time for w[197]    368.92 sec, wall time     12.09 sec
+w[198], rank =  280 /  280
+    CPU time for w[198]    403.81 sec, wall time     13.28 sec
+w[199], rank =  280 /  280
+    CPU time for w[199]    389.39 sec, wall time     12.80 sec
+w[200], rank =  280 /  280
+    CPU time for w[200]    384.76 sec, wall time     12.53 sec
+w[201], rank =  280 /  280
+    CPU time for w[201]    393.52 sec, wall time     12.91 sec
+w[202], rank =  280 /  280
+    CPU time for w[202]    373.38 sec, wall time     12.20 sec
+w[203], rank =  280 /  280
+    CPU time for w[203]    478.23 sec, wall time     15.64 sec
+w[204], rank =  280 /  280
+    CPU time for w[204]    382.28 sec, wall time     12.45 sec
+w[205], rank =  280 /  280
+    CPU time for w[205]    356.43 sec, wall time     11.72 sec
+w[206], rank =  280 /  280
+    CPU time for w[206]    393.71 sec, wall time     12.99 sec
+w[207], rank =  280 /  280
+    CPU time for w[207]    436.82 sec, wall time     14.34 sec
+w[208], rank =  280 /  280
+    CPU time for w[208]    422.66 sec, wall time     13.83 sec
+w[209], rank =  280 /  280
+    CPU time for w[209]    460.57 sec, wall time     15.26 sec
+w[210], rank =  280 /  280
+    CPU time for w[210]    400.60 sec, wall time     13.13 sec
+w[211], rank =  280 /  280
+    CPU time for w[211]    383.50 sec, wall time     12.64 sec
+w[212], rank =  280 /  280
+    CPU time for w[212]    397.11 sec, wall time     13.08 sec
+w[213], rank =  280 /  280
+    CPU time for w[213]    389.47 sec, wall time     12.73 sec
+w[214], rank =  280 /  280
+    CPU time for w[214]    390.47 sec, wall time     12.91 sec
+w[215], rank =  280 /  280
+    CPU time for w[215]    382.88 sec, wall time     12.52 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-20-19-19-19/46829453/tmp.chk
+    CPU time for building ISDF  93174.91 sec, wall time   3150.75 sec

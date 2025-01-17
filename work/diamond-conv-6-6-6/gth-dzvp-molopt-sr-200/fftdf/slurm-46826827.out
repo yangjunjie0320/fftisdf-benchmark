@@ -29,3 +29,25 @@ fft_jk: get_k_kpts max_memory 207416.696832  blksize 104
     CPU time for get_k_kpts: make_kpt (12,*)   8594.62 sec, wall time    700.80 sec
     CPU time for get_k_kpts: make_kpt (13,*)   7861.86 sec, wall time    620.86 sec
     CPU time for get_k_kpts: make_kpt (14,*)   7715.90 sec, wall time    627.98 sec
+    CPU time for get_k_kpts: make_kpt (15,*)   8054.18 sec, wall time    638.39 sec
+    CPU time for get_k_kpts: make_kpt (16,*)   7909.64 sec, wall time    625.78 sec
+    CPU time for get_k_kpts: make_kpt (17,*)   7896.55 sec, wall time    634.46 sec
+    CPU time for get_k_kpts: make_kpt (18,*)   7397.46 sec, wall time    618.74 sec
+    CPU time for get_k_kpts: make_kpt (19,*)   7357.16 sec, wall time    638.73 sec
+    CPU time for get_k_kpts: make_kpt (20,*)   7766.18 sec, wall time    641.07 sec
+    CPU time for get_k_kpts: make_kpt (21,*)   7819.39 sec, wall time    657.23 sec
+    CPU time for get_k_kpts: make_kpt (22,*)   7558.67 sec, wall time    646.57 sec
+    CPU time for get_k_kpts: make_kpt (23,*)   7567.01 sec, wall time    638.89 sec
+    CPU time for get_k_kpts: make_kpt (24,*)   7451.57 sec, wall time    642.54 sec
+    CPU time for get_k_kpts: make_kpt (25,*)   7198.22 sec, wall time    633.74 sec
+    CPU time for get_k_kpts: make_kpt (26,*)   7422.79 sec, wall time    634.48 sec
+    CPU time for get_k_kpts: make_kpt (27,*)   7646.76 sec, wall time    639.06 sec
+    CPU time for get_k_kpts: make_kpt (28,*)   7408.96 sec, wall time    623.76 sec
+    CPU time for get_k_kpts: make_kpt (29,*)   7265.40 sec, wall time    631.33 sec
+    CPU time for get_k_kpts: make_kpt (30,*)   7514.63 sec, wall time    636.93 sec
+    CPU time for get_k_kpts: make_kpt (31,*)   7304.09 sec, wall time    634.03 sec
+    CPU time for get_k_kpts: make_kpt (32,*)   7637.29 sec, wall time    635.44 sec
+    CPU time for get_k_kpts: make_kpt (33,*)   7666.89 sec, wall time    640.04 sec
+    CPU time for get_k_kpts: make_kpt (34,*)   7539.69 sec, wall time    640.45 sec
+    CPU time for get_k_kpts: make_kpt (35,*)   7442.20 sec, wall time    628.88 sec
+    CPU time for get_k_kpts: make_kpt (36,*)   7584.98 sec, wall time    639.33 sec

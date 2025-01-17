@@ -434,3 +434,295 @@ w[ 65], rank = 3120 / 3120
     CPU time for w[ 65]   4676.25 sec, wall time    167.14 sec
 w[ 66], rank = 3120 / 3120
     CPU time for w[ 66]   2326.09 sec, wall time     90.11 sec
+w[ 67], rank = 3120 / 3120
+    CPU time for w[ 67]   1700.61 sec, wall time     69.58 sec
+w[ 68], rank = 3120 / 3120
+    CPU time for w[ 68]   3810.35 sec, wall time    140.89 sec
+w[ 69], rank = 3120 / 3120
+    CPU time for w[ 69]   2146.25 sec, wall time     84.81 sec
+w[ 70], rank = 3120 / 3120
+    CPU time for w[ 70]   1483.62 sec, wall time     60.55 sec
+w[ 71], rank = 3120 / 3120
+    CPU time for w[ 71]   1670.14 sec, wall time     66.00 sec
+w[ 72], rank = 3120 / 3120
+    CPU time for w[ 72]   1565.94 sec, wall time     63.82 sec
+w[ 73], rank = 3120 / 3120
+    CPU time for w[ 73]   1059.36 sec, wall time     46.40 sec
+w[ 74], rank = 3120 / 3120
+    CPU time for w[ 74]   1257.85 sec, wall time     53.86 sec
+w[ 75], rank = 3120 / 3120
+    CPU time for w[ 75]   1095.13 sec, wall time     46.83 sec
+w[ 76], rank = 3120 / 3120
+    CPU time for w[ 76]    997.42 sec, wall time     44.51 sec
+w[ 77], rank = 3120 / 3120
+    CPU time for w[ 77]   4955.75 sec, wall time    174.46 sec
+w[ 78], rank = 3120 / 3120
+    CPU time for w[ 78]   1082.00 sec, wall time     48.31 sec
+w[ 79], rank = 3120 / 3120
+    CPU time for w[ 79]   1214.16 sec, wall time     52.05 sec
+w[ 80], rank = 3120 / 3120
+    CPU time for w[ 80]   1436.40 sec, wall time     59.55 sec
+w[ 81], rank = 3120 / 3120
+    CPU time for w[ 81]   1273.02 sec, wall time     54.32 sec
+w[ 82], rank = 3120 / 3120
+    CPU time for w[ 82]   1337.83 sec, wall time     56.39 sec
+w[ 83], rank = 3120 / 3120
+    CPU time for w[ 83]   2190.20 sec, wall time     85.35 sec
+w[ 84], rank = 3120 / 3120
+    CPU time for w[ 84]   1390.31 sec, wall time     58.01 sec
+w[ 85], rank = 3120 / 3120
+    CPU time for w[ 85]   1511.38 sec, wall time     62.00 sec
+w[ 86], rank = 3120 / 3120
+    CPU time for w[ 86]   6292.90 sec, wall time    231.25 sec
+w[ 87], rank = 3120 / 3120
+    CPU time for w[ 87]   2074.68 sec, wall time     81.52 sec
+w[ 88], rank = 3120 / 3120
+    CPU time for w[ 88]   4712.82 sec, wall time    168.14 sec
+w[ 89], rank = 3120 / 3120
+    CPU time for w[ 89]   3103.02 sec, wall time    113.10 sec
+w[ 90], rank = 3120 / 3120
+    CPU time for w[ 90]   1141.50 sec, wall time     48.64 sec
+w[ 91], rank = 3120 / 3120
+    CPU time for w[ 91]   1283.20 sec, wall time     54.26 sec
+w[ 92], rank = 3120 / 3120
+    CPU time for w[ 92]   1144.45 sec, wall time     50.24 sec
+w[ 93], rank = 3120 / 3120
+    CPU time for w[ 93]   5496.96 sec, wall time    192.99 sec
+w[ 94], rank = 3120 / 3120
+    CPU time for w[ 94]   2867.05 sec, wall time    107.99 sec
+w[ 95], rank = 3120 / 3120
+    CPU time for w[ 95]   3538.23 sec, wall time    127.19 sec
+w[ 96], rank = 3120 / 3120
+    CPU time for w[ 96]   1138.93 sec, wall time     49.02 sec
+w[ 97], rank = 3120 / 3120
+    CPU time for w[ 97]   1163.48 sec, wall time     49.70 sec
+w[ 98], rank = 3120 / 3120
+    CPU time for w[ 98]   5041.59 sec, wall time    177.75 sec
+w[ 99], rank = 3120 / 3120
+    CPU time for w[ 99]   2419.78 sec, wall time     94.04 sec
+w[100], rank = 3120 / 3120
+    CPU time for w[100]   3609.39 sec, wall time    131.51 sec
+w[101], rank = 3120 / 3120
+    CPU time for w[101]   3786.30 sec, wall time    137.63 sec
+w[102], rank = 3120 / 3120
+    CPU time for w[102]   5691.00 sec, wall time    199.61 sec
+w[103], rank = 3120 / 3120
+    CPU time for w[103]   2171.42 sec, wall time     85.95 sec
+w[104], rank = 3120 / 3120
+    CPU time for w[104]   4672.21 sec, wall time    166.06 sec
+w[105], rank = 3120 / 3120
+    CPU time for w[105]   1644.54 sec, wall time     67.95 sec
+w[106], rank = 3120 / 3120
+    CPU time for w[106]   3093.47 sec, wall time    112.21 sec
+w[107], rank = 3120 / 3120
+    CPU time for w[107]   5150.28 sec, wall time    183.96 sec
+w[108], rank = 3120 / 3120
+    CPU time for w[108]   2532.04 sec, wall time     92.46 sec
+w[109], rank = 3120 / 3120
+    CPU time for w[109]   2620.75 sec, wall time     98.20 sec
+w[110], rank = 3120 / 3120
+    CPU time for w[110]   4419.61 sec, wall time    157.21 sec
+w[111], rank = 3120 / 3120
+    CPU time for w[111]   2080.54 sec, wall time     78.95 sec
+w[112], rank = 3120 / 3120
+    CPU time for w[112]   2734.20 sec, wall time    101.94 sec
+w[113], rank = 3120 / 3120
+    CPU time for w[113]   2106.38 sec, wall time     80.17 sec
+w[114], rank = 3120 / 3120
+    CPU time for w[114]   1128.21 sec, wall time     47.43 sec
+w[115], rank = 3120 / 3120
+    CPU time for w[115]   1034.86 sec, wall time     44.95 sec
+w[116], rank = 3120 / 3120
+    CPU time for w[116]   1283.38 sec, wall time     52.95 sec
+w[117], rank = 3120 / 3120
+    CPU time for w[117]   1013.31 sec, wall time     43.81 sec
+w[118], rank = 3120 / 3120
+    CPU time for w[118]   1167.92 sec, wall time     49.34 sec
+w[119], rank = 3120 / 3120
+    CPU time for w[119]    999.53 sec, wall time     43.91 sec
+w[120], rank = 3120 / 3120
+    CPU time for w[120]   1067.44 sec, wall time     45.62 sec
+w[121], rank = 3120 / 3120
+    CPU time for w[121]   1225.32 sec, wall time     51.66 sec
+w[122], rank = 3120 / 3120
+    CPU time for w[122]   2240.58 sec, wall time     86.49 sec
+w[123], rank = 3120 / 3120
+    CPU time for w[123]   2826.04 sec, wall time    104.81 sec
+w[124], rank = 3120 / 3120
+    CPU time for w[124]   1782.31 sec, wall time     71.79 sec
+w[125], rank = 3120 / 3120
+    CPU time for w[125]   3639.69 sec, wall time    132.34 sec
+w[126], rank = 3120 / 3120
+    CPU time for w[126]   3600.71 sec, wall time    128.21 sec
+w[127], rank = 3120 / 3120
+    CPU time for w[127]   1476.23 sec, wall time     60.81 sec
+w[128], rank = 3120 / 3120
+    CPU time for w[128]   3723.79 sec, wall time    135.06 sec
+w[129], rank = 3120 / 3120
+    CPU time for w[129]   4008.24 sec, wall time    143.11 sec
+w[130], rank = 3120 / 3120
+    CPU time for w[130]   1715.40 sec, wall time     68.62 sec
+w[131], rank = 3120 / 3120
+    CPU time for w[131]   2237.98 sec, wall time     86.76 sec
+w[132], rank = 3120 / 3120
+    CPU time for w[132]   1503.45 sec, wall time     61.33 sec
+w[133], rank = 3120 / 3120
+    CPU time for w[133]   2853.09 sec, wall time    106.42 sec
+w[134], rank = 3120 / 3120
+    CPU time for w[134]   2079.20 sec, wall time     80.07 sec
+w[135], rank = 3120 / 3120
+    CPU time for w[135]   1411.01 sec, wall time     57.81 sec
+w[136], rank = 3120 / 3120
+    CPU time for w[136]   2930.32 sec, wall time    109.42 sec
+w[137], rank = 3120 / 3120
+    CPU time for w[137]   2012.30 sec, wall time     78.83 sec
+w[138], rank = 3120 / 3120
+    CPU time for w[138]   2077.41 sec, wall time     83.92 sec
+w[139], rank = 3120 / 3120
+    CPU time for w[139]   1425.29 sec, wall time     58.97 sec
+w[140], rank = 3120 / 3120
+    CPU time for w[140]   1397.11 sec, wall time     57.89 sec
+w[141], rank = 3120 / 3120
+    CPU time for w[141]   1973.51 sec, wall time     77.16 sec
+w[142], rank = 3120 / 3120
+    CPU time for w[142]   2491.84 sec, wall time     96.07 sec
+w[143], rank = 3120 / 3120
+    CPU time for w[143]   2508.41 sec, wall time     94.93 sec
+w[144], rank = 3120 / 3120
+    CPU time for w[144]   5004.42 sec, wall time    176.97 sec
+w[145], rank = 3120 / 3120
+    CPU time for w[145]   5273.50 sec, wall time    189.10 sec
+w[146], rank = 3120 / 3120
+    CPU time for w[146]   2537.61 sec, wall time     96.16 sec
+w[147], rank = 3120 / 3120
+    CPU time for w[147]   5111.57 sec, wall time    180.41 sec
+w[148], rank = 3120 / 3120
+    CPU time for w[148]   1673.72 sec, wall time     68.20 sec
+w[149], rank = 3120 / 3120
+    CPU time for w[149]   5136.17 sec, wall time    181.53 sec
+w[150], rank = 3120 / 3120
+    CPU time for w[150]   1735.05 sec, wall time     68.66 sec
+w[151], rank = 3120 / 3120
+    CPU time for w[151]   1278.53 sec, wall time     55.23 sec
+w[152], rank = 3120 / 3120
+    CPU time for w[152]   2163.73 sec, wall time     83.88 sec
+w[153], rank = 3120 / 3120
+    CPU time for w[153]   1619.22 sec, wall time     68.58 sec
+w[154], rank = 3120 / 3120
+    CPU time for w[154]   1946.11 sec, wall time     76.90 sec
+w[155], rank = 3120 / 3120
+    CPU time for w[155]   1584.61 sec, wall time     66.92 sec
+w[156], rank = 3120 / 3120
+    CPU time for w[156]   1290.30 sec, wall time     56.09 sec
+w[157], rank = 3120 / 3120
+    CPU time for w[157]   4640.38 sec, wall time    165.74 sec
+w[158], rank = 3120 / 3120
+    CPU time for w[158]   1508.38 sec, wall time     62.44 sec
+w[159], rank = 3120 / 3120
+    CPU time for w[159]   4735.60 sec, wall time    168.16 sec
+w[160], rank = 3120 / 3120
+    CPU time for w[160]   4261.24 sec, wall time    152.82 sec
+w[161], rank = 3120 / 3120
+    CPU time for w[161]   2349.59 sec, wall time     89.67 sec
+w[162], rank = 3120 / 3120
+    CPU time for w[162]   2056.65 sec, wall time     79.71 sec
+w[163], rank = 3120 / 3120
+    CPU time for w[163]   1716.13 sec, wall time     68.94 sec
+w[164], rank = 3120 / 3120
+    CPU time for w[164]   3295.21 sec, wall time    120.72 sec
+w[165], rank = 3120 / 3120
+    CPU time for w[165]   3182.04 sec, wall time    117.77 sec
+w[166], rank = 3120 / 3120
+    CPU time for w[166]   2844.99 sec, wall time    106.79 sec
+w[167], rank = 3120 / 3120
+    CPU time for w[167]   1842.98 sec, wall time     73.85 sec
+w[168], rank = 3120 / 3120
+    CPU time for w[168]   3099.12 sec, wall time    113.24 sec
+w[169], rank = 3120 / 3120
+    CPU time for w[169]   2211.81 sec, wall time     86.07 sec
+w[170], rank = 3120 / 3120
+    CPU time for w[170]   1391.50 sec, wall time     57.98 sec
+w[171], rank = 3120 / 3120
+    CPU time for w[171]   1412.40 sec, wall time     59.07 sec
+w[172], rank = 3120 / 3120
+    CPU time for w[172]   2401.34 sec, wall time     90.70 sec
+w[173], rank = 3120 / 3120
+    CPU time for w[173]   1750.40 sec, wall time     70.62 sec
+w[174], rank = 3120 / 3120
+    CPU time for w[174]   3082.46 sec, wall time    113.19 sec
+w[175], rank = 3120 / 3120
+    CPU time for w[175]   4663.41 sec, wall time    166.52 sec
+w[176], rank = 3120 / 3120
+    CPU time for w[176]   2372.84 sec, wall time     93.61 sec
+w[177], rank = 3120 / 3120
+    CPU time for w[177]   4731.05 sec, wall time    167.85 sec
+w[178], rank = 3120 / 3120
+    CPU time for w[178]   1085.95 sec, wall time     47.59 sec
+w[179], rank = 3120 / 3120
+    CPU time for w[179]   1194.28 sec, wall time     52.09 sec
+w[180], rank = 3120 / 3120
+    CPU time for w[180]   1745.25 sec, wall time     69.95 sec
+w[181], rank = 3120 / 3120
+    CPU time for w[181]   1343.72 sec, wall time     55.13 sec
+w[182], rank = 3120 / 3120
+    CPU time for w[182]   4473.48 sec, wall time    157.88 sec
+w[183], rank = 3120 / 3120
+    CPU time for w[183]   1624.61 sec, wall time     65.77 sec
+w[184], rank = 3120 / 3120
+    CPU time for w[184]   1141.21 sec, wall time     50.61 sec
+w[185], rank = 3120 / 3120
+    CPU time for w[185]   1674.11 sec, wall time     66.19 sec
+w[186], rank = 3120 / 3120
+    CPU time for w[186]   4698.93 sec, wall time    165.46 sec
+w[187], rank = 3120 / 3120
+    CPU time for w[187]   2588.39 sec, wall time    100.58 sec
+w[188], rank = 3120 / 3120
+    CPU time for w[188]   2016.73 sec, wall time     81.93 sec
+w[189], rank = 3120 / 3120
+    CPU time for w[189]   3974.17 sec, wall time    141.50 sec
+w[190], rank = 3120 / 3120
+    CPU time for w[190]   3833.03 sec, wall time    137.45 sec
+w[191], rank = 3120 / 3120
+    CPU time for w[191]   3959.39 sec, wall time    142.58 sec
+w[192], rank = 3120 / 3120
+    CPU time for w[192]   3241.25 sec, wall time    117.83 sec
+w[193], rank = 3120 / 3120
+    CPU time for w[193]   1470.53 sec, wall time     61.13 sec
+w[194], rank = 3120 / 3120
+    CPU time for w[194]   4839.12 sec, wall time    173.30 sec
+w[195], rank = 3120 / 3120
+    CPU time for w[195]   1931.00 sec, wall time     78.03 sec
+w[196], rank = 3120 / 3120
+    CPU time for w[196]   3707.15 sec, wall time    132.62 sec
+w[197], rank = 3120 / 3120
+    CPU time for w[197]   1780.18 sec, wall time     72.03 sec
+w[198], rank = 3120 / 3120
+    CPU time for w[198]   3106.92 sec, wall time    116.09 sec
+w[199], rank = 3120 / 3120
+    CPU time for w[199]   1472.74 sec, wall time     60.88 sec
+w[200], rank = 3120 / 3120
+    CPU time for w[200]   2101.10 sec, wall time     81.27 sec
+w[201], rank = 3120 / 3120
+    CPU time for w[201]   5219.02 sec, wall time    184.83 sec
+w[202], rank = 3120 / 3120
+    CPU time for w[202]   2734.77 sec, wall time    104.15 sec
+w[203], rank = 3120 / 3120
+    CPU time for w[203]   2759.15 sec, wall time    102.65 sec
+w[204], rank = 3120 / 3120
+    CPU time for w[204]   2214.90 sec, wall time     87.44 sec
+w[205], rank = 3120 / 3120
+    CPU time for w[205]   4803.94 sec, wall time    169.42 sec
+w[206], rank = 3120 / 3120
+    CPU time for w[206]   1799.83 sec, wall time     70.83 sec
+w[207], rank = 3120 / 3120
+    CPU time for w[207]   1175.13 sec, wall time     51.71 sec
+w[208], rank = 3120 / 3120
+    CPU time for w[208]   4879.91 sec, wall time    171.63 sec
+w[209], rank = 3120 / 3120
+    CPU time for w[209]   2701.88 sec, wall time    102.71 sec
+w[210], rank = 3120 / 3120
+    CPU time for w[210]   4493.46 sec, wall time    159.14 sec
+w[211], rank = 3120 / 3120
+    CPU time for w[211]   2871.82 sec, wall time    106.56 sec
+w[212], rank = 3120 / 3120
+    CPU time for w[212]   3596.11 sec, wall time    130.50 sec

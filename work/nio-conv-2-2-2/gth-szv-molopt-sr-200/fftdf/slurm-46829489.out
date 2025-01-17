@@ -1,0 +1,24 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftdf/46829489/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftdf/46829489/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+WARN: ke_cutoff/mesh (200 / [53 53 53]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 26 Eh.
+Recommended ke_cutoff/mesh are 1167.63 / [123 123 123].
+
+fft_jk: get_k_kpts max_memory 243292.315648  blksize 56
+    CPU time for get_k_kpts: make_kpt (0,*)  29555.51 sec, wall time    981.74 sec
+    CPU time for get_k_kpts: make_kpt (1,*)  29667.72 sec, wall time    984.65 sec
+    CPU time for get_k_kpts: make_kpt (2,*)  29423.59 sec, wall time    977.59 sec
+    CPU time for get_k_kpts: make_kpt (3,*)  29052.83 sec, wall time    964.57 sec
+    CPU time for get_k_kpts: make_kpt (4,*)  28868.73 sec, wall time    958.13 sec
+    CPU time for get_k_kpts: make_kpt (5,*)  28553.87 sec, wall time    947.70 sec
+    CPU time for get_k_kpts: make_kpt (6,*)  29047.42 sec, wall time    962.16 sec
+    CPU time for get_k_kpts: make_kpt (7,*)  26557.92 sec, wall time    879.37 sec

@@ -1,0 +1,290 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-30/46829476/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-30/46829476/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+c0 =  30.00
+       get_partition wall time:     9.214072 CPU time:     9.184353
+len of partition[   0] =  23285
+len of partition[   1] =  27368
+len of partition[   2] =  23285
+len of partition[   3] =  27368
+len of partition[   4] =  23285
+len of partition[   5] =  27368
+len of partition[   6] =  23285
+len of partition[   7] =  27368
+len of partition[   8] =  23285
+len of partition[   9] =  27368
+len of partition[  10] =  23285
+len of partition[  11] =  27368
+len of partition[  12] =  23285
+len of partition[  13] =  27368
+len of partition[  14] =  23285
+len of partition[  15] =  27368
+len of partition[  16] =  23285
+len of partition[  17] =  27368
+len of partition[  18] =  23285
+len of partition[  19] =  27368
+len of partition[  20] =  23285
+len of partition[  21] =  27368
+len of partition[  22] =  23285
+len of partition[  23] =  27368
+len of partition[  24] =  23285
+len of partition[  25] =  27368
+len of partition[  26] =  23285
+len of partition[  27] =  27368
+len of partition[  28] =  23285
+len of partition[  29] =  27368
+len of partition[  30] =  23285
+len of partition[  31] =  27368
+len of partition[  32] =  23285
+len of partition[  33] =  27368
+len of partition[  34] =  23285
+len of partition[  35] =  27368
+len of partition[  36] =  23285
+len of partition[  37] =  27368
+len of partition[  38] =  23285
+len of partition[  39] =  27368
+len of partition[  40] =  23285
+len of partition[  41] =  27368
+len of partition[  42] =  23285
+len of partition[  43] =  27368
+len of partition[  44] =  23285
+len of partition[  45] =  27368
+len of partition[  46] =  23285
+len of partition[  47] =  27368
+len of partition[  48] =  23285
+len of partition[  49] =  27368
+len of partition[  50] =  23285
+len of partition[  51] =  27368
+len of partition[  52] =  23285
+len of partition[  53] =  27368
+len of partition[  54] =  23285
+len of partition[  55] =  27368
+len of partition[  56] =  23285
+len of partition[  57] =  27368
+len of partition[  58] =  23285
+len of partition[  59] =  27368
+len of partition[  60] =  23285
+len of partition[  61] =  27368
+len of partition[  62] =  23285
+len of partition[  63] =  27368
+len of partition[  64] =  23285
+len of partition[  65] =  27368
+len of partition[  66] =  23285
+len of partition[  67] =  27368
+len of partition[  68] =  23285
+len of partition[  69] =  27368
+len of partition[  70] =  23285
+len of partition[  71] =  27368
+len of partition[  72] =  23285
+len of partition[  73] =  27368
+len of partition[  74] =  23285
+len of partition[  75] =  27368
+len of partition[  76] =  23285
+len of partition[  77] =  27368
+len of partition[  78] =  23285
+len of partition[  79] =  27368
+len of partition[  80] =  23285
+len of partition[  81] =  27368
+len of partition[  82] =  23285
+len of partition[  83] =  27368
+len of partition[  84] =  23285
+len of partition[  85] =  27368
+len of partition[  86] =  23285
+len of partition[  87] =  27368
+len of partition[  88] =  23285
+len of partition[  89] =  27368
+len of partition[  90] =  23285
+len of partition[  91] =  27368
+len of partition[  92] =  23285
+len of partition[  93] =  27368
+len of partition[  94] =  23285
+len of partition[  95] =  27368
+len of partition[  96] =  23285
+len of partition[  97] =  27368
+len of partition[  98] =  23285
+len of partition[  99] =  27368
+len of partition[ 100] =  23285
+len of partition[ 101] =  27368
+len of partition[ 102] =  23285
+len of partition[ 103] =  27368
+len of partition[ 104] =  23285
+len of partition[ 105] =  27368
+len of partition[ 106] =  23285
+len of partition[ 107] =  27368
+len of partition[ 108] =  23285
+len of partition[ 109] =  27368
+len of partition[ 110] =  23285
+len of partition[ 111] =  27368
+len of partition[ 112] =  23285
+len of partition[ 113] =  27368
+len of partition[ 114] =  23285
+len of partition[ 115] =  27368
+len of partition[ 116] =  23285
+len of partition[ 117] =  27368
+len of partition[ 118] =  23285
+len of partition[ 119] =  27368
+len of partition[ 120] =  23285
+len of partition[ 121] =  27368
+len of partition[ 122] =  23285
+len of partition[ 123] =  27368
+len of partition[ 124] =  23285
+len of partition[ 125] =  27368
+len of partition[ 126] =  23285
+len of partition[ 127] =  27368
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     2.237701 CPU time:    36.538796
+In _build_buffer: ISDF Local size of buffer = 1172.413 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    2
+select_IP_local_atm: npt_found =  954
+select_IP_local_atm: npt_found =  541
+select_IP_local_step1 wall time:     8.244724 CPU time:   243.683018
+ build_aoRg_possible wall time:     0.067678 CPU time:     0.067451
+select_IP_local_step2 wall time:     0.000181 CPU time:     0.000187
+select_IP_local_step3 wall time:     0.000675 CPU time:     0.000670
+Memory usage for aoR  :    964.622 MB
+Memory usage for aoRg :     28.507 MB
+            build_IP wall time:     8.313258 CPU time:   243.751327
+build_aux_basis_local wall time:     2.154467 CPU time:    27.649249
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]     48.18 sec, wall time      9.46 sec
+    CPU time for gen W [   2|[  32:  64]     44.48 sec, wall time      8.01 sec
+    CPU time for gen W [   3|[  64:  96]    109.12 sec, wall time     10.20 sec
+    CPU time for gen W [   4|[  96: 128]     52.37 sec, wall time      8.28 sec
+    CPU time for gen W [   5|[ 128: 160]    129.60 sec, wall time     10.68 sec
+    CPU time for gen W [   6|[ 160: 192]    202.06 sec, wall time     13.74 sec
+    CPU time for gen W [   7|[ 192: 224]     40.65 sec, wall time      7.84 sec
+    CPU time for gen W [   8|[ 224: 256]    159.84 sec, wall time     12.16 sec
+    CPU time for gen W [   9|[ 256: 288]     42.91 sec, wall time      7.87 sec
+    CPU time for gen W [  10|[ 288: 320]     41.73 sec, wall time      8.03 sec
+    CPU time for gen W [  11|[ 320: 352]    302.34 sec, wall time     16.31 sec
+    CPU time for gen W [  12|[ 352: 384]     98.19 sec, wall time      9.65 sec
+    CPU time for gen W [  13|[ 384: 416]     42.50 sec, wall time      7.85 sec
+    CPU time for gen W [  14|[ 416: 448]     42.12 sec, wall time      7.83 sec
+    CPU time for gen W [  15|[ 448: 480]     51.14 sec, wall time      8.12 sec
+    CPU time for gen W [  16|[ 480: 512]     40.56 sec, wall time      7.98 sec
+    CPU time for gen W [  17|[ 512: 544]    125.09 sec, wall time     10.62 sec
+    CPU time for gen W [  18|[ 544: 576]     40.04 sec, wall time      7.79 sec
+    CPU time for gen W [  19|[ 576: 608]     48.22 sec, wall time      8.08 sec
+    CPU time for gen W [  20|[ 608: 640]    245.74 sec, wall time     14.99 sec
+    CPU time for gen W [  21|[ 640: 672]     39.93 sec, wall time      7.76 sec
+    CPU time for gen W [  22|[ 672: 704]     40.09 sec, wall time      7.81 sec
+    CPU time for gen W [  23|[ 704: 736]    115.84 sec, wall time     10.49 sec
+    CPU time for gen W [  24|[ 736: 768]     41.44 sec, wall time      7.79 sec
+    CPU time for gen W [  25|[ 768: 800]     41.42 sec, wall time      7.79 sec
+    CPU time for gen W [  26|[ 800: 832]     41.83 sec, wall time      7.81 sec
+    CPU time for gen W [  27|[ 832: 864]     41.71 sec, wall time      7.84 sec
+    CPU time for gen W [  28|[ 864: 896]    209.18 sec, wall time     13.89 sec
+    CPU time for gen W [  29|[ 896: 928]     40.65 sec, wall time      7.80 sec
+    CPU time for gen W [  30|[ 928: 954]     35.44 sec, wall time      6.38 sec
+    CPU time for gen W [  31|[   0:  32]     41.88 sec, wall time      8.02 sec
+    CPU time for gen W [  32|[  32:  64]     45.25 sec, wall time      7.97 sec
+    CPU time for gen W [  33|[  64:  96]     37.70 sec, wall time      7.72 sec
+    CPU time for gen W [  34|[  96: 128]     41.34 sec, wall time      7.88 sec
+    CPU time for gen W [  35|[ 128: 160]    104.24 sec, wall time      9.99 sec
+    CPU time for gen W [  36|[ 160: 192]     42.33 sec, wall time      7.87 sec
+    CPU time for gen W [  37|[ 192: 224]     42.09 sec, wall time      7.85 sec
+    CPU time for gen W [  38|[ 224: 256]     42.16 sec, wall time      7.86 sec
+    CPU time for gen W [  39|[ 256: 288]     42.11 sec, wall time      7.85 sec
+    CPU time for gen W [  40|[ 288: 320]     42.06 sec, wall time      7.85 sec
+    CPU time for gen W [  41|[ 320: 352]     42.07 sec, wall time      7.85 sec
+    CPU time for gen W [  42|[ 352: 384]     42.02 sec, wall time      7.86 sec
+    CPU time for gen W [  43|[ 384: 416]     42.12 sec, wall time      7.86 sec
+    CPU time for gen W [  44|[ 416: 448]     65.84 sec, wall time      8.69 sec
+    CPU time for gen W [  45|[ 448: 480]     43.82 sec, wall time      7.91 sec
+    CPU time for gen W [  46|[ 480: 512]     43.83 sec, wall time      7.91 sec
+    CPU time for gen W [  47|[ 512: 541]     41.95 sec, wall time      7.23 sec
+     build_V_W_local wall time:   417.031926 CPU time:  3357.345060
+Number of interpolation points = 95680, effective CISDF =  38.33
+    CPU time for ISDF build   3686.42 sec, wall time    440.39 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-30/46829476/isdf.chk
+Warning: In _1e_operator_k2gamma max abs of diff =  2.004252815102222e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4466059505285963e-08 0 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7683418617433005e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6596386612225365e-08 0 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.202010475349864e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.591416656608734e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4978483528087047e-08 1 0 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.76833767585556e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7022463924544185e-08 1 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9741327140593258e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0239022513469216e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.218614663020279e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.653941899475115e-08 1 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9829318478886164e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.654630685244079e-08 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5631373655465878e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4078328164649068e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5371520523401477e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2020108181312302e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4939675268104353 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9829360792261098e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6234416727601314e-08 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.199330981223439e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6313935905243886e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5914231781281678e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.543655439057882e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6313993511940904e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.9031114331948295e-08 3 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.004252815102222e-08 0 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4466059505285963e-08 0 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7683418617433005e-08 0 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6596386612225365e-08 0 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.202010475349864e-08 0 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.591416656608734e-08 0 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.4978483528087047e-08 1 0 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.76833767585556e-08 1 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.7022463924544185e-08 1 0 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9741327140593258e-08 1 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.0239022513469216e-08 1 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.218614663020279e-08 1 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  1.653941899475115e-08 1 2 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9829318478886164e-08 1 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.654630685244079e-08 1 2 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5631373655465878e-08 1 3 0
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4078328164649068e-08 1 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5371520523401477e-08 1 3 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.2020108181312302e-08 2 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.4939675268104353 2 1 0
+Warning: In _1e_operator_k2gamma max abs of diff =  1.9829360792261098e-08 2 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  1.6234416727601314e-08 2 1 2
+Warning: In _1e_operator_k2gamma max abs of diff =  2.199330981223439e-08 2 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6313935905243886e-08 2 3 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.5914231781281678e-08 3 0 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.543655439057882e-08 3 1 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.6313993511940904e-08 3 2 1
+Warning: In _1e_operator_k2gamma max abs of diff =  2.9031114331948295e-08 3 3 1

@@ -18,7 +18,7 @@ if __name__ == "__main__":
         chk_ref = os.path.join(args.prefix, "gdf", "vjk.chk")
         print("Using GDF as reference.")
     else:
-        raise ValueError("Reference file not found: %s" % chk_ref)
+        raise ValueError("Reference not found.")
 
     vj_ref = chkfile.load(chk_ref, "vj")
     vk_ref = chkfile.load(chk_ref, "vk")

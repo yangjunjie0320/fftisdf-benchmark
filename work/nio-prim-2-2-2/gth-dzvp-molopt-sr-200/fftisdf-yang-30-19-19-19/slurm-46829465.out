@@ -1,0 +1,66 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-30-19-19-19/46829465/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-30-19-19-19/46829465/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [37 37 37] (50653 PWs)
+len(kpts) = 8
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-3.24243283e-01 -2.29274798e-01  5.61606073e-01]
+ [ 2.68304197e-09  6.87824258e-01  0.00000000e+00]
+ [-3.24243280e-01  4.58549461e-01  5.61606073e-01]
+ [ 6.48486565e-01 -2.29274661e-01  0.00000000e+00]
+ [ 3.24243282e-01 -4.58549459e-01  5.61606073e-01]
+ [ 6.48486567e-01  4.58549597e-01  0.00000000e+00]
+ [ 3.24243285e-01  2.29274799e-01  5.61606073e-01]]
+Overwritten attributes  tol kmesh m0 c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [37 37 37]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 29 Eh.
+Recommended ke_cutoff/mesh are 1172.14 / [89 89 89].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [19, 19, 19], ke_cutoff = 182.46
+Final parent grid size = [21 19 21]
+
+Selecting interpolation points
+nkpts = 8, nao = 39, c0 =  30.00
+Parent grid mesh = [21 19 21], grid size = 8379
+    CPU time for select interpolation points    132.99 sec, wall time      6.79 sec
+Pivoted Cholesky rank = 2049, nip = 1170, estimated error = 2.07e-03
+Number of interpolation points = 1170, effective CISDF =  30.00
+    CPU time for building left-hand side     12.27 sec, wall time      0.40 sec
+
+kpt = 8, ngrid = 50653, nao = 39
+ngrid = 50653, blksize = 163739, nip = 1170
+required disk space = 7 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-30-19-19-19/46829465/yekiwjev
+blksize = 163739, memory for aoR_loop = 24521 MB
+finished aoR_loop[       0:   50653]
+    CPU time for building right-hand side     68.52 sec, wall time     10.92 sec
+w[  0], rank = 1166 / 1170
+    CPU time for w[  0]   1666.10 sec, wall time     55.36 sec
+w[  1], rank = 1165 / 1170
+    CPU time for w[  1]   1637.30 sec, wall time     54.19 sec
+w[  2], rank = 1166 / 1170
+    CPU time for w[  2]   1580.71 sec, wall time     52.50 sec
+w[  3], rank = 1166 / 1170
+    CPU time for w[  3]   1757.08 sec, wall time     58.33 sec
+w[  4], rank = 1166 / 1170
+    CPU time for w[  4]   1672.41 sec, wall time     55.57 sec
+w[  5], rank = 1165 / 1170
+    CPU time for w[  5]   1504.76 sec, wall time     50.63 sec
+w[  6], rank = 1166 / 1170
+    CPU time for w[  6]   1750.41 sec, wall time     58.73 sec
+w[  7], rank = 1164 / 1170
+    CPU time for w[  7]   1628.03 sec, wall time     55.71 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-30-19-19-19/46829465/tmp.chk
+    CPU time for building ISDF  13413.51 sec, wall time    459.57 sec
