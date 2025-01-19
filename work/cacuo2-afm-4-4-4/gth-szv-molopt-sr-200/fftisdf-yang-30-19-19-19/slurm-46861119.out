@@ -90,3 +90,187 @@ Final parent grid size = [45 45 19]
 Selecting interpolation points
 nkpts = 64, nao = 88, c0 =  30.00
 Parent grid mesh = [45 45 19], grid size = 38475
+    CPU time for select interpolation points   5780.32 sec, wall time    479.30 sec
+Pivoted Cholesky rank = 4778, nip = 2640, estimated error = 1.60e-03
+Number of interpolation points = 2640, effective CISDF =  30.00
+    CPU time for building left-hand side     96.47 sec, wall time      7.66 sec
+
+kpt = 64, ngrid = 370025, nao = 88
+ngrid = 370025, blksize = 8799, nip = 2640
+required disk space = 1000 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-30-19-19-19/46861119/c5aixz0o
+blksize = 8799, memory for aoR_loop = 23786 MB
+finished aoR_loop[       0:    8799]
+finished aoR_loop[    8799:   17598]
+finished aoR_loop[   17598:   26397]
+finished aoR_loop[   26397:   35196]
+finished aoR_loop[   35196:   43995]
+finished aoR_loop[   43995:   52794]
+finished aoR_loop[   52794:   61593]
+finished aoR_loop[   61593:   70392]
+finished aoR_loop[   70392:   79191]
+finished aoR_loop[   79191:   87990]
+finished aoR_loop[   87990:   96789]
+finished aoR_loop[   96789:  105588]
+finished aoR_loop[  105588:  114387]
+finished aoR_loop[  114387:  123186]
+finished aoR_loop[  123186:  131985]
+finished aoR_loop[  131985:  140784]
+finished aoR_loop[  140784:  149583]
+finished aoR_loop[  149583:  158382]
+finished aoR_loop[  158382:  167181]
+finished aoR_loop[  167181:  175980]
+finished aoR_loop[  175980:  184779]
+finished aoR_loop[  184779:  193578]
+finished aoR_loop[  193578:  202377]
+finished aoR_loop[  202377:  211176]
+finished aoR_loop[  211176:  219975]
+finished aoR_loop[  219975:  228774]
+finished aoR_loop[  228774:  237573]
+finished aoR_loop[  237573:  246372]
+finished aoR_loop[  246372:  255171]
+finished aoR_loop[  255171:  263970]
+finished aoR_loop[  263970:  272769]
+finished aoR_loop[  272769:  281568]
+finished aoR_loop[  281568:  290367]
+finished aoR_loop[  290367:  299166]
+finished aoR_loop[  299166:  307965]
+finished aoR_loop[  307965:  316764]
+finished aoR_loop[  316764:  325563]
+finished aoR_loop[  325563:  334362]
+finished aoR_loop[  334362:  343161]
+finished aoR_loop[  343161:  351960]
+finished aoR_loop[  351960:  360759]
+finished aoR_loop[  360759:  369558]
+finished aoR_loop[  369558:  370025]
+    CPU time for building right-hand side   6848.28 sec, wall time   1189.49 sec
+w[  0], rank = 2640 / 2640
+    CPU time for w[  0]   5154.24 sec, wall time    242.13 sec
+w[  1], rank = 2640 / 2640
+    CPU time for w[  1]   4758.83 sec, wall time    221.60 sec
+w[  2], rank = 2640 / 2640
+    CPU time for w[  2]   5114.78 sec, wall time    232.08 sec
+w[  3], rank = 2640 / 2640
+    CPU time for w[  3]   5127.84 sec, wall time    234.28 sec
+w[  4], rank = 2640 / 2640
+    CPU time for w[  4]   2670.14 sec, wall time    133.25 sec
+w[  5], rank = 2640 / 2640
+    CPU time for w[  5]   2400.63 sec, wall time    129.20 sec
+w[  6], rank = 2640 / 2640
+    CPU time for w[  6]   2104.08 sec, wall time    112.22 sec
+w[  7], rank = 2640 / 2640
+    CPU time for w[  7]   2112.63 sec, wall time    115.29 sec
+w[  8], rank = 2640 / 2640
+    CPU time for w[  8]   2827.95 sec, wall time    133.47 sec
+w[  9], rank = 2640 / 2640
+    CPU time for w[  9]   2113.53 sec, wall time    114.42 sec
+w[ 10], rank = 2640 / 2640
+    CPU time for w[ 10]   2090.31 sec, wall time    108.90 sec
+w[ 11], rank = 2640 / 2640
+    CPU time for w[ 11]   2120.45 sec, wall time    116.52 sec
+w[ 12], rank = 2640 / 2640
+    CPU time for w[ 12]   2093.38 sec, wall time    110.88 sec
+w[ 13], rank = 2640 / 2640
+    CPU time for w[ 13]   2086.90 sec, wall time    114.06 sec
+w[ 14], rank = 2640 / 2640
+    CPU time for w[ 14]   2081.84 sec, wall time    111.18 sec
+w[ 15], rank = 2640 / 2640
+    CPU time for w[ 15]   2120.59 sec, wall time    118.37 sec
+w[ 16], rank = 2640 / 2640
+    CPU time for w[ 16]   2077.62 sec, wall time    112.35 sec
+w[ 17], rank = 2640 / 2640
+    CPU time for w[ 17]   2599.14 sec, wall time    141.57 sec
+w[ 18], rank = 2640 / 2640
+    CPU time for w[ 18]   5120.84 sec, wall time    227.17 sec
+w[ 19], rank = 2640 / 2640
+    CPU time for w[ 19]   5104.45 sec, wall time    231.92 sec
+w[ 20], rank = 2640 / 2640
+    CPU time for w[ 20]   5284.87 sec, wall time    243.83 sec
+w[ 21], rank = 2640 / 2640
+    CPU time for w[ 21]   5078.44 sec, wall time    239.69 sec
+w[ 22], rank = 2640 / 2640
+    CPU time for w[ 22]   4790.44 sec, wall time    218.64 sec
+w[ 23], rank = 2640 / 2640
+    CPU time for w[ 23]   4790.91 sec, wall time    218.53 sec
+w[ 24], rank = 2640 / 2640
+    CPU time for w[ 24]   2430.49 sec, wall time    124.94 sec
+w[ 25], rank = 2640 / 2640
+    CPU time for w[ 25]   2103.46 sec, wall time    114.76 sec
+w[ 26], rank = 2640 / 2640
+    CPU time for w[ 26]   2101.12 sec, wall time    112.07 sec
+w[ 27], rank = 2640 / 2640
+    CPU time for w[ 27]   2089.34 sec, wall time    116.56 sec
+w[ 28], rank = 2640 / 2640
+    CPU time for w[ 28]   2114.77 sec, wall time    115.95 sec
+w[ 29], rank = 2640 / 2640
+    CPU time for w[ 29]   2125.77 sec, wall time    121.05 sec
+w[ 30], rank = 2640 / 2640
+    CPU time for w[ 30]   2900.46 sec, wall time    143.52 sec
+w[ 31], rank = 2640 / 2640
+    CPU time for w[ 31]   2442.67 sec, wall time    138.25 sec
+w[ 32], rank = 2640 / 2640
+    CPU time for w[ 32]   2692.50 sec, wall time    135.60 sec
+w[ 33], rank = 2640 / 2640
+    CPU time for w[ 33]   2394.64 sec, wall time    136.03 sec
+w[ 34], rank = 2640 / 2640
+    CPU time for w[ 34]   2613.78 sec, wall time    148.58 sec
+w[ 35], rank = 2640 / 2640
+    CPU time for w[ 35]   2825.52 sec, wall time    153.71 sec
+w[ 36], rank = 2640 / 2640
+    CPU time for w[ 36]   3912.41 sec, wall time    191.79 sec
+w[ 37], rank = 2640 / 2640
+    CPU time for w[ 37]   5201.98 sec, wall time    236.17 sec
+w[ 38], rank = 2640 / 2640
+    CPU time for w[ 38]   5100.05 sec, wall time    228.60 sec
+w[ 39], rank = 2640 / 2640
+    CPU time for w[ 39]   3675.89 sec, wall time    180.00 sec
+w[ 40], rank = 2640 / 2640
+    CPU time for w[ 40]   2441.07 sec, wall time    133.39 sec
+w[ 41], rank = 2640 / 2640
+    CPU time for w[ 41]   2570.24 sec, wall time    137.16 sec
+w[ 42], rank = 2640 / 2640
+    CPU time for w[ 42]   2628.93 sec, wall time    138.13 sec
+w[ 43], rank = 2640 / 2640
+    CPU time for w[ 43]   2521.82 sec, wall time    139.64 sec
+w[ 44], rank = 2640 / 2640
+    CPU time for w[ 44]   2488.89 sec, wall time    133.35 sec
+w[ 45], rank = 2640 / 2640
+    CPU time for w[ 45]   2385.83 sec, wall time    133.07 sec
+w[ 46], rank = 2640 / 2640
+    CPU time for w[ 46]   2855.69 sec, wall time    147.93 sec
+w[ 47], rank = 2640 / 2640
+    CPU time for w[ 47]   2579.41 sec, wall time    140.79 sec
+w[ 48], rank = 2640 / 2640
+    CPU time for w[ 48]   2355.38 sec, wall time    128.04 sec
+w[ 49], rank = 2640 / 2640
+    CPU time for w[ 49]   2452.66 sec, wall time    135.22 sec
+w[ 50], rank = 2640 / 2640
+    CPU time for w[ 50]   2449.05 sec, wall time    131.36 sec
+w[ 51], rank = 2640 / 2640
+    CPU time for w[ 51]   2333.97 sec, wall time    134.01 sec
+w[ 52], rank = 2640 / 2640
+    CPU time for w[ 52]   2435.16 sec, wall time    134.44 sec
+w[ 53], rank = 2640 / 2640
+    CPU time for w[ 53]   2329.33 sec, wall time    126.93 sec
+w[ 54], rank = 2640 / 2640
+    CPU time for w[ 54]   2251.54 sec, wall time    122.51 sec
+w[ 55], rank = 2640 / 2640
+    CPU time for w[ 55]   2521.76 sec, wall time    139.32 sec
+w[ 56], rank = 2640 / 2640
+    CPU time for w[ 56]   2192.91 sec, wall time    118.53 sec
+w[ 57], rank = 2640 / 2640
+    CPU time for w[ 57]   2437.10 sec, wall time    129.85 sec
+w[ 58], rank = 2640 / 2640
+    CPU time for w[ 58]   2813.37 sec, wall time    145.24 sec
+w[ 59], rank = 2640 / 2640
+    CPU time for w[ 59]   2813.86 sec, wall time    156.25 sec
+w[ 60], rank = 2640 / 2640
+    CPU time for w[ 60]   2430.11 sec, wall time    133.77 sec
+w[ 61], rank = 2640 / 2640
+    CPU time for w[ 61]   2209.68 sec, wall time    122.90 sec
+w[ 62], rank = 2640 / 2640
+    CPU time for w[ 62]   2162.75 sec, wall time    117.94 sec
+w[ 63], rank = 2640 / 2640
+    CPU time for w[ 63]   2172.38 sec, wall time    120.17 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-30-19-19-19/46861119/tmp.chk
+    CPU time for building ISDF 200119.03 sec, wall time  11260.14 sec
