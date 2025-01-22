@@ -1,0 +1,12 @@
+
+/central/home/junjiey/work/fftisdf-benchmark/work/nio-conv-2-2-2/gth-szv-molopt-sr-20
+err_vj: 0.00e+00, err_vk: 0.00e+00, build:  0.00e+00 s, get_j:  2.48e+00 s, get_k:  6.13e+02 s, size:   0.00e+00 GB # fftdf
+err_vj: 4.02e-10, err_vk: 4.46e-02, build:  5.11e+00 s, get_j:  3.00e-01 s, get_k:  2.99e+00 s, size:   3.14e-02 GB # fftisdf-ning-10
+err_vj: 4.02e-10, err_vk: 3.84e-02, build:  5.45e+00 s, get_j:  3.10e-01 s, get_k:  4.97e+00 s, size:   3.48e-02 GB # fftisdf-ning-20
+err_vj: 4.02e-10, err_vk: 3.82e-02, build:  6.21e+00 s, get_j:  2.70e-01 s, get_k:  5.45e+00 s, size:   3.71e-02 GB # fftisdf-ning-30
+err_vj: 4.02e-10, err_vk: 3.81e-02, build:  7.08e+00 s, get_j:  3.20e-01 s, get_k:  6.32e+00 s, size:   3.94e-02 GB # fftisdf-ning-40
+err_vj: 1.66e-01, err_vk: 7.66e-02, build:  2.44e+01 s, get_j:  1.40e-01 s, get_k:  8.70e-01 s, size:   4.42e-02 GB # fftisdf-yang-10-19-19-19
+err_vj: 3.18e-03, err_vk: 6.28e-04, build:  4.74e+01 s, get_j:  2.60e-01 s, get_k:  5.70e-01 s, size:   1.69e-01 GB # fftisdf-yang-20-19-19-19
+err_vj: 1.44e-03, err_vk: 2.95e-04, build:  5.60e+01 s, get_j:  3.60e-01 s, get_k:  6.30e-01 s, size:   3.73e-01 GB # fftisdf-yang-30-19-19-19
+err_vj: 8.46e-04, err_vk: 1.34e-04, build:  7.65e+01 s, get_j:  4.70e-01 s, get_k:  1.21e+00 s, size:   6.58e-01 GB # fftisdf-yang-40-19-19-19
+err_vj: 2.65e+00, err_vk: 1.40e+00, build:  5.01e+02 s, get_j:  7.10e-01 s, get_k:  9.68e+01 s, size:   1.54e+00 GB # gdf

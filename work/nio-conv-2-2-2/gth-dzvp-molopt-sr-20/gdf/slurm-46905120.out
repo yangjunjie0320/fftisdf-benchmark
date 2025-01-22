@@ -65,3 +65,9 @@ max_memory 245239 MB, blksize 240
 max_memory 245239 MB, blksize 240
     CPU time for get_k_kpts: make_kpt ki>=kj (3,*)   3032.67 sec, wall time     95.91 sec
 max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (4,*)   3899.24 sec, wall time    122.88 sec
+max_memory 245239 MB, blksize 240

@@ -174,3 +174,11 @@ w[ 31], rank = 5118 / 5121
     CPU time for w[ 31]    971.41 sec, wall time     31.81 sec
 w[ 32], rank = 5116 / 5121
     CPU time for w[ 32]   1048.79 sec, wall time     33.87 sec
+w[ 33], rank = 5117 / 5121
+    CPU time for w[ 33]    925.95 sec, wall time     30.31 sec
+w[ 34], rank = 5118 / 5121
+    CPU time for w[ 34]    982.50 sec, wall time     31.71 sec
+w[ 35], rank = 5117 / 5121
+    CPU time for w[ 35]   1011.60 sec, wall time     32.91 sec
+w[ 36], rank = 5118 / 5121
+    CPU time for w[ 36]   1056.51 sec, wall time     34.37 sec
