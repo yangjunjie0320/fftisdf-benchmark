@@ -43,11 +43,11 @@ def cell_from_poscar(poscar_file: str):
     c = gto.Cell()
     c.atom = ase_atoms_to_pyscf(atoms)
     c.a = numpy.array(atoms.cell)
-    c.exp_to_discard = 1e-10
+    # c.exp_to_discard = 1e-10
     c.unit = 'A'
     return c
 
-def get_jk_time(cell, kmesh, df_obj=None, tmp=None):
+def get_jk_time(cell, kmesh=None, df_obj=None, tmp=None):
     from pyscf import lib
     from pyscf.lib import logger
     from pyscf.lib.logger import perf_counter
@@ -57,22 +57,28 @@ def get_jk_time(cell, kmesh, df_obj=None, tmp=None):
     stdout = open("out.log", "w")
     log = logger.Logger(stdout, 5)
 
-    from pyscf.pbc.scf import KRHF
-    kpts = cell.get_kpts(kmesh)
-    scf_obj = KRHF(cell, kpts=kpts)
-    scf_obj.exxdiv = None
-    dm_kpts = scf_obj.get_init_guess(key="1e")
+    if kmesh is not None:
+        from pyscf.pbc.scf import KRHF
+        kpts = cell.get_kpts(kmesh)
+        scf_obj = KRHF(cell, kpts=kpts)
+        scf_obj.exxdiv = None
+        dm0 = scf_obj.get_init_guess(key="minao")
+    else:
+        from pyscf.pbc.scf import RHF
+        scf_obj = RHF(cell)
+        scf_obj.exxdiv = None
+        dm0 = scf_obj.get_init_guess(key="minao")
 
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = df_obj.build()
     t1 = log.timer("build", *t0)
 
     t0 = (process_clock(), perf_counter())
-    vj1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=False)[0]
+    vj1 = scf_obj.get_jk(cell, dm0, with_j=True, with_k=False)[0]
     t1 = log.timer("get_j", *t0)
 
     t0 = (process_clock(), perf_counter())
-    vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=False, with_k=True)[1]
+    vk1 = scf_obj.get_jk(cell, dm0, with_j=False, with_k=True)[1]
     t2 = log.timer("get_k", *t0)
 
     log.info("chk file size: %6.2e GB", os.path.getsize(tmp) / 1e9)

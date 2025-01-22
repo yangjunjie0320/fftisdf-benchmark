@@ -1,0 +1,674 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-40/46905078/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-40/46905078/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  40.00
+       get_partition wall time:     0.575441 CPU time:     0.572850
+len of partition[   0] =    496
+len of partition[   1] =    361
+len of partition[   2] =    484
+len of partition[   3] =    362
+len of partition[   4] =    468
+len of partition[   5] =    354
+len of partition[   6] =    492
+len of partition[   7] =    358
+len of partition[   8] =    496
+len of partition[   9] =    361
+len of partition[  10] =    484
+len of partition[  11] =    362
+len of partition[  12] =    468
+len of partition[  13] =    354
+len of partition[  14] =    492
+len of partition[  15] =    358
+len of partition[  16] =    496
+len of partition[  17] =    361
+len of partition[  18] =    484
+len of partition[  19] =    362
+len of partition[  20] =    468
+len of partition[  21] =    354
+len of partition[  22] =    492
+len of partition[  23] =    358
+len of partition[  24] =    496
+len of partition[  25] =    361
+len of partition[  26] =    484
+len of partition[  27] =    362
+len of partition[  28] =    468
+len of partition[  29] =    354
+len of partition[  30] =    492
+len of partition[  31] =    358
+len of partition[  32] =    496
+len of partition[  33] =    361
+len of partition[  34] =    484
+len of partition[  35] =    362
+len of partition[  36] =    468
+len of partition[  37] =    354
+len of partition[  38] =    492
+len of partition[  39] =    358
+len of partition[  40] =    496
+len of partition[  41] =    361
+len of partition[  42] =    484
+len of partition[  43] =    362
+len of partition[  44] =    468
+len of partition[  45] =    354
+len of partition[  46] =    492
+len of partition[  47] =    358
+len of partition[  48] =    496
+len of partition[  49] =    361
+len of partition[  50] =    484
+len of partition[  51] =    362
+len of partition[  52] =    468
+len of partition[  53] =    354
+len of partition[  54] =    492
+len of partition[  55] =    358
+len of partition[  56] =    496
+len of partition[  57] =    361
+len of partition[  58] =    484
+len of partition[  59] =    362
+len of partition[  60] =    468
+len of partition[  61] =    354
+len of partition[  62] =    492
+len of partition[  63] =    358
+len of partition[  64] =    496
+len of partition[  65] =    361
+len of partition[  66] =    484
+len of partition[  67] =    362
+len of partition[  68] =    468
+len of partition[  69] =    354
+len of partition[  70] =    492
+len of partition[  71] =    358
+len of partition[  72] =    496
+len of partition[  73] =    361
+len of partition[  74] =    484
+len of partition[  75] =    362
+len of partition[  76] =    468
+len of partition[  77] =    354
+len of partition[  78] =    492
+len of partition[  79] =    358
+len of partition[  80] =    496
+len of partition[  81] =    361
+len of partition[  82] =    484
+len of partition[  83] =    362
+len of partition[  84] =    468
+len of partition[  85] =    354
+len of partition[  86] =    492
+len of partition[  87] =    358
+len of partition[  88] =    496
+len of partition[  89] =    361
+len of partition[  90] =    484
+len of partition[  91] =    362
+len of partition[  92] =    468
+len of partition[  93] =    354
+len of partition[  94] =    492
+len of partition[  95] =    358
+len of partition[  96] =    496
+len of partition[  97] =    361
+len of partition[  98] =    484
+len of partition[  99] =    362
+len of partition[ 100] =    468
+len of partition[ 101] =    354
+len of partition[ 102] =    492
+len of partition[ 103] =    358
+len of partition[ 104] =    496
+len of partition[ 105] =    361
+len of partition[ 106] =    484
+len of partition[ 107] =    362
+len of partition[ 108] =    468
+len of partition[ 109] =    354
+len of partition[ 110] =    492
+len of partition[ 111] =    358
+len of partition[ 112] =    496
+len of partition[ 113] =    361
+len of partition[ 114] =    484
+len of partition[ 115] =    362
+len of partition[ 116] =    468
+len of partition[ 117] =    354
+len of partition[ 118] =    492
+len of partition[ 119] =    358
+len of partition[ 120] =    496
+len of partition[ 121] =    361
+len of partition[ 122] =    484
+len of partition[ 123] =    362
+len of partition[ 124] =    468
+len of partition[ 125] =    354
+len of partition[ 126] =    492
+len of partition[ 127] =    358
+len of partition[ 128] =    496
+len of partition[ 129] =    361
+len of partition[ 130] =    484
+len of partition[ 131] =    362
+len of partition[ 132] =    468
+len of partition[ 133] =    354
+len of partition[ 134] =    492
+len of partition[ 135] =    358
+len of partition[ 136] =    496
+len of partition[ 137] =    361
+len of partition[ 138] =    484
+len of partition[ 139] =    362
+len of partition[ 140] =    468
+len of partition[ 141] =    354
+len of partition[ 142] =    492
+len of partition[ 143] =    358
+len of partition[ 144] =    496
+len of partition[ 145] =    361
+len of partition[ 146] =    484
+len of partition[ 147] =    362
+len of partition[ 148] =    468
+len of partition[ 149] =    354
+len of partition[ 150] =    492
+len of partition[ 151] =    358
+len of partition[ 152] =    496
+len of partition[ 153] =    361
+len of partition[ 154] =    484
+len of partition[ 155] =    362
+len of partition[ 156] =    468
+len of partition[ 157] =    354
+len of partition[ 158] =    492
+len of partition[ 159] =    358
+len of partition[ 160] =    496
+len of partition[ 161] =    361
+len of partition[ 162] =    484
+len of partition[ 163] =    362
+len of partition[ 164] =    468
+len of partition[ 165] =    354
+len of partition[ 166] =    492
+len of partition[ 167] =    358
+len of partition[ 168] =    496
+len of partition[ 169] =    361
+len of partition[ 170] =    484
+len of partition[ 171] =    362
+len of partition[ 172] =    468
+len of partition[ 173] =    354
+len of partition[ 174] =    492
+len of partition[ 175] =    358
+len of partition[ 176] =    496
+len of partition[ 177] =    361
+len of partition[ 178] =    484
+len of partition[ 179] =    362
+len of partition[ 180] =    468
+len of partition[ 181] =    354
+len of partition[ 182] =    492
+len of partition[ 183] =    358
+len of partition[ 184] =    496
+len of partition[ 185] =    361
+len of partition[ 186] =    484
+len of partition[ 187] =    362
+len of partition[ 188] =    468
+len of partition[ 189] =    354
+len of partition[ 190] =    492
+len of partition[ 191] =    358
+len of partition[ 192] =    496
+len of partition[ 193] =    361
+len of partition[ 194] =    484
+len of partition[ 195] =    362
+len of partition[ 196] =    468
+len of partition[ 197] =    354
+len of partition[ 198] =    492
+len of partition[ 199] =    358
+len of partition[ 200] =    496
+len of partition[ 201] =    361
+len of partition[ 202] =    484
+len of partition[ 203] =    362
+len of partition[ 204] =    468
+len of partition[ 205] =    354
+len of partition[ 206] =    492
+len of partition[ 207] =    358
+len of partition[ 208] =    496
+len of partition[ 209] =    361
+len of partition[ 210] =    484
+len of partition[ 211] =    362
+len of partition[ 212] =    468
+len of partition[ 213] =    354
+len of partition[ 214] =    492
+len of partition[ 215] =    358
+len of partition[ 216] =    496
+len of partition[ 217] =    361
+len of partition[ 218] =    484
+len of partition[ 219] =    362
+len of partition[ 220] =    468
+len of partition[ 221] =    354
+len of partition[ 222] =    492
+len of partition[ 223] =    358
+len of partition[ 224] =    496
+len of partition[ 225] =    361
+len of partition[ 226] =    484
+len of partition[ 227] =    362
+len of partition[ 228] =    468
+len of partition[ 229] =    354
+len of partition[ 230] =    492
+len of partition[ 231] =    358
+len of partition[ 232] =    496
+len of partition[ 233] =    361
+len of partition[ 234] =    484
+len of partition[ 235] =    362
+len of partition[ 236] =    468
+len of partition[ 237] =    354
+len of partition[ 238] =    492
+len of partition[ 239] =    358
+len of partition[ 240] =    496
+len of partition[ 241] =    361
+len of partition[ 242] =    484
+len of partition[ 243] =    362
+len of partition[ 244] =    468
+len of partition[ 245] =    354
+len of partition[ 246] =    492
+len of partition[ 247] =    358
+len of partition[ 248] =    496
+len of partition[ 249] =    361
+len of partition[ 250] =    484
+len of partition[ 251] =    362
+len of partition[ 252] =    468
+len of partition[ 253] =    354
+len of partition[ 254] =    492
+len of partition[ 255] =    358
+len of partition[ 256] =    496
+len of partition[ 257] =    361
+len of partition[ 258] =    484
+len of partition[ 259] =    362
+len of partition[ 260] =    468
+len of partition[ 261] =    354
+len of partition[ 262] =    492
+len of partition[ 263] =    358
+len of partition[ 264] =    496
+len of partition[ 265] =    361
+len of partition[ 266] =    484
+len of partition[ 267] =    362
+len of partition[ 268] =    468
+len of partition[ 269] =    354
+len of partition[ 270] =    492
+len of partition[ 271] =    358
+len of partition[ 272] =    496
+len of partition[ 273] =    361
+len of partition[ 274] =    484
+len of partition[ 275] =    362
+len of partition[ 276] =    468
+len of partition[ 277] =    354
+len of partition[ 278] =    492
+len of partition[ 279] =    358
+len of partition[ 280] =    496
+len of partition[ 281] =    361
+len of partition[ 282] =    484
+len of partition[ 283] =    362
+len of partition[ 284] =    468
+len of partition[ 285] =    354
+len of partition[ 286] =    492
+len of partition[ 287] =    358
+len of partition[ 288] =    496
+len of partition[ 289] =    361
+len of partition[ 290] =    484
+len of partition[ 291] =    362
+len of partition[ 292] =    468
+len of partition[ 293] =    354
+len of partition[ 294] =    492
+len of partition[ 295] =    358
+len of partition[ 296] =    496
+len of partition[ 297] =    361
+len of partition[ 298] =    484
+len of partition[ 299] =    362
+len of partition[ 300] =    468
+len of partition[ 301] =    354
+len of partition[ 302] =    492
+len of partition[ 303] =    358
+len of partition[ 304] =    496
+len of partition[ 305] =    361
+len of partition[ 306] =    484
+len of partition[ 307] =    362
+len of partition[ 308] =    468
+len of partition[ 309] =    354
+len of partition[ 310] =    492
+len of partition[ 311] =    358
+len of partition[ 312] =    496
+len of partition[ 313] =    361
+len of partition[ 314] =    484
+len of partition[ 315] =    362
+len of partition[ 316] =    468
+len of partition[ 317] =    354
+len of partition[ 318] =    492
+len of partition[ 319] =    358
+len of partition[ 320] =    496
+len of partition[ 321] =    361
+len of partition[ 322] =    484
+len of partition[ 323] =    362
+len of partition[ 324] =    468
+len of partition[ 325] =    354
+len of partition[ 326] =    492
+len of partition[ 327] =    358
+len of partition[ 328] =    496
+len of partition[ 329] =    361
+len of partition[ 330] =    484
+len of partition[ 331] =    362
+len of partition[ 332] =    468
+len of partition[ 333] =    354
+len of partition[ 334] =    492
+len of partition[ 335] =    358
+len of partition[ 336] =    496
+len of partition[ 337] =    361
+len of partition[ 338] =    484
+len of partition[ 339] =    362
+len of partition[ 340] =    468
+len of partition[ 341] =    354
+len of partition[ 342] =    492
+len of partition[ 343] =    358
+len of partition[ 344] =    496
+len of partition[ 345] =    361
+len of partition[ 346] =    484
+len of partition[ 347] =    362
+len of partition[ 348] =    468
+len of partition[ 349] =    354
+len of partition[ 350] =    492
+len of partition[ 351] =    358
+len of partition[ 352] =    496
+len of partition[ 353] =    361
+len of partition[ 354] =    484
+len of partition[ 355] =    362
+len of partition[ 356] =    468
+len of partition[ 357] =    354
+len of partition[ 358] =    492
+len of partition[ 359] =    358
+len of partition[ 360] =    496
+len of partition[ 361] =    361
+len of partition[ 362] =    484
+len of partition[ 363] =    362
+len of partition[ 364] =    468
+len of partition[ 365] =    354
+len of partition[ 366] =    492
+len of partition[ 367] =    358
+len of partition[ 368] =    496
+len of partition[ 369] =    361
+len of partition[ 370] =    484
+len of partition[ 371] =    362
+len of partition[ 372] =    468
+len of partition[ 373] =    354
+len of partition[ 374] =    492
+len of partition[ 375] =    358
+len of partition[ 376] =    496
+len of partition[ 377] =    361
+len of partition[ 378] =    484
+len of partition[ 379] =    362
+len of partition[ 380] =    468
+len of partition[ 381] =    354
+len of partition[ 382] =    492
+len of partition[ 383] =    358
+len of partition[ 384] =    496
+len of partition[ 385] =    361
+len of partition[ 386] =    484
+len of partition[ 387] =    362
+len of partition[ 388] =    468
+len of partition[ 389] =    354
+len of partition[ 390] =    492
+len of partition[ 391] =    358
+len of partition[ 392] =    496
+len of partition[ 393] =    361
+len of partition[ 394] =    484
+len of partition[ 395] =    362
+len of partition[ 396] =    468
+len of partition[ 397] =    354
+len of partition[ 398] =    492
+len of partition[ 399] =    358
+len of partition[ 400] =    496
+len of partition[ 401] =    361
+len of partition[ 402] =    484
+len of partition[ 403] =    362
+len of partition[ 404] =    468
+len of partition[ 405] =    354
+len of partition[ 406] =    492
+len of partition[ 407] =    358
+len of partition[ 408] =    496
+len of partition[ 409] =    361
+len of partition[ 410] =    484
+len of partition[ 411] =    362
+len of partition[ 412] =    468
+len of partition[ 413] =    354
+len of partition[ 414] =    492
+len of partition[ 415] =    358
+len of partition[ 416] =    496
+len of partition[ 417] =    361
+len of partition[ 418] =    484
+len of partition[ 419] =    362
+len of partition[ 420] =    468
+len of partition[ 421] =    354
+len of partition[ 422] =    492
+len of partition[ 423] =    358
+len of partition[ 424] =    496
+len of partition[ 425] =    361
+len of partition[ 426] =    484
+len of partition[ 427] =    362
+len of partition[ 428] =    468
+len of partition[ 429] =    354
+len of partition[ 430] =    492
+len of partition[ 431] =    358
+len of partition[ 432] =    496
+len of partition[ 433] =    361
+len of partition[ 434] =    484
+len of partition[ 435] =    362
+len of partition[ 436] =    468
+len of partition[ 437] =    354
+len of partition[ 438] =    492
+len of partition[ 439] =    358
+len of partition[ 440] =    496
+len of partition[ 441] =    361
+len of partition[ 442] =    484
+len of partition[ 443] =    362
+len of partition[ 444] =    468
+len of partition[ 445] =    354
+len of partition[ 446] =    492
+len of partition[ 447] =    358
+len of partition[ 448] =    496
+len of partition[ 449] =    361
+len of partition[ 450] =    484
+len of partition[ 451] =    362
+len of partition[ 452] =    468
+len of partition[ 453] =    354
+len of partition[ 454] =    492
+len of partition[ 455] =    358
+len of partition[ 456] =    496
+len of partition[ 457] =    361
+len of partition[ 458] =    484
+len of partition[ 459] =    362
+len of partition[ 460] =    468
+len of partition[ 461] =    354
+len of partition[ 462] =    492
+len of partition[ 463] =    358
+len of partition[ 464] =    496
+len of partition[ 465] =    361
+len of partition[ 466] =    484
+len of partition[ 467] =    362
+len of partition[ 468] =    468
+len of partition[ 469] =    354
+len of partition[ 470] =    492
+len of partition[ 471] =    358
+len of partition[ 472] =    496
+len of partition[ 473] =    361
+len of partition[ 474] =    484
+len of partition[ 475] =    362
+len of partition[ 476] =    468
+len of partition[ 477] =    354
+len of partition[ 478] =    492
+len of partition[ 479] =    358
+len of partition[ 480] =    496
+len of partition[ 481] =    361
+len of partition[ 482] =    484
+len of partition[ 483] =    362
+len of partition[ 484] =    468
+len of partition[ 485] =    354
+len of partition[ 486] =    492
+len of partition[ 487] =    358
+len of partition[ 488] =    496
+len of partition[ 489] =    361
+len of partition[ 490] =    484
+len of partition[ 491] =    362
+len of partition[ 492] =    468
+len of partition[ 493] =    354
+len of partition[ 494] =    492
+len of partition[ 495] =    358
+len of partition[ 496] =    496
+len of partition[ 497] =    361
+len of partition[ 498] =    484
+len of partition[ 499] =    362
+len of partition[ 500] =    468
+len of partition[ 501] =    354
+len of partition[ 502] =    492
+len of partition[ 503] =    358
+len of partition[ 504] =    496
+len of partition[ 505] =    361
+len of partition[ 506] =    484
+len of partition[ 507] =    362
+len of partition[ 508] =    468
+len of partition[ 509] =    354
+len of partition[ 510] =    492
+len of partition[ 511] =    358
+             get_aoR wall time:     1.130822 CPU time:    33.023039
+In _build_buffer: ISDF Local size of buffer = 1941.722 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    8
+select_IP_local_atm: npt_found =  496
+select_IP_local_atm: npt_found =  361
+select_IP_local_atm: npt_found =  484
+select_IP_local_atm: npt_found =  362
+select_IP_local_atm: npt_found =  468
+select_IP_local_atm: npt_found =  354
+select_IP_local_atm: npt_found =  467
+select_IP_local_atm: npt_found =  358
+select_IP_local_step1 wall time:     0.534149 CPU time:    16.564425
+ build_aoRg_possible wall time:     0.133169 CPU time:     3.833527
+select_IP_local_step2 wall time:     0.000205 CPU time:     0.000216
+select_IP_local_step3 wall time:     0.001141 CPU time:     0.001135
+Memory usage for aoR  :    146.964 MB
+Memory usage for aoRg :    145.877 MB
+            build_IP wall time:     0.668663 CPU time:    20.399302
+build_aux_basis_local wall time:     0.470456 CPU time:    12.911709
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]     11.94 sec, wall time      0.49 sec
+    CPU time for gen W [   2|[  32:  64]      6.36 sec, wall time      0.28 sec
+    CPU time for gen W [   3|[  64:  96]      6.16 sec, wall time      0.28 sec
+    CPU time for gen W [   4|[  96: 128]      6.41 sec, wall time      0.28 sec
+    CPU time for gen W [   5|[ 128: 160]      6.27 sec, wall time      0.28 sec
+    CPU time for gen W [   6|[ 160: 192]      6.43 sec, wall time      0.28 sec
+    CPU time for gen W [   7|[ 192: 224]      6.26 sec, wall time      0.28 sec
+    CPU time for gen W [   8|[ 224: 256]      6.36 sec, wall time      0.28 sec
+    CPU time for gen W [   9|[ 256: 288]      6.71 sec, wall time      0.29 sec
+    CPU time for gen W [  10|[ 288: 320]      6.15 sec, wall time      0.27 sec
+    CPU time for gen W [  11|[ 320: 352]      6.22 sec, wall time      0.28 sec
+    CPU time for gen W [  12|[ 352: 384]      6.29 sec, wall time      0.28 sec
+    CPU time for gen W [  13|[ 384: 416]      6.24 sec, wall time      0.28 sec
+    CPU time for gen W [  14|[ 416: 448]      6.25 sec, wall time      0.28 sec
+    CPU time for gen W [  15|[ 448: 480]      7.49 sec, wall time      0.32 sec
+    CPU time for gen W [  16|[ 480: 496]      2.37 sec, wall time      0.10 sec
+    CPU time for gen W [  17|[   0:  32]      4.89 sec, wall time      0.40 sec
+    CPU time for gen W [  18|[  32:  64]      6.32 sec, wall time      0.28 sec
+    CPU time for gen W [  19|[  64:  96]      5.96 sec, wall time      0.26 sec
+    CPU time for gen W [  20|[  96: 128]      6.36 sec, wall time      0.28 sec
+    CPU time for gen W [  21|[ 128: 160]      6.11 sec, wall time      0.27 sec
+    CPU time for gen W [  22|[ 160: 192]      6.09 sec, wall time      0.27 sec
+    CPU time for gen W [  23|[ 192: 224]      6.19 sec, wall time      0.27 sec
+    CPU time for gen W [  24|[ 224: 256]      6.11 sec, wall time      0.27 sec
+    CPU time for gen W [  25|[ 256: 288]      6.21 sec, wall time      0.27 sec
+    CPU time for gen W [  26|[ 288: 320]      6.03 sec, wall time      0.27 sec
+    CPU time for gen W [  27|[ 320: 352]      6.18 sec, wall time      0.27 sec
+    CPU time for gen W [  28|[ 352: 361]      2.62 sec, wall time      0.09 sec
+    CPU time for gen W [  29|[   0:  32]      4.31 sec, wall time      0.29 sec
+    CPU time for gen W [  30|[  32:  64]      6.19 sec, wall time      0.27 sec
+    CPU time for gen W [  31|[  64:  96]      6.11 sec, wall time      0.27 sec
+    CPU time for gen W [  32|[  96: 128]      6.14 sec, wall time      0.27 sec
+    CPU time for gen W [  33|[ 128: 160]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [  34|[ 160: 192]      7.13 sec, wall time      0.30 sec
+    CPU time for gen W [  35|[ 192: 224]      5.21 sec, wall time      0.25 sec
+    CPU time for gen W [  36|[ 224: 256]      6.12 sec, wall time      0.27 sec
+    CPU time for gen W [  37|[ 256: 288]      5.88 sec, wall time      0.26 sec
+    CPU time for gen W [  38|[ 288: 320]      6.40 sec, wall time      0.28 sec
+    CPU time for gen W [  39|[ 320: 352]      6.22 sec, wall time      0.27 sec
+    CPU time for gen W [  40|[ 352: 384]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [  41|[ 384: 416]      6.02 sec, wall time      0.27 sec
+    CPU time for gen W [  42|[ 416: 448]      6.04 sec, wall time      0.27 sec
+    CPU time for gen W [  43|[ 448: 480]      6.25 sec, wall time      0.27 sec
+    CPU time for gen W [  44|[ 480: 484]      1.63 sec, wall time      0.05 sec
+    CPU time for gen W [  45|[   0:  32]      4.68 sec, wall time      0.29 sec
+    CPU time for gen W [  46|[  32:  64]      6.23 sec, wall time      0.28 sec
+    CPU time for gen W [  47|[  64:  96]      5.99 sec, wall time      0.27 sec
+    CPU time for gen W [  48|[  96: 128]      6.21 sec, wall time      0.27 sec
+    CPU time for gen W [  49|[ 128: 160]      6.09 sec, wall time      0.27 sec
+    CPU time for gen W [  50|[ 160: 192]      6.17 sec, wall time      0.27 sec
+    CPU time for gen W [  51|[ 192: 224]      6.16 sec, wall time      0.27 sec
+    CPU time for gen W [  52|[ 224: 256]      6.08 sec, wall time      0.27 sec
+    CPU time for gen W [  53|[ 256: 288]      6.59 sec, wall time      0.29 sec
+    CPU time for gen W [  54|[ 288: 320]      6.16 sec, wall time      0.30 sec
+    CPU time for gen W [  55|[ 320: 352]      6.22 sec, wall time      0.28 sec
+    CPU time for gen W [  56|[ 352: 362]      2.78 sec, wall time      0.10 sec
+    CPU time for gen W [  57|[   0:  32]      4.34 sec, wall time      0.31 sec
+    CPU time for gen W [  58|[  32:  64]      6.17 sec, wall time      0.27 sec
+    CPU time for gen W [  59|[  64:  96]      6.11 sec, wall time      0.27 sec
+    CPU time for gen W [  60|[  96: 128]      6.04 sec, wall time      0.27 sec
+    CPU time for gen W [  61|[ 128: 160]      6.22 sec, wall time      0.27 sec
+    CPU time for gen W [  62|[ 160: 192]      6.25 sec, wall time      0.27 sec
+    CPU time for gen W [  63|[ 192: 224]      6.16 sec, wall time      0.27 sec
+    CPU time for gen W [  64|[ 224: 256]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [  65|[ 256: 288]      6.30 sec, wall time      0.27 sec
+    CPU time for gen W [  66|[ 288: 320]      6.08 sec, wall time      0.27 sec
+    CPU time for gen W [  67|[ 320: 352]      6.14 sec, wall time      0.27 sec
+    CPU time for gen W [  68|[ 352: 384]      6.12 sec, wall time      0.27 sec
+    CPU time for gen W [  69|[ 384: 416]      6.09 sec, wall time      0.27 sec
+    CPU time for gen W [  70|[ 416: 448]      5.95 sec, wall time      0.26 sec
+    CPU time for gen W [  71|[ 448: 468]      4.15 sec, wall time      0.17 sec
+    CPU time for gen W [  72|[   0:  32]      5.24 sec, wall time      0.30 sec
+    CPU time for gen W [  73|[  32:  64]      5.92 sec, wall time      0.26 sec
+    CPU time for gen W [  74|[  64:  96]      6.12 sec, wall time      0.27 sec
+    CPU time for gen W [  75|[  96: 128]      5.97 sec, wall time      0.26 sec
+    CPU time for gen W [  76|[ 128: 160]      6.02 sec, wall time      0.27 sec
+    CPU time for gen W [  77|[ 160: 192]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [  78|[ 192: 224]      6.02 sec, wall time      0.27 sec
+    CPU time for gen W [  79|[ 224: 256]      6.14 sec, wall time      0.27 sec
+    CPU time for gen W [  80|[ 256: 288]      5.91 sec, wall time      0.26 sec
+    CPU time for gen W [  81|[ 288: 320]      6.20 sec, wall time      0.27 sec
+    CPU time for gen W [  82|[ 320: 352]      5.92 sec, wall time      0.26 sec
+    CPU time for gen W [  83|[ 352: 354]      2.65 sec, wall time      0.09 sec
+    CPU time for gen W [  84|[   0:  32]      3.42 sec, wall time      0.30 sec
+    CPU time for gen W [  85|[  32:  64]      6.15 sec, wall time      0.27 sec
+    CPU time for gen W [  86|[  64:  96]      5.92 sec, wall time      0.26 sec
+    CPU time for gen W [  87|[  96: 128]      6.08 sec, wall time      0.27 sec
+    CPU time for gen W [  88|[ 128: 160]      5.98 sec, wall time      0.27 sec
+    CPU time for gen W [  89|[ 160: 192]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [  90|[ 192: 224]      6.08 sec, wall time      0.27 sec
+    CPU time for gen W [  91|[ 224: 256]      5.96 sec, wall time      0.26 sec
+    CPU time for gen W [  92|[ 256: 288]      6.52 sec, wall time      0.28 sec
+    CPU time for gen W [  93|[ 288: 320]      5.49 sec, wall time      0.25 sec
+    CPU time for gen W [  94|[ 320: 352]      6.13 sec, wall time      0.27 sec
+    CPU time for gen W [  95|[ 352: 384]      5.82 sec, wall time      0.26 sec
+    CPU time for gen W [  96|[ 384: 416]      6.01 sec, wall time      0.27 sec
+    CPU time for gen W [  97|[ 416: 448]      6.04 sec, wall time      0.27 sec
+    CPU time for gen W [  98|[ 448: 467]      3.95 sec, wall time      0.16 sec
+    CPU time for gen W [  99|[   0:  32]      5.01 sec, wall time      0.29 sec
+    CPU time for gen W [ 100|[  32:  64]      6.05 sec, wall time      0.27 sec
+    CPU time for gen W [ 101|[  64:  96]      6.11 sec, wall time      0.27 sec
+    CPU time for gen W [ 102|[  96: 128]      5.97 sec, wall time      0.27 sec
+    CPU time for gen W [ 103|[ 128: 160]      6.09 sec, wall time      0.27 sec
+    CPU time for gen W [ 104|[ 160: 192]      5.89 sec, wall time      0.26 sec
+    CPU time for gen W [ 105|[ 192: 224]      6.07 sec, wall time      0.27 sec
+    CPU time for gen W [ 106|[ 224: 256]      6.06 sec, wall time      0.27 sec
+    CPU time for gen W [ 107|[ 256: 288]      5.96 sec, wall time      0.27 sec
+    CPU time for gen W [ 108|[ 288: 320]      6.16 sec, wall time      0.27 sec
+    CPU time for gen W [ 109|[ 320: 352]      5.97 sec, wall time      0.27 sec
+    CPU time for gen W [ 110|[ 352: 358]      3.18 sec, wall time      0.15 sec
+     build_V_W_local wall time:    29.118591 CPU time:   644.691227
+Number of interpolation points = 214400, effective CISDF =  32.21
+    CPU time for ISDF build    722.86 sec, wall time     36.03 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-40/46905078/isdf.chk
+/home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_tools_Tsym.py:329: ComplexWarning: Casting complex values to real discards the imaginary part
+  operator_k[loc1] = CAST_TO_COMPLEX(REAL(op_1))

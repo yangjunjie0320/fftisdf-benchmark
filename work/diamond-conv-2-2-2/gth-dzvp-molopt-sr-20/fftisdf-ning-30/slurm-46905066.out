@@ -1,0 +1,225 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-30/46905066/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-30/46905066/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  30.00
+       get_partition wall time:     0.137285 CPU time:     1.573886
+len of partition[   0] =    496
+len of partition[   1] =    361
+len of partition[   2] =    484
+len of partition[   3] =    362
+len of partition[   4] =    468
+len of partition[   5] =    354
+len of partition[   6] =    492
+len of partition[   7] =    358
+len of partition[   8] =    496
+len of partition[   9] =    361
+len of partition[  10] =    484
+len of partition[  11] =    362
+len of partition[  12] =    468
+len of partition[  13] =    354
+len of partition[  14] =    492
+len of partition[  15] =    358
+len of partition[  16] =    496
+len of partition[  17] =    361
+len of partition[  18] =    484
+len of partition[  19] =    362
+len of partition[  20] =    468
+len of partition[  21] =    354
+len of partition[  22] =    492
+len of partition[  23] =    358
+len of partition[  24] =    496
+len of partition[  25] =    361
+len of partition[  26] =    484
+len of partition[  27] =    362
+len of partition[  28] =    468
+len of partition[  29] =    354
+len of partition[  30] =    492
+len of partition[  31] =    358
+len of partition[  32] =    496
+len of partition[  33] =    361
+len of partition[  34] =    484
+len of partition[  35] =    362
+len of partition[  36] =    468
+len of partition[  37] =    354
+len of partition[  38] =    492
+len of partition[  39] =    358
+len of partition[  40] =    496
+len of partition[  41] =    361
+len of partition[  42] =    484
+len of partition[  43] =    362
+len of partition[  44] =    468
+len of partition[  45] =    354
+len of partition[  46] =    492
+len of partition[  47] =    358
+len of partition[  48] =    496
+len of partition[  49] =    361
+len of partition[  50] =    484
+len of partition[  51] =    362
+len of partition[  52] =    468
+len of partition[  53] =    354
+len of partition[  54] =    492
+len of partition[  55] =    358
+len of partition[  56] =    496
+len of partition[  57] =    361
+len of partition[  58] =    484
+len of partition[  59] =    362
+len of partition[  60] =    468
+len of partition[  61] =    354
+len of partition[  62] =    492
+len of partition[  63] =    358
+             get_aoR wall time:     0.203568 CPU time:     5.783233
+In _build_buffer: ISDF Local size of buffer = 77.542 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    8
+select_IP_local_atm: npt_found =  494
+select_IP_local_atm: npt_found =  360
+select_IP_local_atm: npt_found =  484
+select_IP_local_atm: npt_found =  362
+select_IP_local_atm: npt_found =  468
+select_IP_local_atm: npt_found =  354
+select_IP_local_atm: npt_found =  448
+select_IP_local_atm: npt_found =  358
+select_IP_local_step1 wall time:     0.392675 CPU time:    12.429220
+ build_aoRg_possible wall time:     0.021224 CPU time:     0.669734
+select_IP_local_step2 wall time:     0.000094 CPU time:     0.000100
+select_IP_local_step3 wall time:     0.000999 CPU time:     0.031913
+Memory usage for aoR  :     21.474 MB
+Memory usage for aoRg :     21.176 MB
+            build_IP wall time:     0.414991 CPU time:    13.130967
+build_aux_basis_local wall time:     0.097786 CPU time:     2.678642
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      6.45 sec, wall time      0.20 sec
+    CPU time for gen W [   2|[  32:  64]      3.18 sec, wall time      0.11 sec
+    CPU time for gen W [   3|[  64:  96]      0.12 sec, wall time      0.00 sec
+    CPU time for gen W [   4|[  96: 128]      1.45 sec, wall time      0.05 sec
+    CPU time for gen W [   5|[ 128: 160]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [   6|[ 160: 192]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [   7|[ 192: 224]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [   8|[ 224: 256]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [   9|[ 256: 288]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  10|[ 288: 320]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  11|[ 320: 352]      1.24 sec, wall time      0.04 sec
+    CPU time for gen W [  12|[ 352: 384]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  13|[ 384: 416]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  14|[ 416: 448]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  15|[ 448: 480]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  16|[ 480: 494]      0.55 sec, wall time      0.02 sec
+    CPU time for gen W [  17|[   0:  32]      3.48 sec, wall time      0.14 sec
+    CPU time for gen W [  18|[  32:  64]      2.34 sec, wall time      0.08 sec
+    CPU time for gen W [  19|[  64:  96]      0.06 sec, wall time      0.00 sec
+    CPU time for gen W [  20|[  96: 128]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  21|[ 128: 160]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  22|[ 160: 192]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  23|[ 192: 224]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  24|[ 224: 256]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  25|[ 256: 288]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  26|[ 288: 320]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  27|[ 320: 352]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  28|[ 352: 360]      0.41 sec, wall time      0.01 sec
+    CPU time for gen W [  29|[   0:  32]      1.65 sec, wall time      0.06 sec
+    CPU time for gen W [  30|[  32:  64]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  31|[  64:  96]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  32|[  96: 128]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  33|[ 128: 160]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  34|[ 160: 192]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  35|[ 192: 224]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  36|[ 224: 256]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  37|[ 256: 288]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  38|[ 288: 320]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  39|[ 320: 352]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  40|[ 352: 384]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  41|[ 384: 416]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  42|[ 416: 448]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  43|[ 448: 480]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  44|[ 480: 484]      0.26 sec, wall time      0.01 sec
+    CPU time for gen W [  45|[   0:  32]      1.71 sec, wall time      0.06 sec
+    CPU time for gen W [  46|[  32:  64]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  47|[  64:  96]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  48|[  96: 128]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  49|[ 128: 160]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  50|[ 160: 192]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  51|[ 192: 224]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  52|[ 224: 256]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  53|[ 256: 288]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  54|[ 288: 320]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  55|[ 320: 352]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  56|[ 352: 362]      0.46 sec, wall time      0.02 sec
+    CPU time for gen W [  57|[   0:  32]      1.22 sec, wall time      0.04 sec
+    CPU time for gen W [  58|[  32:  64]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  59|[  64:  96]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  60|[  96: 128]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  61|[ 128: 160]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  62|[ 160: 192]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  63|[ 192: 224]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  64|[ 224: 256]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  65|[ 256: 288]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  66|[ 288: 320]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  67|[ 320: 352]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  68|[ 352: 384]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  69|[ 384: 416]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  70|[ 416: 448]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  71|[ 448: 468]      0.72 sec, wall time      0.02 sec
+    CPU time for gen W [  72|[   0:  32]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  73|[  32:  64]      3.23 sec, wall time      0.11 sec
+    CPU time for gen W [  74|[  64:  96]      0.09 sec, wall time      0.00 sec
+    CPU time for gen W [  75|[  96: 128]      1.39 sec, wall time      0.05 sec
+    CPU time for gen W [  76|[ 128: 160]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  77|[ 160: 192]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  78|[ 192: 224]      1.24 sec, wall time      0.04 sec
+    CPU time for gen W [  79|[ 224: 256]      1.04 sec, wall time      0.04 sec
+    CPU time for gen W [  80|[ 256: 288]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  81|[ 288: 320]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  82|[ 320: 352]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  83|[ 352: 354]      0.20 sec, wall time      0.01 sec
+    CPU time for gen W [  84|[   0:  32]      1.24 sec, wall time      0.04 sec
+    CPU time for gen W [  85|[  32:  64]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  86|[  64:  96]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  87|[  96: 128]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  88|[ 128: 160]      1.84 sec, wall time      0.06 sec
+    CPU time for gen W [  89|[ 160: 192]      1.62 sec, wall time      0.06 sec
+    CPU time for gen W [  90|[ 192: 224]      1.22 sec, wall time      0.04 sec
+    CPU time for gen W [  91|[ 224: 256]      1.13 sec, wall time      0.04 sec
+    CPU time for gen W [  92|[ 256: 288]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [  93|[ 288: 320]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  94|[ 320: 352]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  95|[ 352: 384]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  96|[ 384: 416]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  97|[ 416: 448]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [  98|[   0:  32]      3.13 sec, wall time      0.11 sec
+    CPU time for gen W [  99|[  32:  64]      0.06 sec, wall time      0.00 sec
+    CPU time for gen W [ 100|[  64:  96]      1.21 sec, wall time      0.04 sec
+    CPU time for gen W [ 101|[  96: 128]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [ 102|[ 128: 160]      1.18 sec, wall time      0.04 sec
+    CPU time for gen W [ 103|[ 160: 192]      1.19 sec, wall time      0.04 sec
+    CPU time for gen W [ 104|[ 192: 224]      1.18 sec, wall time      0.04 sec
+    CPU time for gen W [ 105|[ 224: 256]      1.18 sec, wall time      0.04 sec
+    CPU time for gen W [ 106|[ 256: 288]      1.18 sec, wall time      0.04 sec
+    CPU time for gen W [ 107|[ 288: 320]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [ 108|[ 320: 352]      1.16 sec, wall time      0.04 sec
+    CPU time for gen W [ 109|[ 352: 358]      0.40 sec, wall time      0.01 sec
+     build_V_W_local wall time:     4.648245 CPU time:   134.413274
+Number of interpolation points = 26624, effective CISDF =  32.00
+    CPU time for ISDF build    165.05 sec, wall time      5.75 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-30/46905066/isdf.chk
+/home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_tools_Tsym.py:329: ComplexWarning: Casting complex values to real discards the imaginary part
+  operator_k[loc1] = CAST_TO_COMPLEX(REAL(op_1))

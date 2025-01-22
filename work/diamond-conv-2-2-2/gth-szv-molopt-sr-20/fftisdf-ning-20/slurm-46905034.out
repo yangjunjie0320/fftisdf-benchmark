@@ -1,0 +1,164 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46905034/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-20/46905034/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 32
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local_k.py
+c0 =  20.00
+       get_partition wall time:     0.124655 CPU time:     1.052886
+len of partition[   0] =    496
+len of partition[   1] =    361
+len of partition[   2] =    484
+len of partition[   3] =    362
+len of partition[   4] =    468
+len of partition[   5] =    354
+len of partition[   6] =    492
+len of partition[   7] =    358
+len of partition[   8] =    496
+len of partition[   9] =    361
+len of partition[  10] =    484
+len of partition[  11] =    362
+len of partition[  12] =    468
+len of partition[  13] =    354
+len of partition[  14] =    492
+len of partition[  15] =    358
+len of partition[  16] =    496
+len of partition[  17] =    361
+len of partition[  18] =    484
+len of partition[  19] =    362
+len of partition[  20] =    468
+len of partition[  21] =    354
+len of partition[  22] =    492
+len of partition[  23] =    358
+len of partition[  24] =    496
+len of partition[  25] =    361
+len of partition[  26] =    484
+len of partition[  27] =    362
+len of partition[  28] =    468
+len of partition[  29] =    354
+len of partition[  30] =    492
+len of partition[  31] =    358
+len of partition[  32] =    496
+len of partition[  33] =    361
+len of partition[  34] =    484
+len of partition[  35] =    362
+len of partition[  36] =    468
+len of partition[  37] =    354
+len of partition[  38] =    492
+len of partition[  39] =    358
+len of partition[  40] =    496
+len of partition[  41] =    361
+len of partition[  42] =    484
+len of partition[  43] =    362
+len of partition[  44] =    468
+len of partition[  45] =    354
+len of partition[  46] =    492
+len of partition[  47] =    358
+len of partition[  48] =    496
+len of partition[  49] =    361
+len of partition[  50] =    484
+len of partition[  51] =    362
+len of partition[  52] =    468
+len of partition[  53] =    354
+len of partition[  54] =    492
+len of partition[  55] =    358
+len of partition[  56] =    496
+len of partition[  57] =    361
+len of partition[  58] =    484
+len of partition[  59] =    362
+len of partition[  60] =    468
+len of partition[  61] =    354
+len of partition[  62] =    492
+len of partition[  63] =    358
+             get_aoR wall time:     0.149599 CPU time:     4.110947
+In _build_buffer: ISDF Local size of buffer = 20.607 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    8
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  168
+select_IP_local_atm: npt_found =  169
+select_IP_local_atm: npt_found =  169
+select_IP_local_step1 wall time:     0.277253 CPU time:     8.767977
+ build_aoRg_possible wall time:     0.002418 CPU time:     0.064028
+select_IP_local_step2 wall time:     0.000094 CPU time:     0.000098
+select_IP_local_step3 wall time:     0.000487 CPU time:     0.031332
+Memory usage for aoR  :      6.607 MB
+Memory usage for aoRg :      2.654 MB
+            build_IP wall time:     0.280251 CPU time:     8.863436
+build_aux_basis_local wall time:     0.026400 CPU time:     0.826968
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+    CPU time for gen W [   1|[   0:  32]      0.26 sec, wall time      0.17 sec
+    CPU time for gen W [   2|[  32:  64]      0.36 sec, wall time      0.04 sec
+    CPU time for gen W [   3|[  64:  96]      0.36 sec, wall time      0.04 sec
+    CPU time for gen W [   4|[  96: 128]      0.83 sec, wall time      0.08 sec
+    CPU time for gen W [   5|[ 128: 160]      0.02 sec, wall time      0.00 sec
+    CPU time for gen W [   6|[ 160: 169]      0.15 sec, wall time      0.01 sec
+    CPU time for gen W [   7|[   0:  32]      0.44 sec, wall time      0.04 sec
+    CPU time for gen W [   8|[  32:  64]      0.40 sec, wall time      0.04 sec
+    CPU time for gen W [   9|[  64:  96]      0.40 sec, wall time      0.04 sec
+    CPU time for gen W [  10|[  96: 128]      0.40 sec, wall time      0.04 sec
+    CPU time for gen W [  11|[ 128: 160]      0.39 sec, wall time      0.04 sec
+    CPU time for gen W [  12|[ 160: 169]      0.15 sec, wall time      0.01 sec
+    CPU time for gen W [  13|[   0:  32]      0.60 sec, wall time      0.06 sec
+    CPU time for gen W [  14|[  32:  64]      0.42 sec, wall time      0.04 sec
+    CPU time for gen W [  15|[  64:  96]      0.40 sec, wall time      0.04 sec
+    CPU time for gen W [  16|[  96: 128]      0.39 sec, wall time      0.04 sec
+    CPU time for gen W [  17|[ 128: 160]      0.41 sec, wall time      0.04 sec
+    CPU time for gen W [  18|[ 160: 169]      0.14 sec, wall time      0.01 sec
+    CPU time for gen W [  19|[   0:  32]      0.58 sec, wall time      0.06 sec
+    CPU time for gen W [  20|[  32:  64]      0.41 sec, wall time      0.04 sec
+    CPU time for gen W [  21|[  64:  96]      0.38 sec, wall time      0.04 sec
+    CPU time for gen W [  22|[  96: 128]      0.34 sec, wall time      0.03 sec
+    CPU time for gen W [  23|[ 128: 160]      0.34 sec, wall time      0.03 sec
+    CPU time for gen W [  24|[ 160: 169]      0.14 sec, wall time      0.01 sec
+    CPU time for gen W [  25|[   0:  32]      0.51 sec, wall time      0.05 sec
+    CPU time for gen W [  26|[  32:  64]      0.34 sec, wall time      0.03 sec
+    CPU time for gen W [  27|[  64:  96]      0.35 sec, wall time      0.03 sec
+    CPU time for gen W [  28|[  96: 128]      0.36 sec, wall time      0.04 sec
+    CPU time for gen W [  29|[ 128: 160]      0.33 sec, wall time      0.03 sec
+    CPU time for gen W [  30|[ 160: 169]      0.13 sec, wall time      0.01 sec
+    CPU time for gen W [  31|[   0:  32]      0.53 sec, wall time      0.05 sec
+    CPU time for gen W [  32|[  32:  64]      0.37 sec, wall time      0.04 sec
+    CPU time for gen W [  33|[  64:  96]      0.38 sec, wall time      0.04 sec
+    CPU time for gen W [  34|[  96: 128]      0.43 sec, wall time      0.04 sec
+    CPU time for gen W [  35|[ 128: 160]      0.43 sec, wall time      0.04 sec
+    CPU time for gen W [  36|[ 160: 168]      0.14 sec, wall time      0.01 sec
+    CPU time for gen W [  37|[   0:  32]      0.52 sec, wall time      0.05 sec
+    CPU time for gen W [  38|[  32:  64]      0.35 sec, wall time      0.04 sec
+    CPU time for gen W [  39|[  64:  96]      0.35 sec, wall time      0.03 sec
+    CPU time for gen W [  40|[  96: 128]      0.36 sec, wall time      0.04 sec
+    CPU time for gen W [  41|[ 128: 160]      0.35 sec, wall time      0.04 sec
+    CPU time for gen W [  42|[ 160: 169]      0.13 sec, wall time      0.01 sec
+    CPU time for gen W [  43|[   0:  32]      0.50 sec, wall time      0.05 sec
+    CPU time for gen W [  44|[  32:  64]      0.35 sec, wall time      0.03 sec
+    CPU time for gen W [  45|[  64:  96]      0.35 sec, wall time      0.04 sec
+    CPU time for gen W [  46|[  96: 128]      0.35 sec, wall time      0.03 sec
+    CPU time for gen W [  47|[ 128: 160]      0.34 sec, wall time      0.03 sec
+    CPU time for gen W [  48|[ 160: 169]      0.13 sec, wall time      0.01 sec
+     build_V_W_local wall time:     3.438923 CPU time:    21.166119
+Number of interpolation points = 10808, effective CISDF =  42.22
+    CPU time for ISDF build     44.33 sec, wall time      4.28 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute spin because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-20/46905034/isdf.chk
+/home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_tools_Tsym.py:329: ComplexWarning: Casting complex values to real discards the imaginary part
+  operator_k[loc1] = CAST_TO_COMPLEX(REAL(op_1))

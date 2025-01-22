@@ -1,0 +1,67 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//gdf/46905120/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//gdf/46905120/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = None
+_cderi_to_save = /central/scratch/yangjunjie//gdf/46905120/gdf.chk
+len(kpts) = 8
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]]
+    CPU time for j3c  29080.63 sec, wall time   1011.81 sec
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+    CPU time for get_j pass 1    119.50 sec, wall time      3.95 sec
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+max_memory 245263 MB, blksize 240
+    CPU time for get_j pass 2     59.00 sec, wall time      1.86 sec
+    CPU time for get_j    178.70 sec, wall time      5.82 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 52 / 156
+max_memory 245239 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)    574.89 sec, wall time     18.05 sec
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)   1397.40 sec, wall time     43.91 sec
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)   2250.09 sec, wall time     71.07 sec
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+max_memory 245239 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)   3032.67 sec, wall time     95.91 sec
+max_memory 245239 MB, blksize 240
