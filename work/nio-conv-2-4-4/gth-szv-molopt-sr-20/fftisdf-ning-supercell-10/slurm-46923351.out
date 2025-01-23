@@ -2316,3 +2316,4 @@ max_memory = 233166 MB (12593 in use)
               J_half wall time:     2.075521 CPU time:    66.011275
     CPU time for get_jk_dm_local    150.78 sec, wall time      4.73 sec
 max_memory = 233148 MB (12611 in use)
+    CPU time for get_jk_dm_local   4857.63 sec, wall time    170.21 sec
