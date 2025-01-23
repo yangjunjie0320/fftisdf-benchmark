@@ -198,3 +198,43 @@ w[ 43], rank = 4680 / 4680
     CPU time for w[ 43]    804.31 sec, wall time     26.40 sec
 w[ 44], rank = 4680 / 4680
     CPU time for w[ 44]    965.70 sec, wall time     31.70 sec
+w[ 45], rank = 4680 / 4680
+    CPU time for w[ 45]    920.37 sec, wall time     30.09 sec
+w[ 46], rank = 4680 / 4680
+    CPU time for w[ 46]   1602.14 sec, wall time     52.32 sec
+w[ 47], rank = 4680 / 4680
+    CPU time for w[ 47]   1315.92 sec, wall time     43.04 sec
+w[ 48], rank = 4680 / 4680
+    CPU time for w[ 48]   1243.93 sec, wall time     40.66 sec
+w[ 49], rank = 4680 / 4680
+    CPU time for w[ 49]    811.52 sec, wall time     26.67 sec
+w[ 50], rank = 4680 / 4680
+    CPU time for w[ 50]    859.21 sec, wall time     27.99 sec
+w[ 51], rank = 4680 / 4680
+    CPU time for w[ 51]    895.68 sec, wall time     29.31 sec
+w[ 52], rank = 4680 / 4680
+    CPU time for w[ 52]    913.94 sec, wall time     30.14 sec
+w[ 53], rank = 4680 / 4680
+    CPU time for w[ 53]    870.96 sec, wall time     28.76 sec
+w[ 54], rank = 4680 / 4680
+    CPU time for w[ 54]    811.13 sec, wall time     26.62 sec
+w[ 55], rank = 4680 / 4680
+    CPU time for w[ 55]    793.91 sec, wall time     26.08 sec
+w[ 56], rank = 4680 / 4680
+    CPU time for w[ 56]    811.66 sec, wall time     26.68 sec
+w[ 57], rank = 4680 / 4680
+    CPU time for w[ 57]    934.73 sec, wall time     30.73 sec
+w[ 58], rank = 4680 / 4680
+    CPU time for w[ 58]    779.83 sec, wall time     25.55 sec
+w[ 59], rank = 4680 / 4680
+    CPU time for w[ 59]    871.56 sec, wall time     28.53 sec
+w[ 60], rank = 4680 / 4680
+    CPU time for w[ 60]   1341.65 sec, wall time     43.88 sec
+w[ 61], rank = 4680 / 4680
+    CPU time for w[ 61]    845.77 sec, wall time     27.81 sec
+w[ 62], rank = 4680 / 4680
+    CPU time for w[ 62]   1731.10 sec, wall time     56.36 sec
+w[ 63], rank = 4680 / 4680
+    CPU time for w[ 63]    886.02 sec, wall time     29.04 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-30-19-19-19/46905135/tmp.chk
+    CPU time for building ISDF  60426.10 sec, wall time   2019.37 sec

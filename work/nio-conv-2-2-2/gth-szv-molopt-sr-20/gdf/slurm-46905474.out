@@ -1,0 +1,104 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//gdf/46905474/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//gdf/46905474/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = None
+_cderi_to_save = /central/scratch/yangjunjie//gdf/46905474/gdf.chk
+len(kpts) = 8
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]]
+    CPU time for j3c  15541.39 sec, wall time    491.33 sec
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+    CPU time for get_j pass 1      7.07 sec, wall time      0.22 sec
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+max_memory 245373 MB, blksize 240
+    CPU time for get_j pass 2      2.72 sec, wall time      0.09 sec
+    CPU time for get_j      9.80 sec, wall time      0.31 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 52 / 56
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)     49.82 sec, wall time      1.56 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)    153.21 sec, wall time      4.80 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)    243.94 sec, wall time      7.64 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)    328.56 sec, wall time     10.29 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (4,*)    436.48 sec, wall time     13.67 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (5,*)    526.50 sec, wall time     16.49 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (6,*)    606.73 sec, wall time     19.00 sec
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+max_memory 245390 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (7,*)    718.66 sec, wall time     22.50 sec
+    CPU time for buf1      34.79 sec, wall time       1.11 sec
+    CPU time for ct11     582.04 sec, wall time      18.21 sec
+    CPU time for ct12    1153.20 sec, wall time      36.10 sec
+    CPU time for buf2       0.03 sec, wall time       0.00 sec
+    CPU time for ct21     263.08 sec, wall time       8.24 sec
+    CPU time for ct22     978.24 sec, wall time      30.63 sec
+    CPU time for load      52.27 sec, wall time       1.64 sec
+    CPU time for get_k_kpts   3064.00 sec, wall time     95.94 sec

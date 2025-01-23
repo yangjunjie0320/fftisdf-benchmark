@@ -227,3 +227,13 @@ w[ 58], rank = 3120 / 3120
     CPU time for w[ 58]    505.68 sec, wall time     16.45 sec
 w[ 59], rank = 3120 / 3120
     CPU time for w[ 59]    437.87 sec, wall time     14.32 sec
+w[ 60], rank = 3120 / 3120
+    CPU time for w[ 60]   1684.69 sec, wall time     54.74 sec
+w[ 61], rank = 3120 / 3120
+    CPU time for w[ 61]    697.37 sec, wall time     22.78 sec
+w[ 62], rank = 3120 / 3120
+    CPU time for w[ 62]    460.62 sec, wall time     15.06 sec
+w[ 63], rank = 3120 / 3120
+    CPU time for w[ 63]    460.03 sec, wall time     15.14 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-20-19-19-19/46905133/tmp.chk
+    CPU time for building ISDF  44900.19 sec, wall time   1486.03 sec

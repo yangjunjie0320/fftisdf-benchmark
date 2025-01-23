@@ -628,3 +628,67 @@ w[184], rank = 4118 / 4160
     CPU time for w[184]    195.68 sec, wall time      6.89 sec
 w[185], rank = 4117 / 4160
     CPU time for w[185]    177.18 sec, wall time      6.27 sec
+w[186], rank = 4122 / 4160
+    CPU time for w[186]    210.35 sec, wall time      7.29 sec
+w[187], rank = 4123 / 4160
+    CPU time for w[187]    180.58 sec, wall time      6.41 sec
+w[188], rank = 4119 / 4160
+    CPU time for w[188]    213.89 sec, wall time      7.49 sec
+w[189], rank = 4126 / 4160
+    CPU time for w[189]    176.65 sec, wall time      6.28 sec
+w[190], rank = 4122 / 4160
+    CPU time for w[190]    203.05 sec, wall time      7.13 sec
+w[191], rank = 4120 / 4160
+    CPU time for w[191]    180.19 sec, wall time      6.42 sec
+w[192], rank = 4126 / 4160
+    CPU time for w[192]    195.50 sec, wall time      6.95 sec
+w[193], rank = 4116 / 4160
+    CPU time for w[193]    176.16 sec, wall time      6.27 sec
+w[194], rank = 4127 / 4160
+    CPU time for w[194]    198.97 sec, wall time      7.03 sec
+w[195], rank = 4124 / 4160
+    CPU time for w[195]    178.17 sec, wall time      6.33 sec
+w[196], rank = 4125 / 4160
+    CPU time for w[196]    203.39 sec, wall time      7.17 sec
+w[197], rank = 4120 / 4160
+    CPU time for w[197]    188.67 sec, wall time      6.84 sec
+w[198], rank = 4126 / 4160
+    CPU time for w[198]    194.80 sec, wall time      6.88 sec
+w[199], rank = 4123 / 4160
+    CPU time for w[199]    175.45 sec, wall time      6.23 sec
+w[200], rank = 4124 / 4160
+    CPU time for w[200]    199.68 sec, wall time      7.00 sec
+w[201], rank = 4125 / 4160
+    CPU time for w[201]    175.50 sec, wall time      6.20 sec
+w[202], rank = 4130 / 4160
+    CPU time for w[202]    201.33 sec, wall time      7.09 sec
+w[203], rank = 4124 / 4160
+    CPU time for w[203]    175.88 sec, wall time      6.28 sec
+w[204], rank = 4121 / 4160
+    CPU time for w[204]    200.34 sec, wall time      7.07 sec
+w[205], rank = 4121 / 4160
+    CPU time for w[205]    180.99 sec, wall time      6.48 sec
+w[206], rank = 4120 / 4160
+    CPU time for w[206]    211.94 sec, wall time      7.46 sec
+w[207], rank = 4127 / 4160
+    CPU time for w[207]    174.25 sec, wall time      6.25 sec
+w[208], rank = 4125 / 4160
+    CPU time for w[208]    193.42 sec, wall time      6.88 sec
+w[209], rank = 4127 / 4160
+    CPU time for w[209]    177.69 sec, wall time      6.36 sec
+w[210], rank = 4123 / 4160
+    CPU time for w[210]    198.90 sec, wall time      6.99 sec
+w[211], rank = 4122 / 4160
+    CPU time for w[211]    177.29 sec, wall time      6.32 sec
+w[212], rank = 4122 / 4160
+    CPU time for w[212]    190.43 sec, wall time      6.74 sec
+w[213], rank = 4126 / 4160
+    CPU time for w[213]    179.66 sec, wall time      6.36 sec
+w[214], rank = 4117 / 4160
+    CPU time for w[214]    182.82 sec, wall time      6.51 sec
+w[215], rank = 4123 / 4160
+    CPU time for w[215]    185.53 sec, wall time      6.58 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-40-19-19-19/46905087/tmp.chk
+    CPU time for building ISDF  42921.95 sec, wall time   1611.60 sec
+/var/spool/slurmd/job46905087/slurm_script: line 40: 1500836 Killed                  python main.py --c0=40.00 --m0=19-19-19 --cell=diamond-conv.vasp --kmesh=6-6-6 --basis=gth-dzvp-molopt-sr --ke_cutoff=20.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46905087.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

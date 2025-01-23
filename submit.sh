@@ -25,16 +25,16 @@ function submit() {
 }
 
 ke_cutoff=20
-for cell in diamond-conv nio-conv; do
+for cell in nio-conv; do
     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
         for kmesh in 2-2-2 4-4-4 6-6-6; do
             for method in fftdf gdf; do
                 submit $cell $kmesh $basis $ke_cutoff $method
             done
 
-            for c0 in 10 20 30 40; do
+            for c0 in 40 60 80 120; do
                 method=fftisdf-yang-$c0-19-19-19
-                submit $cell $kmesh $basis $ke_cutoff $method
+                # submit $cell $kmesh $basis $ke_cutoff $method
 
                 method=fftisdf-ning-$c0
                 submit $cell $kmesh $basis $ke_cutoff $method

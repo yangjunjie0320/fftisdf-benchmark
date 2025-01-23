@@ -1,0 +1,35 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 245760
+TMPDIR = /central/scratch/yangjunjie//fftdf/46905485/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftdf/46905485/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+WARN: ke_cutoff/mesh (20 / [17 17 17]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 1e+02 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+fft_jk: get_k_kpts max_memory 243523.682304  blksize 56
+    CPU time for get_k_kpts: make_kpt (0,*)  67292.24 sec, wall time   2123.69 sec
+    CPU time for get_k_kpts: make_kpt (1,*)  66694.15 sec, wall time   2102.62 sec
+    CPU time for get_k_kpts: make_kpt (2,*)  66483.00 sec, wall time   2094.27 sec
+    CPU time for get_k_kpts: make_kpt (3,*)  66483.29 sec, wall time   2095.17 sec
+    CPU time for get_k_kpts: make_kpt (4,*)  66110.13 sec, wall time   2083.02 sec
+    CPU time for get_k_kpts: make_kpt (5,*)  65759.74 sec, wall time   2073.25 sec
+    CPU time for get_k_kpts: make_kpt (6,*)  66237.02 sec, wall time   2087.63 sec
+    CPU time for get_k_kpts: make_kpt (7,*)  66545.65 sec, wall time   2096.60 sec
+    CPU time for get_k_kpts: make_kpt (8,*)  66725.46 sec, wall time   2102.66 sec
+    CPU time for get_k_kpts: make_kpt (9,*)  66291.79 sec, wall time   2088.66 sec
+    CPU time for get_k_kpts: make_kpt (10,*)  66989.05 sec, wall time   2111.98 sec
+    CPU time for get_k_kpts: make_kpt (11,*)  66370.71 sec, wall time   2092.82 sec
+    CPU time for get_k_kpts: make_kpt (12,*)  66232.81 sec, wall time   2087.30 sec
+    CPU time for get_k_kpts: make_kpt (13,*)  65562.24 sec, wall time   2065.65 sec
