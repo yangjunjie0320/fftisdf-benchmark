@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     cmd = "\n"
     if "fftisdf-yang" in method:
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-yang"))
+        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")), "%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")
         method = method.split("-")
 
         cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-yang")
@@ -28,16 +28,21 @@ if __name__ == "__main__":
         cmd += "--c0=%.2f --m0=%s " % (c0, m0)
     
     elif "fftisdf-ning" in method:
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-ning"))
+        # assert 1 == 2, method
         method = method.split("-")
+        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))), "%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))
 
         cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-ning")
-        c0 = float(method[2])
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "-".join(method[:-1]))
+        print(cmd)
+        c0 = float(method[-1])
         cmd += "python main.py "
         cmd += "--c0=%.2f " % c0
 
     else:
+        if "supercell" in method:
+            cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
+
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, method))
         cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method)
         cmd += "python main.py "
