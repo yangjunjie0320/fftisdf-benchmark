@@ -29,11 +29,11 @@ for cell in diamond-conv nio-conv cco-2x2-frac; do
     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
         for kmesh in 1-1-2 1-2-2 2-2-2 2-2-4 2-4-4 4-4-4; do
             method=gdf
-            submit $cell $kmesh $basis $ke_cutoff $method
+            # submit $cell $kmesh $basis $ke_cutoff $method
 
             for c0 in 10 20; do
-                method=fftisdf-yang-$c0-15-15-15
-                submit $cell $kmesh $basis $ke_cutoff $method
+                # method=fftisdf-yang-$c0-15-15-15
+                # submit $cell $kmesh $basis $ke_cutoff $method
 
                 method=fftisdf-ning-supercell-$c0
                 submit $cell $kmesh $basis $ke_cutoff $method

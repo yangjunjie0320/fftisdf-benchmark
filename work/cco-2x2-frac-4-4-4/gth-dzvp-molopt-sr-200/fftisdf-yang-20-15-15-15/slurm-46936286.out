@@ -1,0 +1,121 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-15-15-15-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46936286/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-20-15-15-15-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46936286/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 64
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.26135187]
+ [0.         0.         0.52270374]
+ [0.         0.         0.78405561]
+ [0.         0.10779511 0.        ]
+ [0.         0.10779511 0.26135187]
+ [0.         0.10779511 0.52270374]
+ [0.         0.10779511 0.78405561]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.26135187]
+ [0.         0.21559021 0.52270374]
+ [0.         0.21559021 0.78405561]
+ [0.         0.32338532 0.        ]
+ [0.         0.32338532 0.26135187]
+ [0.         0.32338532 0.52270374]
+ [0.         0.32338532 0.78405561]
+ [0.10779511 0.         0.        ]
+ [0.10779511 0.         0.26135187]
+ [0.10779511 0.         0.52270374]
+ [0.10779511 0.         0.78405561]
+ [0.10779511 0.10779511 0.        ]
+ [0.10779511 0.10779511 0.26135187]
+ [0.10779511 0.10779511 0.52270374]
+ [0.10779511 0.10779511 0.78405561]
+ [0.10779511 0.21559021 0.        ]
+ [0.10779511 0.21559021 0.26135187]
+ [0.10779511 0.21559021 0.52270374]
+ [0.10779511 0.21559021 0.78405561]
+ [0.10779511 0.32338532 0.        ]
+ [0.10779511 0.32338532 0.26135187]
+ [0.10779511 0.32338532 0.52270374]
+ [0.10779511 0.32338532 0.78405561]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.26135187]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.         0.78405561]
+ [0.21559021 0.10779511 0.        ]
+ [0.21559021 0.10779511 0.26135187]
+ [0.21559021 0.10779511 0.52270374]
+ [0.21559021 0.10779511 0.78405561]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.26135187]
+ [0.21559021 0.21559021 0.52270374]
+ [0.21559021 0.21559021 0.78405561]
+ [0.21559021 0.32338532 0.        ]
+ [0.21559021 0.32338532 0.26135187]
+ [0.21559021 0.32338532 0.52270374]
+ [0.21559021 0.32338532 0.78405561]
+ [0.32338532 0.         0.        ]
+ [0.32338532 0.         0.26135187]
+ [0.32338532 0.         0.52270374]
+ [0.32338532 0.         0.78405561]
+ [0.32338532 0.10779511 0.        ]
+ [0.32338532 0.10779511 0.26135187]
+ [0.32338532 0.10779511 0.52270374]
+ [0.32338532 0.10779511 0.78405561]
+ [0.32338532 0.21559021 0.        ]
+ [0.32338532 0.21559021 0.26135187]
+ [0.32338532 0.21559021 0.52270374]
+ [0.32338532 0.21559021 0.78405561]
+ [0.32338532 0.32338532 0.        ]
+ [0.32338532 0.32338532 0.26135187]
+ [0.32338532 0.32338532 0.52270374]
+ [0.32338532 0.32338532 0.78405561]]
+Overwritten attributes  tol c0 kmesh m0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  95.62
+Final parent grid size = [35 35 15]
+
+Selecting interpolation points
+nkpts = 64, nao = 260, c0 =  20.00
+Parent grid mesh = [35 35 15], grid size = 18375
+    CPU time for select interpolation points   3607.03 sec, wall time    103.16 sec
+Pivoted Cholesky rank = 10358, nip = 5200, estimated error = 6.39e-03
+Number of interpolation points = 5200, effective CISDF =  20.00
+    CPU time for building left-hand side    492.77 sec, wall time     20.95 sec
+
+kpt = 64, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 8671, nip = 5200
+required disk space = 1970 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-20-15-15-15-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46936286/9b3wubas
+blksize = 8671, memory for aoR_loop = 46171 MB
+finished aoR_loop[       0:    8671]
+finished aoR_loop[    8671:   17342]
+finished aoR_loop[   17342:   26013]
+finished aoR_loop[   26013:   34684]
+finished aoR_loop[   34684:   43355]
+finished aoR_loop[   43355:   52026]
+finished aoR_loop[   52026:   60697]
+finished aoR_loop[   60697:   69368]
+finished aoR_loop[   69368:   78039]
+finished aoR_loop[   78039:   86710]
+finished aoR_loop[   86710:   95381]
+finished aoR_loop[   95381:  104052]
+finished aoR_loop[  104052:  112723]
+finished aoR_loop[  112723:  121394]

@@ -59,8 +59,8 @@ class ISDF(object):
 
         direct = False
         c0 = self.c0
-        rela_qr = 1e-4
-        aoR_cutoff = 1e-10
+        rela_qr = 1e-3
+        aoR_cutoff = 1e-8
         build_V_K_bunchsize = 512
         with_robust_fitting = False
 

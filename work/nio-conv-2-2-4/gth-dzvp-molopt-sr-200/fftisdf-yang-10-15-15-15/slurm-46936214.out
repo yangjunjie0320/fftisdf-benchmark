@@ -1,0 +1,82 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-nio-conv-2-2-4-gth-dzvp-molopt-sr/46936214/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-nio-conv-2-2-4-gth-dzvp-molopt-sr/46936214/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [53 53 53] (148877 PWs)
+len(kpts) = 16
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]]
+Overwritten attributes  kmesh tol c0 m0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [53 53 53]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 25 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+kmesh = [2 2 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  55.19
+Final parent grid size = [15 15 15]
+
+Selecting interpolation points
+nkpts = 16, nao = 156, c0 =  10.00
+Parent grid mesh = [15 15 15], grid size = 3375
+    CPU time for select interpolation points    157.25 sec, wall time      2.64 sec
+Pivoted Cholesky rank = 3185, nip = 1560, estimated error = 1.98e-02
+Number of interpolation points = 1560, effective CISDF =  10.00
+    CPU time for building left-hand side     32.55 sec, wall time      0.57 sec
+
+kpt = 16, ngrid = 148877, nao = 156
+ngrid = 148877, blksize = 122815, nip = 1560
+required disk space = 59 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-10-15-15-15-nio-conv-2-2-4-gth-dzvp-molopt-sr/46936214/i211fg8h
+blksize = 122815, memory for aoR_loop = 49047 MB
+finished aoR_loop[       0:  122815]
+finished aoR_loop[  122815:  148877]
+    CPU time for building right-hand side    655.61 sec, wall time     62.45 sec
+w[  0], rank = 1560 / 1560
+    CPU time for w[  0]  17994.23 sec, wall time    298.83 sec
+w[  1], rank = 1560 / 1560
+    CPU time for w[  1]  20827.00 sec, wall time    337.89 sec
+w[  2], rank = 1560 / 1560
+    CPU time for w[  2]  18372.60 sec, wall time    297.19 sec
+w[  3], rank = 1560 / 1560
+    CPU time for w[  3]  18663.74 sec, wall time    303.54 sec
+w[  4], rank = 1560 / 1560
+    CPU time for w[  4]  18598.37 sec, wall time    300.68 sec
+w[  5], rank = 1560 / 1560
+    CPU time for w[  5]  18829.49 sec, wall time    305.36 sec
+w[  6], rank = 1560 / 1560
+    CPU time for w[  6]  18567.48 sec, wall time    300.16 sec
+w[  7], rank = 1560 / 1560
+    CPU time for w[  7]  18474.03 sec, wall time    299.34 sec
+w[  8], rank = 1560 / 1560
+    CPU time for w[  8]  19619.87 sec, wall time    317.54 sec
+w[  9], rank = 1560 / 1560
+    CPU time for w[  9]  18538.81 sec, wall time    300.98 sec

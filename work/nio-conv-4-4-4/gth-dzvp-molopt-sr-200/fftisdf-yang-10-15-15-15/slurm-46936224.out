@@ -1,0 +1,125 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-nio-conv-4-4-4-gth-dzvp-molopt-sr/46936224/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-nio-conv-4-4-4-gth-dzvp-molopt-sr/46936224/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [53 53 53] (148877 PWs)
+len(kpts) = 64
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  1.98557713e-01  0.00000000e+00]
+ [-1.42289801e-17  1.98557713e-01  1.98557713e-01]
+ [-2.84579601e-17  1.98557713e-01  3.97115427e-01]
+ [-4.26869402e-17  1.98557713e-01  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 0.00000000e+00  5.95673140e-01  0.00000000e+00]
+ [-1.42289801e-17  5.95673140e-01  1.98557713e-01]
+ [-2.84579601e-17  5.95673140e-01  3.97115427e-01]
+ [-4.26869402e-17  5.95673140e-01  5.95673140e-01]
+ [ 1.98557713e-01  1.42289801e-17  0.00000000e+00]
+ [ 1.98557713e-01  0.00000000e+00  1.98557713e-01]
+ [ 1.98557713e-01 -1.42289801e-17  3.97115427e-01]
+ [ 1.98557713e-01 -2.84579601e-17  5.95673140e-01]
+ [ 1.98557713e-01  1.98557713e-01  0.00000000e+00]
+ [ 1.98557713e-01  1.98557713e-01  1.98557713e-01]
+ [ 1.98557713e-01  1.98557713e-01  3.97115427e-01]
+ [ 1.98557713e-01  1.98557713e-01  5.95673140e-01]
+ [ 1.98557713e-01  3.97115427e-01  0.00000000e+00]
+ [ 1.98557713e-01  3.97115427e-01  1.98557713e-01]
+ [ 1.98557713e-01  3.97115427e-01  3.97115427e-01]
+ [ 1.98557713e-01  3.97115427e-01  5.95673140e-01]
+ [ 1.98557713e-01  5.95673140e-01  0.00000000e+00]
+ [ 1.98557713e-01  5.95673140e-01  1.98557713e-01]
+ [ 1.98557713e-01  5.95673140e-01  3.97115427e-01]
+ [ 1.98557713e-01  5.95673140e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  1.98557713e-01  0.00000000e+00]
+ [ 3.97115427e-01  1.98557713e-01  1.98557713e-01]
+ [ 3.97115427e-01  1.98557713e-01  3.97115427e-01]
+ [ 3.97115427e-01  1.98557713e-01  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  5.95673140e-01  0.00000000e+00]
+ [ 3.97115427e-01  5.95673140e-01  1.98557713e-01]
+ [ 3.97115427e-01  5.95673140e-01  3.97115427e-01]
+ [ 3.97115427e-01  5.95673140e-01  5.95673140e-01]
+ [ 5.95673140e-01  4.26869402e-17  0.00000000e+00]
+ [ 5.95673140e-01  2.84579601e-17  1.98557713e-01]
+ [ 5.95673140e-01  1.42289801e-17  3.97115427e-01]
+ [ 5.95673140e-01  0.00000000e+00  5.95673140e-01]
+ [ 5.95673140e-01  1.98557713e-01  0.00000000e+00]
+ [ 5.95673140e-01  1.98557713e-01  1.98557713e-01]
+ [ 5.95673140e-01  1.98557713e-01  3.97115427e-01]
+ [ 5.95673140e-01  1.98557713e-01  5.95673140e-01]
+ [ 5.95673140e-01  3.97115427e-01  0.00000000e+00]
+ [ 5.95673140e-01  3.97115427e-01  1.98557713e-01]
+ [ 5.95673140e-01  3.97115427e-01  3.97115427e-01]
+ [ 5.95673140e-01  3.97115427e-01  5.95673140e-01]
+ [ 5.95673140e-01  5.95673140e-01  0.00000000e+00]
+ [ 5.95673140e-01  5.95673140e-01  1.98557713e-01]
+ [ 5.95673140e-01  5.95673140e-01  3.97115427e-01]
+ [ 5.95673140e-01  5.95673140e-01  5.95673140e-01]]
+Overwritten attributes  kmesh c0 m0 tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [53 53 53]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 25 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  55.19
+Final parent grid size = [15 15 15]
+
+Selecting interpolation points
+nkpts = 64, nao = 156, c0 =  10.00
+Parent grid mesh = [15 15 15], grid size = 3375
+    CPU time for select interpolation points    773.80 sec, wall time     12.45 sec
+Pivoted Cholesky rank = 3293, nip = 1560, estimated error = 3.93e-02
+Number of interpolation points = 1560, effective CISDF =  10.00
+    CPU time for building left-hand side     45.42 sec, wall time      1.69 sec
+
+kpt = 64, ngrid = 148877, nao = 156
+ngrid = 148877, blksize = 30563, nip = 1560
+required disk space = 237 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-10-15-15-15-nio-conv-4-4-4-gth-dzvp-molopt-sr/46936224/4svfvg2z
+blksize = 30563, memory for aoR_loop = 48822 MB
+finished aoR_loop[       0:   30563]
+finished aoR_loop[   30563:   61126]
+finished aoR_loop[   61126:   91689]
+finished aoR_loop[   91689:  122252]
+finished aoR_loop[  122252:  148877]
+    CPU time for building right-hand side   2865.18 sec, wall time    265.72 sec
+w[  0], rank = 1560 / 1560
+    CPU time for w[  0]  18176.56 sec, wall time    296.59 sec
+w[  1], rank = 1560 / 1560
+    CPU time for w[  1]  18566.77 sec, wall time    301.27 sec
+w[  2], rank = 1560 / 1560
+    CPU time for w[  2]  18282.87 sec, wall time    295.62 sec
+w[  3], rank = 1560 / 1560
+    CPU time for w[  3]  18606.19 sec, wall time    301.79 sec
+w[  4], rank = 1560 / 1560
+    CPU time for w[  4]  18609.63 sec, wall time    301.87 sec
+w[  5], rank = 1560 / 1560
+    CPU time for w[  5]  18285.45 sec, wall time    297.22 sec

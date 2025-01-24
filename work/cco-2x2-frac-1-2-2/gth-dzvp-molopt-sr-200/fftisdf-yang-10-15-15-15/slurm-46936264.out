@@ -1,0 +1,60 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-cco-2x2-frac-1-2-2-gth-dzvp-molopt-sr/46936264/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-cco-2x2-frac-1-2-2-gth-dzvp-molopt-sr/46936264/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 4
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.52270374]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.52270374]]
+Overwritten attributes  m0 kmesh tol c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [1 2 2]
+Input parent grid mesh = [15, 15, 15], ke_cutoff =  95.62
+Final parent grid size = [35 35 15]
+
+Selecting interpolation points
+nkpts = 4, nao = 260, c0 =  10.00
+Parent grid mesh = [35 35 15], grid size = 18375
+    CPU time for select interpolation points    537.98 sec, wall time     17.94 sec
+Pivoted Cholesky rank = 7985, nip = 2600, estimated error = 2.20e-02
+Number of interpolation points = 2600, effective CISDF =  10.00
+    CPU time for building left-hand side     21.26 sec, wall time      0.33 sec
+
+kpt = 4, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 294773, nip = 2600
+required disk space = 61 GB
+finished creating fswp: /central/scratch/yangjunjie/fftisdf-yang-10-15-15-15-cco-2x2-frac-1-2-2-gth-dzvp-molopt-sr/46936264/8d5tlxra
+blksize = 294773, memory for aoR_loop = 49050 MB
+finished aoR_loop[       0:  294773]
+finished aoR_loop[  294773:  370025]
+    CPU time for building right-hand side    696.52 sec, wall time     71.88 sec
+w[  0], rank = 2600 / 2600
+    CPU time for w[  0]   3142.78 sec, wall time     96.51 sec
+w[  1], rank = 2600 / 2600
+    CPU time for w[  1]   3397.54 sec, wall time    102.96 sec
+w[  2], rank = 2600 / 2600
+    CPU time for w[  2]   3420.87 sec, wall time     99.09 sec
+w[  3], rank = 2600 / 2600
+    CPU time for w[  3]   3501.50 sec, wall time    103.05 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-cco-2x2-frac-1-2-2-gth-dzvp-molopt-sr/46936264/tmp.chk
+    CPU time for building ISDF  14730.81 sec, wall time    492.80 sec
