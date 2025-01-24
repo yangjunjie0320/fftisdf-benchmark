@@ -1,0 +1,514 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-1-1-2-gth-szv-molopt-sr/46937715/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-1-1-2-gth-szv-molopt-sr/46937715/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+LOADING ISDF BACKEND
+NUM_THREADS   : 64
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac-1-1-2/gth-szv-molopt-sr-200/fftisdf-ning-supercell-20/main.py ****
+import os, sys
+import numpy, scipy
+import pyscf
+
+TMPDIR = os.getenv("TMPDIR", None)
+DATA_PATH = os.getenv("DATA_PATH", None)
+PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
+PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+
+try:
+    from pyscf.lib import generate_pickle_methods
+    getstate, setstate = generate_pickle_methods(
+        excludes=(
+            '_isdf_to_save', 
+            '_isdf', 
+            'buffer_fft',
+            'buffer_cpu', 
+            'buffer_gpu', 
+            'buffer',
+            'cell', 
+            'prim_cell',
+            '_swapfile',
+        )
+    )   
+except ImportError:
+    import sys 
+    sys.stderr.write("pyscf.lib.generate_pickle_methods is not available, ISDF will not support pickle\n")
+    def raise_error(*args, **kwargs):
+        raise NotImplementedError("ISDF does not support pickle")
+    getstate = setstate = raise_error
+
+from pyscf.isdf import isdf_local
+class ISDF_Local(isdf_local.ISDF_Local):
+    __getstate__ = getstate
+    __setstate__ = setstate
+
+class ISDF(object):
+    cell = None
+    group = None
+
+    kpts = None
+    kmesh = None
+    c0 = None
+    verbose = 10
+
+    _isdf = None
+    _isdf_to_save = None
+    
+    def __init__(self, cell=None, kpts=None):
+        assert kpts is None
+        self.cell = cell
+        self.kpts = kpts
+
+    def build(self):
+        cell = self.cell.copy(deep=True)
+
+        group = self.group
+        assert group is not None
+
+        direct = False
+        c0 = self.c0
+        rela_qr = 1e-3
+        aoR_cutoff = 1e-8
+        build_V_K_bunchsize = 512
+        with_robust_fitting = False
+
+        from pyscf.lib import logger
+        from pyscf.lib.logger import perf_counter
+        from pyscf.lib.logger import process_clock
+        t0 = (process_clock(), perf_counter())
+        log = logger.new_logger(cell, 10)
+        log.info("ISDF module: %s" % isdf_local.__file__)
+
+        isdf_obj = ISDF_Local(
+            cell, limited_memory=True, direct=direct,
+            with_robust_fitting=with_robust_fitting,
+            build_V_K_bunchsize=build_V_K_bunchsize,
+        )
+
+        isdf_obj.verbose = 10
+        log.info("c0 = %6.2f" % c0)
+
+        isdf_obj.build(c=c0, rela_cutoff=rela_qr, group=group)
+
+        nip = isdf_obj.naux
+        log.info(
+            "Number of interpolation points = %d, effective CISDF = %6.2f",
+            nip, nip / isdf_obj.nao
+        )
+        log.timer("ISDF build", *t0)
+
+        import pickle
+        with open(self._isdf, "wb") as f:
+            pickle.dump(isdf_obj, f)
+            log.debug("finished saving to %s", self._isdf)
+
+        isdf_obj._isdf = self._isdf
+        isdf_obj._isdf_to_save = self._isdf
+        return isdf_obj
+
+def main(args):
+    from utils import cell_from_poscar
+    path = os.path.join(DATA_PATH, args.cell)
+    assert os.path.exists(path), "Cell file not found: %s" % path
+
+    c = cell_from_poscar(path)
+    c.basis = args.basis
+    c.pseudo = args.pseudo
+    c.verbose = 0
+    c.unit = 'aa'
+    # c.exp_to_discard = 0.1
+    # c.exp_to_discard = 0.0
+    c.max_memory = PYSCF_MAX_MEMORY
+    c.ke_cutoff = args.ke_cutoff
+    c.build(dump_input=False)
+
+    kmesh = [int(x) for x in args.kmesh.split("-")]
+    kmesh = numpy.array(kmesh)
+    kpts = c.get_kpts(kmesh)
+
+    pcell = c.copy(deep=True)
+
+    natm = len(pcell.atom)
+    atm = []
+    for ia in range(natm):
+        s = pcell.atom_symbol(ia)
+        x = pcell.atom_coord(ia, unit='A')
+        atm.append([s, x])
+
+    from pyscf.lib.parameters import BOHR
+    lvx = pcell.lattice_vectors() * BOHR
+
+    from pyscf.isdf.isdf_tools_cell import build_supercell_with_partition
+    scell, group = build_supercell_with_partition(
+        atm, lvx, spin=0, charge=0, mesh=None, Ls=kmesh,
+        partition=None, basis=args.basis,
+        pseudo=args.pseudo, ke_cutoff=args.ke_cutoff,
+        max_memory=PYSCF_MAX_MEMORY, 
+        precision=1e-12, 
+        use_particle_mesh_ewald=True,
+        verbose=4,
+    )
+
+    from utils import get_jk_time
+    df_obj = ISDF(scell)
+    df_obj.group = group
+    df_obj.c0 = args.c0
+    df_obj.verbose = 10
+    df_obj.kmesh = kmesh
+    df_obj._isdf = os.path.join(TMPDIR, "isdf.chk")
+
+    from utils import get_jk_time
+    kmesh = None
+    get_jk_time(scell, kmesh=kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
+    parser.add_argument("--kmesh", type=str, default="2-2-2")
+    parser.add_argument("--c0", type=float, default=20.0)
+    parser.add_argument("--ke_cutoff", type=float, default=40)
+    parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
+    parser.add_argument("--pseudo", type=str, default="gth-pade")
+
+    args = parser.parse_args()
+    main(args)
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-35-27.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 64
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Thu Jan 23 20:40:07 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-1-1-2-gth-szv-molopt-sr/46937715/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] conf_file None
+[INPUT] verbose = 4
+[INPUT] num. atoms = 32
+[INPUT] num. electrons = 264
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 Cu     1.927800000000   1.927800000000   1.590250000000 AA    3.643014022937   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  2 Cu     5.783400000000   5.783400000000   1.590250000000 AA   10.929042068810  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  3 Cu     1.927800000000   5.783400000000   1.590250000000 AA    3.643014022937  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  4 Cu     5.783400000000   1.927800000000   1.590250000000 AA   10.929042068810   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  5 O      1.927800000000   3.855600000000   1.590250000000 AA    3.643014022937   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT]  6 O      3.855600000000   5.783400000000   1.590250000000 AA    7.286028045873  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  7 O      5.783400000000   3.855600000000   1.590250000000 AA   10.929042068810   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT]  8 O      3.855600000000   1.927800000000   1.590250000000 AA    7.286028045873   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  9 O      0.000000000000   1.927800000000   1.590250000000 AA    0.000000000000   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 10 O      1.927800000000   7.711200000000   1.590250000000 AA    3.643014022937  14.572056091746   3.005136969590 Bohr   0.0
+[INPUT] 11 O      7.711200000000   5.783400000000   1.590250000000 AA   14.572056091746  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 12 O      5.783400000000   0.000000000000   1.590250000000 AA   10.929042068810   0.000000000000   3.005136969590 Bohr   0.0
+[INPUT] 13 Ca     0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT] 14 Ca     3.855600000000   3.855600000000   0.000000000000 AA    7.286028045873   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 15 Ca     7.711200000000   3.855600000000   0.000000000000 AA   14.572056091746   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 16 Ca     3.855600000000   7.711200000000   0.000000000000 AA    7.286028045873  14.572056091746   0.000000000000 Bohr   0.0
+[INPUT] 17 Cu     1.927800000000   1.927800000000   4.770750000000 AA    3.643014022937   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 18 Cu     5.783400000000   5.783400000000   4.770750000000 AA   10.929042068810  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 19 Cu     1.927800000000   5.783400000000   4.770750000000 AA    3.643014022937  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 20 Cu     5.783400000000   1.927800000000   4.770750000000 AA   10.929042068810   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 21 O      1.927800000000   3.855600000000   4.770750000000 AA    3.643014022937   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 22 O      3.855600000000   5.783400000000   4.770750000000 AA    7.286028045873  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 23 O      5.783400000000   3.855600000000   4.770750000000 AA   10.929042068810   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 24 O      3.855600000000   1.927800000000   4.770750000000 AA    7.286028045873   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 25 O      0.000000000000   1.927800000000   4.770750000000 AA    0.000000000000   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 26 O      1.927800000000   7.711200000000   4.770750000000 AA    3.643014022937  14.572056091746   9.015410908769 Bohr   0.0
+[INPUT] 27 O      7.711200000000   5.783400000000   4.770750000000 AA   14.572056091746  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 28 O      5.783400000000   0.000000000000   4.770750000000 AA   10.929042068810   0.000000000000   9.015410908769 Bohr   0.0
+[INPUT] 29 Ca     0.000000000000   0.000000000000   3.180500000000 AA    0.000000000000   0.000000000000   6.010273939179 Bohr   0.0
+[INPUT] 30 Ca     3.855600000000   3.855600000000   3.180500000000 AA    7.286028045873   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 31 Ca     7.711200000000   3.855600000000   3.180500000000 AA   14.572056091746   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 32 Ca     3.855600000000   7.711200000000   3.180500000000 AA    7.286028045873  14.572056091746   6.010273939179 Bohr   0.0
+
+nuclear repulsion = -732.906017894692
+number of shells = 72
+number of NR pGTOs = 944
+number of NR cGTOs = 176
+basis = gth-szv-molopt-sr
+ecp = {}
+CPU time:        16.31
+lattice vectors  a1 [14.572056092, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 14.572056092, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 12.020547878]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 2552.5
+rcut = 34.84447946911392 (nimgs = [3 3 3])
+lattice sum = 585 cells
+precision = 1e-12
+pseudo = gth-pade
+ke_cutoff = 200.0
+    = [95 95 79] mesh (712975 PWs)
+Initial guess from minao.
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local.py
+ISDF: mol.ke_cutoff = 200.000000
+ISDF: mol.natm      = 32
+ISDF: mol.nao       = 176
+c0 =  20.00
+       get_partition wall time:     2.909293 CPU time:     5.936618
+len of partition[   0] =  22027
+len of partition[   1] =  22027
+len of partition[   2] =  22027
+len of partition[   3] =  22027
+len of partition[   4] =  21697
+len of partition[   5] =  21776
+len of partition[   6] =  21695
+len of partition[   7] =  21612
+len of partition[   8] =  20982
+len of partition[   9] =  20909
+len of partition[  10] =  20909
+len of partition[  11] =  20836
+len of partition[  12] =  24951
+len of partition[  13] =  24840
+len of partition[  14] =  24852
+len of partition[  15] =  24852
+len of partition[  16] =  21587
+len of partition[  17] =  21587
+len of partition[  18] =  21587
+len of partition[  19] =  21587
+len of partition[  20] =  21505
+len of partition[  21] =  21584
+len of partition[  22] =  21503
+len of partition[  23] =  21420
+len of partition[  24] =  20798
+len of partition[  25] =  20725
+len of partition[  26] =  20725
+len of partition[  27] =  20652
+len of partition[  28] =  24872
+len of partition[  29] =  24952
+len of partition[  30] =  24936
+len of partition[  31] =  24936
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:     3.486603 CPU time:   221.166036
+In _build_buffer: ISDF Local size of buffer = 1762.420 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =   32
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  116
+select_IP_local_atm: npt_found =  119
+select_IP_local_atm: npt_found =  120
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  101
+select_IP_local_atm: npt_found =   99
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  129
+select_IP_local_atm: npt_found =  130
+select_IP_local_atm: npt_found =  129
+select_IP_local_atm: npt_found =  131
+select_IP_local_atm: npt_found =  122
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  132
+select_IP_local_atm: npt_found =  124
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =   99
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  136
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  130
+select_IP_local_step1 wall time:     6.918042 CPU time:   440.939352
+ build_aoRg_possible wall time:     0.021273 CPU time:     1.340612
+select_IP_local_step2 wall time:     0.000129 CPU time:     0.000137
+select_IP_local_step3 wall time:     0.001296 CPU time:     0.064049
+Memory usage for aoR  :    957.407 MB
+Memory usage for aoRg :      5.009 MB
+            build_IP wall time:     6.940741 CPU time:   442.344151
+build_aux_basis_local wall time:     1.244579 CPU time:    79.352510
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:    104.334 MB

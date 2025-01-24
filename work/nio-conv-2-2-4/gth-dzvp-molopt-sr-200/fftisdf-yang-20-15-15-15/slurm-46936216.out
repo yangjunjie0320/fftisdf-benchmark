@@ -71,3 +71,5 @@ w[  3], rank = 3120 / 3120
     CPU time for w[  3]  38128.55 sec, wall time    619.70 sec
 w[  4], rank = 3120 / 3120
     CPU time for w[  4]  37945.31 sec, wall time    614.08 sec
+w[  5], rank = 3120 / 3120
+    CPU time for w[  5]  38013.80 sec, wall time    616.96 sec

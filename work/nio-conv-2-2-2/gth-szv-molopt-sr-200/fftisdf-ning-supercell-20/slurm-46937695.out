@@ -768,3 +768,11 @@ build_aux_basis_local wall time:     4.001183 CPU time:   254.506776
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:      0.000 MB
 Memory usage for W:    360.084 MB
+     build_V_W_local wall time:   771.813337 CPU time:   993.452178
+Number of interpolation points = 6870, effective CISDF =  15.33
+    CPU time for ISDF build   4839.44 sec, wall time    836.55 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-supercell-20-nio-conv-2-2-2-gth-szv-molopt-sr/46937695/isdf.chk

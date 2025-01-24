@@ -110,3 +110,9 @@ w[ 15], rank = 1120 / 1120
     CPU time for w[ 15]  12770.25 sec, wall time    209.00 sec
 w[ 16], rank = 1120 / 1120
     CPU time for w[ 16]  13109.97 sec, wall time    213.35 sec
+w[ 17], rank = 1120 / 1120
+    CPU time for w[ 17]  12575.27 sec, wall time    205.68 sec
+w[ 18], rank = 1120 / 1120
+    CPU time for w[ 18]  13437.85 sec, wall time    219.54 sec
+w[ 19], rank = 1120 / 1120
+    CPU time for w[ 19]  14419.01 sec, wall time    236.84 sec

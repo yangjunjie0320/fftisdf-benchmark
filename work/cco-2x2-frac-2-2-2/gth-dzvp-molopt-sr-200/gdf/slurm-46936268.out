@@ -28,3 +28,37 @@ len(kpts) = 8
  [0.21559021 0.         0.52270374]
  [0.21559021 0.21559021 0.        ]
  [0.21559021 0.21559021 0.52270374]]
+    CPU time for j3c 115868.40 sec, wall time   2213.87 sec
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+    CPU time for get_j pass 1    783.37 sec, wall time     12.57 sec
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+max_memory 490765 MB, blksize 240
+    CPU time for get_j pass 2    524.38 sec, wall time      8.27 sec
+    CPU time for get_j   1308.02 sec, wall time     20.84 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 76 / 260
+max_memory 490722 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)   2479.90 sec, wall time     39.17 sec
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)   7095.36 sec, wall time    111.99 sec
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)  11757.17 sec, wall time    186.26 sec
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
