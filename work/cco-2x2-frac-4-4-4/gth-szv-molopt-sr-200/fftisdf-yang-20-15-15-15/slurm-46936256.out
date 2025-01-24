@@ -228,3 +228,7 @@ w[ 52], rank = 1760 / 1760
     CPU time for w[ 52]   1706.12 sec, wall time     59.78 sec
 w[ 53], rank = 1760 / 1760
     CPU time for w[ 53]   1838.45 sec, wall time     64.95 sec
+w[ 54], rank = 1760 / 1760
+    CPU time for w[ 54]   1793.03 sec, wall time     61.19 sec
+w[ 55], rank = 1760 / 1760
+    CPU time for w[ 55]   1800.93 sec, wall time     62.33 sec

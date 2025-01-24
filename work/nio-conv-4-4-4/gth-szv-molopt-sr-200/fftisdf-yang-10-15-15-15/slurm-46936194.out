@@ -218,3 +218,5 @@ w[ 53], rank =  560 /  560
     CPU time for w[ 53]   6928.42 sec, wall time    113.29 sec
 w[ 54], rank =  560 /  560
     CPU time for w[ 54]   6730.54 sec, wall time    110.07 sec
+w[ 55], rank =  560 /  560
+    CPU time for w[ 55]   6406.81 sec, wall time    104.71 sec

@@ -8409,3 +8409,38 @@ select_IP_local_atm: npt_found =  118
 select_IP_local_atm: npt_found =  110
 select_IP_local_atm: npt_found =  107
 select_IP_local_atm: npt_found =  120
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  101
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =  136
+select_IP_local_atm: npt_found =  144
+select_IP_local_atm: npt_found =  116
+select_IP_local_atm: npt_found =  113
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  138
+select_IP_local_atm: npt_found =  141
+select_IP_local_atm: npt_found =  147
+select_IP_local_step1 wall time:   271.758942 CPU time: 17266.114304
+ build_aoRg_possible wall time:     3.218779 CPU time:     9.224581
+select_IP_local_step2 wall time:     0.000313 CPU time:     0.000338
+select_IP_local_step3 wall time:     0.038648 CPU time:     0.038581
+Memory usage for aoR  : 139543.152 MB
+Memory usage for aoRg :    768.951 MB
+            build_IP wall time:   275.016682 CPU time: 17275.377804

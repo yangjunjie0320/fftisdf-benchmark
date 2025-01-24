@@ -155,3 +155,5 @@ w[ 12], rank = 2600 / 2600
     CPU time for w[ 12]   5163.82 sec, wall time    137.70 sec
 w[ 13], rank = 2600 / 2600
     CPU time for w[ 13]   9818.62 sec, wall time    216.61 sec
+w[ 14], rank = 2600 / 2600
+    CPU time for w[ 14]   5317.04 sec, wall time    143.21 sec
