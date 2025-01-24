@@ -62,3 +62,5 @@ w[  3], rank = 3116 / 3116
     CPU time for w[  3]  37496.82 sec, wall time    605.97 sec
 w[  4], rank = 3116 / 3116
     CPU time for w[  4]  37258.04 sec, wall time    602.33 sec
+w[  5], rank = 3116 / 3116
+    CPU time for w[  5]  37250.64 sec, wall time    602.23 sec

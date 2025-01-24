@@ -95,3 +95,5 @@ finished aoR_loop[  321984:  339872]
 finished aoR_loop[  339872:  357760]
 finished aoR_loop[  357760:  370025]
     CPU time for building right-hand side  10691.93 sec, wall time   1145.21 sec
+w[  0], rank = 5200 / 5200
+    CPU time for w[  0]   9969.77 sec, wall time    278.66 sec

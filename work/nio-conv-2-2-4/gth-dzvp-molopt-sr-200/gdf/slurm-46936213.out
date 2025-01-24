@@ -125,3 +125,28 @@ max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (8,*)   9021.38 sec, wall time    144.05 sec
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (9,*)  10132.92 sec, wall time    161.44 sec
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240

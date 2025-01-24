@@ -146,3 +146,15 @@ w[ 11], rank = 1760 / 1760
     CPU time for w[ 11]   1775.71 sec, wall time     61.83 sec
 w[ 12], rank = 1760 / 1760
     CPU time for w[ 12]   1770.20 sec, wall time     59.41 sec
+w[ 13], rank = 1760 / 1760
+    CPU time for w[ 13]   1819.76 sec, wall time     63.00 sec
+w[ 14], rank = 1760 / 1760
+    CPU time for w[ 14]   1810.23 sec, wall time     60.01 sec
+w[ 15], rank = 1760 / 1760
+    CPU time for w[ 15]   1811.01 sec, wall time     67.21 sec
+w[ 16], rank = 1760 / 1760
+    CPU time for w[ 16]   1834.36 sec, wall time     60.47 sec
+w[ 17], rank = 1760 / 1760
+    CPU time for w[ 17]   1782.33 sec, wall time     63.32 sec
+w[ 18], rank = 1760 / 1760
+    CPU time for w[ 18]   1928.99 sec, wall time     61.48 sec
