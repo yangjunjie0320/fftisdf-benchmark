@@ -201,3 +201,36 @@ max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
 max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (14,*)  14587.84 sec, wall time    233.14 sec
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+max_memory 490280 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (15,*)  15998.72 sec, wall time    255.80 sec
+    CPU time for buf1    2756.19 sec, wall time      44.36 sec
+    CPU time for ct11   33294.38 sec, wall time     526.73 sec
+    CPU time for ct12   44627.02 sec, wall time     704.24 sec
+    CPU time for buf2       2.64 sec, wall time       0.05 sec
+    CPU time for ct21   12181.02 sec, wall time     191.82 sec
+    CPU time for ct22   39264.42 sec, wall time     619.32 sec
+    CPU time for load    1455.51 sec, wall time      47.72 sec
+    CPU time for get_k_kpts 133627.84 sec, wall time   2134.99 sec

@@ -92,3 +92,9 @@ w[ 12], rank = 2600 / 2600
     CPU time for w[ 12]   9586.27 sec, wall time    204.46 sec
 w[ 13], rank = 2600 / 2600
     CPU time for w[ 13]   5307.83 sec, wall time    148.61 sec
+w[ 14], rank = 2600 / 2600
+    CPU time for w[ 14]   5325.96 sec, wall time    137.69 sec
+w[ 15], rank = 2600 / 2600
+    CPU time for w[ 15]   5701.02 sec, wall time    150.07 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-cco-2x2-frac-2-2-4-gth-dzvp-molopt-sr/46936274/tmp.chk
+    CPU time for building ISDF 106579.16 sec, wall time   2928.96 sec

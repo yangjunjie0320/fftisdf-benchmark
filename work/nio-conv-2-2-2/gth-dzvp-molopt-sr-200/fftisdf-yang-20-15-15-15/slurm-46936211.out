@@ -66,3 +66,7 @@ w[  5], rank = 3116 / 3116
     CPU time for w[  5]  37250.64 sec, wall time    602.23 sec
 w[  6], rank = 3116 / 3116
     CPU time for w[  6]  37226.98 sec, wall time    602.48 sec
+w[  7], rank = 3116 / 3116
+    CPU time for w[  7]  37491.99 sec, wall time    609.39 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-20-15-15-15-nio-conv-2-2-2-gth-dzvp-molopt-sr/46936211/tmp.chk
+    CPU time for building ISDF 298499.92 sec, wall time   4896.79 sec

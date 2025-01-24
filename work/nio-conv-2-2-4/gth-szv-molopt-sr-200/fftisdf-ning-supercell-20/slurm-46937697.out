@@ -1245,3 +1245,38 @@ select_IP_local_atm: npt_found =  109
 select_IP_local_atm: npt_found =  110
 select_IP_local_atm: npt_found =  128
 select_IP_local_atm: npt_found =  124
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =   99
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  125
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  113
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  101
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =   97
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =  119
+select_IP_local_atm: npt_found =  120
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =  117
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  111
+select_IP_local_step1 wall time:   995.277250 CPU time: 49390.093560
+ build_aoRg_possible wall time:     2.151087 CPU time:     8.064940
+select_IP_local_step2 wall time:     0.000420 CPU time:     0.000444
+select_IP_local_step3 wall time:     0.007938 CPU time:     0.007907
+Memory usage for aoR  :   9977.994 MB
+Memory usage for aoRg :     64.875 MB
+            build_IP wall time:   997.436695 CPU time: 49398.166850
+build_aux_basis_local wall time:    20.586990 CPU time:  1223.135762
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:   1466.238 MB

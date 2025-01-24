@@ -103,3 +103,13 @@ w[  2], rank = 5200 / 5200
     CPU time for w[  2]  11645.28 sec, wall time    277.36 sec
 w[  3], rank = 5200 / 5200
     CPU time for w[  3]  12003.07 sec, wall time    308.87 sec
+w[  4], rank = 5200 / 5200
+    CPU time for w[  4]   9264.76 sec, wall time    256.94 sec
+w[  5], rank = 5200 / 5200
+    CPU time for w[  5]   9462.62 sec, wall time    267.78 sec
+w[  6], rank = 5200 / 5200
+    CPU time for w[  6]  11702.66 sec, wall time    284.50 sec
+w[  7], rank = 5200 / 5200
+    CPU time for w[  7]  11490.43 sec, wall time    306.13 sec
+w[  8], rank = 5200 / 5200
+    CPU time for w[  8]  11668.94 sec, wall time    279.84 sec

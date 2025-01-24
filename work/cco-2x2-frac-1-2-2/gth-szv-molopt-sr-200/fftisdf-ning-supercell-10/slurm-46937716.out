@@ -725,3 +725,54 @@ select_IP_local_atm: npt_found =  100
 select_IP_local_atm: npt_found =  110
 select_IP_local_atm: npt_found =  113
 select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  114
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =   92
+select_IP_local_atm: npt_found =   85
+select_IP_local_atm: npt_found =   90
+select_IP_local_atm: npt_found =   97
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =   92
+select_IP_local_atm: npt_found =   93
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  117
+select_IP_local_atm: npt_found =   88
+select_IP_local_atm: npt_found =   89
+select_IP_local_atm: npt_found =   89
+select_IP_local_atm: npt_found =   88
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =   97
+select_IP_local_atm: npt_found =   87
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  116
+select_IP_local_step1 wall time:    42.816019 CPU time:  2683.547981
+ build_aoRg_possible wall time:     0.073391 CPU time:     4.706750
+select_IP_local_step2 wall time:     0.000185 CPU time:     0.000260
+select_IP_local_step3 wall time:     0.002906 CPU time:     0.190569
+Memory usage for aoR  :   3083.982 MB
+Memory usage for aoRg :     14.322 MB
+            build_IP wall time:    42.892500 CPU time:  2688.445560
+build_aux_basis_local wall time:     4.310743 CPU time:   269.745025
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:    319.275 MB
+     build_V_W_local wall time:   528.200320 CPU time:  1117.295085
+Number of interpolation points = 6469, effective CISDF =  18.38
+    CPU time for ISDF build   5565.30 sec, wall time    604.00 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie//fftisdf-ning-supercell-10-cco-2x2-frac-1-2-2-gth-szv-molopt-sr/46937716/isdf.chk

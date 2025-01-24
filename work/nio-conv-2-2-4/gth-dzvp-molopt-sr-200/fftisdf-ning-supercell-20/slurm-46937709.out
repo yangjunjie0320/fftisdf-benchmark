@@ -1027,3 +1027,256 @@ WARNING!
   linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
   to remove the diffused Gaussians whose exponents are less than 0.1.
 
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:    79.994394 CPU time:  3401.156338
+In _build_buffer: ISDF Local size of buffer = 8412.605 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =  128
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  281
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  316
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  281
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  280
+select_IP_local_atm: npt_found =  277
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  281
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  278
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  275
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  268
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  316
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  281
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  282
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  283
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  278
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  308
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  319
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  290
+select_IP_local_step1 wall time:   138.428543 CPU time:  8755.679212
+ build_aoRg_possible wall time:     1.509955 CPU time:     6.970803
+select_IP_local_step2 wall time:     0.000192 CPU time:     0.000207
+select_IP_local_step3 wall time:     0.011086 CPU time:     0.011067
+Memory usage for aoR  :  30113.136 MB
+Memory usage for aoRg :    526.492 MB
+            build_IP wall time:   139.949776 CPU time:  8762.661289
+build_aux_basis_local wall time:    34.978056 CPU time:  1474.229865
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:  10746.009 MB

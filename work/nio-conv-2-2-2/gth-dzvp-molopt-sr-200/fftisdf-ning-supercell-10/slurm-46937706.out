@@ -747,3 +747,24 @@ select_IP_local_atm: npt_found =  273
 select_IP_local_atm: npt_found =  275
 select_IP_local_atm: npt_found =  237
 select_IP_local_atm: npt_found =  237
+select_IP_local_atm: npt_found =  238
+select_IP_local_atm: npt_found =  233
+select_IP_local_atm: npt_found =  272
+select_IP_local_atm: npt_found =  267
+select_IP_local_atm: npt_found =  271
+select_IP_local_atm: npt_found =  272
+select_IP_local_atm: npt_found =  231
+select_IP_local_atm: npt_found =  236
+select_IP_local_atm: npt_found =  233
+select_IP_local_atm: npt_found =  225
+select_IP_local_step1 wall time:   132.114767 CPU time:  8000.806283
+ build_aoRg_possible wall time:     0.409541 CPU time:     2.662512
+select_IP_local_step2 wall time:     0.000183 CPU time:     0.000196
+select_IP_local_step3 wall time:     0.004802 CPU time:     0.004787
+Memory usage for aoR  :  10404.992 MB
+Memory usage for aoRg :    153.086 MB
+            build_IP wall time:   132.529293 CPU time:  8003.473778
+build_aux_basis_local wall time:    14.501489 CPU time:   788.450437
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:   1956.544 MB

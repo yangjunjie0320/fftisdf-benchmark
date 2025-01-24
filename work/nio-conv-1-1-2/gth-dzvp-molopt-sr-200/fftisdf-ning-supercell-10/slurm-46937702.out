@@ -392,3 +392,4 @@ Number of interpolation points = 4062, effective CISDF =  13.02
 /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
   warnings.warn(msg)
 finished saving to /central/scratch/yangjunjie//fftisdf-ning-supercell-10-nio-conv-1-1-2-gth-dzvp-molopt-sr/46937702/isdf.chk
+      isdf_local_eri wall time:   273.841889 CPU time:  3305.961904

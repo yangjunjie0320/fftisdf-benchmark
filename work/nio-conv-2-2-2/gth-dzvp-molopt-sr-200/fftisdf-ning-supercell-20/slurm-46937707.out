@@ -701,3 +701,70 @@ select_IP_local_atm: npt_found =  282
 select_IP_local_atm: npt_found =  297
 select_IP_local_atm: npt_found =  300
 select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  280
+select_IP_local_atm: npt_found =  278
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  277
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  281
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  277
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  313
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  268
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  276
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  308
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  300
+select_IP_local_step1 wall time:   238.475304 CPU time: 14751.308458
+ build_aoRg_possible wall time:     1.650685 CPU time:     7.143865
+select_IP_local_step2 wall time:     0.000212 CPU time:     0.000226
+select_IP_local_step3 wall time:     0.006026 CPU time:     0.006011
+Memory usage for aoR  :  10404.992 MB
+Memory usage for aoRg :    179.394 MB
+            build_IP wall time:   240.132227 CPU time: 14758.458560
+build_aux_basis_local wall time:    13.906492 CPU time:   743.195514
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:   2689.939 MB

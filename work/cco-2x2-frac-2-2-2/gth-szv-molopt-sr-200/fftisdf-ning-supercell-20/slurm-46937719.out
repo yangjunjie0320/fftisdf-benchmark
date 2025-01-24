@@ -1,0 +1,1282 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-2-2-2-gth-szv-molopt-sr/46937719/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-2-2-2-gth-szv-molopt-sr/46937719/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+LOADING ISDF BACKEND
+NUM_THREADS   : 64
+USE_NUMPY     : 0
+USE_SCIPY     : 1
+USE_TORCH     : 0
+USE_TORCH_GPU : 0
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac-2-2-2/gth-szv-molopt-sr-200/fftisdf-ning-supercell-20/main.py ****
+import os, sys
+import numpy, scipy
+import pyscf
+
+TMPDIR = os.getenv("TMPDIR", None)
+DATA_PATH = os.getenv("DATA_PATH", None)
+PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
+PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+
+try:
+    from pyscf.lib import generate_pickle_methods
+    getstate, setstate = generate_pickle_methods(
+        excludes=(
+            '_isdf_to_save', 
+            '_isdf', 
+            'buffer_fft',
+            'buffer_cpu', 
+            'buffer_gpu', 
+            'buffer',
+            'cell', 
+            'prim_cell',
+            '_swapfile',
+        )
+    )   
+except ImportError:
+    import sys 
+    sys.stderr.write("pyscf.lib.generate_pickle_methods is not available, ISDF will not support pickle\n")
+    def raise_error(*args, **kwargs):
+        raise NotImplementedError("ISDF does not support pickle")
+    getstate = setstate = raise_error
+
+from pyscf.isdf import isdf_local
+class ISDF_Local(isdf_local.ISDF_Local):
+    __getstate__ = getstate
+    __setstate__ = setstate
+
+class ISDF(object):
+    cell = None
+    group = None
+
+    kpts = None
+    kmesh = None
+    c0 = None
+    verbose = 10
+
+    _isdf = None
+    _isdf_to_save = None
+    
+    def __init__(self, cell=None, kpts=None):
+        assert kpts is None
+        self.cell = cell
+        self.kpts = kpts
+
+    def build(self):
+        cell = self.cell.copy(deep=True)
+
+        group = self.group
+        assert group is not None
+
+        direct = False
+        c0 = self.c0
+        rela_qr = 1e-3
+        aoR_cutoff = 1e-8
+        build_V_K_bunchsize = 512
+        with_robust_fitting = False
+
+        from pyscf.lib import logger
+        from pyscf.lib.logger import perf_counter
+        from pyscf.lib.logger import process_clock
+        t0 = (process_clock(), perf_counter())
+        log = logger.new_logger(cell, 10)
+        log.info("ISDF module: %s" % isdf_local.__file__)
+
+        isdf_obj = ISDF_Local(
+            cell, limited_memory=True, direct=direct,
+            with_robust_fitting=with_robust_fitting,
+            build_V_K_bunchsize=build_V_K_bunchsize,
+        )
+
+        isdf_obj.verbose = 10
+        log.info("c0 = %6.2f" % c0)
+
+        isdf_obj.build(c=c0, rela_cutoff=rela_qr, group=group)
+
+        nip = isdf_obj.naux
+        log.info(
+            "Number of interpolation points = %d, effective CISDF = %6.2f",
+            nip, nip / isdf_obj.nao
+        )
+        log.timer("ISDF build", *t0)
+
+        import pickle
+        with open(self._isdf, "wb") as f:
+            pickle.dump(isdf_obj, f)
+            log.debug("finished saving to %s", self._isdf)
+
+        isdf_obj._isdf = self._isdf
+        isdf_obj._isdf_to_save = self._isdf
+        return isdf_obj
+
+def main(args):
+    from utils import cell_from_poscar
+    path = os.path.join(DATA_PATH, args.cell)
+    assert os.path.exists(path), "Cell file not found: %s" % path
+
+    c = cell_from_poscar(path)
+    c.basis = args.basis
+    c.pseudo = args.pseudo
+    c.verbose = 0
+    c.unit = 'aa'
+    # c.exp_to_discard = 0.1
+    # c.exp_to_discard = 0.0
+    c.max_memory = PYSCF_MAX_MEMORY
+    c.ke_cutoff = args.ke_cutoff
+    c.build(dump_input=False)
+
+    kmesh = [int(x) for x in args.kmesh.split("-")]
+    kmesh = numpy.array(kmesh)
+    kpts = c.get_kpts(kmesh)
+
+    pcell = c.copy(deep=True)
+
+    natm = len(pcell.atom)
+    atm = []
+    for ia in range(natm):
+        s = pcell.atom_symbol(ia)
+        x = pcell.atom_coord(ia, unit='A')
+        atm.append([s, x])
+
+    from pyscf.lib.parameters import BOHR
+    lvx = pcell.lattice_vectors() * BOHR
+
+    from pyscf.isdf.isdf_tools_cell import build_supercell_with_partition
+    scell, group = build_supercell_with_partition(
+        atm, lvx, spin=0, charge=0, mesh=None, Ls=kmesh,
+        partition=None, basis=args.basis,
+        pseudo=args.pseudo, ke_cutoff=args.ke_cutoff,
+        max_memory=PYSCF_MAX_MEMORY, 
+        precision=1e-12, 
+        use_particle_mesh_ewald=True,
+        verbose=4,
+    )
+
+    from utils import get_jk_time
+    df_obj = ISDF(scell)
+    df_obj.group = group
+    df_obj.c0 = args.c0
+    df_obj.verbose = 10
+    df_obj.kmesh = kmesh
+    df_obj._isdf = os.path.join(TMPDIR, "isdf.chk")
+
+    from utils import get_jk_time
+    kmesh = None
+    get_jk_time(scell, kmesh=kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
+    parser.add_argument("--kmesh", type=str, default="2-2-2")
+    parser.add_argument("--c0", type=float, default=20.0)
+    parser.add_argument("--ke_cutoff", type=float, default=40)
+    parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
+    parser.add_argument("--pseudo", type=str, default="gth-pade")
+
+    args = parser.parse_args()
+    main(args)
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-54-40.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 64
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Thu Jan 23 20:44:04 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-2-2-2-gth-szv-molopt-sr/46937719/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] conf_file None
+[INPUT] verbose = 4
+[INPUT] num. atoms = 128
+[INPUT] num. electrons = 1056
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 Cu     1.927800000000   1.927800000000   1.590250000000 AA    3.643014022937   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  2 Cu     5.783400000000   5.783400000000   1.590250000000 AA   10.929042068810  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  3 Cu     1.927800000000   5.783400000000   1.590250000000 AA    3.643014022937  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  4 Cu     5.783400000000   1.927800000000   1.590250000000 AA   10.929042068810   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  5 O      1.927800000000   3.855600000000   1.590250000000 AA    3.643014022937   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT]  6 O      3.855600000000   5.783400000000   1.590250000000 AA    7.286028045873  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT]  7 O      5.783400000000   3.855600000000   1.590250000000 AA   10.929042068810   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT]  8 O      3.855600000000   1.927800000000   1.590250000000 AA    7.286028045873   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT]  9 O      0.000000000000   1.927800000000   1.590250000000 AA    0.000000000000   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 10 O      1.927800000000   7.711200000000   1.590250000000 AA    3.643014022937  14.572056091746   3.005136969590 Bohr   0.0
+[INPUT] 11 O      7.711200000000   5.783400000000   1.590250000000 AA   14.572056091746  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 12 O      5.783400000000   0.000000000000   1.590250000000 AA   10.929042068810   0.000000000000   3.005136969590 Bohr   0.0
+[INPUT] 13 Ca     0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT] 14 Ca     3.855600000000   3.855600000000   0.000000000000 AA    7.286028045873   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 15 Ca     7.711200000000   3.855600000000   0.000000000000 AA   14.572056091746   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 16 Ca     3.855600000000   7.711200000000   0.000000000000 AA    7.286028045873  14.572056091746   0.000000000000 Bohr   0.0
+[INPUT] 17 Cu     1.927800000000   1.927800000000   4.770750000000 AA    3.643014022937   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 18 Cu     5.783400000000   5.783400000000   4.770750000000 AA   10.929042068810  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 19 Cu     1.927800000000   5.783400000000   4.770750000000 AA    3.643014022937  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 20 Cu     5.783400000000   1.927800000000   4.770750000000 AA   10.929042068810   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 21 O      1.927800000000   3.855600000000   4.770750000000 AA    3.643014022937   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 22 O      3.855600000000   5.783400000000   4.770750000000 AA    7.286028045873  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 23 O      5.783400000000   3.855600000000   4.770750000000 AA   10.929042068810   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 24 O      3.855600000000   1.927800000000   4.770750000000 AA    7.286028045873   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 25 O      0.000000000000   1.927800000000   4.770750000000 AA    0.000000000000   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 26 O      1.927800000000   7.711200000000   4.770750000000 AA    3.643014022937  14.572056091746   9.015410908769 Bohr   0.0
+[INPUT] 27 O      7.711200000000   5.783400000000   4.770750000000 AA   14.572056091746  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 28 O      5.783400000000   0.000000000000   4.770750000000 AA   10.929042068810   0.000000000000   9.015410908769 Bohr   0.0
+[INPUT] 29 Ca     0.000000000000   0.000000000000   3.180500000000 AA    0.000000000000   0.000000000000   6.010273939179 Bohr   0.0
+[INPUT] 30 Ca     3.855600000000   3.855600000000   3.180500000000 AA    7.286028045873   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 31 Ca     7.711200000000   3.855600000000   3.180500000000 AA   14.572056091746   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 32 Ca     3.855600000000   7.711200000000   3.180500000000 AA    7.286028045873  14.572056091746   6.010273939179 Bohr   0.0
+[INPUT] 33 Cu     1.927800000000   9.639000000000   1.590250000000 AA    3.643014022937  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT] 34 Cu     5.783400000000  13.494600000000   1.590250000000 AA   10.929042068810  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT] 35 Cu     1.927800000000  13.494600000000   1.590250000000 AA    3.643014022937  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT] 36 Cu     5.783400000000   9.639000000000   1.590250000000 AA   10.929042068810  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT] 37 O      1.927800000000  11.566800000000   1.590250000000 AA    3.643014022937  21.858084137619   3.005136969590 Bohr   0.0
+[INPUT] 38 O      3.855600000000  13.494600000000   1.590250000000 AA    7.286028045873  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT] 39 O      5.783400000000  11.566800000000   1.590250000000 AA   10.929042068810  21.858084137619   3.005136969590 Bohr   0.0
+[INPUT] 40 O      3.855600000000   9.639000000000   1.590250000000 AA    7.286028045873  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT] 41 O      0.000000000000   9.639000000000   1.590250000000 AA    0.000000000000  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT] 42 O      1.927800000000  15.422400000000   1.590250000000 AA    3.643014022937  29.144112183492   3.005136969590 Bohr   0.0
+[INPUT] 43 O      7.711200000000  13.494600000000   1.590250000000 AA   14.572056091746  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT] 44 O      5.783400000000   7.711200000000   1.590250000000 AA   10.929042068810  14.572056091746   3.005136969590 Bohr   0.0
+[INPUT] 45 Ca     0.000000000000   7.711200000000   0.000000000000 AA    0.000000000000  14.572056091746   0.000000000000 Bohr   0.0
+[INPUT] 46 Ca     3.855600000000  11.566800000000   0.000000000000 AA    7.286028045873  21.858084137619   0.000000000000 Bohr   0.0
+[INPUT] 47 Ca     7.711200000000  11.566800000000   0.000000000000 AA   14.572056091746  21.858084137619   0.000000000000 Bohr   0.0
+[INPUT] 48 Ca     3.855600000000  15.422400000000   0.000000000000 AA    7.286028045873  29.144112183492   0.000000000000 Bohr   0.0
+[INPUT] 49 Cu     1.927800000000   9.639000000000   4.770750000000 AA    3.643014022937  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT] 50 Cu     5.783400000000  13.494600000000   4.770750000000 AA   10.929042068810  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT] 51 Cu     1.927800000000  13.494600000000   4.770750000000 AA    3.643014022937  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT] 52 Cu     5.783400000000   9.639000000000   4.770750000000 AA   10.929042068810  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT] 53 O      1.927800000000  11.566800000000   4.770750000000 AA    3.643014022937  21.858084137619   9.015410908769 Bohr   0.0
+[INPUT] 54 O      3.855600000000  13.494600000000   4.770750000000 AA    7.286028045873  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT] 55 O      5.783400000000  11.566800000000   4.770750000000 AA   10.929042068810  21.858084137619   9.015410908769 Bohr   0.0
+[INPUT] 56 O      3.855600000000   9.639000000000   4.770750000000 AA    7.286028045873  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT] 57 O      0.000000000000   9.639000000000   4.770750000000 AA    0.000000000000  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT] 58 O      1.927800000000  15.422400000000   4.770750000000 AA    3.643014022937  29.144112183492   9.015410908769 Bohr   0.0
+[INPUT] 59 O      7.711200000000  13.494600000000   4.770750000000 AA   14.572056091746  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT] 60 O      5.783400000000   7.711200000000   4.770750000000 AA   10.929042068810  14.572056091746   9.015410908769 Bohr   0.0
+[INPUT] 61 Ca     0.000000000000   7.711200000000   3.180500000000 AA    0.000000000000  14.572056091746   6.010273939179 Bohr   0.0
+[INPUT] 62 Ca     3.855600000000  11.566800000000   3.180500000000 AA    7.286028045873  21.858084137619   6.010273939179 Bohr   0.0
+[INPUT] 63 Ca     7.711200000000  11.566800000000   3.180500000000 AA   14.572056091746  21.858084137619   6.010273939179 Bohr   0.0
+[INPUT] 64 Ca     3.855600000000  15.422400000000   3.180500000000 AA    7.286028045873  29.144112183492   6.010273939179 Bohr   0.0
+[INPUT] 65 Cu     9.639000000000   1.927800000000   1.590250000000 AA   18.215070114683   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 66 Cu    13.494600000000   5.783400000000   1.590250000000 AA   25.501098160556  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 67 Cu     9.639000000000   5.783400000000   1.590250000000 AA   18.215070114683  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 68 Cu    13.494600000000   1.927800000000   1.590250000000 AA   25.501098160556   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 69 O      9.639000000000   3.855600000000   1.590250000000 AA   18.215070114683   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT] 70 O     11.566800000000   5.783400000000   1.590250000000 AA   21.858084137619  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 71 O     13.494600000000   3.855600000000   1.590250000000 AA   25.501098160556   7.286028045873   3.005136969590 Bohr   0.0
+[INPUT] 72 O     11.566800000000   1.927800000000   1.590250000000 AA   21.858084137619   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 73 O      7.711200000000   1.927800000000   1.590250000000 AA   14.572056091746   3.643014022937   3.005136969590 Bohr   0.0
+[INPUT] 74 O      9.639000000000   7.711200000000   1.590250000000 AA   18.215070114683  14.572056091746   3.005136969590 Bohr   0.0
+[INPUT] 75 O     15.422400000000   5.783400000000   1.590250000000 AA   29.144112183492  10.929042068810   3.005136969590 Bohr   0.0
+[INPUT] 76 O     13.494600000000   0.000000000000   1.590250000000 AA   25.501098160556   0.000000000000   3.005136969590 Bohr   0.0
+[INPUT] 77 Ca     7.711200000000   0.000000000000   0.000000000000 AA   14.572056091746   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT] 78 Ca    11.566800000000   3.855600000000   0.000000000000 AA   21.858084137619   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 79 Ca    15.422400000000   3.855600000000   0.000000000000 AA   29.144112183492   7.286028045873   0.000000000000 Bohr   0.0
+[INPUT] 80 Ca    11.566800000000   7.711200000000   0.000000000000 AA   21.858084137619  14.572056091746   0.000000000000 Bohr   0.0
+[INPUT] 81 Cu     9.639000000000   1.927800000000   4.770750000000 AA   18.215070114683   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 82 Cu    13.494600000000   5.783400000000   4.770750000000 AA   25.501098160556  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 83 Cu     9.639000000000   5.783400000000   4.770750000000 AA   18.215070114683  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 84 Cu    13.494600000000   1.927800000000   4.770750000000 AA   25.501098160556   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 85 O      9.639000000000   3.855600000000   4.770750000000 AA   18.215070114683   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 86 O     11.566800000000   5.783400000000   4.770750000000 AA   21.858084137619  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 87 O     13.494600000000   3.855600000000   4.770750000000 AA   25.501098160556   7.286028045873   9.015410908769 Bohr   0.0
+[INPUT] 88 O     11.566800000000   1.927800000000   4.770750000000 AA   21.858084137619   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 89 O      7.711200000000   1.927800000000   4.770750000000 AA   14.572056091746   3.643014022937   9.015410908769 Bohr   0.0
+[INPUT] 90 O      9.639000000000   7.711200000000   4.770750000000 AA   18.215070114683  14.572056091746   9.015410908769 Bohr   0.0
+[INPUT] 91 O     15.422400000000   5.783400000000   4.770750000000 AA   29.144112183492  10.929042068810   9.015410908769 Bohr   0.0
+[INPUT] 92 O     13.494600000000   0.000000000000   4.770750000000 AA   25.501098160556   0.000000000000   9.015410908769 Bohr   0.0
+[INPUT] 93 Ca     7.711200000000   0.000000000000   3.180500000000 AA   14.572056091746   0.000000000000   6.010273939179 Bohr   0.0
+[INPUT] 94 Ca    11.566800000000   3.855600000000   3.180500000000 AA   21.858084137619   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 95 Ca    15.422400000000   3.855600000000   3.180500000000 AA   29.144112183492   7.286028045873   6.010273939179 Bohr   0.0
+[INPUT] 96 Ca    11.566800000000   7.711200000000   3.180500000000 AA   21.858084137619  14.572056091746   6.010273939179 Bohr   0.0
+[INPUT] 97 Cu     9.639000000000   9.639000000000   1.590250000000 AA   18.215070114683  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT] 98 Cu    13.494600000000  13.494600000000   1.590250000000 AA   25.501098160556  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT] 99 Cu     9.639000000000  13.494600000000   1.590250000000 AA   18.215070114683  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT]100 Cu    13.494600000000   9.639000000000   1.590250000000 AA   25.501098160556  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT]101 O      9.639000000000  11.566800000000   1.590250000000 AA   18.215070114683  21.858084137619   3.005136969590 Bohr   0.0
+[INPUT]102 O     11.566800000000  13.494600000000   1.590250000000 AA   21.858084137619  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT]103 O     13.494600000000  11.566800000000   1.590250000000 AA   25.501098160556  21.858084137619   3.005136969590 Bohr   0.0
+[INPUT]104 O     11.566800000000   9.639000000000   1.590250000000 AA   21.858084137619  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT]105 O      7.711200000000   9.639000000000   1.590250000000 AA   14.572056091746  18.215070114683   3.005136969590 Bohr   0.0
+[INPUT]106 O      9.639000000000  15.422400000000   1.590250000000 AA   18.215070114683  29.144112183492   3.005136969590 Bohr   0.0
+[INPUT]107 O     15.422400000000  13.494600000000   1.590250000000 AA   29.144112183492  25.501098160556   3.005136969590 Bohr   0.0
+[INPUT]108 O     13.494600000000   7.711200000000   1.590250000000 AA   25.501098160556  14.572056091746   3.005136969590 Bohr   0.0
+[INPUT]109 Ca     7.711200000000   7.711200000000   0.000000000000 AA   14.572056091746  14.572056091746   0.000000000000 Bohr   0.0
+[INPUT]110 Ca    11.566800000000  11.566800000000   0.000000000000 AA   21.858084137619  21.858084137619   0.000000000000 Bohr   0.0
+[INPUT]111 Ca    15.422400000000  11.566800000000   0.000000000000 AA   29.144112183492  21.858084137619   0.000000000000 Bohr   0.0
+[INPUT]112 Ca    11.566800000000  15.422400000000   0.000000000000 AA   21.858084137619  29.144112183492   0.000000000000 Bohr   0.0
+[INPUT]113 Cu     9.639000000000   9.639000000000   4.770750000000 AA   18.215070114683  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT]114 Cu    13.494600000000  13.494600000000   4.770750000000 AA   25.501098160556  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT]115 Cu     9.639000000000  13.494600000000   4.770750000000 AA   18.215070114683  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT]116 Cu    13.494600000000   9.639000000000   4.770750000000 AA   25.501098160556  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT]117 O      9.639000000000  11.566800000000   4.770750000000 AA   18.215070114683  21.858084137619   9.015410908769 Bohr   0.0
+[INPUT]118 O     11.566800000000  13.494600000000   4.770750000000 AA   21.858084137619  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT]119 O     13.494600000000  11.566800000000   4.770750000000 AA   25.501098160556  21.858084137619   9.015410908769 Bohr   0.0
+[INPUT]120 O     11.566800000000   9.639000000000   4.770750000000 AA   21.858084137619  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT]121 O      7.711200000000   9.639000000000   4.770750000000 AA   14.572056091746  18.215070114683   9.015410908769 Bohr   0.0
+[INPUT]122 O      9.639000000000  15.422400000000   4.770750000000 AA   18.215070114683  29.144112183492   9.015410908769 Bohr   0.0
+[INPUT]123 O     15.422400000000  13.494600000000   4.770750000000 AA   29.144112183492  25.501098160556   9.015410908769 Bohr   0.0
+[INPUT]124 O     13.494600000000   7.711200000000   4.770750000000 AA   25.501098160556  14.572056091746   9.015410908769 Bohr   0.0
+[INPUT]125 Ca     7.711200000000   7.711200000000   3.180500000000 AA   14.572056091746  14.572056091746   6.010273939179 Bohr   0.0
+[INPUT]126 Ca    11.566800000000  11.566800000000   3.180500000000 AA   21.858084137619  21.858084137619   6.010273939179 Bohr   0.0
+[INPUT]127 Ca    15.422400000000  11.566800000000   3.180500000000 AA   29.144112183492  21.858084137619   6.010273939179 Bohr   0.0
+[INPUT]128 Ca    11.566800000000  15.422400000000   3.180500000000 AA   21.858084137619  29.144112183492   6.010273939179 Bohr   0.0
+
+nuclear repulsion = -2931.62407098323
+number of shells = 288
+number of NR pGTOs = 3776
+number of NR cGTOs = 704
+basis = gth-szv-molopt-sr
+ecp = {}
+CPU time:        15.27
+lattice vectors  a1 [29.144112183, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 29.144112183, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 12.020547878]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 10210
+rcut = 34.84447946911392 (nimgs = [2 2 3])
+lattice sum = 345 cells
+precision = 1e-12
+pseudo = gth-pade
+ke_cutoff = 200.0
+    = [187 187  79] mesh (2762551 PWs)
+Initial guess from minao.
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local.py
+ISDF: mol.ke_cutoff = 200.000000
+ISDF: mol.natm      = 128
+ISDF: mol.nao       = 704
+c0 =  20.00
+       get_partition wall time:     8.029357 CPU time:     8.008607
+len of partition[   0] =  21934
+len of partition[   1] =  20392
+len of partition[   2] =  21136
+len of partition[   3] =  21136
+len of partition[   4] =  20549
+len of partition[   5] =  20616
+len of partition[   6] =  20536
+len of partition[   7] =  20480
+len of partition[   8] =  20480
+len of partition[   9] =  21330
+len of partition[  10] =  21300
+len of partition[  11] =  20616
+len of partition[  12] =  24119
+len of partition[  13] =  24101
+len of partition[  14] =  24096
+len of partition[  15] =  24096
+len of partition[  16] =  21502
+len of partition[  17] =  19975
+len of partition[  18] =  20720
+len of partition[  19] =  20720
+len of partition[  20] =  20365
+len of partition[  21] =  20455
+len of partition[  22] =  20375
+len of partition[  23] =  20296
+len of partition[  24] =  20296
+len of partition[  25] =  21138
+len of partition[  26] =  21132
+len of partition[  27] =  20455
+len of partition[  28] =  24048
+len of partition[  29] =  24072
+len of partition[  30] =  24084
+len of partition[  31] =  24084
+len of partition[  32] =  21136
+len of partition[  33] =  21136
+len of partition[  34] =  21934
+len of partition[  35] =  20392
+len of partition[  36] =  20549
+len of partition[  37] =  20480
+len of partition[  38] =  20582
+len of partition[  39] =  20570
+len of partition[  40] =  20616
+len of partition[  41] =  20462
+len of partition[  42] =  21330
+len of partition[  43] =  21279
+len of partition[  44] =  24128
+len of partition[  45] =  24101
+len of partition[  46] =  24096
+len of partition[  47] =  24103
+len of partition[  48] =  20720
+len of partition[  49] =  20720
+len of partition[  50] =  21502
+len of partition[  51] =  19975
+len of partition[  52] =  20365
+len of partition[  53] =  20296
+len of partition[  54] =  20421
+len of partition[  55] =  20409
+len of partition[  56] =  20455
+len of partition[  57] =  20278
+len of partition[  58] =  21138
+len of partition[  59] =  21111
+len of partition[  60] =  24072
+len of partition[  61] =  24072
+len of partition[  62] =  24084
+len of partition[  63] =  24058
+len of partition[  64] =  21136
+len of partition[  65] =  21136
+len of partition[  66] =  20392
+len of partition[  67] =  21934
+len of partition[  68] =  20570
+len of partition[  69] =  20582
+len of partition[  70] =  20480
+len of partition[  71] =  20549
+len of partition[  72] =  21330
+len of partition[  73] =  21321
+len of partition[  74] =  20616
+len of partition[  75] =  20480
+len of partition[  76] =  24128
+len of partition[  77] =  24101
+len of partition[  78] =  24103
+len of partition[  79] =  24096
+len of partition[  80] =  20720
+len of partition[  81] =  20720
+len of partition[  82] =  19975
+len of partition[  83] =  21502
+len of partition[  84] =  20409
+len of partition[  85] =  20421
+len of partition[  86] =  20296
+len of partition[  87] =  20365
+len of partition[  88] =  21138
+len of partition[  89] =  21153
+len of partition[  90] =  20455
+len of partition[  91] =  20296
+len of partition[  92] =  24072
+len of partition[  93] =  24072
+len of partition[  94] =  24058
+len of partition[  95] =  24084
+len of partition[  96] =  20392
+len of partition[  97] =  21934
+len of partition[  98] =  21136
+len of partition[  99] =  21136
+len of partition[ 100] =  20616
+len of partition[ 101] =  20549
+len of partition[ 102] =  20480
+len of partition[ 103] =  20536
+len of partition[ 104] =  21300
+len of partition[ 105] =  20616
+len of partition[ 106] =  20498
+len of partition[ 107] =  21330
+len of partition[ 108] =  24096
+len of partition[ 109] =  24101
+len of partition[ 110] =  24103
+len of partition[ 111] =  24103
+len of partition[ 112] =  19975
+len of partition[ 113] =  21502
+len of partition[ 114] =  20720
+len of partition[ 115] =  20720
+len of partition[ 116] =  20455
+len of partition[ 117] =  20365
+len of partition[ 118] =  20296
+len of partition[ 119] =  20375
+len of partition[ 120] =  21132
+len of partition[ 121] =  20455
+len of partition[ 122] =  20314
+len of partition[ 123] =  21138
+len of partition[ 124] =  24096
+len of partition[ 125] =  24072
+len of partition[ 126] =  24058
+len of partition[ 127] =  24058
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+             get_aoR wall time:    80.466796 CPU time:  5095.339803
+In _build_buffer: ISDF Local size of buffer = 6828.816 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =  128
+select_IP_local_atm: npt_found =  120
+select_IP_local_atm: npt_found =  119
+select_IP_local_atm: npt_found =  119
+select_IP_local_atm: npt_found =  124
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  112
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  101
+select_IP_local_atm: npt_found =  125
+select_IP_local_atm: npt_found =  125
+select_IP_local_atm: npt_found =  138
+select_IP_local_atm: npt_found =  130
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =   91
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =  133
+select_IP_local_atm: npt_found =  134
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  130
+select_IP_local_atm: npt_found =  117
+select_IP_local_atm: npt_found =  122
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =   95
+select_IP_local_atm: npt_found =  113
+select_IP_local_atm: npt_found =   99
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  108
+select_IP_local_atm: npt_found =  116
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  140
+select_IP_local_atm: npt_found =  137
+select_IP_local_atm: npt_found =  119
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =  125
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =   98
+select_IP_local_atm: npt_found =  105
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  122
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  138
+select_IP_local_atm: npt_found =  117
+select_IP_local_atm: npt_found =  123
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  124
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =  113
+select_IP_local_atm: npt_found =   98
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  129
+select_IP_local_atm: npt_found =  136
+select_IP_local_atm: npt_found =  134
+select_IP_local_atm: npt_found =  143
+select_IP_local_atm: npt_found =  118
+select_IP_local_atm: npt_found =  130
+select_IP_local_atm: npt_found =  120
+select_IP_local_atm: npt_found =  123
+select_IP_local_atm: npt_found =   98
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  107
+select_IP_local_atm: npt_found =  106
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =   95
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =  131
+select_IP_local_atm: npt_found =  132
+select_IP_local_atm: npt_found =  122
+select_IP_local_atm: npt_found =  125
+select_IP_local_atm: npt_found =  113
+select_IP_local_atm: npt_found =  121
+select_IP_local_atm: npt_found =  127
+select_IP_local_atm: npt_found =   96
+select_IP_local_atm: npt_found =  111
+select_IP_local_atm: npt_found =   99
+select_IP_local_atm: npt_found =  109
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =   94
+select_IP_local_atm: npt_found =   97
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =  133
+select_IP_local_atm: npt_found =  132
+select_IP_local_atm: npt_found =  128
+select_IP_local_atm: npt_found =  116
+select_IP_local_atm: npt_found =  124
+select_IP_local_atm: npt_found =  115
+select_IP_local_atm: npt_found =  117
+select_IP_local_atm: npt_found =  129
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =   95
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  104
+select_IP_local_atm: npt_found =  102
+select_IP_local_atm: npt_found =   98
+select_IP_local_atm: npt_found =  103
+select_IP_local_atm: npt_found =  110
+select_IP_local_atm: npt_found =  122
+select_IP_local_atm: npt_found =  134
+select_IP_local_atm: npt_found =  131
+select_IP_local_atm: npt_found =  132
+select_IP_local_step1 wall time:    23.782612 CPU time:  1517.278778
+ build_aoRg_possible wall time:     0.135840 CPU time:     5.819980
+select_IP_local_step2 wall time:     0.000136 CPU time:     0.000157
+select_IP_local_step3 wall time:     0.004710 CPU time:     0.004696
+Memory usage for aoR  :   9742.536 MB
+Memory usage for aoRg :     52.159 MB
+            build_IP wall time:    23.923298 CPU time:  1523.103611
+build_aux_basis_local wall time:    12.493901 CPU time:   792.255777
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:   1644.377 MB

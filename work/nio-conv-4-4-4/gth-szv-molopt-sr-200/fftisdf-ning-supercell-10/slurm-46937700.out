@@ -4348,3 +4348,7 @@ select_IP_local_step3 wall time:     0.016118 CPU time:     0.016092
 Memory usage for aoR  :  66514.312 MB
 Memory usage for aoRg :    390.177 MB
             build_IP wall time:   120.098780 CPU time:  7520.518560
+build_aux_basis_local wall time:    85.562554 CPU time:  4436.833255
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:  17955.125 MB
