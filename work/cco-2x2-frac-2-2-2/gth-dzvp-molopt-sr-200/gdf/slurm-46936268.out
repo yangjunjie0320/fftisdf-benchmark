@@ -89,3 +89,16 @@ max_memory 490722 MB, blksize 240
 max_memory 490722 MB, blksize 240
 max_memory 490722 MB, blksize 240
 max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+max_memory 490722 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (7,*)  35914.64 sec, wall time    567.44 sec
+    CPU time for buf1    1892.43 sec, wall time      31.17 sec
+    CPU time for ct11   29217.45 sec, wall time     461.19 sec
+    CPU time for ct12   43729.37 sec, wall time     689.26 sec
+    CPU time for buf2       0.74 sec, wall time       0.02 sec
+    CPU time for ct21   38590.13 sec, wall time     606.41 sec
+    CPU time for ct22   37484.21 sec, wall time     590.37 sec
+    CPU time for load     456.70 sec, wall time      16.00 sec
+    CPU time for get_k_kpts 151397.21 sec, wall time   2394.86 sec

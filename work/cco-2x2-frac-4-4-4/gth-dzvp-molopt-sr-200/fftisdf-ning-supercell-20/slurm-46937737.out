@@ -1,8 +1,8 @@
 OMP_NUM_THREADS = 64
 MKL_NUM_THREADS = 1
 PYSCF_MAX_MEMORY = 491520
-TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-szv-molopt-sr/46937725/
-PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-szv-molopt-sr/46937725/
+TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46937737/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46937737/
 
 /home/junjiey/anaconda3/envs/fftisdf/bin/python
 2.7.0
@@ -24,7 +24,7 @@ USE_NUMPY     : 0
 USE_SCIPY     : 1
 USE_TORCH     : 0
 USE_TORCH_GPU : 0
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac-4-4-4/gth-szv-molopt-sr-200/fftisdf-ning-supercell-20/main.py ****
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac-4-4-4/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/main.py ****
 import os, sys
 import numpy, scipy
 import pyscf
@@ -195,14 +195,14 @@ if __name__ == "__main__":
 #INFO: ******************** input file end ********************
 
 
-System: uname_result(system='Linux', node='hpc-35-09.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 64
+System: uname_result(system='Linux', node='hpc-34-25.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 64
 Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
 numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
-Date: Thu Jan 23 20:46:29 2025
+Date: Thu Jan 23 21:16:46 2025
 PySCF version 2.7.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-szv-molopt-sr/46937725/
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//fftisdf-ning-supercell-20-cco-2x2-frac-4-4-4-gth-dzvp-molopt-sr/46937737/
 [ENV] PYSCF_MAX_MEMORY 491520
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] conf_file None
@@ -1240,19 +1240,19 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/py
 [INPUT]1024 Ca    26.989200000000  30.844800000000   9.541500000000 AA   51.002196321111  58.288224366984  18.030821817538 Bohr   0.0
 
 nuclear repulsion = -23452.9925673383
-number of shells = 2304
-number of NR pGTOs = 30208
-number of NR cGTOs = 5632
-basis = gth-szv-molopt-sr
+number of shells = 3328
+number of NR pGTOs = 61440
+number of NR cGTOs = 16640
+basis = gth-dzvp-molopt-sr
 ecp = {}
-CPU time:        16.15
+CPU time:        19.34
 lattice vectors  a1 [58.288224367, 0.000000000, 0.000000000]
                  a2 [0.000000000, 58.288224367, 0.000000000]
                  a3 [0.000000000, 0.000000000, 24.041095757]
 dimension = 3
 low_dim_ft_type = None
 Cell volume = 81680
-rcut = 34.84447946911392 (nimgs = [1 1 2])
+rcut = 37.859655795834115 (nimgs = [1 1 2])
 lattice sum = 159 cells
 precision = 1e-12
 pseudo = gth-pade
@@ -1262,9 +1262,9 @@ Initial guess from minao.
 ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local.py
 ISDF: mol.ke_cutoff = 200.000000
 ISDF: mol.natm      = 1024
-ISDF: mol.nao       = 5632
+ISDF: mol.nao       = 16640
 c0 =  20.00
-       get_partition wall time:    62.873141 CPU time:    62.737288
+       get_partition wall time:    62.652537 CPU time:    62.520044
 len of partition[   0] =  19885
 len of partition[   1] =  19882
 len of partition[   2] =  19892
@@ -1346,39 +1346,39 @@ len of partition[  77] =  23547
 len of partition[  78] =  23555
 len of partition[  79] =  23528
 len of partition[  80] =  20621
-len of partition[  81] =  19892
-len of partition[  82] =  19907
+len of partition[  81] =  19882
+len of partition[  82] =  19882
 len of partition[  83] =  20631
-len of partition[  84] =  19995
+len of partition[  84] =  20033
 len of partition[  85] =  20792
-len of partition[  86] =  20059
+len of partition[  86] =  20079
 len of partition[  87] =  20904
 len of partition[  88] =  19997
-len of partition[  89] =  20849
+len of partition[  89] =  20864
 len of partition[  90] =  20046
 len of partition[  91] =  20001
 len of partition[  92] =  23476
-len of partition[  93] =  23538
+len of partition[  93] =  23528
 len of partition[  94] =  23497
 len of partition[  95] =  23542
 len of partition[  96] =  20621
-len of partition[  97] =  19882
+len of partition[  97] =  19892
 len of partition[  98] =  19882
 len of partition[  99] =  20631
 len of partition[ 100] =  20033
 len of partition[ 101] =  20792
-len of partition[ 102] =  20079
+len of partition[ 102] =  20059
 len of partition[ 103] =  20904
 len of partition[ 104] =  19997
 len of partition[ 105] =  20864
-len of partition[ 106] =  20103
+len of partition[ 106] =  20046
 len of partition[ 107] =  20001
 len of partition[ 108] =  23438
-len of partition[ 109] =  23464
+len of partition[ 109] =  23462
 len of partition[ 110] =  23498
 len of partition[ 111] =  23408
 len of partition[ 112] =  20200
-len of partition[ 113] =  19513
+len of partition[ 113] =  19468
 len of partition[ 114] =  19462
 len of partition[ 115] =  20212
 len of partition[ 116] =  19865
@@ -1387,11 +1387,11 @@ len of partition[ 118] =  19978
 len of partition[ 119] =  20652
 len of partition[ 120] =  19756
 len of partition[ 121] =  20688
-len of partition[ 122] =  19695
+len of partition[ 122] =  19847
 len of partition[ 123] =  19899
 len of partition[ 124] =  23476
 len of partition[ 125] =  23528
-len of partition[ 126] =  23547
+len of partition[ 126] =  23497
 len of partition[ 127] =  23542
 len of partition[ 128] =  19871
 len of partition[ 129] =  20628
@@ -1411,9 +1411,9 @@ len of partition[ 142] =  23555
 len of partition[ 143] =  23579
 len of partition[ 144] =  19882
 len of partition[ 145] =  20631
-len of partition[ 146] =  20641
+len of partition[ 146] =  20621
 len of partition[ 147] =  19882
-len of partition[ 148] =  19968
+len of partition[ 148] =  20033
 len of partition[ 149] =  20904
 len of partition[ 150] =  20079
 len of partition[ 151] =  20792
@@ -1421,14 +1421,14 @@ len of partition[ 152] =  20122
 len of partition[ 153] =  20033
 len of partition[ 154] =  20138
 len of partition[ 155] =  20664
-len of partition[ 156] =  23533
-len of partition[ 157] =  23573
+len of partition[ 156] =  23522
+len of partition[ 157] =  23528
 len of partition[ 158] =  23497
 len of partition[ 159] =  23502
 len of partition[ 160] =  19882
 len of partition[ 161] =  20631
 len of partition[ 162] =  20621
-len of partition[ 163] =  19937
+len of partition[ 163] =  19882
 len of partition[ 164] =  20033
 len of partition[ 165] =  20904
 len of partition[ 166] =  20079
@@ -1436,7 +1436,7 @@ len of partition[ 167] =  20792
 len of partition[ 168] =  20122
 len of partition[ 169] =  20033
 len of partition[ 170] =  20138
-len of partition[ 171] =  20568
+len of partition[ 171] =  20664
 len of partition[ 172] =  23432
 len of partition[ 173] =  23462
 len of partition[ 174] =  23488
@@ -1538,7 +1538,7 @@ len of partition[ 269] =  23547
 len of partition[ 270] =  23528
 len of partition[ 271] =  23555
 len of partition[ 272] =  20621
-len of partition[ 273] =  19882
+len of partition[ 273] =  20030
 len of partition[ 274] =  20631
 len of partition[ 275] =  19882
 len of partition[ 276] =  20904
@@ -1554,11 +1554,11 @@ len of partition[ 285] =  23528
 len of partition[ 286] =  23542
 len of partition[ 287] =  23497
 len of partition[ 288] =  20621
-len of partition[ 289] =  19916
+len of partition[ 289] =  19882
 len of partition[ 290] =  20631
 len of partition[ 291] =  19882
 len of partition[ 292] =  20904
-len of partition[ 293] =  20031
+len of partition[ 293] =  20079
 len of partition[ 294] =  20792
 len of partition[ 295] =  20033
 len of partition[ 296] =  20033
@@ -1567,8 +1567,8 @@ len of partition[ 298] =  20664
 len of partition[ 299] =  20122
 len of partition[ 300] =  23438
 len of partition[ 301] =  23462
-len of partition[ 302] =  23408
-len of partition[ 303] =  23488
+len of partition[ 302] =  23416
+len of partition[ 303] =  23628
 len of partition[ 304] =  20200
 len of partition[ 305] =  19468
 len of partition[ 306] =  20212
@@ -1584,12 +1584,12 @@ len of partition[ 315] =  19923
 len of partition[ 316] =  23476
 len of partition[ 317] =  23528
 len of partition[ 318] =  23542
-len of partition[ 319] =  23511
+len of partition[ 319] =  23497
 len of partition[ 320] =  21383
 len of partition[ 321] =  19889
 len of partition[ 322] =  20637
 len of partition[ 323] =  20637
-len of partition[ 324] =  20012
+len of partition[ 324] =  20014
 len of partition[ 325] =  20084
 len of partition[ 326] =  20008
 len of partition[ 327] =  19940
@@ -1603,36 +1603,36 @@ len of partition[ 334] =  23488
 len of partition[ 335] =  23488
 len of partition[ 336] =  21394
 len of partition[ 337] =  19890
-len of partition[ 338] =  20652
-len of partition[ 339] =  20626
-len of partition[ 340] =  20030
-len of partition[ 341] =  20124
-len of partition[ 342] =  20051
-len of partition[ 343] =  19997
+len of partition[ 338] =  20684
+len of partition[ 339] =  20652
+len of partition[ 340] =  19990
+len of partition[ 341] =  20122
+len of partition[ 342] =  20046
+len of partition[ 343] =  19959
 len of partition[ 344] =  20138
 len of partition[ 345] =  20904
 len of partition[ 346] =  20825
-len of partition[ 347] =  20046
+len of partition[ 347] =  19686
 len of partition[ 348] =  23468
-len of partition[ 349] =  23523
-len of partition[ 350] =  23532
-len of partition[ 351] =  23532
+len of partition[ 349] =  23541
+len of partition[ 350] =  23540
+len of partition[ 351] =  23540
 len of partition[ 352] =  21394
-len of partition[ 353] =  20009
-len of partition[ 354] =  20626
+len of partition[ 353] =  19890
+len of partition[ 354] =  20652
 len of partition[ 355] =  20626
-len of partition[ 356] =  20068
-len of partition[ 357] =  20064
-len of partition[ 358] =  19956
+len of partition[ 356] =  20030
+len of partition[ 357] =  20122
+len of partition[ 358] =  20046
 len of partition[ 359] =  19997
 len of partition[ 360] =  20138
 len of partition[ 361] =  20904
 len of partition[ 362] =  20825
-len of partition[ 363] =  20046
+len of partition[ 363] =  20118
 len of partition[ 364] =  23460
-len of partition[ 365] =  23559
+len of partition[ 365] =  23560
 len of partition[ 366] =  23484
-len of partition[ 367] =  23495
+len of partition[ 367] =  23484
 len of partition[ 368] =  20951
 len of partition[ 369] =  19472
 len of partition[ 370] =  20213
@@ -1648,15 +1648,15 @@ len of partition[ 379] =  19847
 len of partition[ 380] =  23468
 len of partition[ 381] =  23523
 len of partition[ 382] =  23532
-len of partition[ 383] =  23540
+len of partition[ 383] =  23532
 len of partition[ 384] =  20637
 len of partition[ 385] =  20637
-len of partition[ 386] =  21388
-len of partition[ 387] =  19889
-len of partition[ 388] =  19982
+len of partition[ 386] =  21383
+len of partition[ 387] =  19908
+len of partition[ 388] =  20012
 len of partition[ 389] =  19940
 len of partition[ 390] =  20018
-len of partition[ 391] =  20074
+len of partition[ 391] =  20044
 len of partition[ 392] =  20008
 len of partition[ 393] =  20012
 len of partition[ 394] =  20844
@@ -1672,55 +1672,55 @@ len of partition[ 403] =  19890
 len of partition[ 404] =  20068
 len of partition[ 405] =  19997
 len of partition[ 406] =  20057
-len of partition[ 407] =  20111
+len of partition[ 407] =  20114
 len of partition[ 408] =  20046
 len of partition[ 409] =  20068
-len of partition[ 410] =  20904
+len of partition[ 410] =  20804
 len of partition[ 411] =  20783
 len of partition[ 412] =  23496
-len of partition[ 413] =  23548
+len of partition[ 413] =  23523
 len of partition[ 414] =  23532
-len of partition[ 415] =  23503
+len of partition[ 415] =  23497
 len of partition[ 416] =  20626
-len of partition[ 417] =  20626
+len of partition[ 417] =  20700
 len of partition[ 418] =  21394
 len of partition[ 419] =  19890
 len of partition[ 420] =  20068
-len of partition[ 421] =  19997
+len of partition[ 421] =  19901
 len of partition[ 422] =  20057
-len of partition[ 423] =  20114
+len of partition[ 423] =  20111
 len of partition[ 424] =  20046
 len of partition[ 425] =  20068
-len of partition[ 426] =  20904
+len of partition[ 426] =  20910
 len of partition[ 427] =  20783
 len of partition[ 428] =  23436
 len of partition[ 429] =  23536
-len of partition[ 430] =  23484
+len of partition[ 430] =  23520
 len of partition[ 431] =  23488
 len of partition[ 432] =  20213
 len of partition[ 433] =  20213
 len of partition[ 434] =  20951
-len of partition[ 435] =  19491
+len of partition[ 435] =  19472
 len of partition[ 436] =  19828
-len of partition[ 437] =  19756
+len of partition[ 437] =  19760
 len of partition[ 438] =  19857
-len of partition[ 439] =  19883
+len of partition[ 439] =  19913
 len of partition[ 440] =  19847
 len of partition[ 441] =  19828
-len of partition[ 442] =  20652
+len of partition[ 442] =  20616
 len of partition[ 443] =  20576
-len of partition[ 444] =  23537
-len of partition[ 445] =  23523
-len of partition[ 446] =  23532
-len of partition[ 447] =  23629
+len of partition[ 444] =  23496
+len of partition[ 445] =  23541
+len of partition[ 446] =  23547
+len of partition[ 447] =  23497
 len of partition[ 448] =  20628
 len of partition[ 449] =  19871
 len of partition[ 450] =  20624
-len of partition[ 451] =  19889
+len of partition[ 451] =  19885
 len of partition[ 452] =  20844
-len of partition[ 453] =  20047
+len of partition[ 453] =  20049
 len of partition[ 454] =  20753
-len of partition[ 455] =  20129
+len of partition[ 455] =  20139
 len of partition[ 456] =  20077
 len of partition[ 457] =  19940
 len of partition[ 458] =  20880
@@ -1732,7 +1732,7 @@ len of partition[ 463] =  23519
 len of partition[ 464] =  20631
 len of partition[ 465] =  19882
 len of partition[ 466] =  20621
-len of partition[ 467] =  19882
+len of partition[ 467] =  19917
 len of partition[ 468] =  20904
 len of partition[ 469] =  20033
 len of partition[ 470] =  20792
@@ -1742,40 +1742,40 @@ len of partition[ 473] =  19997
 len of partition[ 474] =  20864
 len of partition[ 475] =  20046
 len of partition[ 476] =  23468
-len of partition[ 477] =  23530
-len of partition[ 478] =  23601
+len of partition[ 477] =  23528
+len of partition[ 478] =  23542
 len of partition[ 479] =  23517
-len of partition[ 480] =  20697
-len of partition[ 481] =  19891
+len of partition[ 480] =  20631
+len of partition[ 481] =  19882
 len of partition[ 482] =  20621
 len of partition[ 483] =  19882
 len of partition[ 484] =  20904
-len of partition[ 485] =  20019
+len of partition[ 485] =  20033
 len of partition[ 486] =  20792
-len of partition[ 487] =  19887
+len of partition[ 487] =  20079
 len of partition[ 488] =  20018
 len of partition[ 489] =  19997
 len of partition[ 490] =  20864
 len of partition[ 491] =  20046
 len of partition[ 492] =  23460
-len of partition[ 493] =  23467
+len of partition[ 493] =  23462
 len of partition[ 494] =  23408
 len of partition[ 495] =  23472
 len of partition[ 496] =  20212
 len of partition[ 497] =  19462
 len of partition[ 498] =  20200
-len of partition[ 499] =  19472
+len of partition[ 499] =  19468
 len of partition[ 500] =  20652
-len of partition[ 501] =  19863
+len of partition[ 501] =  19865
 len of partition[ 502] =  20585
-len of partition[ 503] =  19968
+len of partition[ 503] =  19978
 len of partition[ 504] =  19916
 len of partition[ 505] =  19756
 len of partition[ 506] =  20688
 len of partition[ 507] =  19847
 len of partition[ 508] =  23468
-len of partition[ 509] =  23530
-len of partition[ 510] =  23601
+len of partition[ 509] =  23528
+len of partition[ 510] =  23542
 len of partition[ 511] =  23517
 len of partition[ 512] =  19871
 len of partition[ 513] =  20628
@@ -1809,7 +1809,7 @@ len of partition[ 540] =  23522
 len of partition[ 541] =  23528
 len of partition[ 542] =  23502
 len of partition[ 543] =  23497
-len of partition[ 544] =  19882
+len of partition[ 544] =  19886
 len of partition[ 545] =  20631
 len of partition[ 546] =  19882
 len of partition[ 547] =  20621
@@ -1817,7 +1817,7 @@ len of partition[ 548] =  20792
 len of partition[ 549] =  20079
 len of partition[ 550] =  20904
 len of partition[ 551] =  20033
-len of partition[ 552] =  20864
+len of partition[ 552] =  20852
 len of partition[ 553] =  20046
 len of partition[ 554] =  20029
 len of partition[ 555] =  19997
@@ -1842,12 +1842,12 @@ len of partition[ 573] =  23528
 len of partition[ 574] =  23502
 len of partition[ 575] =  23497
 len of partition[ 576] =  20637
-len of partition[ 577] =  20651
-len of partition[ 578] =  19889
+len of partition[ 577] =  20637
+len of partition[ 578] =  19908
 len of partition[ 579] =  21383
-len of partition[ 580] =  20074
+len of partition[ 580] =  20044
 len of partition[ 581] =  20018
-len of partition[ 582] =  19922
+len of partition[ 582] =  19940
 len of partition[ 583] =  20012
 len of partition[ 584] =  20844
 len of partition[ 585] =  20744
@@ -1858,37 +1858,37 @@ len of partition[ 589] =  23523
 len of partition[ 590] =  23555
 len of partition[ 591] =  23488
 len of partition[ 592] =  20626
-len of partition[ 593] =  20626
+len of partition[ 593] =  20688
 len of partition[ 594] =  19890
 len of partition[ 595] =  21394
-len of partition[ 596] =  20111
-len of partition[ 597] =  20068
-len of partition[ 598] =  19998
+len of partition[ 596] =  20114
+len of partition[ 597] =  19912
+len of partition[ 598] =  19997
 len of partition[ 599] =  20068
 len of partition[ 600] =  20904
-len of partition[ 601] =  20792
+len of partition[ 601] =  20781
 len of partition[ 602] =  20046
 len of partition[ 603] =  20138
 len of partition[ 604] =  23496
-len of partition[ 605] =  23526
+len of partition[ 605] =  23523
 len of partition[ 606] =  23497
 len of partition[ 607] =  23547
 len of partition[ 608] =  20626
-len of partition[ 609] =  20688
+len of partition[ 609] =  20626
 len of partition[ 610] =  19890
 len of partition[ 611] =  21394
 len of partition[ 612] =  20111
-len of partition[ 613] =  19912
+len of partition[ 613] =  20068
 len of partition[ 614] =  19997
 len of partition[ 615] =  20068
 len of partition[ 616] =  20904
-len of partition[ 617] =  20641
+len of partition[ 617] =  20781
 len of partition[ 618] =  20046
 len of partition[ 619] =  20138
 len of partition[ 620] =  23436
 len of partition[ 621] =  23536
 len of partition[ 622] =  23488
-len of partition[ 623] =  23556
+len of partition[ 623] =  23580
 len of partition[ 624] =  20213
 len of partition[ 625] =  20213
 len of partition[ 626] =  19472
@@ -1904,83 +1904,83 @@ len of partition[ 635] =  19896
 len of partition[ 636] =  23496
 len of partition[ 637] =  23523
 len of partition[ 638] =  23497
-len of partition[ 639] =  23532
-len of partition[ 640] =  19889
+len of partition[ 639] =  23547
+len of partition[ 640] =  19913
 len of partition[ 641] =  21383
 len of partition[ 642] =  20637
-len of partition[ 643] =  20656
+len of partition[ 643] =  20654
 len of partition[ 644] =  20084
 len of partition[ 645] =  20012
-len of partition[ 646] =  19940
-len of partition[ 647] =  20008
+len of partition[ 646] =  19913
+len of partition[ 647] =  19963
 len of partition[ 648] =  20739
 len of partition[ 649] =  20008
-len of partition[ 650] =  20017
-len of partition[ 651] =  20808
+len of partition[ 650] =  20080
+len of partition[ 651] =  20844
 len of partition[ 652] =  23464
 len of partition[ 653] =  23523
 len of partition[ 654] =  23555
 len of partition[ 655] =  23555
-len of partition[ 656] =  19890
+len of partition[ 656] =  19963
 len of partition[ 657] =  21394
-len of partition[ 658] =  20626
+len of partition[ 658] =  20733
 len of partition[ 659] =  20626
 len of partition[ 660] =  20122
-len of partition[ 661] =  20068
-len of partition[ 662] =  20004
-len of partition[ 663] =  20073
-len of partition[ 664] =  20779
+len of partition[ 661] =  19993
+len of partition[ 662] =  19999
+len of partition[ 663] =  19947
+len of partition[ 664] =  20790
 len of partition[ 665] =  20046
-len of partition[ 666] =  20144
-len of partition[ 667] =  20906
+len of partition[ 666] =  20138
+len of partition[ 667] =  20904
 len of partition[ 668] =  23544
-len of partition[ 669] =  23523
-len of partition[ 670] =  23536
-len of partition[ 671] =  23497
+len of partition[ 669] =  23531
+len of partition[ 670] =  23531
+len of partition[ 671] =  23536
 len of partition[ 672] =  19983
-len of partition[ 673] =  21449
+len of partition[ 673] =  21394
 len of partition[ 674] =  20626
-len of partition[ 675] =  20726
+len of partition[ 675] =  20725
 len of partition[ 676] =  20122
-len of partition[ 677] =  20068
-len of partition[ 678] =  19872
-len of partition[ 679] =  19851
-len of partition[ 680] =  20779
+len of partition[ 677] =  20071
+len of partition[ 678] =  19853
+len of partition[ 679] =  20054
+len of partition[ 680] =  20639
 len of partition[ 681] =  20046
 len of partition[ 682] =  20138
-len of partition[ 683] =  20904
+len of partition[ 683] =  20906
 len of partition[ 684] =  23484
-len of partition[ 685] =  23667
+len of partition[ 685] =  23561
 len of partition[ 686] =  23488
 len of partition[ 687] =  23488
 len of partition[ 688] =  19472
 len of partition[ 689] =  20951
-len of partition[ 690] =  20213
-len of partition[ 691] =  20213
+len of partition[ 690] =  20232
+len of partition[ 691] =  20232
 len of partition[ 692] =  19923
 len of partition[ 693] =  19828
-len of partition[ 694] =  19756
+len of partition[ 694] =  19763
 len of partition[ 695] =  19847
 len of partition[ 696] =  20571
 len of partition[ 697] =  19847
 len of partition[ 698] =  19896
-len of partition[ 699] =  20652
+len of partition[ 699] =  20616
 len of partition[ 700] =  23544
-len of partition[ 701] =  23523
-len of partition[ 702] =  23518
-len of partition[ 703] =  23518
+len of partition[ 701] =  23561
+len of partition[ 702] =  23497
+len of partition[ 703] =  23497
 len of partition[ 704] =  19885
 len of partition[ 705] =  20624
-len of partition[ 706] =  19910
-len of partition[ 707] =  20628
-len of partition[ 708] =  20618
-len of partition[ 709] =  20049
+len of partition[ 706] =  19871
+len of partition[ 707] =  20646
+len of partition[ 708] =  20753
+len of partition[ 709] =  20044
 len of partition[ 710] =  20844
 len of partition[ 711] =  20139
 len of partition[ 712] =  20726
 len of partition[ 713] =  20084
 len of partition[ 714] =  20049
-len of partition[ 715] =  20012
+len of partition[ 715] =  19949
 len of partition[ 716] =  23524
 len of partition[ 717] =  23547
 len of partition[ 718] =  23579
@@ -1989,42 +1989,42 @@ len of partition[ 720] =  19882
 len of partition[ 721] =  20621
 len of partition[ 722] =  19882
 len of partition[ 723] =  20631
-len of partition[ 724] =  20829
+len of partition[ 724] =  20792
 len of partition[ 725] =  20033
 len of partition[ 726] =  20904
 len of partition[ 727] =  20079
-len of partition[ 728] =  20664
+len of partition[ 728] =  20584
 len of partition[ 729] =  20122
 len of partition[ 730] =  20033
-len of partition[ 731] =  20068
+len of partition[ 731] =  20074
 len of partition[ 732] =  23496
-len of partition[ 733] =  23528
+len of partition[ 733] =  23533
 len of partition[ 734] =  23502
 len of partition[ 735] =  23517
 len of partition[ 736] =  19882
 len of partition[ 737] =  20621
 len of partition[ 738] =  19882
 len of partition[ 739] =  20631
-len of partition[ 740] =  20829
+len of partition[ 740] =  20792
 len of partition[ 741] =  20033
 len of partition[ 742] =  20904
 len of partition[ 743] =  20079
 len of partition[ 744] =  20664
 len of partition[ 745] =  20122
-len of partition[ 746] =  20033
+len of partition[ 746] =  19984
 len of partition[ 747] =  20068
-len of partition[ 748] =  23436
+len of partition[ 748] =  23481
 len of partition[ 749] =  23462
-len of partition[ 750] =  23422
+len of partition[ 750] =  23461
 len of partition[ 751] =  23472
 len of partition[ 752] =  19468
 len of partition[ 753] =  20200
-len of partition[ 754] =  19501
-len of partition[ 755] =  20216
-len of partition[ 756] =  20450
+len of partition[ 754] =  19462
+len of partition[ 755] =  20212
+len of partition[ 756] =  20585
 len of partition[ 757] =  19865
 len of partition[ 758] =  20652
-len of partition[ 759] =  19953
+len of partition[ 759] =  19978
 len of partition[ 760] =  20558
 len of partition[ 761] =  19923
 len of partition[ 762] =  19865
@@ -2103,10 +2103,10 @@ len of partition[ 834] =  19885
 len of partition[ 835] =  20624
 len of partition[ 836] =  20139
 len of partition[ 837] =  20753
-len of partition[ 838] =  20049
+len of partition[ 838] =  20047
 len of partition[ 839] =  20844
 len of partition[ 840] =  20012
-len of partition[ 841] =  20726
+len of partition[ 841] =  20706
 len of partition[ 842] =  20084
 len of partition[ 843] =  20049
 len of partition[ 844] =  23577
@@ -2114,20 +2114,20 @@ len of partition[ 845] =  23547
 len of partition[ 846] =  23519
 len of partition[ 847] =  23528
 len of partition[ 848] =  20631
-len of partition[ 849] =  19891
+len of partition[ 849] =  19882
 len of partition[ 850] =  19882
 len of partition[ 851] =  20621
 len of partition[ 852] =  20079
 len of partition[ 853] =  20792
-len of partition[ 854] =  20019
+len of partition[ 854] =  20033
 len of partition[ 855] =  20904
 len of partition[ 856] =  20068
 len of partition[ 857] =  20664
 len of partition[ 858] =  20122
 len of partition[ 859] =  20033
 len of partition[ 860] =  23468
-len of partition[ 861] =  23528
-len of partition[ 862] =  23522
+len of partition[ 861] =  23530
+len of partition[ 862] =  23517
 len of partition[ 863] =  23542
 len of partition[ 864] =  20631
 len of partition[ 865] =  19882
@@ -2142,7 +2142,7 @@ len of partition[ 873] =  20664
 len of partition[ 874] =  20122
 len of partition[ 875] =  20033
 len of partition[ 876] =  23460
-len of partition[ 877] =  23467
+len of partition[ 877] =  23462
 len of partition[ 878] =  23472
 len of partition[ 879] =  23408
 len of partition[ 880] =  20212
@@ -2160,10 +2160,10 @@ len of partition[ 891] =  19865
 len of partition[ 892] =  23468
 len of partition[ 893] =  23528
 len of partition[ 894] =  23517
-len of partition[ 895] =  23578
-len of partition[ 896] =  19885
+len of partition[ 895] =  23542
+len of partition[ 896] =  19890
 len of partition[ 897] =  20624
-len of partition[ 898] =  20646
+len of partition[ 898] =  20628
 len of partition[ 899] =  19871
 len of partition[ 900] =  20139
 len of partition[ 901] =  20844
@@ -2177,43 +2177,43 @@ len of partition[ 908] =  23524
 len of partition[ 909] =  23547
 len of partition[ 910] =  23519
 len of partition[ 911] =  23579
-len of partition[ 912] =  19882
+len of partition[ 912] =  19944
 len of partition[ 913] =  20621
 len of partition[ 914] =  20631
 len of partition[ 915] =  19882
-len of partition[ 916] =  20079
-len of partition[ 917] =  20918
+len of partition[ 916] =  19983
+len of partition[ 917] =  20904
 len of partition[ 918] =  20033
 len of partition[ 919] =  20792
 len of partition[ 920] =  20046
 len of partition[ 921] =  20079
 len of partition[ 922] =  19997
 len of partition[ 923] =  20864
-len of partition[ 924] =  23496
+len of partition[ 924] =  23511
 len of partition[ 925] =  23528
 len of partition[ 926] =  23517
 len of partition[ 927] =  23502
 len of partition[ 928] =  19882
-len of partition[ 929] =  20690
+len of partition[ 929] =  20621
 len of partition[ 930] =  20631
-len of partition[ 931] =  19922
+len of partition[ 931] =  19882
 len of partition[ 932] =  20079
-len of partition[ 933] =  20679
-len of partition[ 934] =  20028
+len of partition[ 933] =  20904
+len of partition[ 934] =  20033
 len of partition[ 935] =  20792
 len of partition[ 936] =  20046
 len of partition[ 937] =  20079
 len of partition[ 938] =  19997
-len of partition[ 939] =  20788
+len of partition[ 939] =  20864
 len of partition[ 940] =  23436
-len of partition[ 941] =  23604
+len of partition[ 941] =  23462
 len of partition[ 942] =  23472
-len of partition[ 943] =  23422
+len of partition[ 943] =  23461
 len of partition[ 944] =  19468
 len of partition[ 945] =  20200
-len of partition[ 946] =  20216
+len of partition[ 946] =  20212
 len of partition[ 947] =  19462
-len of partition[ 948] =  19953
+len of partition[ 948] =  19978
 len of partition[ 949] =  20652
 len of partition[ 950] =  19860
 len of partition[ 951] =  20585
@@ -2223,9 +2223,9 @@ len of partition[ 954] =  19756
 len of partition[ 955] =  20688
 len of partition[ 956] =  23496
 len of partition[ 957] =  23533
-len of partition[ 958] =  23522
+len of partition[ 958] =  23517
 len of partition[ 959] =  23502
-len of partition[ 960] =  19886
+len of partition[ 960] =  19882
 len of partition[ 961] =  19885
 len of partition[ 962] =  19892
 len of partition[ 963] =  19892
@@ -2233,7 +2233,7 @@ len of partition[ 964] =  20807
 len of partition[ 965] =  20880
 len of partition[ 966] =  20794
 len of partition[ 967] =  20726
-len of partition[ 968] =  20025
+len of partition[ 968] =  20060
 len of partition[ 969] =  20139
 len of partition[ 970] =  20049
 len of partition[ 971] =  20049
@@ -2242,24 +2242,24 @@ len of partition[ 973] =  23571
 len of partition[ 974] =  23521
 len of partition[ 975] =  23521
 len of partition[ 976] =  19889
-len of partition[ 977] =  19884
+len of partition[ 977] =  19895
 len of partition[ 978] =  19883
-len of partition[ 979] =  19883
+len of partition[ 979] =  19893
 len of partition[ 980] =  20745
 len of partition[ 981] =  20864
-len of partition[ 982] =  20778
+len of partition[ 982] =  20715
 len of partition[ 983] =  20664
 len of partition[ 984] =  20001
 len of partition[ 985] =  20079
 len of partition[ 986] =  20033
-len of partition[ 987] =  20033
-len of partition[ 988] =  23499
+len of partition[ 987] =  19984
+len of partition[ 988] =  23468
 len of partition[ 989] =  23537
 len of partition[ 990] =  23518
 len of partition[ 991] =  23518
 len of partition[ 992] =  19889
 len of partition[ 993] =  19884
-len of partition[ 994] =  19883
+len of partition[ 994] =  19893
 len of partition[ 995] =  19883
 len of partition[ 996] =  20745
 len of partition[ 997] =  20864
@@ -2270,7 +2270,7 @@ len of partition[1001] =  20079
 len of partition[1002] =  20033
 len of partition[1003] =  20033
 len of partition[1004] =  23460
-len of partition[1005] =  23406
+len of partition[1005] =  23458
 len of partition[1006] =  23420
 len of partition[1007] =  23420
 len of partition[1008] =  19465
@@ -5959,2492 +5959,3 @@ WARNING!
   linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
   to remove the diffused Gaussians whose exponents are less than 0.1.
 
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-WARNING!
-  Very diffused basis functions are found in the basis set. They may lead to severe
-  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
-  to remove the diffused Gaussians whose exponents are less than 0.1.
-
-             get_aoR wall time:   749.289149 CPU time: 37835.881148
-In _build_buffer: ISDF Local size of buffer = 53307.025 MB
- ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
-select_IP_local_atm: atm_begin =    0, atm_end = 1024
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =   90
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  145
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   92
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  139
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =   92
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =   92
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  152
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  139
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =   92
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  140
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  143
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  144
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  139
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  139
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  140
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =   89
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  143
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  144
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  139
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  135
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  143
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   88
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  143
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  140
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  144
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   86
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  142
-select_IP_local_atm: npt_found =  137
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  126
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =   88
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  131
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =   95
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =   93
-select_IP_local_atm: npt_found =  117
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =   99
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  114
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  134
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =   97
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  129
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  100
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =   94
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  122
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =   89
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  133
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  123
-select_IP_local_atm: npt_found =  124
-select_IP_local_atm: npt_found =  119
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =   98
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  102
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  104
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  125
-select_IP_local_atm: npt_found =  142
-select_IP_local_atm: npt_found =  130
-select_IP_local_atm: npt_found =  132
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  107
-select_IP_local_atm: npt_found =  120
-select_IP_local_atm: npt_found =   96
-select_IP_local_atm: npt_found =  108
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  101
-select_IP_local_atm: npt_found =  110
-select_IP_local_atm: npt_found =  103
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  127
-select_IP_local_atm: npt_found =  115
-select_IP_local_atm: npt_found =  136
-select_IP_local_atm: npt_found =  144
-select_IP_local_atm: npt_found =  116
-select_IP_local_atm: npt_found =  113
-select_IP_local_atm: npt_found =  118
-select_IP_local_atm: npt_found =  121
-select_IP_local_atm: npt_found =  105
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  111
-select_IP_local_atm: npt_found =  112
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  106
-select_IP_local_atm: npt_found =  109
-select_IP_local_atm: npt_found =  128
-select_IP_local_atm: npt_found =  138
-select_IP_local_atm: npt_found =  141
-select_IP_local_atm: npt_found =  147
-select_IP_local_step1 wall time:   271.758942 CPU time: 17266.114304
- build_aoRg_possible wall time:     3.218779 CPU time:     9.224581
-select_IP_local_step2 wall time:     0.000313 CPU time:     0.000338
-select_IP_local_step3 wall time:     0.038648 CPU time:     0.038581
-Memory usage for aoR  : 139543.152 MB
-Memory usage for aoRg :    768.951 MB
-            build_IP wall time:   275.016682 CPU time: 17275.377804
-build_aux_basis_local wall time:   252.359454 CPU time:  9527.056836
- ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
-Memory usage for V:      0.000 MB
-Memory usage for W: 105900.649 MB

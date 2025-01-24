@@ -129,3 +129,25 @@ w[ 20], rank = 2600 / 2600
     CPU time for w[ 20]   6100.45 sec, wall time    152.59 sec
 w[ 21], rank = 2600 / 2600
     CPU time for w[ 21]  10712.82 sec, wall time    228.03 sec
+w[ 22], rank = 2600 / 2600
+    CPU time for w[ 22]   5360.11 sec, wall time    140.66 sec
+w[ 23], rank = 2600 / 2600
+    CPU time for w[ 23]   5470.26 sec, wall time    150.17 sec
+w[ 24], rank = 2600 / 2600
+    CPU time for w[ 24]   4689.82 sec, wall time    124.02 sec
+w[ 25], rank = 2600 / 2600
+    CPU time for w[ 25]   5093.80 sec, wall time    140.70 sec
+w[ 26], rank = 2600 / 2600
+    CPU time for w[ 26]   5221.18 sec, wall time    137.78 sec
+w[ 27], rank = 2600 / 2600
+    CPU time for w[ 27]   5225.25 sec, wall time    141.15 sec
+w[ 28], rank = 2600 / 2600
+    CPU time for w[ 28]   5152.45 sec, wall time    134.86 sec
+w[ 29], rank = 2600 / 2600
+    CPU time for w[ 29]   5261.36 sec, wall time    141.68 sec
+w[ 30], rank = 2600 / 2600
+    CPU time for w[ 30]   9703.11 sec, wall time    209.34 sec
+w[ 31], rank = 2600 / 2600
+    CPU time for w[ 31]   5300.60 sec, wall time    142.46 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-cco-2x2-frac-2-4-4-gth-dzvp-molopt-sr/46936279/tmp.chk
+    CPU time for building ISDF 185248.56 sec, wall time   5510.08 sec

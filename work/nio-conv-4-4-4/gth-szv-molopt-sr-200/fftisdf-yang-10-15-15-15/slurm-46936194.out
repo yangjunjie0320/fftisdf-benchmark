@@ -222,3 +222,19 @@ w[ 55], rank =  560 /  560
     CPU time for w[ 55]   6406.81 sec, wall time    104.71 sec
 w[ 56], rank =  560 /  560
     CPU time for w[ 56]   6234.74 sec, wall time    102.55 sec
+w[ 57], rank =  560 /  560
+    CPU time for w[ 57]   6772.27 sec, wall time    110.43 sec
+w[ 58], rank =  560 /  560
+    CPU time for w[ 58]   6211.06 sec, wall time    101.52 sec
+w[ 59], rank =  560 /  560
+    CPU time for w[ 59]   6811.70 sec, wall time    111.43 sec
+w[ 60], rank =  560 /  560
+    CPU time for w[ 60]   6325.98 sec, wall time    103.60 sec
+w[ 61], rank =  560 /  560
+    CPU time for w[ 61]   7141.50 sec, wall time    116.50 sec
+w[ 62], rank =  560 /  560
+    CPU time for w[ 62]   6845.40 sec, wall time    111.92 sec
+w[ 63], rank =  560 /  560
+    CPU time for w[ 63]   6689.71 sec, wall time    109.10 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//fftisdf-yang-10-15-15-15-nio-conv-4-4-4-gth-szv-molopt-sr/46936194/tmp.chk
+    CPU time for building ISDF 420621.29 sec, wall time   6964.99 sec
