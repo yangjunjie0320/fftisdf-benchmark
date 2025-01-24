@@ -1,0 +1,48 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-szv-molopt-sr-200/fftisdf-yang-20-21-21-21/1-2-2//46975562/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-szv-molopt-sr-200/fftisdf-yang-20-21-21-21/1-2-2//46975562/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [45 45 45] (91125 PWs)
+len(kpts) = 4
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.62240176e-17 -2.62240176e-17  4.66885213e-01]
+ [ 0.00000000e+00  4.66885213e-01  0.00000000e+00]
+ [-2.62240176e-17  4.66885213e-01  4.66885213e-01]]
+Overwritten attributes  c0 kmesh tol m0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [45 45 45]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 0.016 Eh.
+Recommended ke_cutoff/mesh are 529.952 / [71 71 71].
+
+kmesh = [1 2 2]
+Input parent grid mesh = [21, 21, 21], ke_cutoff = 155.69
+Final parent grid size = [21 21 21]
+
+Selecting interpolation points
+nkpts = 4, nao = 32, c0 =  20.00
+Parent grid mesh = [21 21 21], grid size = 9261
+    CPU time for select interpolation points     99.45 sec, wall time      3.73 sec
+Pivoted Cholesky rank = 1299, nip = 640, estimated error = 2.50e-03
+Number of interpolation points = 640, effective CISDF =  20.00
+    CPU time for building left-hand side     10.94 sec, wall time      0.17 sec
+
+kpt = 4, ngrid = 91125, nao = 32
+ngrid = 91125, blksize = 1199260, nip = 640
+required disk space = 3 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-conv/gth-szv-molopt-sr-200/fftisdf-yang-20-21-21-21/1-2-2/46975562/h5aa1y7l
+blksize = 1199260, memory for aoR_loop = 49121 MB
+finished aoR_loop[       0:   91125]
+    CPU time for building right-hand side     67.07 sec, wall time      4.89 sec
+w[  0], rank =  640 /  640
+    CPU time for w[  0]    162.27 sec, wall time      4.45 sec
+w[  1], rank =  640 /  640
+    CPU time for w[  1]    164.91 sec, wall time      4.58 sec

@@ -7,7 +7,7 @@ function submit() {
     ke_cutoff=$4
     method=$5
 
-    dir=$PREFIX/work/$cell/$basis-$ke_cutoff/$kmesh/$method/
+    dir=$PREFIX/work/$cell/$basis-$ke_cutoff/$method/$kmesh/
     printf "\n$dir\n"
     if [ -d $dir ]; then
         echo "Directory $dir already exists"
@@ -18,7 +18,7 @@ function submit() {
 
     cp $PREFIX/src/run.sh run.sh
     cmd=$(python $PREFIX/src/dump.py --prefix=$PREFIX --cell=$cell.vasp --kmesh=$kmesh --ke_cutoff=$ke_cutoff --basis=$basis --method=$method)
-    echo -e "$cmd" >> run.sh; sbatch --job-name=$dir --cpus-per-task=64 --mem=480GB --time=48:00:00 run.sh --constraint=icelake
+    echo -e "$cmd" >> run.sh; sbatch --job-name=/work/$cell/$basis-$ke_cutoff/$method/$kmesh/ --cpus-per-task=64 --mem=480GB --time=48:00:00 run.sh --constraint=icelake
 
     # echo $cmd
     cd -
