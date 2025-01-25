@@ -1,0 +1,114 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4//46975729/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4//46975729/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = None
+_cderi_to_save = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4//46975729/gdf.chk
+len(kpts) = 64
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.26135187]
+ [0.         0.         0.52270374]
+ [0.         0.         0.78405561]
+ [0.         0.10779511 0.        ]
+ [0.         0.10779511 0.26135187]
+ [0.         0.10779511 0.52270374]
+ [0.         0.10779511 0.78405561]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.26135187]
+ [0.         0.21559021 0.52270374]
+ [0.         0.21559021 0.78405561]
+ [0.         0.32338532 0.        ]
+ [0.         0.32338532 0.26135187]
+ [0.         0.32338532 0.52270374]
+ [0.         0.32338532 0.78405561]
+ [0.10779511 0.         0.        ]
+ [0.10779511 0.         0.26135187]
+ [0.10779511 0.         0.52270374]
+ [0.10779511 0.         0.78405561]
+ [0.10779511 0.10779511 0.        ]
+ [0.10779511 0.10779511 0.26135187]
+ [0.10779511 0.10779511 0.52270374]
+ [0.10779511 0.10779511 0.78405561]
+ [0.10779511 0.21559021 0.        ]
+ [0.10779511 0.21559021 0.26135187]
+ [0.10779511 0.21559021 0.52270374]
+ [0.10779511 0.21559021 0.78405561]
+ [0.10779511 0.32338532 0.        ]
+ [0.10779511 0.32338532 0.26135187]
+ [0.10779511 0.32338532 0.52270374]
+ [0.10779511 0.32338532 0.78405561]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.26135187]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.         0.78405561]
+ [0.21559021 0.10779511 0.        ]
+ [0.21559021 0.10779511 0.26135187]
+ [0.21559021 0.10779511 0.52270374]
+ [0.21559021 0.10779511 0.78405561]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.26135187]
+ [0.21559021 0.21559021 0.52270374]
+ [0.21559021 0.21559021 0.78405561]
+ [0.21559021 0.32338532 0.        ]
+ [0.21559021 0.32338532 0.26135187]
+ [0.21559021 0.32338532 0.52270374]
+ [0.21559021 0.32338532 0.78405561]
+ [0.32338532 0.         0.        ]
+ [0.32338532 0.         0.26135187]
+ [0.32338532 0.         0.52270374]
+ [0.32338532 0.         0.78405561]
+ [0.32338532 0.10779511 0.        ]
+ [0.32338532 0.10779511 0.26135187]
+ [0.32338532 0.10779511 0.52270374]
+ [0.32338532 0.10779511 0.78405561]
+ [0.32338532 0.21559021 0.        ]
+ [0.32338532 0.21559021 0.26135187]
+ [0.32338532 0.21559021 0.52270374]
+ [0.32338532 0.21559021 0.78405561]
+ [0.32338532 0.32338532 0.        ]
+ [0.32338532 0.32338532 0.26135187]
+ [0.32338532 0.32338532 0.52270374]
+ [0.32338532 0.32338532 0.78405561]]
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4/main.py", line 47, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4/main.py", line 35, in main
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi_to_save)
+  File "/home/junjiey/work/fftisdf-benchmark/src/utils.py", line 73, in get_jk_time
+    scf_obj.with_df = df_obj.build()
+                      ^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/df.py", line 268, in build
+    self._make_j3c(self.cell, self.auxcell, None, cderi)
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/df.py", line 295, in _make_j3c
+    dfbuilder.make_j3c(cderi_file, j_only=j_only, dataname=self._dataname,
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/rsdf_builder.py", line 927, in make_j3c
+    fswap = self.outcore_auxe2(cderi_file, intor, aosym, comp, j_only,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/rsdf_builder.py", line 537, in outcore_auxe2
+    fswap[f'{dataname}I/{idx}'][row0:row1] = outI[k]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/dataset.py", line 1022, in __setitem__
+    self.id.write(mspace, fspace, val, mtype, dxpl=self._dxpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5d.pyx", line 281, in h5py.h5d.DatasetID.write
+  File "h5py/_proxy.pyx", line 115, in h5py._proxy.dset_rw
+OSError: [Errno 122] Can't write data (file write failed: time = Fri Jan 24 23:36:03 2025
+, filename = '/central/scratch/yangjunjie/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/gdf/4-4-4/46975729/.outcore_auxe2_swapmn7o031l', file descriptor = 6, errno = 122, error message = 'Disk quota exceeded', buf = 0x7eab5fafa010, total write size = 49302400, bytes this sub-write = 49302400, bytes actually written = 18446744073709551615, offset = 0)

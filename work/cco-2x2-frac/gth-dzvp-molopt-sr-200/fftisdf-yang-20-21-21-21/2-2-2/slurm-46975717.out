@@ -1,0 +1,76 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-2-2//46975717/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-2-2//46975717/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 8
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.52270374]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.52270374]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.52270374]]
+Overwritten attributes  kmesh m0 tol c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [21, 21, 21], ke_cutoff = 195.14
+Final parent grid size = [51 51 21]
+
+Selecting interpolation points
+nkpts = 8, nao = 260, c0 =  20.00
+Parent grid mesh = [51 51 21], grid size = 54621
+    CPU time for select interpolation points   5832.77 sec, wall time    212.52 sec
+Pivoted Cholesky rank = 10814, nip = 5200, estimated error = 4.34e-03
+Number of interpolation points = 5200, effective CISDF =  20.00
+    CPU time for building left-hand side     65.27 sec, wall time      2.50 sec
+
+kpt = 8, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 73203, nip = 5200
+required disk space = 246 GB
+finished creating fswp: /central/scratch/yangjunjie/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-2-2/46975717/edmgu9wk
+blksize = 73203, memory for aoR_loop = 48723 MB
+finished aoR_loop[       0:   73203]
+finished aoR_loop[   73203:  146406]
+finished aoR_loop[  146406:  219609]
+finished aoR_loop[  219609:  292812]
+finished aoR_loop[  292812:  366015]
+finished aoR_loop[  366015:  370025]
+    CPU time for building right-hand side   2591.36 sec, wall time    297.00 sec
+w[  0], rank = 5200 / 5200
+    CPU time for w[  0]  10404.45 sec, wall time    279.96 sec
+w[  1], rank = 5200 / 5200
+    CPU time for w[  1]  11642.74 sec, wall time    285.02 sec
+w[  2], rank = 5200 / 5200
+    CPU time for w[  2]  11927.62 sec, wall time    293.43 sec
+w[  3], rank = 5200 / 5200
+    CPU time for w[  3]  10194.94 sec, wall time    262.81 sec
+w[  4], rank = 5200 / 5200
+    CPU time for w[  4]  11029.05 sec, wall time    272.28 sec
+w[  5], rank = 5200 / 5200
+    CPU time for w[  5]  11821.75 sec, wall time    285.76 sec
+w[  6], rank = 5200 / 5200
+    CPU time for w[  6]  10726.02 sec, wall time    265.65 sec
+w[  7], rank = 5200 / 5200
+    CPU time for w[  7]  11243.98 sec, wall time    278.03 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-2-2//46975717/tmp.chk
+    CPU time for building ISDF  97500.65 sec, wall time   2738.41 sec

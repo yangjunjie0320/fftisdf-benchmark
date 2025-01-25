@@ -1,0 +1,154 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4//46975732/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4//46975732/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 64
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.26135187]
+ [0.         0.         0.52270374]
+ [0.         0.         0.78405561]
+ [0.         0.10779511 0.        ]
+ [0.         0.10779511 0.26135187]
+ [0.         0.10779511 0.52270374]
+ [0.         0.10779511 0.78405561]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.26135187]
+ [0.         0.21559021 0.52270374]
+ [0.         0.21559021 0.78405561]
+ [0.         0.32338532 0.        ]
+ [0.         0.32338532 0.26135187]
+ [0.         0.32338532 0.52270374]
+ [0.         0.32338532 0.78405561]
+ [0.10779511 0.         0.        ]
+ [0.10779511 0.         0.26135187]
+ [0.10779511 0.         0.52270374]
+ [0.10779511 0.         0.78405561]
+ [0.10779511 0.10779511 0.        ]
+ [0.10779511 0.10779511 0.26135187]
+ [0.10779511 0.10779511 0.52270374]
+ [0.10779511 0.10779511 0.78405561]
+ [0.10779511 0.21559021 0.        ]
+ [0.10779511 0.21559021 0.26135187]
+ [0.10779511 0.21559021 0.52270374]
+ [0.10779511 0.21559021 0.78405561]
+ [0.10779511 0.32338532 0.        ]
+ [0.10779511 0.32338532 0.26135187]
+ [0.10779511 0.32338532 0.52270374]
+ [0.10779511 0.32338532 0.78405561]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.26135187]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.         0.78405561]
+ [0.21559021 0.10779511 0.        ]
+ [0.21559021 0.10779511 0.26135187]
+ [0.21559021 0.10779511 0.52270374]
+ [0.21559021 0.10779511 0.78405561]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.26135187]
+ [0.21559021 0.21559021 0.52270374]
+ [0.21559021 0.21559021 0.78405561]
+ [0.21559021 0.32338532 0.        ]
+ [0.21559021 0.32338532 0.26135187]
+ [0.21559021 0.32338532 0.52270374]
+ [0.21559021 0.32338532 0.78405561]
+ [0.32338532 0.         0.        ]
+ [0.32338532 0.         0.26135187]
+ [0.32338532 0.         0.52270374]
+ [0.32338532 0.         0.78405561]
+ [0.32338532 0.10779511 0.        ]
+ [0.32338532 0.10779511 0.26135187]
+ [0.32338532 0.10779511 0.52270374]
+ [0.32338532 0.10779511 0.78405561]
+ [0.32338532 0.21559021 0.        ]
+ [0.32338532 0.21559021 0.26135187]
+ [0.32338532 0.21559021 0.52270374]
+ [0.32338532 0.21559021 0.78405561]
+ [0.32338532 0.32338532 0.        ]
+ [0.32338532 0.32338532 0.26135187]
+ [0.32338532 0.32338532 0.52270374]
+ [0.32338532 0.32338532 0.78405561]]
+Overwritten attributes  c0 m0 kmesh tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [21, 21, 21], ke_cutoff = 195.14
+Final parent grid size = [51 51 21]
+
+Selecting interpolation points
+nkpts = 64, nao = 260, c0 =  20.00
+Parent grid mesh = [51 51 21], grid size = 54621
+    CPU time for select interpolation points  21317.19 sec, wall time    869.41 sec
+Pivoted Cholesky rank = 12741, nip = 5200, estimated error = 1.24e-02
+Number of interpolation points = 5200, effective CISDF =  20.00
+    CPU time for building left-hand side    312.80 sec, wall time     18.63 sec
+
+kpt = 64, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 8668, nip = 5200
+required disk space = 1970 GB
+finished creating fswp: /central/scratch/yangjunjie/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4/46975732/3pj8xpjc
+blksize = 8668, memory for aoR_loop = 46155 MB
+finished aoR_loop[       0:    8668]
+finished aoR_loop[    8668:   17336]
+finished aoR_loop[   17336:   26004]
+finished aoR_loop[   26004:   34672]
+finished aoR_loop[   34672:   43340]
+finished aoR_loop[   43340:   52008]
+finished aoR_loop[   52008:   60676]
+finished aoR_loop[   60676:   69344]
+finished aoR_loop[   69344:   78012]
+finished aoR_loop[   78012:   86680]
+finished aoR_loop[   86680:   95348]
+finished aoR_loop[   95348:  104016]
+finished aoR_loop[  104016:  112684]
+finished aoR_loop[  112684:  121352]
+finished aoR_loop[  121352:  130020]
+finished aoR_loop[  130020:  138688]
+finished aoR_loop[  138688:  147356]
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4/main.py", line 52, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4/main.py", line 38, in main
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+  File "/home/junjiey/work/fftisdf-benchmark/src/utils.py", line 73, in get_jk_time
+    scf_obj.with_df = df_obj.build()
+                      ^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 349, in build
+    self._x, self._w = build(self, c0=c0, m0=m0, kpts=kpts, kmesh=kmesh)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 62, in build
+    b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 464, in _make_rhs
+    return _make_rhs_outcore(self, x_k, kpts=kpts, kmesh=kmesh, blksize=blksize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/work/fftisdf-benchmark/src/fft_isdf.py", line 116, in _make_rhs_outcore
+    b_k[:, g0:g1, :] = s2k(b_s, phase).conj()
+    ~~~^^^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/dataset.py", line 1022, in __setitem__
+    self.id.write(mspace, fspace, val, mtype, dxpl=self._dxpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5d.pyx", line 281, in h5py.h5d.DatasetID.write
+  File "h5py/_proxy.pyx", line 115, in h5py._proxy.dset_rw
+OSError: [Errno 122] Can't write data (file write failed: time = Fri Jan 24 23:36:03 2025
+, filename = '/central/scratch/yangjunjie/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/4-4-4/46975732/3pj8xpjc', file descriptor = 4, errno = 122, error message = 'Disk quota exceeded', buf = 0x7f77af19f010, total write size = 721177600, bytes this sub-write = 721177600, bytes actually written = 18446744073709551615, offset = 0)

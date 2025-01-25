@@ -1,0 +1,163 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-4-4//46975727/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-4-4//46975727/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [95 95 41] (370025 PWs)
+len(kpts) = 32
+    kpts = [[0.         0.         0.        ]
+ [0.         0.         0.26135187]
+ [0.         0.         0.52270374]
+ [0.         0.         0.78405561]
+ [0.         0.10779511 0.        ]
+ [0.         0.10779511 0.26135187]
+ [0.         0.10779511 0.52270374]
+ [0.         0.10779511 0.78405561]
+ [0.         0.21559021 0.        ]
+ [0.         0.21559021 0.26135187]
+ [0.         0.21559021 0.52270374]
+ [0.         0.21559021 0.78405561]
+ [0.         0.32338532 0.        ]
+ [0.         0.32338532 0.26135187]
+ [0.         0.32338532 0.52270374]
+ [0.         0.32338532 0.78405561]
+ [0.21559021 0.         0.        ]
+ [0.21559021 0.         0.26135187]
+ [0.21559021 0.         0.52270374]
+ [0.21559021 0.         0.78405561]
+ [0.21559021 0.10779511 0.        ]
+ [0.21559021 0.10779511 0.26135187]
+ [0.21559021 0.10779511 0.52270374]
+ [0.21559021 0.10779511 0.78405561]
+ [0.21559021 0.21559021 0.        ]
+ [0.21559021 0.21559021 0.26135187]
+ [0.21559021 0.21559021 0.52270374]
+ [0.21559021 0.21559021 0.78405561]
+ [0.21559021 0.32338532 0.        ]
+ [0.21559021 0.32338532 0.26135187]
+ [0.21559021 0.32338532 0.52270374]
+ [0.21559021 0.32338532 0.78405561]]
+Overwritten attributes  tol kmesh m0 c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [95 95 41]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 10 Eh.
+Recommended ke_cutoff/mesh are 1066.26 / [217 217  91].
+
+kmesh = [2 4 4]
+Input parent grid mesh = [21, 21, 21], ke_cutoff = 195.14
+Final parent grid size = [51 51 21]
+
+Selecting interpolation points
+nkpts = 32, nao = 260, c0 =  20.00
+Parent grid mesh = [51 51 21], grid size = 54621
+    CPU time for select interpolation points  12426.00 sec, wall time    487.93 sec
+Pivoted Cholesky rank = 12093, nip = 5200, estimated error = 8.73e-03
+Number of interpolation points = 5200, effective CISDF =  20.00
+    CPU time for building left-hand side    198.22 sec, wall time      9.96 sec
+
+kpt = 32, ngrid = 370025, nao = 260
+ngrid = 370025, blksize = 17886, nip = 5200
+required disk space = 985 GB
+finished creating fswp: /central/scratch/yangjunjie/work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-4-4/46975727/qmg5r581
+blksize = 17886, memory for aoR_loop = 47619 MB
+finished aoR_loop[       0:   17886]
+finished aoR_loop[   17886:   35772]
+finished aoR_loop[   35772:   53658]
+finished aoR_loop[   53658:   71544]
+finished aoR_loop[   71544:   89430]
+finished aoR_loop[   89430:  107316]
+finished aoR_loop[  107316:  125202]
+finished aoR_loop[  125202:  143088]
+finished aoR_loop[  143088:  160974]
+finished aoR_loop[  160974:  178860]
+finished aoR_loop[  178860:  196746]
+finished aoR_loop[  196746:  214632]
+finished aoR_loop[  214632:  232518]
+finished aoR_loop[  232518:  250404]
+finished aoR_loop[  250404:  268290]
+finished aoR_loop[  268290:  286176]
+finished aoR_loop[  286176:  304062]
+finished aoR_loop[  304062:  321948]
+finished aoR_loop[  321948:  339834]
+finished aoR_loop[  339834:  357720]
+finished aoR_loop[  357720:  370025]
+    CPU time for building right-hand side  10745.64 sec, wall time   1092.44 sec
+w[  0], rank = 5200 / 5200
+    CPU time for w[  0]   9705.60 sec, wall time    257.41 sec
+w[  1], rank = 5200 / 5200
+    CPU time for w[  1]  11714.87 sec, wall time    302.47 sec
+w[  2], rank = 5200 / 5200
+    CPU time for w[  2]  15097.33 sec, wall time    333.54 sec
+w[  3], rank = 5200 / 5200
+    CPU time for w[  3]  11225.84 sec, wall time    290.68 sec
+w[  4], rank = 5200 / 5200
+    CPU time for w[  4]  11748.32 sec, wall time    285.41 sec
+w[  5], rank = 5200 / 5200
+    CPU time for w[  5]  11829.67 sec, wall time    293.01 sec
+w[  6], rank = 5200 / 5200
+    CPU time for w[  6]   9607.14 sec, wall time    258.61 sec
+w[  7], rank = 5200 / 5200
+    CPU time for w[  7]  12501.66 sec, wall time    306.08 sec
+w[  8], rank = 5200 / 5200
+    CPU time for w[  8]  11861.71 sec, wall time    282.29 sec
+w[  9], rank = 5200 / 5200
+    CPU time for w[  9]  11828.35 sec, wall time    296.08 sec
+w[ 10], rank = 5200 / 5200
+    CPU time for w[ 10]  10229.68 sec, wall time    261.93 sec
+w[ 11], rank = 5200 / 5200
+    CPU time for w[ 11]  12369.75 sec, wall time    307.16 sec
+w[ 12], rank = 5200 / 5200
+    CPU time for w[ 12]  11904.18 sec, wall time    286.56 sec
+w[ 13], rank = 5200 / 5200
+    CPU time for w[ 13]  11761.86 sec, wall time    290.52 sec
+w[ 14], rank = 5200 / 5200
+    CPU time for w[ 14]  11863.90 sec, wall time    287.66 sec
+w[ 15], rank = 5200 / 5200
+    CPU time for w[ 15]  11745.84 sec, wall time    292.99 sec
+w[ 16], rank = 5200 / 5200
+    CPU time for w[ 16]  11806.33 sec, wall time    278.99 sec
+w[ 17], rank = 5200 / 5200
+    CPU time for w[ 17]  11198.76 sec, wall time    292.16 sec
+w[ 18], rank = 5200 / 5200
+    CPU time for w[ 18]  11146.92 sec, wall time    276.96 sec
+w[ 19], rank = 5200 / 5200
+    CPU time for w[ 19]  11520.70 sec, wall time    289.49 sec
+w[ 20], rank = 5200 / 5200
+    CPU time for w[ 20]  11937.23 sec, wall time    287.86 sec
+w[ 21], rank = 5200 / 5200
+    CPU time for w[ 21]  11795.00 sec, wall time    290.97 sec
+w[ 22], rank = 5200 / 5200
+    CPU time for w[ 22]  11682.40 sec, wall time    281.85 sec
+w[ 23], rank = 5200 / 5200
+    CPU time for w[ 23]  11782.59 sec, wall time    290.02 sec
+w[ 24], rank = 5200 / 5200
+    CPU time for w[ 24]  12045.09 sec, wall time    285.61 sec
+w[ 25], rank = 5200 / 5200
+    CPU time for w[ 25]  11825.85 sec, wall time    288.97 sec
+w[ 26], rank = 5200 / 5200
+    CPU time for w[ 26]  11714.85 sec, wall time    275.11 sec
+w[ 27], rank = 5200 / 5200
+    CPU time for w[ 27]  15371.69 sec, wall time    345.71 sec
+w[ 28], rank = 5200 / 5200
+    CPU time for w[ 28]  11859.73 sec, wall time    300.21 sec
+w[ 29], rank = 5200 / 5200
+    CPU time for w[ 29]  11715.45 sec, wall time    289.30 sec
+w[ 30], rank = 5200 / 5200
+    CPU time for w[ 30]  11811.01 sec, wall time    287.09 sec
+w[ 31], rank = 5200 / 5200
+    CPU time for w[ 31]  11711.09 sec, wall time    290.93 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/cco-2x2-frac/gth-dzvp-molopt-sr-200/fftisdf-yang-20-21-21-21/2-4-4//46975727/tmp.chk
+    CPU time for building ISDF 401326.49 sec, wall time  10885.59 sec

@@ -1,0 +1,48 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-yang-10-21-21-21/1-1-2//46975585/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-yang-10-21-21-21/1-1-2//46975585/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [45 45 45] (91125 PWs)
+len(kpts) = 2
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.62240176e-17 -2.62240176e-17  4.66885213e-01]]
+Overwritten attributes  tol c0 kmesh m0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (200 / [45 45 45]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 0.041 Eh.
+Recommended ke_cutoff/mesh are 569.817 / [75 75 75].
+
+kmesh = [1 1 2]
+Input parent grid mesh = [21, 21, 21], ke_cutoff = 155.69
+Final parent grid size = [21 21 21]
+
+Selecting interpolation points
+nkpts = 2, nao = 104, c0 =  10.00
+Parent grid mesh = [21 21 21], grid size = 9261
+    CPU time for select interpolation points    103.97 sec, wall time      3.59 sec
+Pivoted Cholesky rank = 2531, nip = 1040, estimated error = 6.16e-03
+Number of interpolation points = 1040, effective CISDF =  10.00
+    CPU time for building left-hand side      2.25 sec, wall time      0.04 sec
+
+kpt = 2, ngrid = 91125, nao = 104
+ngrid = 91125, blksize = 1475973, nip = 1040
+required disk space = 3 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-yang-10-21-21-21/1-1-2/46975585/7aqoyofi
+blksize = 1475973, memory for aoR_loop = 49120 MB
+finished aoR_loop[       0:   91125]
+    CPU time for building right-hand side     67.70 sec, wall time      3.53 sec
+w[  0], rank = 1040 / 1040
+    CPU time for w[  0]    265.62 sec, wall time      7.31 sec
+w[  1], rank = 1040 / 1040
+    CPU time for w[  1]    271.48 sec, wall time      7.49 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-yang-10-21-21-21/1-1-2//46975585/tmp.chk
+    CPU time for building ISDF    717.95 sec, wall time     22.12 sec

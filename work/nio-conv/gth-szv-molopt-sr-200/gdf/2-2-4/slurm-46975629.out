@@ -1,0 +1,236 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-szv-molopt-sr-200/gdf/2-2-4//46975629/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-szv-molopt-sr-200/gdf/2-2-4//46975629/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = None
+_cderi_to_save = /central/scratch/yangjunjie///work/nio-conv/gth-szv-molopt-sr-200/gdf/2-2-4//46975629/gdf.chk
+len(kpts) = 16
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]]
+    CPU time for j3c  31418.47 sec, wall time    541.24 sec
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+    CPU time for get_j pass 1     77.94 sec, wall time      2.01 sec
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+max_memory 490802 MB, blksize 240
+    CPU time for get_j pass 2      9.27 sec, wall time      0.34 sec
+    CPU time for get_j     87.23 sec, wall time      2.35 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 52 / 56
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)      4.84 sec, wall time      0.08 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)     75.22 sec, wall time      1.20 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)    144.44 sec, wall time      2.28 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)    217.60 sec, wall time      3.44 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (4,*)    291.33 sec, wall time      4.62 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (5,*)    327.05 sec, wall time      5.18 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (6,*)    398.32 sec, wall time      6.34 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (7,*)    477.30 sec, wall time      7.57 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (8,*)    543.41 sec, wall time      8.62 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (9,*)    618.95 sec, wall time      9.78 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (10,*)    655.21 sec, wall time     10.38 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (11,*)    749.83 sec, wall time     11.88 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (12,*)    816.35 sec, wall time     12.93 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (13,*)    876.37 sec, wall time     13.87 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (14,*)    917.22 sec, wall time     14.54 sec
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+max_memory 490758 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (15,*)    990.75 sec, wall time     15.72 sec
+    CPU time for buf1     261.79 sec, wall time       4.18 sec
+    CPU time for ct11     894.59 sec, wall time      14.13 sec
+    CPU time for ct12     753.42 sec, wall time      11.99 sec
+    CPU time for buf2       0.44 sec, wall time       0.01 sec
+    CPU time for ct21     164.32 sec, wall time       2.63 sec
+    CPU time for ct22    5501.78 sec, wall time      87.12 sec
+    CPU time for load     518.83 sec, wall time       8.23 sec
+    CPU time for get_k_kpts   8104.35 sec, wall time    128.43 sec
