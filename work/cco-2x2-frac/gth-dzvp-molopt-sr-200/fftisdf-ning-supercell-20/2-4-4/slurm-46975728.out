@@ -4352,3 +4352,5 @@ build_aux_basis_local wall time:   347.214855 CPU time:  7269.366556
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:      0.000 MB
 Memory usage for W: 201401.715 MB
+/var/spool/slurmd/job46975728/slurm_script: line 42: 3280251 Killed                  python main.py --c0=20.00 --cell=cco-2x2-frac.vasp --kmesh=2-4-4 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46975728.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
