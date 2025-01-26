@@ -1,6 +1,10 @@
 import os, sys
-import numpy, scipy
+import numpy, scipy, torch
+
 import pyscf
+import pyscf.isdf.BackEnd._config as config
+config.disable_fftw()
+config.backend("torch")
 
 TMPDIR = os.getenv("TMPDIR", None)
 DATA_PATH = os.getenv("DATA_PATH", None)

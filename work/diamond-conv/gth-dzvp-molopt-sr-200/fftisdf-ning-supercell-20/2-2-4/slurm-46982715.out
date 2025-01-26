@@ -1,0 +1,649 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/2-2-4//46982715/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/2-2-4//46982715/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 64
+USE_NUMPY     : 0
+USE_SCIPY     : 0
+USE_TORCH     : 1
+USE_TORCH_GPU : 0
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/2-2-4/main.py ****
+import os, sys
+import numpy, scipy, torch
+
+import pyscf
+import pyscf.isdf.BackEnd._config as config
+config.disable_fftw()
+config.backend("torch")
+
+TMPDIR = os.getenv("TMPDIR", None)
+DATA_PATH = os.getenv("DATA_PATH", None)
+PYSCF_MAX_MEMORY = os.getenv("PYSCF_MAX_MEMORY", 4000)
+PYSCF_MAX_MEMORY = int(PYSCF_MAX_MEMORY)
+
+try:
+    from pyscf.lib import generate_pickle_methods
+    getstate, setstate = generate_pickle_methods(
+        excludes=(
+            '_isdf_to_save', 
+            '_isdf', 
+            'buffer_fft',
+            'buffer_cpu', 
+            'buffer_gpu', 
+            'buffer',
+            'cell', 
+            'prim_cell',
+            '_swapfile',
+        )
+    )   
+except ImportError:
+    import sys 
+    sys.stderr.write("pyscf.lib.generate_pickle_methods is not available, ISDF will not support pickle\n")
+    def raise_error(*args, **kwargs):
+        raise NotImplementedError("ISDF does not support pickle")
+    getstate = setstate = raise_error
+
+from pyscf.isdf import isdf_local
+class ISDF_Local(isdf_local.ISDF_Local):
+    __getstate__ = getstate
+    __setstate__ = setstate
+
+class ISDF(object):
+    cell = None
+    group = None
+
+    kpts = None
+    kmesh = None
+    c0 = None
+    verbose = 10
+
+    _isdf = None
+    _isdf_to_save = None
+    
+    def __init__(self, cell=None, kpts=None):
+        assert kpts is None
+        self.cell = cell
+        self.kpts = kpts
+
+    def build(self):
+        cell = self.cell.copy(deep=True)
+
+        group = self.group
+        assert group is not None
+
+        direct = False
+        c0 = self.c0
+        rela_qr = 1e-3
+        aoR_cutoff = 1e-8
+        build_V_K_bunchsize = 512
+        with_robust_fitting = False
+
+        from pyscf.lib import logger
+        from pyscf.lib.logger import perf_counter
+        from pyscf.lib.logger import process_clock
+        t0 = (process_clock(), perf_counter())
+        log = logger.new_logger(cell, 10)
+        log.info("ISDF module: %s" % isdf_local.__file__)
+
+        isdf_obj = ISDF_Local(
+            cell, limited_memory=True, direct=direct,
+            with_robust_fitting=with_robust_fitting,
+            build_V_K_bunchsize=build_V_K_bunchsize,
+        )
+
+        isdf_obj.verbose = 10
+        log.info("c0 = %6.2f" % c0)
+
+        isdf_obj.build(c=c0, rela_cutoff=rela_qr, group=group)
+
+        nip = isdf_obj.naux
+        log.info(
+            "Number of interpolation points = %d, effective CISDF = %6.2f",
+            nip, nip / isdf_obj.nao
+        )
+        log.timer("ISDF build", *t0)
+
+        import pickle
+        with open(self._isdf, "wb") as f:
+            pickle.dump(isdf_obj, f)
+            log.debug("finished saving to %s", self._isdf)
+
+        isdf_obj._isdf = self._isdf
+        isdf_obj._isdf_to_save = self._isdf
+        return isdf_obj
+
+def main(args):
+    from utils import cell_from_poscar
+    path = os.path.join(DATA_PATH, args.cell)
+    assert os.path.exists(path), "Cell file not found: %s" % path
+
+    c = cell_from_poscar(path)
+    c.basis = args.basis
+    c.pseudo = args.pseudo
+    c.verbose = 0
+    c.unit = 'aa'
+    # c.exp_to_discard = 0.1
+    # c.exp_to_discard = 0.0
+    c.max_memory = PYSCF_MAX_MEMORY
+    c.ke_cutoff = args.ke_cutoff
+    c.build(dump_input=False)
+
+    kmesh = [int(x) for x in args.kmesh.split("-")]
+    kmesh = numpy.array(kmesh)
+    kpts = c.get_kpts(kmesh)
+
+    pcell = c.copy(deep=True)
+
+    natm = len(pcell.atom)
+    atm = []
+    for ia in range(natm):
+        s = pcell.atom_symbol(ia)
+        x = pcell.atom_coord(ia, unit='A')
+        atm.append([s, x])
+
+    from pyscf.lib.parameters import BOHR
+    lvx = pcell.lattice_vectors() * BOHR
+
+    from pyscf.isdf.isdf_tools_cell import build_supercell_with_partition
+    scell, group = build_supercell_with_partition(
+        atm, lvx, spin=0, charge=0, mesh=None, Ls=kmesh,
+        partition=None, basis=args.basis,
+        pseudo=args.pseudo, ke_cutoff=args.ke_cutoff,
+        max_memory=PYSCF_MAX_MEMORY, 
+        precision=1e-12, 
+        use_particle_mesh_ewald=True,
+        verbose=4,
+    )
+
+    from utils import get_jk_time
+    df_obj = ISDF(scell)
+    df_obj.group = group
+    df_obj.c0 = args.c0
+    df_obj.verbose = 10
+    df_obj.kmesh = kmesh
+    df_obj._isdf = os.path.join(TMPDIR, "isdf.chk")
+
+    from utils import get_jk_time
+    kmesh = None
+    get_jk_time(scell, kmesh=kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
+    parser.add_argument("--kmesh", type=str, default="2-2-2")
+    parser.add_argument("--c0", type=float, default=20.0)
+    parser.add_argument("--ke_cutoff", type=float, default=40)
+    parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
+    parser.add_argument("--pseudo", type=str, default="gth-pade")
+
+    args = parser.parse_args()
+    main(args)
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-19-33.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Sat Jan 25 19:21:41 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/2-2-4//46982715/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] conf_file None
+[INPUT] verbose = 4
+[INPUT] num. atoms = 128
+[INPUT] num. electrons = 512
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 C      0.000000000000   0.000000000000   1.780372554545 AA    0.000000000000   0.000000000000   3.364416527783 Bohr   0.0
+[INPUT]  2 C      0.890186277273   0.890186277273   2.670558831818 AA    1.682208263891   1.682208263891   5.046624791674 Bohr   0.0
+[INPUT]  3 C     -0.000000000000   1.780372554545   0.000000000000 AA   -0.000000000000   3.364416527783   0.000000000000 Bohr   0.0
+[INPUT]  4 C      0.890186277273   2.670558831818   0.890186277273 AA    1.682208263891   5.046624791674   1.682208263891 Bohr   0.0
+[INPUT]  5 C      1.780372554545   0.000000000000   0.000000000000 AA    3.364416527783   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  6 C      2.670558831818   0.890186277273   0.890186277273 AA    5.046624791674   1.682208263891   1.682208263891 Bohr   0.0
+[INPUT]  7 C      1.780372554545   1.780372554545   1.780372554545 AA    3.364416527783   3.364416527783   3.364416527783 Bohr   0.0
+[INPUT]  8 C      2.670558831818   2.670558831818   2.670558831818 AA    5.046624791674   5.046624791674   5.046624791674 Bohr   0.0
+[INPUT]  9 C      0.000000000000   0.000000000000   5.341117663635 AA    0.000000000000   0.000000000000  10.093249583348 Bohr   0.0
+[INPUT] 10 C      0.890186277273   0.890186277273   6.231303940908 AA    1.682208263891   1.682208263891  11.775457847239 Bohr   0.0
+[INPUT] 11 C     -0.000000000000   1.780372554545   3.560745109090 AA   -0.000000000000   3.364416527783   6.728833055565 Bohr   0.0
+[INPUT] 12 C      0.890186277273   2.670558831818   4.450931386363 AA    1.682208263891   5.046624791674   8.411041319457 Bohr   0.0
+[INPUT] 13 C      1.780372554545   0.000000000000   3.560745109090 AA    3.364416527783   0.000000000000   6.728833055565 Bohr   0.0
+[INPUT] 14 C      2.670558831818   0.890186277273   4.450931386363 AA    5.046624791674   1.682208263891   8.411041319457 Bohr   0.0
+[INPUT] 15 C      1.780372554545   1.780372554545   5.341117663635 AA    3.364416527783   3.364416527783  10.093249583348 Bohr   0.0
+[INPUT] 16 C      2.670558831818   2.670558831818   6.231303940908 AA    5.046624791674   5.046624791674  11.775457847239 Bohr   0.0
+[INPUT] 17 C      0.000000000000   0.000000000000   8.901862772726 AA    0.000000000000   0.000000000000  16.822082638913 Bohr   0.0
+[INPUT] 18 C      0.890186277273   0.890186277273   9.792049049998 AA    1.682208263891   1.682208263891  18.504290902804 Bohr   0.0
+[INPUT] 19 C     -0.000000000000   1.780372554545   7.121490218181 AA   -0.000000000000   3.364416527783  13.457666111131 Bohr   0.0
+[INPUT] 20 C      0.890186277273   2.670558831818   8.011676495453 AA    1.682208263891   5.046624791674  15.139874375022 Bohr   0.0
+[INPUT] 21 C      1.780372554545   0.000000000000   7.121490218181 AA    3.364416527783   0.000000000000  13.457666111131 Bohr   0.0
+[INPUT] 22 C      2.670558831818   0.890186277273   8.011676495453 AA    5.046624791674   1.682208263891  15.139874375022 Bohr   0.0
+[INPUT] 23 C      1.780372554545   1.780372554545   8.901862772726 AA    3.364416527783   3.364416527783  16.822082638913 Bohr   0.0
+[INPUT] 24 C      2.670558831818   2.670558831818   9.792049049998 AA    5.046624791674   5.046624791674  18.504290902804 Bohr   0.0
+[INPUT] 25 C      0.000000000000   0.000000000000  12.462607881816 AA    0.000000000000   0.000000000000  23.550915694478 Bohr   0.0
+[INPUT] 26 C      0.890186277273   0.890186277273  13.352794159089 AA    1.682208263891   1.682208263891  25.233123958370 Bohr   0.0
+[INPUT] 27 C     -0.000000000000   1.780372554545  10.682235327271 AA   -0.000000000000   3.364416527783  20.186499166696 Bohr   0.0
+[INPUT] 28 C      0.890186277273   2.670558831818  11.572421604544 AA    1.682208263891   5.046624791674  21.868707430587 Bohr   0.0
+[INPUT] 29 C      1.780372554545   0.000000000000  10.682235327271 AA    3.364416527783   0.000000000000  20.186499166696 Bohr   0.0
+[INPUT] 30 C      2.670558831818   0.890186277273  11.572421604544 AA    5.046624791674   1.682208263891  21.868707430587 Bohr   0.0
+[INPUT] 31 C      1.780372554545   1.780372554545  12.462607881816 AA    3.364416527783   3.364416527783  23.550915694478 Bohr   0.0
+[INPUT] 32 C      2.670558831818   2.670558831818  13.352794159089 AA    5.046624791674   5.046624791674  25.233123958370 Bohr   0.0
+[INPUT] 33 C     -0.000000000000   3.560745109090   1.780372554545 AA   -0.000000000000   6.728833055565   3.364416527783 Bohr   0.0
+[INPUT] 34 C      0.890186277273   4.450931386363   2.670558831818 AA    1.682208263891   8.411041319457   5.046624791674 Bohr   0.0
+[INPUT] 35 C     -0.000000000000   5.341117663635   0.000000000000 AA   -0.000000000000  10.093249583348   0.000000000000 Bohr   0.0
+[INPUT] 36 C      0.890186277273   6.231303940908   0.890186277273 AA    1.682208263891  11.775457847239   1.682208263891 Bohr   0.0
+[INPUT] 37 C      1.780372554545   3.560745109090   0.000000000000 AA    3.364416527783   6.728833055565   0.000000000000 Bohr   0.0
+[INPUT] 38 C      2.670558831818   4.450931386363   0.890186277273 AA    5.046624791674   8.411041319457   1.682208263891 Bohr   0.0
+[INPUT] 39 C      1.780372554545   5.341117663635   1.780372554545 AA    3.364416527783  10.093249583348   3.364416527783 Bohr   0.0
+[INPUT] 40 C      2.670558831818   6.231303940908   2.670558831818 AA    5.046624791674  11.775457847239   5.046624791674 Bohr   0.0
+[INPUT] 41 C     -0.000000000000   3.560745109090   5.341117663635 AA   -0.000000000000   6.728833055565  10.093249583348 Bohr   0.0
+[INPUT] 42 C      0.890186277273   4.450931386363   6.231303940908 AA    1.682208263891   8.411041319457  11.775457847239 Bohr   0.0
+[INPUT] 43 C     -0.000000000000   5.341117663635   3.560745109090 AA   -0.000000000000  10.093249583348   6.728833055565 Bohr   0.0
+[INPUT] 44 C      0.890186277273   6.231303940908   4.450931386363 AA    1.682208263891  11.775457847239   8.411041319457 Bohr   0.0
+[INPUT] 45 C      1.780372554545   3.560745109090   3.560745109090 AA    3.364416527783   6.728833055565   6.728833055565 Bohr   0.0
+[INPUT] 46 C      2.670558831818   4.450931386363   4.450931386363 AA    5.046624791674   8.411041319457   8.411041319457 Bohr   0.0
+[INPUT] 47 C      1.780372554545   5.341117663635   5.341117663635 AA    3.364416527783  10.093249583348  10.093249583348 Bohr   0.0
+[INPUT] 48 C      2.670558831818   6.231303940908   6.231303940908 AA    5.046624791674  11.775457847239  11.775457847239 Bohr   0.0
+[INPUT] 49 C     -0.000000000000   3.560745109090   8.901862772726 AA   -0.000000000000   6.728833055565  16.822082638913 Bohr   0.0
+[INPUT] 50 C      0.890186277273   4.450931386363   9.792049049998 AA    1.682208263891   8.411041319457  18.504290902804 Bohr   0.0
+[INPUT] 51 C     -0.000000000000   5.341117663635   7.121490218181 AA   -0.000000000000  10.093249583348  13.457666111131 Bohr   0.0
+[INPUT] 52 C      0.890186277273   6.231303940908   8.011676495453 AA    1.682208263891  11.775457847239  15.139874375022 Bohr   0.0
+[INPUT] 53 C      1.780372554545   3.560745109090   7.121490218181 AA    3.364416527783   6.728833055565  13.457666111131 Bohr   0.0
+[INPUT] 54 C      2.670558831818   4.450931386363   8.011676495453 AA    5.046624791674   8.411041319457  15.139874375022 Bohr   0.0
+[INPUT] 55 C      1.780372554545   5.341117663635   8.901862772726 AA    3.364416527783  10.093249583348  16.822082638913 Bohr   0.0
+[INPUT] 56 C      2.670558831818   6.231303940908   9.792049049998 AA    5.046624791674  11.775457847239  18.504290902804 Bohr   0.0
+[INPUT] 57 C     -0.000000000000   3.560745109090  12.462607881816 AA   -0.000000000000   6.728833055565  23.550915694478 Bohr   0.0
+[INPUT] 58 C      0.890186277273   4.450931386363  13.352794159089 AA    1.682208263891   8.411041319457  25.233123958370 Bohr   0.0
+[INPUT] 59 C     -0.000000000000   5.341117663635  10.682235327271 AA   -0.000000000000  10.093249583348  20.186499166696 Bohr   0.0
+[INPUT] 60 C      0.890186277273   6.231303940908  11.572421604544 AA    1.682208263891  11.775457847239  21.868707430587 Bohr   0.0
+[INPUT] 61 C      1.780372554545   3.560745109090  10.682235327271 AA    3.364416527783   6.728833055565  20.186499166696 Bohr   0.0
+[INPUT] 62 C      2.670558831818   4.450931386363  11.572421604544 AA    5.046624791674   8.411041319457  21.868707430587 Bohr   0.0
+[INPUT] 63 C      1.780372554545   5.341117663635  12.462607881816 AA    3.364416527783  10.093249583348  23.550915694478 Bohr   0.0
+[INPUT] 64 C      2.670558831818   6.231303940908  13.352794159089 AA    5.046624791674  11.775457847239  25.233123958370 Bohr   0.0
+[INPUT] 65 C      3.560745109090   0.000000000000   1.780372554545 AA    6.728833055565   0.000000000000   3.364416527783 Bohr   0.0
+[INPUT] 66 C      4.450931386363   0.890186277273   2.670558831818 AA    8.411041319457   1.682208263891   5.046624791674 Bohr   0.0
+[INPUT] 67 C      3.560745109090   1.780372554545   0.000000000000 AA    6.728833055565   3.364416527783   0.000000000000 Bohr   0.0
+[INPUT] 68 C      4.450931386363   2.670558831818   0.890186277273 AA    8.411041319457   5.046624791674   1.682208263891 Bohr   0.0
+[INPUT] 69 C      5.341117663635   0.000000000000   0.000000000000 AA   10.093249583348   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT] 70 C      6.231303940908   0.890186277273   0.890186277273 AA   11.775457847239   1.682208263891   1.682208263891 Bohr   0.0
+[INPUT] 71 C      5.341117663635   1.780372554545   1.780372554545 AA   10.093249583348   3.364416527783   3.364416527783 Bohr   0.0
+[INPUT] 72 C      6.231303940908   2.670558831818   2.670558831818 AA   11.775457847239   5.046624791674   5.046624791674 Bohr   0.0
+[INPUT] 73 C      3.560745109090   0.000000000000   5.341117663635 AA    6.728833055565   0.000000000000  10.093249583348 Bohr   0.0
+[INPUT] 74 C      4.450931386363   0.890186277273   6.231303940908 AA    8.411041319457   1.682208263891  11.775457847239 Bohr   0.0
+[INPUT] 75 C      3.560745109090   1.780372554545   3.560745109090 AA    6.728833055565   3.364416527783   6.728833055565 Bohr   0.0
+[INPUT] 76 C      4.450931386363   2.670558831818   4.450931386363 AA    8.411041319457   5.046624791674   8.411041319457 Bohr   0.0
+[INPUT] 77 C      5.341117663635   0.000000000000   3.560745109090 AA   10.093249583348   0.000000000000   6.728833055565 Bohr   0.0
+[INPUT] 78 C      6.231303940908   0.890186277273   4.450931386363 AA   11.775457847239   1.682208263891   8.411041319457 Bohr   0.0
+[INPUT] 79 C      5.341117663635   1.780372554545   5.341117663635 AA   10.093249583348   3.364416527783  10.093249583348 Bohr   0.0
+[INPUT] 80 C      6.231303940908   2.670558831818   6.231303940908 AA   11.775457847239   5.046624791674  11.775457847239 Bohr   0.0
+[INPUT] 81 C      3.560745109090   0.000000000000   8.901862772726 AA    6.728833055565   0.000000000000  16.822082638913 Bohr   0.0
+[INPUT] 82 C      4.450931386363   0.890186277273   9.792049049998 AA    8.411041319457   1.682208263891  18.504290902804 Bohr   0.0
+[INPUT] 83 C      3.560745109090   1.780372554545   7.121490218181 AA    6.728833055565   3.364416527783  13.457666111131 Bohr   0.0
+[INPUT] 84 C      4.450931386363   2.670558831818   8.011676495453 AA    8.411041319457   5.046624791674  15.139874375022 Bohr   0.0
+[INPUT] 85 C      5.341117663635   0.000000000000   7.121490218181 AA   10.093249583348   0.000000000000  13.457666111131 Bohr   0.0
+[INPUT] 86 C      6.231303940908   0.890186277273   8.011676495453 AA   11.775457847239   1.682208263891  15.139874375022 Bohr   0.0
+[INPUT] 87 C      5.341117663635   1.780372554545   8.901862772726 AA   10.093249583348   3.364416527783  16.822082638913 Bohr   0.0
+[INPUT] 88 C      6.231303940908   2.670558831818   9.792049049998 AA   11.775457847239   5.046624791674  18.504290902804 Bohr   0.0
+[INPUT] 89 C      3.560745109090   0.000000000000  12.462607881816 AA    6.728833055565   0.000000000000  23.550915694478 Bohr   0.0
+[INPUT] 90 C      4.450931386363   0.890186277273  13.352794159089 AA    8.411041319457   1.682208263891  25.233123958370 Bohr   0.0
+[INPUT] 91 C      3.560745109090   1.780372554545  10.682235327271 AA    6.728833055565   3.364416527783  20.186499166696 Bohr   0.0
+[INPUT] 92 C      4.450931386363   2.670558831818  11.572421604544 AA    8.411041319457   5.046624791674  21.868707430587 Bohr   0.0
+[INPUT] 93 C      5.341117663635   0.000000000000  10.682235327271 AA   10.093249583348   0.000000000000  20.186499166696 Bohr   0.0
+[INPUT] 94 C      6.231303940908   0.890186277273  11.572421604544 AA   11.775457847239   1.682208263891  21.868707430587 Bohr   0.0
+[INPUT] 95 C      5.341117663635   1.780372554545  12.462607881816 AA   10.093249583348   3.364416527783  23.550915694478 Bohr   0.0
+[INPUT] 96 C      6.231303940908   2.670558831818  13.352794159089 AA   11.775457847239   5.046624791674  25.233123958370 Bohr   0.0
+[INPUT] 97 C      3.560745109090   3.560745109090   1.780372554545 AA    6.728833055565   6.728833055565   3.364416527783 Bohr   0.0
+[INPUT] 98 C      4.450931386363   4.450931386363   2.670558831818 AA    8.411041319457   8.411041319457   5.046624791674 Bohr   0.0
+[INPUT] 99 C      3.560745109090   5.341117663635   0.000000000000 AA    6.728833055565  10.093249583348   0.000000000000 Bohr   0.0
+[INPUT]100 C      4.450931386363   6.231303940908   0.890186277273 AA    8.411041319457  11.775457847239   1.682208263891 Bohr   0.0
+[INPUT]101 C      5.341117663635   3.560745109090   0.000000000000 AA   10.093249583348   6.728833055565   0.000000000000 Bohr   0.0
+[INPUT]102 C      6.231303940908   4.450931386363   0.890186277273 AA   11.775457847239   8.411041319457   1.682208263891 Bohr   0.0
+[INPUT]103 C      5.341117663635   5.341117663635   1.780372554545 AA   10.093249583348  10.093249583348   3.364416527783 Bohr   0.0
+[INPUT]104 C      6.231303940908   6.231303940908   2.670558831818 AA   11.775457847239  11.775457847239   5.046624791674 Bohr   0.0
+[INPUT]105 C      3.560745109090   3.560745109090   5.341117663635 AA    6.728833055565   6.728833055565  10.093249583348 Bohr   0.0
+[INPUT]106 C      4.450931386363   4.450931386363   6.231303940908 AA    8.411041319457   8.411041319457  11.775457847239 Bohr   0.0
+[INPUT]107 C      3.560745109090   5.341117663635   3.560745109090 AA    6.728833055565  10.093249583348   6.728833055565 Bohr   0.0
+[INPUT]108 C      4.450931386363   6.231303940908   4.450931386363 AA    8.411041319457  11.775457847239   8.411041319457 Bohr   0.0
+[INPUT]109 C      5.341117663635   3.560745109090   3.560745109090 AA   10.093249583348   6.728833055565   6.728833055565 Bohr   0.0
+[INPUT]110 C      6.231303940908   4.450931386363   4.450931386363 AA   11.775457847239   8.411041319457   8.411041319457 Bohr   0.0
+[INPUT]111 C      5.341117663635   5.341117663635   5.341117663635 AA   10.093249583348  10.093249583348  10.093249583348 Bohr   0.0
+[INPUT]112 C      6.231303940908   6.231303940908   6.231303940908 AA   11.775457847239  11.775457847239  11.775457847239 Bohr   0.0
+[INPUT]113 C      3.560745109090   3.560745109090   8.901862772726 AA    6.728833055565   6.728833055565  16.822082638913 Bohr   0.0
+[INPUT]114 C      4.450931386363   4.450931386363   9.792049049998 AA    8.411041319457   8.411041319457  18.504290902804 Bohr   0.0
+[INPUT]115 C      3.560745109090   5.341117663635   7.121490218181 AA    6.728833055565  10.093249583348  13.457666111131 Bohr   0.0
+[INPUT]116 C      4.450931386363   6.231303940908   8.011676495453 AA    8.411041319457  11.775457847239  15.139874375022 Bohr   0.0
+[INPUT]117 C      5.341117663635   3.560745109090   7.121490218181 AA   10.093249583348   6.728833055565  13.457666111131 Bohr   0.0
+[INPUT]118 C      6.231303940908   4.450931386363   8.011676495453 AA   11.775457847239   8.411041319457  15.139874375022 Bohr   0.0
+[INPUT]119 C      5.341117663635   5.341117663635   8.901862772726 AA   10.093249583348  10.093249583348  16.822082638913 Bohr   0.0
+[INPUT]120 C      6.231303940908   6.231303940908   9.792049049998 AA   11.775457847239  11.775457847239  18.504290902804 Bohr   0.0
+[INPUT]121 C      3.560745109090   3.560745109090  12.462607881816 AA    6.728833055565   6.728833055565  23.550915694478 Bohr   0.0
+[INPUT]122 C      4.450931386363   4.450931386363  13.352794159089 AA    8.411041319457   8.411041319457  25.233123958370 Bohr   0.0
+[INPUT]123 C      3.560745109090   5.341117663635  10.682235327271 AA    6.728833055565  10.093249583348  20.186499166696 Bohr   0.0
+[INPUT]124 C      4.450931386363   6.231303940908  11.572421604544 AA    8.411041319457  11.775457847239  21.868707430587 Bohr   0.0
+[INPUT]125 C      5.341117663635   3.560745109090  10.682235327271 AA   10.093249583348   6.728833055565  20.186499166696 Bohr   0.0
+[INPUT]126 C      6.231303940908   4.450931386363  11.572421604544 AA   11.775457847239   8.411041319457  21.868707430587 Bohr   0.0
+[INPUT]127 C      5.341117663635   5.341117663635  12.462607881816 AA   10.093249583348  10.093249583348  23.550915694478 Bohr   0.0
+[INPUT]128 C      6.231303940908   6.231303940908  13.352794159089 AA   11.775457847239  11.775457847239  25.233123958370 Bohr   0.0
+
+nuclear repulsion = -819.767878271326
+number of shells = 384
+number of NR pGTOs = 5760
+number of NR cGTOs = 1664
+basis = gth-dzvp-molopt-sr
+ecp = {}
+CPU time:         9.17
+lattice vectors  a1 [13.457666111, 0.000000000, 0.000000000]
+                 a2 [-0.000000000, 13.457666111, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 26.915332222]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 4874.6
+rcut = 25.51773635630458 (nimgs = [2 2 1])
+lattice sum = 213 cells
+precision = 1e-12
+pseudo = gth-pade
+ke_cutoff = 200.0
+    = [ 87  87 173] mesh (1309437 PWs)
+Initial guess from minao.
+ISDF module: /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/pyscf/isdf/isdf_local.py
+ISDF: mol.ke_cutoff = 200.000000
+ISDF: mol.natm      = 128
+ISDF: mol.nao       = 1664
+c0 =  20.00
+       get_partition wall time:     5.125275 CPU time:     5.107350
+len of partition[   0] =   9932
+len of partition[   1] =  10242
+len of partition[   2] =  10428
+len of partition[   3] =  10014
+len of partition[   4] =  10296
+len of partition[   5] =  10183
+len of partition[   6] =  10189
+len of partition[   7] =  10115
+len of partition[   8] =  10500
+len of partition[   9] =  10027
+len of partition[  10] =  10104
+len of partition[  11] =  10330
+len of partition[  12] =  10168
+len of partition[  13] =  10223
+len of partition[  14] =  10209
+len of partition[  15] =  10140
+len of partition[  16] =  10471
+len of partition[  17] =  10546
+len of partition[  18] =  10444
+len of partition[  19] =  10210
+len of partition[  20] =  10605
+len of partition[  21] =  10208
+len of partition[  22] =  10195
+len of partition[  23] =  10559
+len of partition[  24] =   9905
+len of partition[  25] =   9953
+len of partition[  26] =  10375
+len of partition[  27] =  10164
+len of partition[  28] =  10280
+len of partition[  29] =  10655
+len of partition[  30] =  10329
+len of partition[  31] =  10140
+len of partition[  32] =  10596
+len of partition[  33] =  10556
+len of partition[  34] =  10389
+len of partition[  35] =  10250
+len of partition[  36] =  10410
+len of partition[  37] =  10387
+len of partition[  38] =  10206
+len of partition[  39] =  10573
+len of partition[  40] =   9894
+len of partition[  41] =  10252
+len of partition[  42] =  10161
+len of partition[  43] =  10501
+len of partition[  44] =  10028
+len of partition[  45] =  10422
+len of partition[  46] =  10212
+len of partition[  47] =  10301
+len of partition[  48] =   9855
+len of partition[  49] =  10203
+len of partition[  50] =  10548
+len of partition[  51] =   9677
+len of partition[  52] =  10362
+len of partition[  53] =   9964
+len of partition[  54] =  10205
+len of partition[  55] =  10147
+len of partition[  56] =  10590
+len of partition[  57] =   9989
+len of partition[  58] =  10286
+len of partition[  59] =  10160
+len of partition[  60] =  10344
+len of partition[  61] =  10145
+len of partition[  62] =  10311
+len of partition[  63] =   9772
+len of partition[  64] =  10393
+len of partition[  65] =  10531
+len of partition[  66] =  10432
+len of partition[  67] =  10323
+len of partition[  68] =  10516
+len of partition[  69] =   9867
+len of partition[  70] =  10197
+len of partition[  71] =  10573
+len of partition[  72] =   9721
+len of partition[  73] =  10358
+len of partition[  74] =  10095
+len of partition[  75] =  10577
+len of partition[  76] =  10134
+len of partition[  77] =  10486
+len of partition[  78] =  10242
+len of partition[  79] =  10192
+len of partition[  80] =   9881
+len of partition[  81] =  10193
+len of partition[  82] =  10141
+len of partition[  83] =   9936
+len of partition[  84] =  10369
+len of partition[  85] =   9959
+len of partition[  86] =  10196
+len of partition[  87] =  10239
+len of partition[  88] =  10649
+len of partition[  89] =  10036
+len of partition[  90] =  10189
+len of partition[  91] =  10091
+len of partition[  92] =  10159
+len of partition[  93] =  10276
+len of partition[  94] =  10151
+len of partition[  95] =  10017
+len of partition[  96] =   9433
+len of partition[  97] =  10146
+len of partition[  98] =  10412
+len of partition[  99] =   9934
+len of partition[ 100] =  10294
+len of partition[ 101] =  10006
+len of partition[ 102] =  10179
+len of partition[ 103] =  10222
+len of partition[ 104] =  10616
+len of partition[ 105] =  10099
+len of partition[ 106] =  10181
+len of partition[ 107] =  10217
+len of partition[ 108] =  10087
+len of partition[ 109] =  10204
+len of partition[ 110] =  10122
+len of partition[ 111] =   9978
+len of partition[ 112] =  10588
+len of partition[ 113] =  10588
+len of partition[ 114] =  10368
+len of partition[ 115] =  10215
+len of partition[ 116] =  10521
+len of partition[ 117] =   9886
+len of partition[ 118] =  10197
+len of partition[ 119] =  10479
+len of partition[ 120] =   9797
+len of partition[ 121] =  10238
+len of partition[ 122] =  10255
+len of partition[ 123] =  10394
+len of partition[ 124] =  10173
+len of partition[ 125] =  10435
+len of partition[ 126] =  10210
+len of partition[ 127] =  10009
+             get_aoR wall time:   289.701737 CPU time:   289.248442
+In _build_buffer: ISDF Local size of buffer = 4405.683 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =  128
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  275
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  311
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  313
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  315
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  320
+select_IP_local_atm: npt_found =  280
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  282
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  276
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  325
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  311
+select_IP_local_atm: npt_found =  276
+select_IP_local_atm: npt_found =  282
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  312
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  279
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  311
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  286
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  291
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  313
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  327
+select_IP_local_atm: npt_found =  311
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  305
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  265
+select_IP_local_atm: npt_found =  308
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  319
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  278
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  312
+select_IP_local_atm: npt_found =  280
+select_IP_local_atm: npt_found =  316
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  284
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  276
+select_IP_local_atm: npt_found =  305
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  285
+select_IP_local_atm: npt_found =  300
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  313
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  306
+select_IP_local_atm: npt_found =  292
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  298
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  293
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  314
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  294
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  287
+select_IP_local_atm: npt_found =  285
+select_IP_local_step1 wall time:   140.915454 CPU time:  8562.837524
+ build_aoRg_possible wall time:     1.106764 CPU time:     7.125532
+select_IP_local_step2 wall time:     0.000711 CPU time:     0.000717
+select_IP_local_step3 wall time:     0.258361 CPU time:     0.257914
+Memory usage for aoR  :  15716.139 MB
+Memory usage for aoRg :    459.448 MB
+            build_IP wall time:   142.281290 CPU time:  8570.221687
+build_aux_basis_local wall time:    20.551209 CPU time:  1245.089151
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:      0.000 MB
+Memory usage for W:  11107.485 MB
+     build_V_W_local wall time:  6922.778811 CPU time:  9962.070544
+Number of interpolation points = 38156, effective CISDF =  22.93
+    CPU time for ISDF build  20087.19 sec, wall time   7388.72 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+finished saving to /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-200/fftisdf-ning-supercell-20/2-2-4//46982715/isdf.chk
+max_memory = 448579 MB (42940 in use)
+              J_half wall time:    18.398173 CPU time:  1131.359576
+    CPU time for get_jk_dm_local   1884.53 sec, wall time     30.23 sec
+max_memory = 448471 MB (43048 in use)
+    CPU time for get_jk_dm_local   9206.32 sec, wall time    156.06 sec
