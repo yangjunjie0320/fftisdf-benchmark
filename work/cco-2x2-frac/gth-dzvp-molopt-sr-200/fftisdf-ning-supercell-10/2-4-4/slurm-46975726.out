@@ -4352,3 +4352,4 @@ build_aux_basis_local wall time:   633.530219 CPU time:  8467.343079
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:      0.000 MB
 Memory usage for W: 128710.731 MB
+slurmstepd: error: *** JOB 46975726 ON hpc-53-20 CANCELLED AT 2025-01-25T18:07:09 ***
