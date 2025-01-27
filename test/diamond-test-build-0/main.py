@@ -45,13 +45,11 @@ atm = [
 kmeshes = [
     [1, 1, 1],
     [1, 1, 2],
-    [1, 1, 3],
-    [1, 1, 4],
     [1, 2, 2],
     [2, 2, 2],
-    [2, 2, 3],
-    [2, 3, 3],
-    [3, 3, 3],
+    [2, 2, 4],
+    [2, 4, 4],
+    [4, 4, 4],
 ]  # -44.20339674 and -88.67568935
 VERBOSE = 10
 
@@ -87,6 +85,11 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
+    
+    from pyscf import __config__
+    MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
+    cell.max_memory = MAX_MEMORY
+    print("cell:", cell.max_memory)
     print("group:", group)
 
     build_V_K_bunchsize = 512

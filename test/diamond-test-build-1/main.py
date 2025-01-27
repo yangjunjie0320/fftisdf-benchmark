@@ -97,6 +97,11 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
+    
+    from pyscf import __config__
+    MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
+    cell.max_memory = MAX_MEMORY
+    print("cell:", cell.max_memory)
     print("group:", group)
 
     t0 = (process_clock(), perf_counter())

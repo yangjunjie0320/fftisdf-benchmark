@@ -1,12 +1,11 @@
-for f in $(find . -name "run.sh"); do
+for f in $(find . -name "main.py"); do
     echo "Found: $f"
     dir=$(dirname "$f")
 
-    cd $dir; rm sl* out.log;
-    
-    cp ../run.sh .
+    cd $dir; cp ../run.sh .; rm slurm-*
+
     sbatch \
-      --job-name=diamond \
+      --job-name=$(basename $dir) \
       --cpus-per-task=64 \
       --mem=480GB \
       --time=48:00:00 \
