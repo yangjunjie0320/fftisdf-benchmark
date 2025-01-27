@@ -27,7 +27,7 @@ from pyscf.isdf.isdf_local import ISDF_Local
 #############################
 
 ke_cutoff = 70
-basis = "gth-dzvp"
+basis = "gth-dzvp-molopt-sr"
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -87,14 +87,15 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    cell.max_memory = 200
     print("group:", group)
 
+    build_V_K_bunchsize = 512
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, limited_memory=True, build_V_K_bunchsize=56
+        cell, with_robust_fitting=True, 
+        limited_memory=True, 
+        build_V_K_bunchsize=build_V_K_bunchsize
     )
     isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
-    # isdf.force_translation_symmetry(kmesh)
 
     from pyscf.pbc import scf
 
@@ -102,3 +103,4 @@ for kmesh in kmeshes:
     mf.with_df = isdf
     mf.max_cycle = 1
     mf.kernel()
+    

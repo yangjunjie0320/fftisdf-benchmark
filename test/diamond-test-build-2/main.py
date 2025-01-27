@@ -1,5 +1,3 @@
-# backend to test #
-
 import pyscf.isdf.BackEnd._config as config
 
 config.disable_fftw()
@@ -26,7 +24,7 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
-ke_cutoff = 70
+ke_cutoff = 200
 basis = "gth-dzvp-molopt-sr"
 
 boxlen = 3.57371000
@@ -45,13 +43,11 @@ atm = [
 kmeshes = [
     [1, 1, 1],
     [1, 1, 2],
-    [1, 1, 3],
-    [1, 1, 4],
     [1, 2, 2],
     [2, 2, 2],
-    [2, 2, 3],
-    [2, 3, 3],
-    [3, 3, 3],
+    [2, 2, 4],
+    [2, 4, 4],
+    [4, 4, 4],
 ]  # -44.20339674 and -88.67568935
 VERBOSE = 10
 
@@ -73,8 +69,22 @@ for kmesh in kmeshes:
 
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
     print("kmesh:", kmesh, "mesh:", mesh)
-
     kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
+
+    from pyscf.lib import logger
+    from pyscf.lib.logger import perf_counter
+    from pyscf.lib.logger import process_clock
+    t0 = (process_clock(), perf_counter())
+
+    stdout = open("out.log", "w")
+    log = logger.Logger(stdout, 5)
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
@@ -87,17 +97,30 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    cell.max_memory = 200
     print("group:", group)
 
+    t0 = (process_clock(), perf_counter())
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, limited_memory=True, build_V_K_bunchsize=56
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
     )
-    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
-    # isdf.force_translation_symmetry(kmesh)
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
 
     from pyscf.pbc import scf
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB", 0.0)
+

@@ -4,6 +4,7 @@ for f in $(find . -name "run.sh"); do
 
     cd $dir; rm sl* out.log;
     
+    cp ../run.sh .
     sbatch \
       --job-name=diamond \
       --cpus-per-task=64 \
