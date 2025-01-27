@@ -1,0 +1,301 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/46998082/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/46998082/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 64
+USE_NUMPY     : 0
+USE_SCIPY     : 0
+USE_TORCH     : 1
+USE_TORCH_GPU : 0
+arg.atm = [[ 4 20  1 23  0  0]
+ [ 4 24  1 27  0  0]
+ [ 4 28  1 31  0  0]
+ [ 4 32  1 35  0  0]
+ [ 4 36  1 39  0  0]
+ [ 4 40  1 43  0  0]
+ [ 4 44  1 47  0  0]
+ [ 4 48  1 51  0  0]]
+arg.bas = [[ 0  0  5  2  0 52 57  0]
+ [ 0  1  5  2  0 67 72  0]
+ [ 0  2  5  1  0 82 87  0]
+ [ 1  0  5  2  0 52 57  0]
+ [ 1  1  5  2  0 67 72  0]
+ [ 1  2  5  1  0 82 87  0]
+ [ 2  0  5  2  0 52 57  0]
+ [ 2  1  5  2  0 67 72  0]
+ [ 2  2  5  1  0 82 87  0]
+ [ 3  0  5  2  0 52 57  0]
+ [ 3  1  5  2  0 67 72  0]
+ [ 3  2  5  1  0 82 87  0]
+ [ 4  0  5  2  0 52 57  0]
+ [ 4  1  5  2  0 67 72  0]
+ [ 4  2  5  1  0 82 87  0]
+ [ 5  0  5  2  0 52 57  0]
+ [ 5  1  5  2  0 67 72  0]
+ [ 5  2  5  1  0 82 87  0]
+ [ 6  0  5  2  0 52 57  0]
+ [ 6  1  5  2  0 67 72  0]
+ [ 6  2  5  1  0 82 87  0]
+ [ 7  0  5  2  0 52 57  0]
+ [ 7  1  5  2  0 67 72  0]
+ [ 7  2  5  1  0 82 87  0]]
+arg.env = [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
+  0.          0.          5.06499986  5.06499986  1.68833329  0.
+  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
+  5.06499986  0.          0.          3.37666657  3.37666657  0.
+  1.68833329  5.06499986  5.06499986  0.          5.60533075  2.11301639
+  0.76991145  0.34815709  0.12821225  1.14328643  0.75521952 -0.74331592
+ -0.77915081 -0.08078366  1.95761895  0.29093741  0.02780209  0.48527241
+  0.26332695  5.60533075  2.11301639  0.76991145  0.34815709  0.12821225
+ -1.44059548 -1.3150188  -0.76719096 -0.28600475 -0.05699711 -0.98316391
+ -1.13158177 -0.64703904  0.43083118  0.15573998  5.60533075  2.11301639
+  0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
+  0.04545847  0.04722778]
+ecpbas  = []
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
+import pyscf.isdf.BackEnd._config as config
+
+config.disable_fftw()
+# config.backend("numpy")
+# config.backend("scipy")
+config.backend("torch")
+# config.backend("torch_gpu")
+import pyscf.isdf.BackEnd.isdf_backend as BACKEND
+
+# sys and pyscf #
+
+import numpy as np
+from pyscf import lib
+
+from pyscf.lib.parameters import BOHR
+from pyscf.pbc import df
+
+# isdf util #
+
+from pyscf.isdf.isdf_tools_Tsym import _kmesh_to_Kpoints, _1e_operator_gamma2k
+from pyscf.isdf import isdf_tools_cell
+from pyscf.isdf.isdf import ISDF
+from pyscf.isdf.isdf_local import ISDF_Local
+
+#############################
+
+ke_cutoff = 70
+basis = "gth-dzvp-molopt-sr"
+
+boxlen = 3.57371000
+prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
+atm = [
+    ["C", (0.0, 0.0, 0.0)],
+    ["C", (0.8934275, 0.8934275, 0.8934275)],
+    ["C", (1.786855, 1.786855, 0.0)],
+    ["C", (2.6802825, 2.6802825, 0.8934275)],
+    ["C", (1.786855, 0.0, 1.786855)],
+    ["C", (2.6802825, 0.8934275, 2.6802825)],
+    ["C", (0.0, 1.786855, 1.786855)],
+    ["C", (0.8934275, 2.6802825, 2.6802825)],
+]
+
+kmeshes = [
+    [1, 1, 1],
+    [1, 1, 2],
+    [1, 2, 2],
+    [2, 2, 2],
+    [2, 2, 4],
+    [2, 4, 4],
+    [4, 4, 4],
+]  # -44.20339674 and -88.67568935
+VERBOSE = 10
+
+prim_cell = isdf_tools_cell.build_supercell(
+    atm,
+    prim_a,
+    Ls=[1, 1, 1],
+    ke_cutoff=ke_cutoff,
+    basis=basis,
+    pseudo="gth-pade",
+    verbose=VERBOSE,
+)
+
+prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
+
+prim_mesh = prim_cell.mesh
+
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
+
+for kmesh in kmeshes:
+    mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
+    log.info("kmesh:", kmesh, "mesh:", mesh)
+    kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
+
+    from pyscf.lib import logger
+    from pyscf.lib.logger import perf_counter
+    from pyscf.lib.logger import process_clock
+    t0 = (process_clock(), perf_counter())
+
+    cell, group = isdf_tools_cell.build_supercell_with_partition(
+        atm,
+        prim_a,
+        Ls=kmesh,
+        ke_cutoff=ke_cutoff,
+        partition=prim_group,
+        mesh=mesh,
+        basis=basis,
+        pseudo="gth-pade",
+        verbose=VERBOSE,
+    )
+
+    from pyscf import __config__
+    MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
+    cell.max_memory = MAX_MEMORY
+    print("cell:", cell.max_memory)
+    print("group:", group)
+
+    t0 = (process_clock(), perf_counter())
+    isdf = ISDF_Local(
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
+    )
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
+
+    from pyscf.pbc import scf
+
+    mf = scf.RHF(cell)
+    mf.with_df = isdf
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB\n", 0.0)
+
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-35-01.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Mon Jan 27 15:29:20 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-1/46998082/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] ARGPARSE = False
+[CONFIG] DEBUG = False
+[CONFIG] MAX_MEMORY = 491520
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/46998082/
+[CONFIG] UNIT = angstrom
+[CONFIG] VERBOSE = 3
+[CONFIG] conf_file = None
+[INPUT] verbose = 10
+[INPUT] max_memory = 2000 
+[INPUT] num. atoms = 8
+[INPUT] num. electrons = 32
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 C      0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  2 C      0.893427500000   0.893427500000   0.893427500000 AA    1.688333287155   1.688333287155   1.688333287155 Bohr   0.0
+[INPUT]  3 C      1.786855000000   1.786855000000   0.000000000000 AA    3.376666574310   3.376666574310   0.000000000000 Bohr   0.0
+[INPUT]  4 C      2.680282500000   2.680282500000   0.893427500000 AA    5.064999861465   5.064999861465   1.688333287155 Bohr   0.0
+[INPUT]  5 C      1.786855000000   0.000000000000   1.786855000000 AA    3.376666574310   0.000000000000   3.376666574310 Bohr   0.0
+[INPUT]  6 C      2.680282500000   0.893427500000   2.680282500000 AA    5.064999861465   1.688333287155   5.064999861465 Bohr   0.0
+[INPUT]  7 C      0.000000000000   1.786855000000   1.786855000000 AA    0.000000000000   3.376666574310   3.376666574310 Bohr   0.0
+[INPUT]  8 C      0.893427500000   2.680282500000   2.680282500000 AA    1.688333287155   5.064999861465   5.064999861465 Bohr   0.0
+[INPUT] ---------------- BASIS SET ---------------- 
+[INPUT] l, kappa, [nprim/nctr], expnt,             c_1 c_2 ...
+[INPUT] C
+[INPUT] 0    0    [5    /2   ]  5.6053307517      0.1115328819 0.4665074832
+                                2.11301639053     0.1531421941 0.1441132128
+                                0.76991145481     -0.3213968794 0.0293648809
+                                0.348157086385    -0.6109264216 0.9294703884
+                                0.12821225471     -0.1339908628 1.0669143312
+[INPUT] 1    0    [5    /2   ]  5.6053307517      -0.0648689785 -0.0554756934
+                                2.11301639053     -0.2004702557 -0.2161651752
+                                0.76991145481     -0.4131417301 -0.4366242723
+                                0.348157086385    -0.4153371392 0.7840006984
+                                0.12821225471     -0.2885276736 0.987908135
+[INPUT] 2    0    [5    /1   ]  5.6053307517      0.0299527746
+                                2.11301639053     0.0707844588
+                                0.76991145481     0.6746010586
+                                0.348157086385    0.1736520618
+                                0.12821225471     1.0363170247
+
+Ewald components = 11.6062017390159, -63.0574091279915, 0.401589778745918
+nuclear repulsion = -51.0496176102297
+number of shells = 24
+number of NR pGTOs = 360
+number of NR cGTOs = 104
+basis = gth-dzvp-molopt-sr
+ecp = {}
+bas 0, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 1, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 2, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 3, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 4, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 5, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 6, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 7, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 8, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 9, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 10, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 11, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 12, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 13, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 14, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 15, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 16, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 17, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 18, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 19, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 20, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 21, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 22, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+bas 23, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
+CPU time:         9.42
+lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 6.753333149, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 6.753333149]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 308.003
+rcut = 22.25045319935835 (nimgs = [4 4 4])
+lattice sum = 899 cells
+precision = 1e-08
+pseudo = gth-pade
+ke_cutoff = 70
+    = [27 27 27] mesh (19683 PWs)
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py", line 69, in <module>
+    log = logger.Logger(stdout, 5)
+          ^^^^^^
+NameError: name 'logger' is not defined
