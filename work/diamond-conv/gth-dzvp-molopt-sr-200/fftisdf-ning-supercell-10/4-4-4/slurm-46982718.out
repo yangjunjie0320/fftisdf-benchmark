@@ -1786,3 +1786,12 @@ build_aux_basis_local wall time:   180.553849 CPU time:  5155.033673
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:      0.000 MB
 Memory usage for W: 112082.630 MB
+     build_V_W_local wall time: 87905.746552 CPU time: 107955.776118
+Number of interpolation points = 121206, effective CISDF =  18.21
+    CPU time for ISDF build 118834.60 sec, wall time  89199.70 sec
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute a because it is not JSON-serializable
+  warnings.warn(msg)
+/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/gto/mole.py:1294: UserWarning: Function mol.dumps drops attribute _mesh because it is not JSON-serializable
+  warnings.warn(msg)
+/var/spool/slurmd/job46982718/slurm_script: line 42: 1778638 Killed                  python main.py --c0=10.00 --cell=diamond-conv.vasp --kmesh=4-4-4 --basis=gth-dzvp-molopt-sr --ke_cutoff=200.00 --pseudo=gth-pade
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=46982718.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
