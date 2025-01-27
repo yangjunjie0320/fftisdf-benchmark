@@ -1,5 +1,7 @@
 # FFT-ISDF Benchmark
 
+This repository contains the code for the FFT-ISDF benchmark.
+
 ## Dependencies
 
 The dependencies are listed in `environment.yml`. You can install them by running:
@@ -12,6 +14,12 @@ and activate the environment by running:
 
 ```bash
 conda activate fftisdf
+```
+
+On a `slurm` cluster, you can use the following command to activate the environment:
+
+```bash
+source submit.sh
 ```
 
 ## Crystal Structure

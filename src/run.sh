@@ -4,7 +4,7 @@
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
-source ~/.bashrc
+source /home/junjiey/anaconda3/bin/activate fftisdf
 export DATA_PATH=/home/junjiey/work/fftisdf-benchmark/data/
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK;
@@ -23,8 +23,6 @@ export PYSCF_TMPDIR=$TMPDIR
 mkdir -p $TMPDIR
 echo TMPDIR       = $TMPDIR
 echo PYSCF_TMPDIR = $PYSCF_TMPDIR
-
-conda activate fftisdf
 
 echo ""; which python
 python -c "import pyscf; print(pyscf.__version__)"
