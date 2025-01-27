@@ -1,0 +1,1265 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//diamond/46996080/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond/46996080/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+LOADING ISDF BACKEND
+NUM_THREADS   : 64
+USE_NUMPY     : 0
+USE_SCIPY     : 0
+USE_TORCH     : 1
+USE_TORCH_GPU : 0
+arg.atm = [[ 4 20  1 23  0  0]
+ [ 4 24  1 27  0  0]
+ [ 4 28  1 31  0  0]
+ [ 4 32  1 35  0  0]
+ [ 4 36  1 39  0  0]
+ [ 4 40  1 43  0  0]
+ [ 4 44  1 47  0  0]
+ [ 4 48  1 51  0  0]]
+arg.bas = [[ 0  0  4  2  0 52 56  0]
+ [ 0  1  4  2  0 64 68  0]
+ [ 0  2  1  1  0 76 77  0]
+ [ 1  0  4  2  0 52 56  0]
+ [ 1  1  4  2  0 64 68  0]
+ [ 1  2  1  1  0 76 77  0]
+ [ 2  0  4  2  0 52 56  0]
+ [ 2  1  4  2  0 64 68  0]
+ [ 2  2  1  1  0 76 77  0]
+ [ 3  0  4  2  0 52 56  0]
+ [ 3  1  4  2  0 64 68  0]
+ [ 3  2  1  1  0 76 77  0]
+ [ 4  0  4  2  0 52 56  0]
+ [ 4  1  4  2  0 64 68  0]
+ [ 4  2  1  1  0 76 77  0]
+ [ 5  0  4  2  0 52 56  0]
+ [ 5  1  4  2  0 64 68  0]
+ [ 5  2  1  1  0 76 77  0]
+ [ 6  0  4  2  0 52 56  0]
+ [ 6  1  4  2  0 64 68  0]
+ [ 6  2  1  1  0 76 77  0]
+ [ 7  0  4  2  0 52 56  0]
+ [ 7  1  4  2  0 64 68  0]
+ [ 7  2  1  1  0 76 77  0]]
+arg.env = [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
+  0.          0.          5.06499986  5.06499986  1.68833329  0.
+  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
+  5.06499986  0.          0.          3.37666657  3.37666657  0.
+  1.68833329  5.06499986  5.06499986  0.          4.33623764  1.28818385
+  0.40377671  0.11878777  1.13179715 -0.08939889 -0.8807207  -0.20266289
+  0.          0.          0.          0.51120349  4.33623764  1.28818385
+  0.40377671  0.11878777 -1.60299215 -1.11123874 -0.44247981 -0.08255916
+  0.          0.          0.          0.20344594  0.55        0.91656674]
+ecpbas  = []
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
+# backend to test #
+
+import pyscf.isdf.BackEnd._config as config
+
+config.disable_fftw()
+# config.backend("numpy")
+# config.backend("scipy")
+config.backend("torch")
+# config.backend("torch_gpu")
+import pyscf.isdf.BackEnd.isdf_backend as BACKEND
+
+# sys and pyscf #
+
+import numpy as np
+from pyscf import lib
+
+from pyscf.lib.parameters import BOHR
+from pyscf.pbc import df
+
+# isdf util #
+
+from pyscf.isdf.isdf_tools_Tsym import _kmesh_to_Kpoints, _1e_operator_gamma2k
+from pyscf.isdf import isdf_tools_cell
+from pyscf.isdf.isdf import ISDF
+from pyscf.isdf.isdf_local import ISDF_Local
+
+#############################
+
+ke_cutoff = 70
+basis = "gth-dzvp"
+
+boxlen = 3.57371000
+prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
+atm = [
+    ["C", (0.0, 0.0, 0.0)],
+    ["C", (0.8934275, 0.8934275, 0.8934275)],
+    ["C", (1.786855, 1.786855, 0.0)],
+    ["C", (2.6802825, 2.6802825, 0.8934275)],
+    ["C", (1.786855, 0.0, 1.786855)],
+    ["C", (2.6802825, 0.8934275, 2.6802825)],
+    ["C", (0.0, 1.786855, 1.786855)],
+    ["C", (0.8934275, 2.6802825, 2.6802825)],
+]
+
+kmeshes = [
+    [1, 1, 1],
+    [1, 1, 2],
+    [1, 1, 3],
+    [1, 1, 4],
+    [1, 2, 2],
+    [2, 2, 2],
+    [2, 2, 3],
+    [2, 3, 3],
+    [3, 3, 3],
+]  # -44.20339674 and -88.67568935
+VERBOSE = 10
+
+prim_cell = isdf_tools_cell.build_supercell(
+    atm,
+    prim_a,
+    Ls=[1, 1, 1],
+    ke_cutoff=ke_cutoff,
+    basis=basis,
+    pseudo="gth-pade",
+    verbose=VERBOSE,
+)
+
+prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
+
+prim_mesh = prim_cell.mesh
+
+for kmesh in kmeshes:
+
+    mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
+    print("kmesh:", kmesh, "mesh:", mesh)
+
+    kpts = prim_cell.make_kpts(kmesh)
+
+    cell, group = isdf_tools_cell.build_supercell_with_partition(
+        atm,
+        prim_a,
+        Ls=kmesh,
+        ke_cutoff=ke_cutoff,
+        partition=prim_group,
+        mesh=mesh,
+        basis=basis,
+        pseudo="gth-pade",
+        verbose=VERBOSE,
+    )
+    cell.max_memory = 200
+    print("group:", group)
+
+    isdf = ISDF_Local(
+        cell, with_robust_fitting=True, limited_memory=True, build_V_K_bunchsize=56
+    )
+    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    # isdf.force_translation_symmetry(kmesh)
+
+    from pyscf.pbc import scf
+
+    mf = scf.RHF(cell)
+    mf.with_df = isdf
+    mf.kernel()
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-35-01.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Mon Jan 27 14:30:30 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond/46996080/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] ARGPARSE = False
+[CONFIG] DEBUG = False
+[CONFIG] MAX_MEMORY = 491520
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond/46996080/
+[CONFIG] UNIT = angstrom
+[CONFIG] VERBOSE = 3
+[CONFIG] conf_file = None
+[INPUT] verbose = 10
+[INPUT] max_memory = 2000 
+[INPUT] num. atoms = 8
+[INPUT] num. electrons = 32
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 C      0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  2 C      0.893427500000   0.893427500000   0.893427500000 AA    1.688333287155   1.688333287155   1.688333287155 Bohr   0.0
+[INPUT]  3 C      1.786855000000   1.786855000000   0.000000000000 AA    3.376666574310   3.376666574310   0.000000000000 Bohr   0.0
+[INPUT]  4 C      2.680282500000   2.680282500000   0.893427500000 AA    5.064999861465   5.064999861465   1.688333287155 Bohr   0.0
+[INPUT]  5 C      1.786855000000   0.000000000000   1.786855000000 AA    3.376666574310   0.000000000000   3.376666574310 Bohr   0.0
+[INPUT]  6 C      2.680282500000   0.893427500000   2.680282500000 AA    5.064999861465   1.688333287155   5.064999861465 Bohr   0.0
+[INPUT]  7 C      0.000000000000   1.786855000000   1.786855000000 AA    0.000000000000   3.376666574310   3.376666574310 Bohr   0.0
+[INPUT]  8 C      0.893427500000   2.680282500000   2.680282500000 AA    1.688333287155   5.064999861465   5.064999861465 Bohr   0.0
+[INPUT] ---------------- BASIS SET ---------------- 
+[INPUT] l, kappa, [nprim/nctr], expnt,             c_1 c_2 ...
+[INPUT] C
+[INPUT] 0    0    [4    /2   ]  4.3362376436      0.1490797872    0
+                                1.2881838513      -0.0292640031    0
+                                0.4037767149      -0.688204051    0
+                                0.1187877657      -0.3964426906    1
+[INPUT] 1    0    [4    /2   ]  4.3362376436      -0.0878123619    0
+                                1.2881838513      -0.27755603    0
+                                0.4037767149      -0.4712295093    0
+                                0.1187877657      -0.4058039291    1
+[INPUT] 2    0    [1    /1   ]  0.55                 1
+
+Ewald components = 11.6062017390159, -63.0574091279915, 0.401589778745918
+nuclear repulsion = -51.0496176102297
+number of shells = 24
+number of NR pGTOs = 168
+number of NR cGTOs = 104
+basis = gth-dzvp
+ecp = {}
+bas 0, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 1, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 2, expnt(s) = [0.55]
+bas 3, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 4, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 5, expnt(s) = [0.55]
+bas 6, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 7, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 8, expnt(s) = [0.55]
+bas 9, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 10, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 11, expnt(s) = [0.55]
+bas 12, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 13, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 14, expnt(s) = [0.55]
+bas 15, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 16, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 17, expnt(s) = [0.55]
+bas 18, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 19, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 20, expnt(s) = [0.55]
+bas 21, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 22, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 23, expnt(s) = [0.55]
+CPU time:         9.45
+lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 6.753333149, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 6.753333149]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 308.003
+rcut = 22.07448407082675 (nimgs = [4 4 4])
+lattice sum = 899 cells
+precision = 1e-08
+pseudo = gth-pade
+ke_cutoff = 70
+    = [27 27 27] mesh (19683 PWs)
+kmesh: [1, 1, 1] mesh: [27, 27, 27]
+arg.atm = [[ 4 20  1 23  0  0]
+ [ 4 24  1 27  0  0]
+ [ 4 28  1 31  0  0]
+ [ 4 32  1 35  0  0]
+ [ 4 36  1 39  0  0]
+ [ 4 40  1 43  0  0]
+ [ 4 44  1 47  0  0]
+ [ 4 48  1 51  0  0]]
+arg.bas = [[ 0  0  4  2  0 52 56  0]
+ [ 0  1  4  2  0 64 68  0]
+ [ 0  2  1  1  0 76 77  0]
+ [ 1  0  4  2  0 52 56  0]
+ [ 1  1  4  2  0 64 68  0]
+ [ 1  2  1  1  0 76 77  0]
+ [ 2  0  4  2  0 52 56  0]
+ [ 2  1  4  2  0 64 68  0]
+ [ 2  2  1  1  0 76 77  0]
+ [ 3  0  4  2  0 52 56  0]
+ [ 3  1  4  2  0 64 68  0]
+ [ 3  2  1  1  0 76 77  0]
+ [ 4  0  4  2  0 52 56  0]
+ [ 4  1  4  2  0 64 68  0]
+ [ 4  2  1  1  0 76 77  0]
+ [ 5  0  4  2  0 52 56  0]
+ [ 5  1  4  2  0 64 68  0]
+ [ 5  2  1  1  0 76 77  0]
+ [ 6  0  4  2  0 52 56  0]
+ [ 6  1  4  2  0 64 68  0]
+ [ 6  2  1  1  0 76 77  0]
+ [ 7  0  4  2  0 52 56  0]
+ [ 7  1  4  2  0 64 68  0]
+ [ 7  2  1  1  0 76 77  0]]
+arg.env = [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
+  0.          0.          5.06499986  5.06499986  1.68833329  0.
+  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
+  5.06499986  0.          0.          3.37666657  3.37666657  0.
+  1.68833329  5.06499986  5.06499986  0.          4.33623764  1.28818385
+  0.40377671  0.11878777  1.13179715 -0.08939889 -0.8807207  -0.20266289
+  0.          0.          0.          0.51120349  4.33623764  1.28818385
+  0.40377671  0.11878777 -1.60299215 -1.11123874 -0.44247981 -0.08255916
+  0.          0.          0.          0.20344594  0.55        0.91656674]
+ecpbas  = []
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
+# backend to test #
+
+import pyscf.isdf.BackEnd._config as config
+
+config.disable_fftw()
+# config.backend("numpy")
+# config.backend("scipy")
+config.backend("torch")
+# config.backend("torch_gpu")
+import pyscf.isdf.BackEnd.isdf_backend as BACKEND
+
+# sys and pyscf #
+
+import numpy as np
+from pyscf import lib
+
+from pyscf.lib.parameters import BOHR
+from pyscf.pbc import df
+
+# isdf util #
+
+from pyscf.isdf.isdf_tools_Tsym import _kmesh_to_Kpoints, _1e_operator_gamma2k
+from pyscf.isdf import isdf_tools_cell
+from pyscf.isdf.isdf import ISDF
+from pyscf.isdf.isdf_local import ISDF_Local
+
+#############################
+
+ke_cutoff = 70
+basis = "gth-dzvp"
+
+boxlen = 3.57371000
+prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
+atm = [
+    ["C", (0.0, 0.0, 0.0)],
+    ["C", (0.8934275, 0.8934275, 0.8934275)],
+    ["C", (1.786855, 1.786855, 0.0)],
+    ["C", (2.6802825, 2.6802825, 0.8934275)],
+    ["C", (1.786855, 0.0, 1.786855)],
+    ["C", (2.6802825, 0.8934275, 2.6802825)],
+    ["C", (0.0, 1.786855, 1.786855)],
+    ["C", (0.8934275, 2.6802825, 2.6802825)],
+]
+
+kmeshes = [
+    [1, 1, 1],
+    [1, 1, 2],
+    [1, 1, 3],
+    [1, 1, 4],
+    [1, 2, 2],
+    [2, 2, 2],
+    [2, 2, 3],
+    [2, 3, 3],
+    [3, 3, 3],
+]  # -44.20339674 and -88.67568935
+VERBOSE = 10
+
+prim_cell = isdf_tools_cell.build_supercell(
+    atm,
+    prim_a,
+    Ls=[1, 1, 1],
+    ke_cutoff=ke_cutoff,
+    basis=basis,
+    pseudo="gth-pade",
+    verbose=VERBOSE,
+)
+
+prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
+
+prim_mesh = prim_cell.mesh
+
+for kmesh in kmeshes:
+
+    mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
+    print("kmesh:", kmesh, "mesh:", mesh)
+
+    kpts = prim_cell.make_kpts(kmesh)
+
+    cell, group = isdf_tools_cell.build_supercell_with_partition(
+        atm,
+        prim_a,
+        Ls=kmesh,
+        ke_cutoff=ke_cutoff,
+        partition=prim_group,
+        mesh=mesh,
+        basis=basis,
+        pseudo="gth-pade",
+        verbose=VERBOSE,
+    )
+    cell.max_memory = 200
+    print("group:", group)
+
+    isdf = ISDF_Local(
+        cell, with_robust_fitting=True, limited_memory=True, build_V_K_bunchsize=56
+    )
+    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    # isdf.force_translation_symmetry(kmesh)
+
+    from pyscf.pbc import scf
+
+    mf = scf.RHF(cell)
+    mf.with_df = isdf
+    mf.kernel()
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-35-01.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Mon Jan 27 14:30:30 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond/46996080/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] ARGPARSE = False
+[CONFIG] DEBUG = False
+[CONFIG] MAX_MEMORY = 491520
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond/46996080/
+[CONFIG] UNIT = angstrom
+[CONFIG] VERBOSE = 3
+[CONFIG] conf_file = None
+[INPUT] verbose = 10
+[INPUT] max_memory = 2000 
+[INPUT] num. atoms = 8
+[INPUT] num. electrons = 32
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 C      0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  2 C      0.893427500000   0.893427500000   0.893427500000 AA    1.688333287155   1.688333287155   1.688333287155 Bohr   0.0
+[INPUT]  3 C      1.786855000000   1.786855000000   0.000000000000 AA    3.376666574310   3.376666574310   0.000000000000 Bohr   0.0
+[INPUT]  4 C      2.680282500000   2.680282500000   0.893427500000 AA    5.064999861465   5.064999861465   1.688333287155 Bohr   0.0
+[INPUT]  5 C      1.786855000000   0.000000000000   1.786855000000 AA    3.376666574310   0.000000000000   3.376666574310 Bohr   0.0
+[INPUT]  6 C      2.680282500000   0.893427500000   2.680282500000 AA    5.064999861465   1.688333287155   5.064999861465 Bohr   0.0
+[INPUT]  7 C      0.000000000000   1.786855000000   1.786855000000 AA    0.000000000000   3.376666574310   3.376666574310 Bohr   0.0
+[INPUT]  8 C      0.893427500000   2.680282500000   2.680282500000 AA    1.688333287155   5.064999861465   5.064999861465 Bohr   0.0
+[INPUT] ---------------- BASIS SET ---------------- 
+[INPUT] l, kappa, [nprim/nctr], expnt,             c_1 c_2 ...
+[INPUT] C
+[INPUT] 0    0    [4    /2   ]  4.3362376436      0.1490797872    0
+                                1.2881838513      -0.0292640031    0
+                                0.4037767149      -0.688204051    0
+                                0.1187877657      -0.3964426906    1
+[INPUT] 1    0    [4    /2   ]  4.3362376436      -0.0878123619    0
+                                1.2881838513      -0.27755603    0
+                                0.4037767149      -0.4712295093    0
+                                0.1187877657      -0.4058039291    1
+[INPUT] 2    0    [1    /1   ]  0.55                 1
+
+Ewald components = 11.6062017390159, -63.0574091279915, 0.401589778745918
+nuclear repulsion = -51.0496176102297
+number of shells = 24
+number of NR pGTOs = 168
+number of NR cGTOs = 104
+basis = gth-dzvp
+ecp = {}
+bas 0, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 1, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 2, expnt(s) = [0.55]
+bas 3, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 4, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 5, expnt(s) = [0.55]
+bas 6, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 7, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 8, expnt(s) = [0.55]
+bas 9, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 10, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 11, expnt(s) = [0.55]
+bas 12, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 13, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 14, expnt(s) = [0.55]
+bas 15, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 16, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 17, expnt(s) = [0.55]
+bas 18, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 19, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 20, expnt(s) = [0.55]
+bas 21, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 22, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 23, expnt(s) = [0.55]
+CPU time:         9.47
+lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 6.753333149, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 6.753333149]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 308.003
+rcut = 22.07448407082675 (nimgs = [4 4 4])
+lattice sum = 899 cells
+precision = 1e-08
+pseudo = gth-pade
+mesh = [27, 27, 27] (19683 PWs)
+    = ke_cutoff [73.14423411 73.14423411 73.14423411]
+group: [[0, 1], [2, 3], [4, 5], [6, 7]]
+ISDF: mol.ke_cutoff = 70.000000
+ISDF: mol.natm      = 8
+ISDF: mol.nao       = 104
+************* get_partition *************
+************* end get_partition *************
+       get_partition wall time:     0.102594 CPU time:     0.102055
+len of partition[   0] =   2677
+len of partition[   1] =   2267
+len of partition[   2] =   2692
+len of partition[   3] =   2268
+len of partition[   4] =   2659
+len of partition[   5] =   2252
+len of partition[   6] =   2633
+len of partition[   7] =   2235
+************* get_aoR *************
+************* end get_aoR *************
+             get_aoR wall time:     1.971705 CPU time:     1.957386
+In _build_buffer: ISDF Local size of buffer = 64.151 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =    8
+select_IP_local_atm: npt_found =  552
+select_IP_local_atm: npt_found =  547
+select_IP_local_atm: npt_found =  563
+select_IP_local_atm: npt_found =  527
+select_IP_local_atm: npt_found =  570
+select_IP_local_atm: npt_found =  531
+select_IP_local_atm: npt_found =  546
+select_IP_local_atm: npt_found =  526
+select_IP_local_step1 wall time:     1.462617 CPU time:    91.960489
+ build_aoRg_possible wall time:     0.006858 CPU time:     0.445025
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  865
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  870
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  887
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  857
+select_IP_local_step2 wall time:     0.400788 CPU time:    25.576120
+select_IP_local_step3 wall time:     0.026601 CPU time:     1.722189
+Memory usage for aoR  :     15.624 MB
+Memory usage for aoRg :      2.767 MB
+            build_IP wall time:     1.896864 CPU time:   119.703823
+build_aux_basis_local wall time:     0.186463 CPU time:    11.865391
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+Memory usage for V:    522.439 MB
+Memory usage for W:     92.342 MB
+     build_V_W_local wall time:     2.594464 CPU time:    85.766725
+
+
+******** <class 'pyscf.pbc.scf.hf.RHF'> ********
+method = RHF
+initial guess = minao
+damping factor = 0
+level_shift factor = 0
+DIIS = <class 'pyscf.scf.diis.CDIIS'>
+diis_start_cycle = 1
+diis_space = 8
+diis_damp = 0
+SCF conv_tol = 1e-07
+SCF conv_tol_grad = None
+SCF max_cycles = 50
+direct_scf = True
+direct_scf_tol = 1e-13
+chkfile to save SCF result = /central/scratch/yangjunjie/diamond/46996080/tmp8qnzd5r2
+max_memory 200 MB (current use 1275 MB)
+******** PBC SCF flags ********
+kpt = [0. 0. 0.]
+Exchange divergence treatment (exxdiv) = ewald
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    madelung (= occupied orbital energy shift) = 0.42013290578751533
+    Total energy shift due to Ewald probe charge = -1/2 * Nelec*madelung = -6.7221264926
+DF object = <pyscf.isdf.isdf_local.ISDF_Local object at 0x7f75d9dbe8a0>
+Set gradient conv threshold to 0.000316228
+Initial guess from minao.
+Big error detected in the electron number of initial guess density matrix (Ne/cell = 31.7367)!
+  This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
+  DM is normalized wrt the number of electrons 32
+arg.atm = [[ 4 20  1 23  0  0]
+ [ 4 24  1 27  0  0]
+ [ 4 28  1 31  0  0]
+ [ 4 32  1 35  0  0]
+ [ 4 36  1 39  0  0]
+ [ 4 40  1 43  0  0]
+ [ 4 44  1 47  0  0]
+ [ 4 48  1 51  0  0]]
+arg.bas = [[ 0  0  4  2  0 52 56  0]
+ [ 0  1  4  2  0 64 68  0]
+ [ 0  2  1  1  0 76 77  0]
+ [ 1  0  4  2  0 52 56  0]
+ [ 1  1  4  2  0 64 68  0]
+ [ 1  2  1  1  0 76 77  0]
+ [ 2  0  4  2  0 52 56  0]
+ [ 2  1  4  2  0 64 68  0]
+ [ 2  2  1  1  0 76 77  0]
+ [ 3  0  4  2  0 52 56  0]
+ [ 3  1  4  2  0 64 68  0]
+ [ 3  2  1  1  0 76 77  0]
+ [ 4  0  4  2  0 52 56  0]
+ [ 4  1  4  2  0 64 68  0]
+ [ 4  2  1  1  0 76 77  0]
+ [ 5  0  4  2  0 52 56  0]
+ [ 5  1  4  2  0 64 68  0]
+ [ 5  2  1  1  0 76 77  0]
+ [ 6  0  4  2  0 52 56  0]
+ [ 6  1  4  2  0 64 68  0]
+ [ 6  2  1  1  0 76 77  0]
+ [ 7  0  4  2  0 52 56  0]
+ [ 7  1  4  2  0 64 68  0]
+ [ 7  2  1  1  0 76 77  0]]
+arg.env = [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
+  0.          0.          5.06499986  5.06499986  1.68833329  0.
+  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
+  5.06499986  0.          0.          3.37666657  3.37666657  0.
+  1.68833329  5.06499986  5.06499986  0.          4.33623764  1.28818385
+  0.40377671  0.11878777  1.13179715 -0.08939889 -0.8807207  -0.20266289
+  0.          0.          0.          0.51120349  4.33623764  1.28818385
+  0.40377671  0.11878777 -1.60299215 -1.11123874 -0.44247981 -0.08255916
+  0.          0.          0.          0.20344594  0.55        0.91656674]
+ecpbas  = []
+    CPU time for pbc integral int3c1e_sph      8.18 sec, wall time      1.10 sec
+    CPU time for pbc integral int3c1e_r2_origk_sph      1.33 sec, wall time      1.33 sec
+ke_cutoff for multigrid tasks:
+[2.5925925925925926, 7.777777777777778, 23.333333333333332, 70]
+meshes for multigrid tasks:
+[array([7, 7, 7]), array([11, 11, 11]), array([17, 17, 17]), array([27, 27, 27])]
+              get_pp wall time:     3.352067 CPU time:    11.109226
+max_memory = 2000 MB (1277 in use)
+              J_half wall time:     0.019887 CPU time:     1.211516
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     32.55 sec, wall time      0.54 sec
+    CPU time for vj and vk     32.55 sec, wall time      0.54 sec
+E1 = 14.645607942676541  E_coul = -16.524126573103867
+init E= -52.9281362406571
+    CPU time for initialize scf     47.70 sec, wall time      4.14 sec
+  HOMO = 0.612666994328245  LUMO = 0.808687917656846
+  mo_energy =
+[-2.13595717 -0.40998865 -0.40998842 -0.40998842 -0.40998842 -0.40998831
+ -0.40998831  0.25532616  0.25532616  0.25532616  0.25532712  0.25532712
+  0.25532712  0.61266699  0.61266699  0.61266699  0.80868792  0.80868809
+  0.80868809  0.80868809  0.80868817  0.80868817  0.88621044  0.88621044
+  0.88621044  1.12157185  1.38552811  1.38552811  1.38552811  1.38553134
+  1.38553134  1.38553134  1.66874592  1.668746    1.668746    1.668746
+  1.66874604  1.66874604  1.78684371  1.78684371  1.85836574  2.06214927
+  2.06214927  2.06214927  2.06215111  2.06215111  2.06215111  2.08242723
+  2.08242723  2.08242724  2.30489758  2.30489758  2.30489766  2.30489766
+  2.30489766  2.30489783  2.63195906  2.63195906  2.63195906  2.78823243
+  2.78823243  2.78823243  2.78823631  2.78823631  2.78823631  2.86533236
+  2.8653325   2.8653325   2.8653325   2.86533257  2.86533257  2.94238004
+  2.94238004  2.94238004  2.9423833   2.9423833   2.9423833   3.54075015
+  3.54075016  3.54075016  3.65115268  3.65115268  3.66512294  3.66512341
+  3.66512341  3.66512342  3.66512365  3.66512366  4.19584581  4.71828971
+  4.71828972  4.71828972  5.03030606  5.03030608  5.03030613  5.03031344
+  5.03031346  5.03031351  6.79558771  6.79560474  6.79560475  6.79560475
+  6.79561327  6.79561327]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.007461 CPU time:     0.447128
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     37.61 sec, wall time      0.63 sec
+    CPU time for vj and vk     37.61 sec, wall time      0.63 sec
+E1 = 15.970794737141345  E_coul = -9.072767089232714
+cycle= 1 E= -44.1515899623211  delta_E= 8.78  |g|= 0.437  |ddm|= 7.56
+    CPU time for cycle= 1     39.55 sec, wall time      0.66 sec
+diis-norm(errvec)=0.618638
+diis-c [-0.38271331  1.        ]
+  HOMO = 0.309149785602681  LUMO = 0.913508052012498
+  mo_energy =
+[-0.67531619 -0.26924838 -0.26924729 -0.26924729 -0.26924729 -0.26924674
+ -0.26924674  0.042598    0.042598    0.042598    0.04259852  0.04259852
+  0.04259852  0.30914979  0.30914979  0.30914979  0.91350805  0.91350867
+  0.91350867  0.91350867  0.91350898  0.91350898  0.97392356  0.97392356
+  0.97392356  1.31028802  1.47578427  1.47578427  1.47578427  1.47578697
+  1.47578697  1.47578697  1.72738295  1.72738335  1.72738335  1.72738335
+  1.72738355  1.72738355  1.79888516  1.79888516  1.87884297  2.05648181
+  2.05648181  2.05648181  2.05648319  2.05648319  2.05648319  2.10407025
+  2.10407025  2.10407025  2.31589728  2.31589728  2.31589764  2.31589764
+  2.31589764  2.31589835  2.67621407  2.67621407  2.67621407  2.82454379
+  2.82454379  2.82454379  2.82454726  2.82454726  2.82454726  2.87130346
+  2.87130346  2.87130346  2.87130346  2.87130346  2.87130346  2.96342881
+  2.96342881  2.96342881  2.96343195  2.96343195  2.96343195  3.54879213
+  3.54879214  3.54879214  3.68276892  3.68276892  3.71081313  3.71081395
+  3.71081395  3.71081395  3.71081436  3.71081436  4.20335551  4.74644737
+  4.74644739  4.74644739  5.05201354  5.05201356  5.05201362  5.05202054
+  5.05202055  5.05202061  6.85417338  6.85419402  6.85419403  6.85419403
+  6.85420435  6.85420435]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.008288 CPU time:     0.509990
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     36.99 sec, wall time      0.62 sec
+    CPU time for vj and vk     37.06 sec, wall time      0.62 sec
+E1 = 15.92798123868825  E_coul = -9.079324431243363
+cycle= 2 E= -44.2009608027848  delta_E= -0.0494  |g|= 0.0907  |ddm|= 2.33
+    CPU time for cycle= 2     38.68 sec, wall time      0.65 sec
+diis-norm(errvec)=0.128259
+diis-c [-9.56938749e-04 -2.52278229e-01  1.25227823e+00]
+  HOMO = 0.306346869368928  LUMO = 0.916473768033758
+  mo_energy =
+[-0.6731204  -0.26838167 -0.26838125 -0.26838125 -0.26838125 -0.26838104
+ -0.26838104  0.04094168  0.04094168  0.04094168  0.04094285  0.04094285
+  0.04094285  0.30634687  0.30634687  0.30634687  0.91647377  0.91647429
+  0.91647429  0.91647429  0.91647455  0.91647455  0.97772385  0.97772385
+  0.97772385  1.31886722  1.47976291  1.47976291  1.47976291  1.47976633
+  1.47976634  1.47976634  1.72973387  1.72973405  1.72973405  1.72973405
+  1.72973414  1.72973414  1.79896061  1.79896061  1.87905493  2.05596036
+  2.05596036  2.05596036  2.05596219  2.05596219  2.05596219  2.10487783
+  2.10487783  2.10487783  2.31650157  2.31650157  2.31650173  2.31650173
+  2.31650173  2.31650206  2.67624862  2.67624862  2.67624862  2.82556864
+  2.82556864  2.82556864  2.82557268  2.82557268  2.82557268  2.8715188
+  2.87151901  2.87151901  2.87151901  2.87151912  2.87151912  2.96382935
+  2.96382935  2.96382935  2.96383296  2.96383297  2.96383297  3.54911584
+  3.54911584  3.54911584  3.68433593  3.68433593  3.71284456  3.71284526
+  3.71284526  3.71284526  3.7128456   3.7128456   4.20229302  4.74763967
+  4.74763969  4.7476397   5.05229609  5.05229611  5.05229618  5.05230365
+  5.05230366  5.05230371  6.85365252  6.8536718   6.8536718   6.85367181
+  6.85368144  6.85368145]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.013015 CPU time:     0.829636
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     34.07 sec, wall time      0.57 sec
+    CPU time for vj and vk     34.07 sec, wall time      0.57 sec
+E1 = 15.926289250654975  E_coul = -9.080055633994732
+cycle= 3 E= -44.2033839935695  delta_E= -0.00242  |g|= 0.00519  |ddm|= 0.686
+    CPU time for cycle= 3     36.59 sec, wall time      0.61 sec
+diis-norm(errvec)=0.00733861
+diis-c [-1.06218399e-05  6.31536563e-02 -3.27429267e-01  1.26427561e+00]
+  HOMO = 0.306344674810944  LUMO = 0.916458496751749
+  mo_energy =
+[-0.67277456 -0.26800684 -0.26800589 -0.26800589 -0.26800589 -0.26800542
+ -0.26800542  0.04088284  0.04088284  0.04088284  0.04088356  0.04088356
+  0.04088356  0.30634467  0.30634467  0.30634467  0.9164585   0.91645901
+  0.91645901  0.91645901  0.91645927  0.91645927  0.97779147  0.97779147
+  0.97779147  1.31917175  1.47981254  1.47981254  1.47981254  1.47981547
+  1.47981547  1.47981547  1.72956925  1.72956955  1.72956955  1.72956955
+  1.7295697   1.7295697   1.79891216  1.79891216  1.87891206  2.05588368
+  2.05588368  2.05588368  2.0558852   2.0558852   2.05588521  2.10477057
+  2.10477057  2.10477058  2.31648586  2.31648586  2.31648616  2.31648616
+  2.31648616  2.31648676  2.67618619  2.67618619  2.6761862   2.8255047
+  2.8255047   2.8255047   2.82550832  2.82550832  2.82550832  2.87149415
+  2.87149415  2.87149417  2.87149417  2.87149417  2.87149423  2.96380743
+  2.96380743  2.96380743  2.96381072  2.96381072  2.96381072  3.54908906
+  3.54908906  3.54908906  3.68430724  3.68430725  3.71280753  3.71280827
+  3.71280827  3.71280827  3.71280864  3.71280864  4.20230095  4.74761302
+  4.74761303  4.74761304  5.05228071  5.05228074  5.0522808   5.05228786
+  5.05228788  5.05228793  6.85366675  6.85368707  6.85368708  6.85368708
+  6.85369724  6.85369725]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.215995 CPU time:    13.569637
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     49.32 sec, wall time      0.82 sec
+    CPU time for vj and vk     49.39 sec, wall time      0.82 sec
+E1 = 15.927133539881929  E_coul = -9.080912350092273
+cycle= 4 E= -44.2033964204401  delta_E= -1.24e-05  |g|= 0.00072  |ddm|= 0.0325
+    CPU time for cycle= 4     75.68 sec, wall time      1.24 sec
+diis-norm(errvec)=0.00101775
+diis-c [-2.81658125e-07 -1.74936285e-02  9.15878936e-02 -4.15226487e-01
+  1.34113222e+00]
+  HOMO = 0.306272206768219  LUMO = 0.916431455150825
+  mo_energy =
+[-0.67287252 -0.26806858 -0.26806809 -0.26806809 -0.26806809 -0.26806784
+ -0.26806784  0.04080794  0.04080794  0.04080794  0.04080906  0.04080906
+  0.04080906  0.30627221  0.30627221  0.30627221  0.91643146  0.91643199
+  0.91643199  0.91643199  0.91643226  0.91643226  0.97773645  0.97773645
+  0.97773645  1.31916954  1.47973306  1.47973306  1.47973306  1.47973641
+  1.47973641  1.47973641  1.72954108  1.72954128  1.72954128  1.72954128
+  1.72954138  1.72954138  1.79887425  1.79887425  1.87897548  2.05586281
+  2.05586281  2.05586281  2.0558646   2.0558646   2.0558646   2.10475202
+  2.10475202  2.10475203  2.31645757  2.31645757  2.31645776  2.31645776
+  2.31645776  2.31645814  2.67612961  2.67612961  2.67612961  2.82546068
+  2.82546068  2.82546068  2.82546466  2.82546466  2.82546466  2.87148394
+  2.87148414  2.87148414  2.87148414  2.87148424  2.87148424  2.96377862
+  2.96377862  2.96377862  2.96378218  2.96378218  2.96378218  3.5490726
+  3.5490726   3.5490726   3.68426819  3.68426819  3.71276119  3.7127619
+  3.71276191  3.71276191  3.71276226  3.71276226  4.20229436  4.74757866
+  4.74757868  4.74757868  5.05225192  5.05225194  5.05225201  5.05225942
+  5.05225943  5.05225949  6.85359416  6.85361359  6.8536136   6.8536136
+  6.85362331  6.85362332]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.007984 CPU time:     0.509417
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     33.59 sec, wall time      0.56 sec
+    CPU time for vj and vk     33.59 sec, wall time      0.56 sec
+E1 = 15.927256802929858  E_coul = -9.08103593641415
+cycle= 5 E= -44.203396743714  delta_E= -3.23e-07  |g|= 8.26e-05  |ddm|= 0.00803
+    CPU time for cycle= 5     34.10 sec, wall time      0.57 sec
+diis-norm(errvec)=0.000116854
+diis-c [-2.01190089e-09  1.56343872e-03 -8.21964091e-03  4.21023705e-02
+ -2.32490428e-01  1.19704426e+00]
+  HOMO = 0.306284671769932  LUMO = 0.916432513433323
+  mo_energy =
+[-0.67285183 -0.26804992 -0.26804906 -0.26804906 -0.26804906 -0.26804863
+ -0.26804863  0.04081601  0.04081601  0.04081601  0.04081682  0.04081682
+  0.04081682  0.30628467  0.30628467  0.30628467  0.91643251  0.91643302
+  0.91643302  0.91643302  0.91643327  0.91643327  0.97773947  0.97773947
+  0.97773947  1.3191791   1.47973747  1.47973747  1.47973747  1.47974048
+  1.47974048  1.47974048  1.72953979  1.72954006  1.72954006  1.72954006
+  1.72954019  1.72954019  1.79887545  1.79887545  1.878966    2.05586389
+  2.05586389  2.05586389  2.05586547  2.05586547  2.05586547  2.10474914
+  2.10474914  2.10474915  2.31645931  2.31645931  2.31645959  2.31645959
+  2.31645959  2.31646013  2.67613499  2.67613499  2.67613499  2.82546407
+  2.82546407  2.82546407  2.82546776  2.82546776  2.82546776  2.87148457
+  2.87148457  2.87148457  2.87148457  2.87148457  2.87148459  2.96378114
+  2.96378114  2.96378114  2.96378449  2.96378449  2.96378449  3.54907363
+  3.54907364  3.54907364  3.68426998  3.68426998  3.71276354  3.71276426
+  3.71276426  3.71276426  3.71276462  3.71276463  4.20229831  4.74758063
+  4.74758064  4.74758065  5.05225519  5.05225522  5.05225528  5.05226241
+  5.05226243  5.05226248  6.85360578  6.85362591  6.85362592  6.85362593
+  6.85363599  6.853636  ]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.008066 CPU time:     0.510511
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     33.59 sec, wall time      0.56 sec
+    CPU time for vj and vk     33.65 sec, wall time      0.56 sec
+E1 = 15.92726240341588  E_coul = -9.081041540633173
+cycle= 6 E= -44.203396747447  delta_E= -3.73e-09  |g|= 5.19e-06  |ddm|= 0.00114
+    CPU time for cycle= 6     34.09 sec, wall time      0.57 sec
+  HOMO = 0.306283787575682  LUMO = 0.916432366849691
+  mo_energy =
+[-0.67285338 -0.26805099 -0.26805035 -0.26805035 -0.26805035 -0.26805003
+ -0.26805003  0.04081513  0.04081513  0.04081513  0.04081612  0.04081612
+  0.04081612  0.30628379  0.30628379  0.30628379  0.91643237  0.91643289
+  0.91643289  0.91643289  0.91643315  0.91643315  0.97773894  0.97773894
+  0.97773894  1.31917886  1.47973672  1.47973672  1.47973672  1.47973993
+  1.47973993  1.47973993  1.72953998  1.72954021  1.72954021  1.72954021
+  1.72954033  1.72954033  1.79887513  1.79887513  1.878967    2.05586374
+  2.05586374  2.05586374  2.05586545  2.05586545  2.05586545  2.1047492
+  2.1047492   2.1047492   2.31645911  2.31645911  2.31645933  2.31645933
+  2.31645933  2.31645978  2.67613455  2.67613455  2.67613455  2.82546372
+  2.82546372  2.82546372  2.82546758  2.82546758  2.82546758  2.87148441
+  2.87148452  2.87148452  2.87148452  2.87148457  2.87148457  2.96378085
+  2.96378085  2.96378085  2.96378433  2.96378433  2.96378433  3.54907354
+  3.54907354  3.54907355  3.68426971  3.68426971  3.71276325  3.71276397
+  3.71276397  3.71276397  3.71276433  3.71276433  4.20229828  4.74758039
+  4.74758041  4.74758041  5.05225487  5.05225489  5.05225495  5.05226225
+  5.05226226  5.05226232  6.85360545  6.85362517  6.85362518  6.85362518
+  6.85363504  6.85363504]
+max_memory = 2000 MB (1279 in use)
+              J_half wall time:     0.008120 CPU time:     0.573186
+Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
+    CPU time for get_jk_dm_local     33.65 sec, wall time      0.56 sec
+    CPU time for vj and vk     33.65 sec, wall time      0.56 sec
+E1 = 15.92726243681189  E_coul = -9.081041574037531
+Extra cycle  E= -44.2033967474554  delta_E= -8.35e-12  |g|= 1.22e-06  |ddm|= 3.48e-05
+    CPU time for scf_cycle    340.37 sec, wall time      8.99 sec
+    CPU time for SCF    344.34 sec, wall time      9.19 sec
+converged SCF energy = -44.2033967474554
+kmesh: [1, 1, 2] mesh: [27, 27, 54]
+arg.atm = [[ 4 20  1 23  0  0]
+ [ 4 24  1 27  0  0]
+ [ 4 28  1 31  0  0]
+ [ 4 32  1 35  0  0]
+ [ 4 36  1 39  0  0]
+ [ 4 40  1 43  0  0]
+ [ 4 44  1 47  0  0]
+ [ 4 48  1 51  0  0]
+ [ 4 52  1 55  0  0]
+ [ 4 56  1 59  0  0]
+ [ 4 60  1 63  0  0]
+ [ 4 64  1 67  0  0]
+ [ 4 68  1 71  0  0]
+ [ 4 72  1 75  0  0]
+ [ 4 76  1 79  0  0]
+ [ 4 80  1 83  0  0]]
+arg.bas = [[  0   0   4   2   0  84  88   0]
+ [  0   1   4   2   0  96 100   0]
+ [  0   2   1   1   0 108 109   0]
+ [  1   0   4   2   0  84  88   0]
+ [  1   1   4   2   0  96 100   0]
+ [  1   2   1   1   0 108 109   0]
+ [  2   0   4   2   0  84  88   0]
+ [  2   1   4   2   0  96 100   0]
+ [  2   2   1   1   0 108 109   0]
+ [  3   0   4   2   0  84  88   0]
+ [  3   1   4   2   0  96 100   0]
+ [  3   2   1   1   0 108 109   0]
+ [  4   0   4   2   0  84  88   0]
+ [  4   1   4   2   0  96 100   0]
+ [  4   2   1   1   0 108 109   0]
+ [  5   0   4   2   0  84  88   0]
+ [  5   1   4   2   0  96 100   0]
+ [  5   2   1   1   0 108 109   0]
+ [  6   0   4   2   0  84  88   0]
+ [  6   1   4   2   0  96 100   0]
+ [  6   2   1   1   0 108 109   0]
+ [  7   0   4   2   0  84  88   0]
+ [  7   1   4   2   0  96 100   0]
+ [  7   2   1   1   0 108 109   0]
+ [  8   0   4   2   0  84  88   0]
+ [  8   1   4   2   0  96 100   0]
+ [  8   2   1   1   0 108 109   0]
+ [  9   0   4   2   0  84  88   0]
+ [  9   1   4   2   0  96 100   0]
+ [  9   2   1   1   0 108 109   0]
+ [ 10   0   4   2   0  84  88   0]
+ [ 10   1   4   2   0  96 100   0]
+ [ 10   2   1   1   0 108 109   0]
+ [ 11   0   4   2   0  84  88   0]
+ [ 11   1   4   2   0  96 100   0]
+ [ 11   2   1   1   0 108 109   0]
+ [ 12   0   4   2   0  84  88   0]
+ [ 12   1   4   2   0  96 100   0]
+ [ 12   2   1   1   0 108 109   0]
+ [ 13   0   4   2   0  84  88   0]
+ [ 13   1   4   2   0  96 100   0]
+ [ 13   2   1   1   0 108 109   0]
+ [ 14   0   4   2   0  84  88   0]
+ [ 14   1   4   2   0  96 100   0]
+ [ 14   2   1   1   0 108 109   0]
+ [ 15   0   4   2   0  84  88   0]
+ [ 15   1   4   2   0  96 100   0]
+ [ 15   2   1   1   0 108 109   0]]
+arg.env = [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
+  0.          0.          5.06499986  5.06499986  1.68833329  0.
+  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
+  5.06499986  0.          0.          3.37666657  3.37666657  0.
+  1.68833329  5.06499986  5.06499986  0.          0.          0.
+  6.75333315  0.          1.68833329  1.68833329  8.44166644  0.
+  3.37666657  3.37666657  6.75333315  0.          5.06499986  5.06499986
+  8.44166644  0.          3.37666657  0.         10.12999972  0.
+  5.06499986  1.68833329 11.81833301  0.          0.          3.37666657
+ 10.12999972  0.          1.68833329  5.06499986 11.81833301  0.
+  4.33623764  1.28818385  0.40377671  0.11878777  1.13179715 -0.08939889
+ -0.8807207  -0.20266289  0.          0.          0.          0.51120349
+  4.33623764  1.28818385  0.40377671  0.11878777 -1.60299215 -1.11123874
+ -0.44247981 -0.08255916  0.          0.          0.          0.20344594
+  0.55        0.91656674]
+ecpbas  = []
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
+# backend to test #
+
+import pyscf.isdf.BackEnd._config as config
+
+config.disable_fftw()
+# config.backend("numpy")
+# config.backend("scipy")
+config.backend("torch")
+# config.backend("torch_gpu")
+import pyscf.isdf.BackEnd.isdf_backend as BACKEND
+
+# sys and pyscf #
+
+import numpy as np
+from pyscf import lib
+
+from pyscf.lib.parameters import BOHR
+from pyscf.pbc import df
+
+# isdf util #
+
+from pyscf.isdf.isdf_tools_Tsym import _kmesh_to_Kpoints, _1e_operator_gamma2k
+from pyscf.isdf import isdf_tools_cell
+from pyscf.isdf.isdf import ISDF
+from pyscf.isdf.isdf_local import ISDF_Local
+
+#############################
+
+ke_cutoff = 70
+basis = "gth-dzvp"
+
+boxlen = 3.57371000
+prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
+atm = [
+    ["C", (0.0, 0.0, 0.0)],
+    ["C", (0.8934275, 0.8934275, 0.8934275)],
+    ["C", (1.786855, 1.786855, 0.0)],
+    ["C", (2.6802825, 2.6802825, 0.8934275)],
+    ["C", (1.786855, 0.0, 1.786855)],
+    ["C", (2.6802825, 0.8934275, 2.6802825)],
+    ["C", (0.0, 1.786855, 1.786855)],
+    ["C", (0.8934275, 2.6802825, 2.6802825)],
+]
+
+kmeshes = [
+    [1, 1, 1],
+    [1, 1, 2],
+    [1, 1, 3],
+    [1, 1, 4],
+    [1, 2, 2],
+    [2, 2, 2],
+    [2, 2, 3],
+    [2, 3, 3],
+    [3, 3, 3],
+]  # -44.20339674 and -88.67568935
+VERBOSE = 10
+
+prim_cell = isdf_tools_cell.build_supercell(
+    atm,
+    prim_a,
+    Ls=[1, 1, 1],
+    ke_cutoff=ke_cutoff,
+    basis=basis,
+    pseudo="gth-pade",
+    verbose=VERBOSE,
+)
+
+prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
+
+prim_mesh = prim_cell.mesh
+
+for kmesh in kmeshes:
+
+    mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
+    print("kmesh:", kmesh, "mesh:", mesh)
+
+    kpts = prim_cell.make_kpts(kmesh)
+
+    cell, group = isdf_tools_cell.build_supercell_with_partition(
+        atm,
+        prim_a,
+        Ls=kmesh,
+        ke_cutoff=ke_cutoff,
+        partition=prim_group,
+        mesh=mesh,
+        basis=basis,
+        pseudo="gth-pade",
+        verbose=VERBOSE,
+    )
+    cell.max_memory = 200
+    print("group:", group)
+
+    isdf = ISDF_Local(
+        cell, with_robust_fitting=True, limited_memory=True, build_V_K_bunchsize=56
+    )
+    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    # isdf.force_translation_symmetry(kmesh)
+
+    from pyscf.pbc import scf
+
+    mf = scf.RHF(cell)
+    mf.with_df = isdf
+    mf.kernel()
+#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='hpc-35-01.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
+Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
+numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
+Date: Mon Jan 27 14:30:46 2025
+PySCF version 2.7.0
+PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
+
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond/46996080/
+[ENV] PYSCF_MAX_MEMORY 491520
+[ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
+[CONFIG] ARGPARSE = False
+[CONFIG] DEBUG = False
+[CONFIG] MAX_MEMORY = 491520
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond/46996080/
+[CONFIG] UNIT = angstrom
+[CONFIG] VERBOSE = 3
+[CONFIG] conf_file = None
+[INPUT] verbose = 10
+[INPUT] max_memory = 2000 
+[INPUT] num. atoms = 16
+[INPUT] num. electrons = 64
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstorm
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 C      0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  2 C      0.893427500000   0.893427500000   0.893427500000 AA    1.688333287155   1.688333287155   1.688333287155 Bohr   0.0
+[INPUT]  3 C      1.786855000000   1.786855000000   0.000000000000 AA    3.376666574310   3.376666574310   0.000000000000 Bohr   0.0
+[INPUT]  4 C      2.680282500000   2.680282500000   0.893427500000 AA    5.064999861465   5.064999861465   1.688333287155 Bohr   0.0
+[INPUT]  5 C      1.786855000000   0.000000000000   1.786855000000 AA    3.376666574310   0.000000000000   3.376666574310 Bohr   0.0
+[INPUT]  6 C      2.680282500000   0.893427500000   2.680282500000 AA    5.064999861465   1.688333287155   5.064999861465 Bohr   0.0
+[INPUT]  7 C      0.000000000000   1.786855000000   1.786855000000 AA    0.000000000000   3.376666574310   3.376666574310 Bohr   0.0
+[INPUT]  8 C      0.893427500000   2.680282500000   2.680282500000 AA    1.688333287155   5.064999861465   5.064999861465 Bohr   0.0
+[INPUT]  9 C      0.000000000000   0.000000000000   3.573710000000 AA    0.000000000000   0.000000000000   6.753333148619 Bohr   0.0
+[INPUT] 10 C      0.893427500000   0.893427500000   4.467137500000 AA    1.688333287155   1.688333287155   8.441666435774 Bohr   0.0
+[INPUT] 11 C      1.786855000000   1.786855000000   3.573710000000 AA    3.376666574310   3.376666574310   6.753333148619 Bohr   0.0
+[INPUT] 12 C      2.680282500000   2.680282500000   4.467137500000 AA    5.064999861465   5.064999861465   8.441666435774 Bohr   0.0
+[INPUT] 13 C      1.786855000000   0.000000000000   5.360565000000 AA    3.376666574310   0.000000000000  10.129999722929 Bohr   0.0
+[INPUT] 14 C      2.680282500000   0.893427500000   6.253992500000 AA    5.064999861465   1.688333287155  11.818333010084 Bohr   0.0
+[INPUT] 15 C      0.000000000000   1.786855000000   5.360565000000 AA    0.000000000000   3.376666574310  10.129999722929 Bohr   0.0
+[INPUT] 16 C      0.893427500000   2.680282500000   6.253992500000 AA    1.688333287155   5.064999861465  11.818333010084 Bohr   0.0
+[INPUT] ---------------- BASIS SET ---------------- 
+[INPUT] l, kappa, [nprim/nctr], expnt,             c_1 c_2 ...
+[INPUT] C
+[INPUT] 0    0    [4    /2   ]  4.3362376436      0.1490797872    0
+                                1.2881838513      -0.0292640031    0
+                                0.4037767149      -0.688204051    0
+                                0.1187877657      -0.3964426906    1
+[INPUT] 1    0    [4    /2   ]  4.3362376436      -0.0878123619    0
+                                1.2881838513      -0.27755603    0
+                                0.4037767149      -0.4712295093    0
+                                0.1187877657      -0.4058039291    1
+[INPUT] 2    0    [1    /1   ]  0.55                 1
+
+Ewald components = 36.0289989359732, -138.385048104828, 0.256813947419847
+nuclear repulsion = -102.099235221435
+number of shells = 48
+number of NR pGTOs = 336
+number of NR cGTOs = 208
+basis = gth-dzvp
+ecp = {}
+bas 0, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 1, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 2, expnt(s) = [0.55]
+bas 3, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 4, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 5, expnt(s) = [0.55]
+bas 6, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 7, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 8, expnt(s) = [0.55]
+bas 9, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 10, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 11, expnt(s) = [0.55]
+bas 12, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 13, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 14, expnt(s) = [0.55]
+bas 15, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 16, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 17, expnt(s) = [0.55]
+bas 18, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 19, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 20, expnt(s) = [0.55]
+bas 21, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 22, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 23, expnt(s) = [0.55]
+bas 24, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 25, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 26, expnt(s) = [0.55]
+bas 27, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 28, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 29, expnt(s) = [0.55]
+bas 30, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 31, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 32, expnt(s) = [0.55]
+bas 33, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 34, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 35, expnt(s) = [0.55]
+bas 36, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 37, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 38, expnt(s) = [0.55]
+bas 39, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 40, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 41, expnt(s) = [0.55]
+bas 42, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 43, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 44, expnt(s) = [0.55]
+bas 45, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 46, expnt(s) = [4.33623764 1.28818385 0.40377671 0.11878777]
+bas 47, expnt(s) = [0.55]
+CPU time:       574.47
+lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
+                 a2 [0.000000000, 6.753333149, 0.000000000]
+                 a3 [0.000000000, 0.000000000, 13.506666297]
+dimension = 3
+low_dim_ft_type = None
+Cell volume = 616.005
+rcut = 22.07448407082675 (nimgs = [4 4 2])
+lattice sum = 615 cells
+precision = 1e-08
+pseudo = gth-pade
+mesh = [27, 27, 54] (39366 PWs)
+    = ke_cutoff [73.14423411 73.14423411 73.14423411]
+group: [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10, 11], [12, 13], [14, 15]]
+ISDF: mol.ke_cutoff = 70.000000
+ISDF: mol.natm      = 16
+ISDF: mol.nao       = 208
+************* get_partition *************
+************* end get_partition *************
+       get_partition wall time:     0.144888 CPU time:     5.497791
+len of partition[   0] =   2677
+len of partition[   1] =   2254
+len of partition[   2] =   2675
+len of partition[   3] =   2255
+len of partition[   4] =   2678
+len of partition[   5] =   2264
+len of partition[   6] =   2646
+len of partition[   7] =   2247
+len of partition[   8] =   2677
+len of partition[   9] =   2255
+len of partition[  10] =   2646
+len of partition[  11] =   2252
+len of partition[  12] =   2678
+len of partition[  13] =   2267
+len of partition[  14] =   2645
+len of partition[  15] =   2250
+************* get_aoR *************
+************* end get_aoR *************
+             get_aoR wall time:     2.893369 CPU time:     2.883718
+In _build_buffer: ISDF Local size of buffer = 68.911 MB
+ ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
+select_IP_local_atm: atm_begin =    0, atm_end =   16
+select_IP_local_atm: npt_found =  567
+select_IP_local_atm: npt_found =  537
+select_IP_local_atm: npt_found =  555
+select_IP_local_atm: npt_found =  530
+select_IP_local_atm: npt_found =  552
+select_IP_local_atm: npt_found =  534
+select_IP_local_atm: npt_found =  544
+select_IP_local_atm: npt_found =  541
+select_IP_local_atm: npt_found =  565
+select_IP_local_atm: npt_found =  519
+select_IP_local_atm: npt_found =  561
+select_IP_local_atm: npt_found =  527
+select_IP_local_atm: npt_found =  566
+select_IP_local_atm: npt_found =  518
+select_IP_local_atm: npt_found =  547
+select_IP_local_atm: npt_found =  522
+select_IP_local_step1 wall time:     1.639543 CPU time:   104.224191
+ build_aoRg_possible wall time:     0.012907 CPU time:     0.829825
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  886
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  883
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  878
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  863
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  884
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  883
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  877
+select_IP_local_group: nao_group =   26
+select_IP_local_group: naux_now  =   32
+select_IP_local_group: max_rank  = 1024
+select_IP_local_group: npt_found =  865
+select_IP_local_step2 wall time:     0.723915 CPU time:    46.201729
+select_IP_local_step3 wall time:     0.058467 CPU time:     3.703664
+Memory usage for aoR  :     62.496 MB
+Memory usage for aoRg :     11.164 MB
+            build_IP wall time:     2.434831 CPU time:   154.959409
+build_aux_basis_local wall time:     0.774288 CPU time:    48.717543
+ ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
+slurmstepd: error: *** JOB 46996080 ON hpc-35-01 CANCELLED AT 2025-01-27T14:30:53 ***
