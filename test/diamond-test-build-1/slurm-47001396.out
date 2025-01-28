@@ -6354,3 +6354,7 @@ build_aux_basis_local wall time:    19.083801 CPU time:  1204.286727
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:      0.000 MB
 Memory usage for W:  34334.282 MB
+     build_V_W_local wall time:  1332.439612 CPU time:  4190.925619
+Initial guess from minao.
+max_memory = 424772 MB (66747 in use)
+              J_half wall time:    19.566927 CPU time:  1241.033391

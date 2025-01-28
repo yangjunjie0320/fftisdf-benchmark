@@ -377,3 +377,5 @@ finished aoR_loop[ 1058144: 1190412]
 finished aoR_loop[ 1190412: 1322680]
 finished aoR_loop[ 1322680: 1398875]
     CPU time for building right-hand side   6199.06 sec, wall time    729.75 sec
+/var/spool/slurmd/job47001726/slurm_script: line 36: 3363286 Killed                  python main.py
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=47001726.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
