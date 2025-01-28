@@ -1,0 +1,25 @@
+OMP_NUM_THREADS = 1
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 20480
+TMPDIR = /central/scratch/yangjunjie//diamond/47001197/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond/47001197/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+Rank=0 out of 1 total ranks.
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/test/hdf5-with-mpi/main.py", line 53, in <module>
+    main()
+  File "/central/home/junjiey/work/fftisdf-benchmark/test/hdf5-with-mpi/main.py", line 17, in main
+    with h5py.File('matrix_data.h5', 'w', driver='mpio', comm=comm) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/files.py", line 552, in __init__
+    fapl = make_fapl(driver, libver, rdcc_nslots, rdcc_nbytes, rdcc_w0,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/files.py", line 181, in make_fapl
+    set_fapl(plist, **kwds)
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/files.py", line 49, in _set_fapl_mpio
+    raise ValueError("h5py was built without MPI support, can't use mpio driver")
+ValueError: h5py was built without MPI support, can't use mpio driver
