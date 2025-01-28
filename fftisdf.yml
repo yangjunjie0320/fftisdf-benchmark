@@ -7,8 +7,8 @@ dependencies:
   - python==3.9
   - numpy
   - scipy
-  - hdf5=*=mpi*
-  - h5py=*=mpi*
+  - hdf5=*=*openmpi*
+  - h5py=*=*openmpi*
   - ase
   - mp-api
   - mpi4py
