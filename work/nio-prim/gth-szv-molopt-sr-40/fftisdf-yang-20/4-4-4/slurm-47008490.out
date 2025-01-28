@@ -178,3 +178,5 @@ w[ 32], rank =  275 /  280
     CPU time for w[ 32]    242.31 sec, wall time      3.85 sec
 w[ 33], rank =  275 /  280
     CPU time for w[ 33]    199.78 sec, wall time      3.21 sec
+w[ 34], rank =  275 /  280
+    CPU time for w[ 34]     67.19 sec, wall time      1.06 sec
