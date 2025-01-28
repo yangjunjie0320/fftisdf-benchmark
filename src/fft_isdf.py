@@ -530,10 +530,12 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
-            # w_k.append(coul @ z.conj().T)
             w_ref = coul @ z.conj().T
 
             ainv = scipy.linalg.pinv(a)
+            err = abs( - z).max()
+            print("|ainv @ b.T - z| = % 6.4e" % err)
+
             zeta = pbctools.fft(ainv @ b.T * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
             zeta *= pcell.vol / ngrid
@@ -541,13 +543,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
             assert coul.shape == (nip, ngrid)
-            w_sol = coul @ b.conj() @ ainv
-
-            w1 = lstsq(a, coul @ b.conj())[0]
-            # assert w1.shape == (nip, nip)
-
-            w_sol = lstsq(a.T, w1.T)[0].T
-            # assert w_sol.shape == (nip, nip)
+            w_sol = coul @ b.conj() @ ainv.conj().T
 
             err = abs(w_sol - w_ref).max()
             print("|w_sol - w_ref| = % 6.4e" % err)
