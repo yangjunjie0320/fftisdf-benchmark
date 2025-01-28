@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks-per-node=64
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
@@ -29,10 +29,11 @@ python -c "import pyscf; print(pyscf.__version__)"
 python -c "import scipy; print(scipy.__version__)"
 python -c "import numpy; print(numpy.__version__)"
 
-echo "MPI version: $(mpicc --version)"
-echo "HDF5 version: $(h5c --version)"
+which srun
+which mpirun
+which mpiexec
 echo "NPROCS = $SLURM_NPROCS"
 
 export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
-mpirun -n $SLURM_NPROCS python main.py
+srun -n $SLURM_NPROCS python main.py
