@@ -125,3 +125,17 @@ w[ 24], rank =  159 /  160
     CPU time for w[ 24]      2.74 sec, wall time      0.04 sec
 w[ 25], rank =  159 /  160
     CPU time for w[ 25]      2.81 sec, wall time      0.04 sec
+w[ 26], rank =  159 /  160
+    CPU time for w[ 26]      3.81 sec, wall time      0.06 sec
+w[ 27], rank =  159 /  160
+    CPU time for w[ 27]      3.06 sec, wall time      0.05 sec
+w[ 28], rank =  159 /  160
+    CPU time for w[ 28]      2.93 sec, wall time      0.05 sec
+w[ 29], rank =  159 /  160
+    CPU time for w[ 29]      2.93 sec, wall time      0.05 sec
+w[ 30], rank =  159 /  160
+    CPU time for w[ 30]      2.74 sec, wall time      0.04 sec
+w[ 31], rank =  159 /  160
+    CPU time for w[ 31]      2.81 sec, wall time      0.04 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/diamond-prim/gth-szv-molopt-sr-40/fftisdf-yang-20/2-4-4//47008412/tmp.chk
+    CPU time for building ISDF    200.97 sec, wall time      3.22 sec

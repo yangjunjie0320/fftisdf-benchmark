@@ -1,0 +1,93 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/diamond-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-4//47008442/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/diamond-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-4//47008442/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 16
+    kpts = [[ 0.          0.          0.        ]
+ [-0.19060507 -0.13477816  0.33013771]
+ [-0.38121014 -0.26955632  0.66027542]
+ [-0.57181522 -0.40433448  0.99041314]
+ [ 0.          0.80866896  0.        ]
+ [-0.19060507  0.6738908   0.33013771]
+ [-0.38121014  0.53911264  0.66027542]
+ [-0.57181522  0.40433448  0.99041314]
+ [ 0.76242029 -0.26955632  0.        ]
+ [ 0.57181522 -0.40433448  0.33013771]
+ [ 0.38121014 -0.53911264  0.66027542]
+ [ 0.19060507 -0.6738908   0.99041314]
+ [ 0.76242029  0.53911264  0.        ]
+ [ 0.57181522  0.40433448  0.33013771]
+ [ 0.38121014  0.26955632  0.66027542]
+ [ 0.19060507  0.13477816  0.99041314]]
+Overwritten attributes  c0 kmesh tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 569.817 / [53 53 53].
+
+kmesh = [2 2 4]
+Input parent grid mesh = [9, 9, 9], ke_cutoff =  49.82
+Final parent grid size = [11  9 11]
+
+Selecting interpolation points
+nkpts = 16, nao = 26, c0 =  20.00
+Parent grid mesh = [11  9 11], grid size = 1089
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     64.31 sec, wall time      1.01 sec
+Pivoted Cholesky rank = 1089, nip = 520, estimated error = 3.79e-03
+Number of interpolation points = 520, effective CISDF =  20.00
+    CPU time for building left-hand side     16.31 sec, wall time      0.26 sec
+
+kpt = 16, ngrid = 3375, nao = 26
+ngrid = 3375, blksize = 368840, nip = 520
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-4/47008442/0jhtr19q
+blksize = 368840, memory for aoR_loop = 49099 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side     42.90 sec, wall time      0.81 sec
+w[  0], rank =  500 /  520
+    CPU time for w[  0]     19.29 sec, wall time      0.30 sec
+w[  1], rank =  500 /  520
+    CPU time for w[  1]     12.68 sec, wall time      0.20 sec
+w[  2], rank =  500 /  520
+    CPU time for w[  2]     12.88 sec, wall time      0.20 sec
+w[  3], rank =  500 /  520
+    CPU time for w[  3]     12.57 sec, wall time      0.20 sec
+w[  4], rank =  499 /  520
+    CPU time for w[  4]     12.31 sec, wall time      0.19 sec
+w[  5], rank =  499 /  520
+    CPU time for w[  5]     12.82 sec, wall time      0.20 sec
+w[  6], rank =  499 /  520
+    CPU time for w[  6]     12.50 sec, wall time      0.20 sec
+w[  7], rank =  499 /  520
+    CPU time for w[  7]     12.89 sec, wall time      0.20 sec
+w[  8], rank =  499 /  520
+    CPU time for w[  8]     14.10 sec, wall time      0.22 sec
+w[  9], rank =  499 /  520
+    CPU time for w[  9]     13.53 sec, wall time      0.21 sec
+w[ 10], rank =  499 /  520
+    CPU time for w[ 10]     13.72 sec, wall time      0.21 sec
+w[ 11], rank =  499 /  520
+    CPU time for w[ 11]    132.57 sec, wall time      2.15 sec
+w[ 12], rank =  499 /  520
+    CPU time for w[ 12]     15.62 sec, wall time      0.25 sec
+w[ 13], rank =  499 /  520
+    CPU time for w[ 13]     12.37 sec, wall time      0.19 sec
+w[ 14], rank =  499 /  520
+    CPU time for w[ 14]     12.95 sec, wall time      0.20 sec
+w[ 15], rank =  499 /  520
+    CPU time for w[ 15]    654.56 sec, wall time     10.42 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/diamond-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-4//47008442/tmp.chk
+    CPU time for building ISDF   1110.02 sec, wall time     17.78 sec
