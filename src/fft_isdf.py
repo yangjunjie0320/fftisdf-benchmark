@@ -508,19 +508,20 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             assert f.shape == (ngrid, )
 
             assert a.shape == (nip, nip)
-            assert b.shape == (nip, ngrid)
+            assert b.shape == (ngrid, nip)
 
             # old method
             from scipy.linalg import lstsq
             lstsq_driver = self.lstsq_driver
             tol = self.tol
-            res = lstsq(
-                a, b.T, lapack_driver=lstsq_driver
-            )
+            res = lstsq(a, b.T)
 
             z = res[0]
             rank = res[2]
             assert z.shape == (nip, ngrid)
+
+            err = abs(b.T - a @ z).max()
+            print("|b.T - a @ z| = % 6.4e" % err)
 
             zeta = pbctools.fft(z * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
@@ -533,9 +534,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             w_ref = coul @ z.conj().T
 
             ainv = scipy.linalg.pinv(a)
-            err = abs(z - ainv @ b.T).max()
-            print("err = % 6.4e" % err)
-            
             zeta = pbctools.fft(ainv @ b.T * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
             zeta *= pcell.vol / ngrid
@@ -545,14 +543,21 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             assert coul.shape == (nip, ngrid)
             w_sol = coul @ b.conj() @ ainv
 
+            w1 = lstsq(a, coul @ b.conj())[0]
+            # assert w1.shape == (nip, nip)
+
+            w_sol = lstsq(a.T, w1.T)[0].T
+            # assert w_sol.shape == (nip, nip)
+
             err = abs(w_sol - w_ref).max()
-            print("err = % 6.4e" % err)
+            print("|w_sol - w_ref| = % 6.4e" % err)
 
             w_k.append(w_sol)
 
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
             t0 = log.timer("w[%3d]" % q, *t0)
 
+        assert 1 == 2
         w_k = numpy.asarray(w_k)
         assert w_k.shape == (nkpt, nip, nip)
         return w_k
@@ -604,11 +609,12 @@ if __name__ == "__main__":
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.dump_flags()
-    scf_obj.with_df.check_sanity()
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
+    # scf_obj.with_df.dump_flags()
+    # scf_obj.with_df.check_sanity()
+    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    # vj1 = vj1.reshape(nkpt, nao, nao)
+    # vk1 = vk1.reshape(nkpt, nao, nao)
+    vj1 = vk1 = None
     t1 = log.timer("-> FFTDF JK", *t0)
 
     for c0 in [20.0, 40.0, 60.0]:
