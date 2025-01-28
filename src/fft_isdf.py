@@ -301,11 +301,10 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
     _keys = ['_isdf', '_x', '_w', '_fswap']
 
-    def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0, m0=None):
+    def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0):
         FFTDF.__init__(self, cell, kpts)
         self.kmesh = kmesh
         self.c0 = c0
-        self.m0 = m0
 
         from pyscf.lib import H5TmpFile
         self._fswap = H5TmpFile()
@@ -337,14 +336,17 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         from pyscf.pbc.tools.pbc import mesh_to_cutoff
         from pyscf.pbc.tools.pbc import cutoff_to_mesh
-        m0 = self.m0
+
+        c0 = self.c0
+        nao = self.cell.nao_nr()
+        m0 = (nao * c0) ** (1.0 / 3.0)
+        m0 = [int(m0 - 1)] * 3
         k0 = mesh_to_cutoff(self.cell.a, m0)
         k0 = max(k0)
         log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
 
         m0 = cutoff_to_mesh(self.cell.a, k0)
-        c0 = self.c0
-        self.m0 = m0
+        # self.m0 = m0
         log.info("Final parent grid size = %s", m0)
         self._x, self._w = build(self, c0=c0, m0=m0, kpts=kpts, kmesh=kmesh)
 
@@ -393,8 +395,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             yield ao_k1_etc, p0, p1
     
     def _make_inp_vec(self, m0=None, c0=None, kpts=None, kmesh=None):
-        if m0 is None:
-            m0 = self.m0
+        assert m0 is not None
         g0 = self.cell.gen_uniform_grids(m0)
 
         if c0 is None:
@@ -549,11 +550,11 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         return vj, vk
 
-FFTISDF = ISDF = WithMPI
+ISDF = FFTISDF = InterpolativeSeparableDensityFitting
 
 if __name__ == "__main__":
-    DATA_PATH = os.getenv("DATA_PATH", None)
-    from src.utils import cell_from_poscar
+    DATA_PATH = os.getenv("DATA_PATH", "../data/")
+    from utils import cell_from_poscar
 
     cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
     cell.basis = 'gth-dzvp-molopt-sr'
@@ -562,41 +563,23 @@ if __name__ == "__main__":
     cell.unit = 'aa'
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
-    # cell.mesh = [5, 5, 5]
-    cell.ke_cutoff = 200
+    cell.ke_cutoff = 60
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
-    kmesh = [4, 4, 4]
+    kmesh = [2, 2, 2]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
     scf_obj = pyscf.pbc.scf.KRHF(cell, kpts=kpts)
     scf_obj.exxdiv = None
-    dm_kpts = scf_obj.get_init_guess(key="1e")
-
-    scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = 60.0
-    scf_obj.with_df.m0 = [15, 15, 15]
-    scf_obj.with_df.verbose = 5
-    scf_obj.with_df.tol = 1e-10
-    scf_obj.with_df.build()
-
-    w, x = scf_obj.with_df._w, scf_obj.with_df._x
-    print(w.shape, x.shape)
+    dm_kpts = scf_obj.get_init_guess(key="minao")
 
     log = logger.new_logger(None, 5)
-    t0 = (process_clock(), perf_counter())
-    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj0 = vj0.reshape(nkpt, nao, nao)
-    vk0 = vk0.reshape(nkpt, nao, nao)
-
-    c0 = scf_obj.with_df.c0
-    t1 = log.timer("-> ISDF JK", *t0)
 
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
-    scf_obj.with_df.verbose = 200
+    scf_obj.with_df.verbose = 5
     scf_obj.with_df.dump_flags()
     scf_obj.with_df.check_sanity()
     vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
@@ -604,8 +587,31 @@ if __name__ == "__main__":
     vk1 = vk1.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
 
-    err = abs(vj0 - vj1).max()
-    print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+    for c0 in [20.0, 40.0, 60.0]:
+        scf_obj.with_df = ISDF(cell, kpts=kpts)
+        scf_obj.with_df.c0 = c0
+        scf_obj.with_df.verbose = 5
+        scf_obj.with_df.tol = 1e-10
+        scf_obj.with_df.build()
 
-    err = abs(vk0 - vk1).max()
-    print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
+        w, x = scf_obj.with_df._w, scf_obj.with_df._x
+        # print(w.shape, x.shape)
+        
+        t0 = (process_clock(), perf_counter())
+        vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+        vj0 = vj0.reshape(nkpt, nao, nao)
+        vk0 = vk0.reshape(nkpt, nao, nao)
+
+        for q in range(nkpt):
+            # check if the matrix are hermitian
+            assert numpy.allclose(vj0[q], vj0[q].T.conj())
+            assert numpy.allclose(vk0[q], vk0[q].T.conj())
+
+        c0 = scf_obj.with_df.c0
+        t1 = log.timer("-> ISDF JK", *t0)
+
+        err = abs(vj0 - vj1).max()
+        print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+
+        err = abs(vk0 - vk1).max()
+        print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))

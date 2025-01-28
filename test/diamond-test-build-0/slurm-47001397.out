@@ -1657,3 +1657,9 @@ build_aux_basis_local wall time:     0.831502 CPU time:    52.218167
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
 Memory usage for V:   7748.740 MB
 Memory usage for W:   1269.608 MB
+     build_V_W_local wall time:    35.294148 CPU time:   233.541811
+Initial guess from minao.
+Big error detected in the electron number of initial guess density matrix (Ne/cell = 127.438)!
+  This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
+  DM is normalized wrt the number of electrons 128
+Building PBC AO integrals incore

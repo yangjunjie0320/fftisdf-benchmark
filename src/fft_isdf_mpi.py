@@ -133,7 +133,7 @@ class WithMPI(InterpolativeSeparableDensityFitting):
             res = super()._make_rhs(x_k, kpts=kpts, kmesh=kmesh, blksize=blksize)
         else:
             res = None
-        return 
+        return None
 
 FFTISDF = ISDF = WithMPI
 

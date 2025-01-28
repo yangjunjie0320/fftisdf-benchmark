@@ -12,3 +12,20 @@ chk file size: 0.00e+00 GB
 
 kmesh: [1, 2, 2], mesh: [27, 54, 54]
     CPU time for build    565.84 sec, wall time     37.35 sec
+    CPU time for get_j  15748.82 sec, wall time    669.58 sec
+    CPU time for get_k     21.34 sec, wall time     21.07 sec
+chk file size: 0.00e+00 GB
+
+kmesh: [2, 2, 2], mesh: [54, 54, 54]
+    CPU time for build   2124.05 sec, wall time    134.42 sec
+    CPU time for get_j     61.30 sec, wall time      0.96 sec
+    CPU time for get_k    213.98 sec, wall time      4.63 sec
+chk file size: 0.00e+00 GB
+
+kmesh: [2, 2, 4], mesh: [54, 54, 108]
+    CPU time for build   2954.89 sec, wall time    442.42 sec
+    CPU time for get_j    664.65 sec, wall time     10.44 sec
+    CPU time for get_k   7060.79 sec, wall time    122.98 sec
+chk file size: 0.00e+00 GB
+
+kmesh: [2, 4, 4], mesh: [54, 108, 108]
