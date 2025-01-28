@@ -1,0 +1,14 @@
+kmesh: [1, 1, 1], mesh: [27, 27, 27]
+    CPU time for build    113.91 sec, wall time      6.23 sec
+    CPU time for get_j     53.08 sec, wall time      0.96 sec
+    CPU time for get_k      0.21 sec, wall time      0.21 sec
+chk file size: 0.00e+00 GB
+
+kmesh: [1, 1, 2], mesh: [27, 27, 54]
+    CPU time for build    212.02 sec, wall time     12.74 sec
+    CPU time for get_j    714.57 sec, wall time     18.94 sec
+    CPU time for get_k      1.51 sec, wall time      1.51 sec
+chk file size: 0.00e+00 GB
+
+kmesh: [1, 2, 2], mesh: [27, 54, 54]
+    CPU time for build    565.84 sec, wall time     37.35 sec

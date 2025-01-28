@@ -24,8 +24,13 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
+from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 ke_cutoff = 70
 basis = "gth-dzvp-molopt-sr"
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -62,15 +67,11 @@ prim_cell = isdf_tools_cell.build_supercell(
 )
 
 prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
-
 prim_mesh = prim_cell.mesh
-
-stdout = open("out.log", "w")
-log = logger.Logger(stdout, 5)
 
 for kmesh in kmeshes:
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    log.info("kmesh:", kmesh, "mesh:", mesh)
+    log.info("kmesh: %s, mesh: %s", kmesh, mesh)
     kpts = prim_cell.make_kpts(kmesh)
 
     direct = False
@@ -79,11 +80,6 @@ for kmesh in kmeshes:
     aoR_cutoff = 1e-8
     build_V_K_bunchsize = 512
     with_robust_fitting = False
-
-    from pyscf.lib import logger
-    from pyscf.lib.logger import perf_counter
-    from pyscf.lib.logger import process_clock
-    t0 = (process_clock(), perf_counter())
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,

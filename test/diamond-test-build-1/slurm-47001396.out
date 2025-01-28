@@ -1,8 +1,8 @@
 OMP_NUM_THREADS = 64
 MKL_NUM_THREADS = 1
 PYSCF_MAX_MEMORY = 491520
-TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
-PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 
 /home/junjiey/anaconda3/envs/fftisdf/bin/python
 2.7.0
@@ -63,9 +63,7 @@ arg.env = [ 0.          0.          0.          0.          0.          0.
   0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
   0.04545847  0.04722778]
 ecpbas  = []
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-0/main.py ****
-# backend to test #
-
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
 import pyscf.isdf.BackEnd._config as config
 
 config.disable_fftw()
@@ -92,8 +90,13 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
+from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 ke_cutoff = 70
 basis = "gth-dzvp-molopt-sr"
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -130,15 +133,19 @@ prim_cell = isdf_tools_cell.build_supercell(
 )
 
 prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
-
 prim_mesh = prim_cell.mesh
 
 for kmesh in kmeshes:
-
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    print("kmesh:", kmesh, "mesh:", mesh)
-
+    log.info("kmesh: %s, mesh: %s", kmesh, mesh)
     kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
@@ -151,44 +158,54 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
     print("cell:", cell.max_memory)
     print("group:", group)
 
-    build_V_K_bunchsize = 512
+    t0 = (process_clock(), perf_counter())
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, 
-        limited_memory=True, 
-        build_V_K_bunchsize=build_V_K_bunchsize
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
     )
-    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
 
     from pyscf.pbc import scf
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.max_cycle = 1
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB\n", 0.0)
     #INFO: ******************** input file end ********************
 
 
 System: uname_result(system='Linux', node='hpc-35-02.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
 Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
 numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
-Date: Mon Jan 27 14:57:15 2025
+Date: Mon Jan 27 22:38:08 2025
 PySCF version 2.7.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [ENV] PYSCF_MAX_MEMORY 491520
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] ARGPARSE = False
 [CONFIG] DEBUG = False
 [CONFIG] MAX_MEMORY = 491520
-[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [CONFIG] UNIT = angstrom
 [CONFIG] VERBOSE = 3
 [CONFIG] conf_file = None
@@ -259,7 +276,7 @@ bas 20, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 21, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 22, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 23, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
-CPU time:         9.46
+CPU time:         9.42
 lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
                  a2 [0.000000000, 6.753333149, 0.000000000]
                  a3 [0.000000000, 0.000000000, 6.753333149]
@@ -272,7 +289,6 @@ precision = 1e-08
 pseudo = gth-pade
 ke_cutoff = 70
     = [27 27 27] mesh (19683 PWs)
-kmesh: [1, 1, 1] mesh: [27, 27, 27]
 arg.atm = [[ 4 20  1 23  0  0]
  [ 4 24  1 27  0  0]
  [ 4 28  1 31  0  0]
@@ -322,9 +338,7 @@ arg.env = [ 0.          0.          0.          0.          0.          0.
   0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
   0.04545847  0.04722778]
 ecpbas  = []
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-0/main.py ****
-# backend to test #
-
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
 import pyscf.isdf.BackEnd._config as config
 
 config.disable_fftw()
@@ -351,8 +365,13 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
+from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 ke_cutoff = 70
 basis = "gth-dzvp-molopt-sr"
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -389,15 +408,19 @@ prim_cell = isdf_tools_cell.build_supercell(
 )
 
 prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
-
 prim_mesh = prim_cell.mesh
 
 for kmesh in kmeshes:
-
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    print("kmesh:", kmesh, "mesh:", mesh)
-
+    log.info("kmesh: %s, mesh: %s", kmesh, mesh)
     kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
@@ -410,44 +433,54 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
     print("cell:", cell.max_memory)
     print("group:", group)
 
-    build_V_K_bunchsize = 512
+    t0 = (process_clock(), perf_counter())
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, 
-        limited_memory=True, 
-        build_V_K_bunchsize=build_V_K_bunchsize
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
     )
-    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
 
     from pyscf.pbc import scf
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.max_cycle = 1
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB\n", 0.0)
     #INFO: ******************** input file end ********************
 
 
 System: uname_result(system='Linux', node='hpc-35-02.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
 Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
 numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
-Date: Mon Jan 27 14:57:15 2025
+Date: Mon Jan 27 22:38:08 2025
 PySCF version 2.7.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [ENV] PYSCF_MAX_MEMORY 491520
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] ARGPARSE = False
 [CONFIG] DEBUG = False
 [CONFIG] MAX_MEMORY = 491520
-[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [CONFIG] UNIT = angstrom
 [CONFIG] VERBOSE = 3
 [CONFIG] conf_file = None
@@ -518,7 +551,7 @@ bas 20, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 21, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 22, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 23, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
-CPU time:         9.48
+CPU time:         9.44
 lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
                  a2 [0.000000000, 6.753333149, 0.000000000]
                  a3 [0.000000000, 0.000000000, 6.753333149]
@@ -538,7 +571,7 @@ ISDF: mol.natm      = 8
 ISDF: mol.nao       = 104
 ************* get_partition *************
 ************* end get_partition *************
-       get_partition wall time:     0.103053 CPU time:     0.102458
+       get_partition wall time:     0.105115 CPU time:     0.104639
 len of partition[   0] =   2677
 len of partition[   1] =   2267
 len of partition[   2] =   2692
@@ -549,169 +582,55 @@ len of partition[   6] =   2633
 len of partition[   7] =   2235
 ************* get_aoR *************
 ************* end get_aoR *************
-             get_aoR wall time:     3.036338 CPU time:     3.019663
-In _build_buffer: ISDF Local size of buffer = 80.502 MB
+             get_aoR wall time:     3.021340 CPU time:     3.008059
+In _build_buffer: ISDF Local size of buffer = 76.887 MB
  ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
 select_IP_local_atm: atm_begin =    0, atm_end =    8
-select_IP_local_atm: npt_found =  501
-select_IP_local_atm: npt_found =  480
-select_IP_local_atm: npt_found =  510
-select_IP_local_atm: npt_found =  489
-select_IP_local_atm: npt_found =  507
-select_IP_local_atm: npt_found =  468
-select_IP_local_atm: npt_found =  506
-select_IP_local_atm: npt_found =  478
-select_IP_local_step1 wall time:     1.060905 CPU time:    66.371194
- build_aoRg_possible wall time:     0.003409 CPU time:     0.191899
+select_IP_local_atm: npt_found =  334
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  317
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  326
+select_IP_local_atm: npt_found =  296
+select_IP_local_atm: npt_found =  317
+select_IP_local_atm: npt_found =  297
+select_IP_local_step1 wall time:     1.024474 CPU time:    64.083646
+ build_aoRg_possible wall time:     0.003115 CPU time:     0.191552
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  981
-select_IP_local_group: npt_found =  792
+select_IP_local_group: max_rank  =  633
+select_IP_local_group: npt_found =  527
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  999
-select_IP_local_group: npt_found =  807
+select_IP_local_group: max_rank  =  613
+select_IP_local_group: npt_found =  510
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  975
-select_IP_local_group: npt_found =  794
+select_IP_local_group: max_rank  =  622
+select_IP_local_group: npt_found =  510
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  984
-select_IP_local_group: npt_found =  795
-select_IP_local_step2 wall time:     0.335975 CPU time:    21.448188
-select_IP_local_step3 wall time:     0.023460 CPU time:     1.531968
+select_IP_local_group: max_rank  =  614
+select_IP_local_group: npt_found =  505
+select_IP_local_step2 wall time:     0.236751 CPU time:    15.126767
+select_IP_local_step3 wall time:     0.016167 CPU time:     1.021355
 Memory usage for aoR  :     15.624 MB
-Memory usage for aoRg :      2.536 MB
-            build_IP wall time:     1.423750 CPU time:    89.543249
-build_aux_basis_local wall time:     0.157595 CPU time:    10.081283
+Memory usage for aoRg :      1.635 MB
+            build_IP wall time:     1.280506 CPU time:    80.423320
+build_aux_basis_local wall time:     0.095235 CPU time:     6.061822
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
-Memory usage for V:    478.740 MB
-Memory usage for W:     77.540 MB
-     build_V_W_local wall time:     2.641635 CPU time:    43.499997
-
-
-******** <class 'pyscf.pbc.scf.hf.RHF'> ********
-method = RHF
-initial guess = minao
-damping factor = 0
-level_shift factor = 0
-DIIS = <class 'pyscf.scf.diis.CDIIS'>
-diis_start_cycle = 1
-diis_space = 8
-diis_damp = 0
-SCF conv_tol = 1e-07
-SCF conv_tol_grad = None
-SCF max_cycles = 1
-direct_scf = True
-direct_scf_tol = 1e-13
-chkfile to save SCF result = /central/scratch/yangjunjie/diamond-test-build-0/46997106/tmp0hv3bpqk
-max_memory 491520 MB (current use 1369 MB)
-******** PBC SCF flags ********
-kpt = [0. 0. 0.]
-Exchange divergence treatment (exxdiv) = ewald
-Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
-    madelung (= occupied orbital energy shift) = 0.42013290578751533
-    Total energy shift due to Ewald probe charge = -1/2 * Nelec*madelung = -6.7221264926
-DF object = <pyscf.isdf.isdf_local.ISDF_Local object at 0x7fbc0d856fc0>
-Set gradient conv threshold to 0.000316228
+Memory usage for V:      0.000 MB
+Memory usage for W:     32.125 MB
+     build_V_W_local wall time:     1.576859 CPU time:    24.012332
 Initial guess from minao.
 Big error detected in the electron number of initial guess density matrix (Ne/cell = 31.4598)!
   This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
   DM is normalized wrt the number of electrons 32
-arg.atm = [[ 4 20  1 23  0  0]
- [ 4 24  1 27  0  0]
- [ 4 28  1 31  0  0]
- [ 4 32  1 35  0  0]
- [ 4 36  1 39  0  0]
- [ 4 40  1 43  0  0]
- [ 4 44  1 47  0  0]
- [ 4 48  1 51  0  0]]
-arg.bas = [[ 0  0  5  2  0 52 57  0]
- [ 0  1  5  2  0 67 72  0]
- [ 0  2  5  1  0 82 87  0]
- [ 1  0  5  2  0 52 57  0]
- [ 1  1  5  2  0 67 72  0]
- [ 1  2  5  1  0 82 87  0]
- [ 2  0  5  2  0 52 57  0]
- [ 2  1  5  2  0 67 72  0]
- [ 2  2  5  1  0 82 87  0]
- [ 3  0  5  2  0 52 57  0]
- [ 3  1  5  2  0 67 72  0]
- [ 3  2  5  1  0 82 87  0]
- [ 4  0  5  2  0 52 57  0]
- [ 4  1  5  2  0 67 72  0]
- [ 4  2  5  1  0 82 87  0]
- [ 5  0  5  2  0 52 57  0]
- [ 5  1  5  2  0 67 72  0]
- [ 5  2  5  1  0 82 87  0]
- [ 6  0  5  2  0 52 57  0]
- [ 6  1  5  2  0 67 72  0]
- [ 6  2  5  1  0 82 87  0]
- [ 7  0  5  2  0 52 57  0]
- [ 7  1  5  2  0 67 72  0]
- [ 7  2  5  1  0 82 87  0]]
-arg.env = [ 0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
-  0.          0.          5.06499986  5.06499986  1.68833329  0.
-  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
-  5.06499986  0.          0.          3.37666657  3.37666657  0.
-  1.68833329  5.06499986  5.06499986  0.          5.60533075  2.11301639
-  0.76991145  0.34815709  0.12821225  1.14328643  0.75521952 -0.74331592
- -0.77915081 -0.08078366  1.95761895  0.29093741  0.02780209  0.48527241
-  0.26332695  5.60533075  2.11301639  0.76991145  0.34815709  0.12821225
- -1.44059548 -1.3150188  -0.76719096 -0.28600475 -0.05699711 -0.98316391
- -1.13158177 -0.64703904  0.43083118  0.15573998  5.60533075  2.11301639
-  0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
-  0.04545847  0.04722778]
-ecpbas  = []
-    CPU time for pbc integral int3c1e_sph      9.43 sec, wall time      2.32 sec
-    CPU time for pbc integral int3c1e_r2_origk_sph      2.81 sec, wall time      2.81 sec
-ke_cutoff for multigrid tasks:
-[2.5925925925925926, 7.777777777777778, 23.333333333333332, 70]
-meshes for multigrid tasks:
-[array([7, 7, 7]), array([11, 11, 11]), array([17, 17, 17]), array([27, 27, 27])]
-              get_pp wall time:     7.461239 CPU time:    15.244291
 Building PBC AO integrals incore
-      isdf_local_eri wall time:     4.651012 CPU time:   268.495970
+      isdf_local_eri wall time:     0.796960 CPU time:    48.236865
+    CPU time for vj and vk     53.08 sec, wall time      0.96 sec
 Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
-    CPU time for vj and vk    268.84 sec, wall time      5.00 sec
-E1 = 16.528905470094088  E_coul = -10.15421789153664
-init E= -44.6749300316723
-    CPU time for initialize scf    297.14 sec, wall time     13.03 sec
-  HOMO = 0.641611099264177  LUMO = 0.828023827107479
-  mo_energy =
-[-1.41408552 -0.36385817 -0.36385703 -0.36385703 -0.36385703 -0.36385646
- -0.36385646  0.28267443  0.28267443  0.28267443  0.28267773  0.28267773
-  0.28267773  0.6416111   0.6416111   0.6416111   0.82802383  0.82802429
-  0.82802429  0.82802429  0.82802452  0.82802453  0.90869475  0.90869475
-  0.90869475  1.13843437  1.42986754  1.42986754  1.42986754  1.42987849
-  1.42987849  1.42987849  1.769873    1.769873    1.76987307  1.76987307
-  1.76987307  1.76987319  1.92680508  1.92680508  2.22371549  2.22371549
-  2.22371549  2.22372384  2.22372384  2.22372384  2.46656897  2.46656897
-  2.46656897  2.5808945   2.5808945   2.58090254  2.58090254  2.58090255
-  2.58091863  2.73639513  2.73639513  2.73639513  3.00859202  3.00859202
-  3.00859202  3.00861132  3.00861132  3.00861132  3.18823809  3.18824282
-  3.18824283  3.18824283  3.18824519  3.18824519  3.3006933   3.3006933
-  3.3006933   3.30070798  3.30070798  3.30070798  3.75065492  3.75066104
-  3.75066104  3.75066104  3.7506641   3.7506641   3.86100963  3.86100964
-  4.04632884  4.04632884  4.04632885  4.95300299  4.953003    4.95300302
-  5.04555514  5.04555515  5.04555516  5.04556549  5.0455655   5.04556553
-  7.04615425  9.43183891  9.506841    9.50696606  9.50696606  9.50696606
-  9.50702863  9.50702863]
-Ewald components = 0.000105727067579829, -0.251544692466148, 0.0413725125048105
-    CPU time for vj and vk      6.19 sec, wall time      0.28 sec
-E1 = 15.9638977641789  E_coul = -9.07111213363703
-cycle= 1 E= -44.1568319796879  delta_E= 0.518  |g|= 0.479  |ddm|= 5.89
-    CPU time for cycle= 1     26.93 sec, wall time      0.61 sec
-    CPU time for scf_cycle    324.07 sec, wall time     13.64 sec
-    CPU time for SCF    328.10 sec, wall time     13.94 sec
-SCF not converged.
-SCF energy = -44.1568319796879
-kmesh: [1, 1, 2] mesh: [27, 27, 54]
+    CPU time for vj and vk      0.21 sec, wall time      0.21 sec
 arg.atm = [[ 4 20  1 23  0  0]
  [ 4 24  1 27  0  0]
  [ 4 28  1 31  0  0]
@@ -798,9 +717,7 @@ arg.env = [ 0.          0.          0.          0.          0.          0.
   5.60533075  2.11301639  0.76991145  0.34815709  0.12821225  1.01465273
   0.43485666  0.70818476  0.04545847  0.04722778]
 ecpbas  = []
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-0/main.py ****
-# backend to test #
-
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
 import pyscf.isdf.BackEnd._config as config
 
 config.disable_fftw()
@@ -827,8 +744,13 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
+from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 ke_cutoff = 70
 basis = "gth-dzvp-molopt-sr"
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -865,15 +787,19 @@ prim_cell = isdf_tools_cell.build_supercell(
 )
 
 prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
-
 prim_mesh = prim_cell.mesh
 
 for kmesh in kmeshes:
-
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    print("kmesh:", kmesh, "mesh:", mesh)
-
+    log.info("kmesh: %s, mesh: %s", kmesh, mesh)
     kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
@@ -886,44 +812,54 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
     print("cell:", cell.max_memory)
     print("group:", group)
 
-    build_V_K_bunchsize = 512
+    t0 = (process_clock(), perf_counter())
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, 
-        limited_memory=True, 
-        build_V_K_bunchsize=build_V_K_bunchsize
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
     )
-    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
 
     from pyscf.pbc import scf
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.max_cycle = 1
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB\n", 0.0)
     #INFO: ******************** input file end ********************
 
 
 System: uname_result(system='Linux', node='hpc-35-02.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
 Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
 numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
-Date: Mon Jan 27 14:57:37 2025
+Date: Mon Jan 27 22:38:16 2025
 PySCF version 2.7.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [ENV] PYSCF_MAX_MEMORY 491520
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] ARGPARSE = False
 [CONFIG] DEBUG = False
 [CONFIG] MAX_MEMORY = 491520
-[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [CONFIG] UNIT = angstrom
 [CONFIG] VERBOSE = 3
 [CONFIG] conf_file = None
@@ -1026,7 +962,7 @@ bas 44, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 45, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 46, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 47, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
-CPU time:       490.67
+CPU time:       185.10
 lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
                  a2 [0.000000000, 6.753333149, 0.000000000]
                  a3 [0.000000000, 0.000000000, 13.506666297]
@@ -1046,7 +982,7 @@ ISDF: mol.natm      = 16
 ISDF: mol.nao       = 208
 ************* get_partition *************
 ************* end get_partition *************
-       get_partition wall time:     0.197069 CPU time:     0.196462
+       get_partition wall time:     0.133281 CPU time:     0.415656
 len of partition[   0] =   2677
 len of partition[   1] =   2254
 len of partition[   2] =   2675
@@ -1065,247 +1001,79 @@ len of partition[  14] =   2645
 len of partition[  15] =   2250
 ************* get_aoR *************
 ************* end get_aoR *************
-             get_aoR wall time:     4.722898 CPU time:     4.713291
-In _build_buffer: ISDF Local size of buffer = 161.829 MB
+             get_aoR wall time:     4.342269 CPU time:     4.334731
+In _build_buffer: ISDF Local size of buffer = 153.773 MB
  ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
 select_IP_local_atm: atm_begin =    0, atm_end =   16
-select_IP_local_atm: npt_found =  488
-select_IP_local_atm: npt_found =  473
-select_IP_local_atm: npt_found =  500
-select_IP_local_atm: npt_found =  472
-select_IP_local_atm: npt_found =  517
-select_IP_local_atm: npt_found =  461
-select_IP_local_atm: npt_found =  492
-select_IP_local_atm: npt_found =  476
-select_IP_local_atm: npt_found =  494
-select_IP_local_atm: npt_found =  480
-select_IP_local_atm: npt_found =  489
-select_IP_local_atm: npt_found =  487
-select_IP_local_atm: npt_found =  498
-select_IP_local_atm: npt_found =  472
-select_IP_local_atm: npt_found =  526
-select_IP_local_atm: npt_found =  477
-select_IP_local_step1 wall time:     1.690968 CPU time:   107.624190
- build_aoRg_possible wall time:     0.011807 CPU time:     0.765354
+select_IP_local_atm: npt_found =  331
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  329
+select_IP_local_atm: npt_found =  310
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  290
+select_IP_local_atm: npt_found =  321
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  335
+select_IP_local_atm: npt_found =  299
+select_IP_local_atm: npt_found =  323
+select_IP_local_atm: npt_found =  301
+select_IP_local_atm: npt_found =  324
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  313
+select_IP_local_atm: npt_found =  296
+select_IP_local_step1 wall time:     1.663467 CPU time:   105.888567
+ build_aoRg_possible wall time:     0.010374 CPU time:     0.638759
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  961
-select_IP_local_group: npt_found =  800
+select_IP_local_group: max_rank  =  634
+select_IP_local_group: npt_found =  531
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  972
-select_IP_local_group: npt_found =  785
+select_IP_local_group: max_rank  =  639
+select_IP_local_group: npt_found =  498
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  978
-select_IP_local_group: npt_found =  792
+select_IP_local_group: max_rank  =  594
+select_IP_local_group: npt_found =  521
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  968
-select_IP_local_group: npt_found =  798
+select_IP_local_group: max_rank  =  618
+select_IP_local_group: npt_found =  518
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  974
-select_IP_local_group: npt_found =  791
+select_IP_local_group: max_rank  =  634
+select_IP_local_group: npt_found =  518
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  976
-select_IP_local_group: npt_found =  802
+select_IP_local_group: max_rank  =  624
+select_IP_local_group: npt_found =  510
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  970
-select_IP_local_group: npt_found =  792
+select_IP_local_group: max_rank  =  612
+select_IP_local_group: npt_found =  519
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  = 1003
-select_IP_local_group: npt_found =  783
-select_IP_local_step2 wall time:     0.643824 CPU time:    41.112313
-select_IP_local_step3 wall time:     0.051432 CPU time:     3.256583
+select_IP_local_group: max_rank  =  609
+select_IP_local_group: npt_found =  508
+select_IP_local_step2 wall time:     0.474441 CPU time:    30.317640
+select_IP_local_step3 wall time:     0.036532 CPU time:     2.298794
 Memory usage for aoR  :     62.496 MB
-Memory usage for aoRg :     10.091 MB
-            build_IP wall time:     2.398032 CPU time:   152.758439
-build_aux_basis_local wall time:     0.350153 CPU time:    22.393461
+Memory usage for aoRg :      6.568 MB
+            build_IP wall time:     2.184814 CPU time:   139.143759
+build_aux_basis_local wall time:     0.226375 CPU time:    14.424582
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
-Memory usage for V:   1905.049 MB
-Memory usage for W:    306.958 MB
-     build_V_W_local wall time:     9.972824 CPU time:    95.686364
-
-
-******** <class 'pyscf.pbc.scf.hf.RHF'> ********
-method = RHF
-initial guess = minao
-damping factor = 0
-level_shift factor = 0
-DIIS = <class 'pyscf.scf.diis.CDIIS'>
-diis_start_cycle = 1
-diis_space = 8
-diis_damp = 0
-SCF conv_tol = 1e-07
-SCF conv_tol_grad = None
-SCF max_cycles = 1
-direct_scf = True
-direct_scf_tol = 1e-13
-chkfile to save SCF result = /central/scratch/yangjunjie/diamond-test-build-0/46997106/tmpxmyjvzsc
-max_memory 491520 MB (current use 3560 MB)
-******** PBC SCF flags ********
-kpt = [0. 0. 0.]
-Exchange divergence treatment (exxdiv) = ewald
-Ewald components = 0.000314592933934792, -0.215113710861397, 0.081099078945861
-    madelung (= occupied orbital energy shift) = 0.2674000779632031
-    Total energy shift due to Ewald probe charge = -1/2 * Nelec*madelung = -8.55680249482
-DF object = <pyscf.isdf.isdf_local.ISDF_Local object at 0x7fbc0d890fe0>
-Set gradient conv threshold to 0.000316228
+Memory usage for V:      0.000 MB
+Memory usage for W:    129.693 MB
+     build_V_W_local wall time:     5.634233 CPU time:    53.322818
 Initial guess from minao.
 Big error detected in the electron number of initial guess density matrix (Ne/cell = 63.3632)!
   This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
   DM is normalized wrt the number of electrons 64
-arg.atm = [[ 4 20  1 23  0  0]
- [ 4 24  1 27  0  0]
- [ 4 28  1 31  0  0]
- [ 4 32  1 35  0  0]
- [ 4 36  1 39  0  0]
- [ 4 40  1 43  0  0]
- [ 4 44  1 47  0  0]
- [ 4 48  1 51  0  0]
- [ 4 52  1 55  0  0]
- [ 4 56  1 59  0  0]
- [ 4 60  1 63  0  0]
- [ 4 64  1 67  0  0]
- [ 4 68  1 71  0  0]
- [ 4 72  1 75  0  0]
- [ 4 76  1 79  0  0]
- [ 4 80  1 83  0  0]]
-arg.bas = [[  0   0   5   2   0  84  89   0]
- [  0   1   5   2   0  99 104   0]
- [  0   2   5   1   0 114 119   0]
- [  1   0   5   2   0  84  89   0]
- [  1   1   5   2   0  99 104   0]
- [  1   2   5   1   0 114 119   0]
- [  2   0   5   2   0  84  89   0]
- [  2   1   5   2   0  99 104   0]
- [  2   2   5   1   0 114 119   0]
- [  3   0   5   2   0  84  89   0]
- [  3   1   5   2   0  99 104   0]
- [  3   2   5   1   0 114 119   0]
- [  4   0   5   2   0  84  89   0]
- [  4   1   5   2   0  99 104   0]
- [  4   2   5   1   0 114 119   0]
- [  5   0   5   2   0  84  89   0]
- [  5   1   5   2   0  99 104   0]
- [  5   2   5   1   0 114 119   0]
- [  6   0   5   2   0  84  89   0]
- [  6   1   5   2   0  99 104   0]
- [  6   2   5   1   0 114 119   0]
- [  7   0   5   2   0  84  89   0]
- [  7   1   5   2   0  99 104   0]
- [  7   2   5   1   0 114 119   0]
- [  8   0   5   2   0  84  89   0]
- [  8   1   5   2   0  99 104   0]
- [  8   2   5   1   0 114 119   0]
- [  9   0   5   2   0  84  89   0]
- [  9   1   5   2   0  99 104   0]
- [  9   2   5   1   0 114 119   0]
- [ 10   0   5   2   0  84  89   0]
- [ 10   1   5   2   0  99 104   0]
- [ 10   2   5   1   0 114 119   0]
- [ 11   0   5   2   0  84  89   0]
- [ 11   1   5   2   0  99 104   0]
- [ 11   2   5   1   0 114 119   0]
- [ 12   0   5   2   0  84  89   0]
- [ 12   1   5   2   0  99 104   0]
- [ 12   2   5   1   0 114 119   0]
- [ 13   0   5   2   0  84  89   0]
- [ 13   1   5   2   0  99 104   0]
- [ 13   2   5   1   0 114 119   0]
- [ 14   0   5   2   0  84  89   0]
- [ 14   1   5   2   0  99 104   0]
- [ 14   2   5   1   0 114 119   0]
- [ 15   0   5   2   0  84  89   0]
- [ 15   1   5   2   0  99 104   0]
- [ 15   2   5   1   0 114 119   0]]
-arg.env = [ 0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
-  0.          0.          5.06499986  5.06499986  1.68833329  0.
-  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
-  5.06499986  0.          0.          3.37666657  3.37666657  0.
-  1.68833329  5.06499986  5.06499986  0.          0.          0.
-  6.75333315  0.          1.68833329  1.68833329  8.44166644  0.
-  3.37666657  3.37666657  6.75333315  0.          5.06499986  5.06499986
-  8.44166644  0.          3.37666657  0.         10.12999972  0.
-  5.06499986  1.68833329 11.81833301  0.          0.          3.37666657
- 10.12999972  0.          1.68833329  5.06499986 11.81833301  0.
-  5.60533075  2.11301639  0.76991145  0.34815709  0.12821225  1.14328643
-  0.75521952 -0.74331592 -0.77915081 -0.08078366  1.95761895  0.29093741
-  0.02780209  0.48527241  0.26332695  5.60533075  2.11301639  0.76991145
-  0.34815709  0.12821225 -1.44059548 -1.3150188  -0.76719096 -0.28600475
- -0.05699711 -0.98316391 -1.13158177 -0.64703904  0.43083118  0.15573998
-  5.60533075  2.11301639  0.76991145  0.34815709  0.12821225  1.01465273
-  0.43485666  0.70818476  0.04545847  0.04722778]
-ecpbas  = []
-    CPU time for pbc integral int3c1e_sph     10.52 sec, wall time      4.54 sec
-    CPU time for pbc integral int3c1e_r2_origk_sph      6.23 sec, wall time      6.24 sec
-ke_cutoff for multigrid tasks:
-[2.5925925925925926, 7.777777777777778, 23.333333333333332, 70]
-meshes for multigrid tasks:
-[array([ 7,  7, 11]), array([11, 11, 19]), array([17, 17, 31]), array([27, 27, 53])]
-              get_pp wall time:    15.741613 CPU time:    23.690804
 Building PBC AO integrals incore
-      isdf_local_eri wall time:    84.763866 CPU time:  3404.724726
+      isdf_local_eri wall time:    16.545069 CPU time:   712.180435
+    CPU time for vj and vk    714.57 sec, wall time     18.94 sec
 Ewald components = 0.000314592933934792, -0.215113710861397, 0.081099078945861
-    CPU time for vj and vk   3408.53 sec, wall time     88.58 sec
-E1 = 33.04249055970457  E_coul = -19.996793474220194
-init E= -89.0535381359508
-    CPU time for initialize scf   3438.98 sec, wall time    105.30 sec
-  HOMO = 0.640143368880436  LUMO = 0.817569858608385
-  mo_energy =
-[-1.36220037 -1.08123412 -1.08123407 -0.38926943 -0.38926943 -0.33585253
- -0.33585249 -0.33585249 -0.33585245 -0.29088409 -0.29088404 -0.29088404
- -0.29088399  0.14477883  0.14477886  0.14477886  0.14477888  0.27024057
-  0.27024061  0.27024061  0.27024064  0.28442853  0.28442858  0.29590445
-  0.29590445  0.41879592  0.41879592  0.41879594  0.41879594  0.6321309
-  0.64014337  0.64014337  0.81756986  0.81756988  0.81756988  0.8175699
-  0.82419639  0.82419643  0.82610699  0.82610699  0.90326372  0.90326372
-  0.90512141  1.10552655  1.10552656  1.13497264  1.15065073  1.15065081
-  1.15065081  1.15065088  1.18129129  1.18129131  1.18129131  1.18129133
-  1.18813642  1.18813642  1.18813646  1.18813646  1.42629258  1.42629258
-  1.42740676  1.42740688  1.42740688  1.42740694  1.59270397  1.59270399
-  1.6685178   1.66851781  1.66851781  1.66851782  1.76434653  1.76434653
-  1.76589017  1.76589017  1.76589017  1.76589018  1.81719766  1.81719786
-  1.92169828  1.92778215  2.08857054  2.08857056  2.21037989  2.21037995
-  2.21037996  2.21038002  2.22068242  2.22068242  2.22130847  2.22130854
-  2.22130854  2.22130855  2.46329163  2.46329163  2.46428246  2.49537127
-  2.49537127  2.49537131  2.49537131  2.57819287  2.57819321  2.57819321
-  2.57819338  2.57898072  2.57898089  2.6641098   2.6641098   2.66410984
-  2.66410984  2.73300568  2.73326221  2.73326221  2.73831742  2.7383175
-  2.7383175   2.73831758  2.94036735  2.94036735  3.00528688  3.00528689
-  3.00528715  3.00528737  3.00553622  3.00553622  3.05764876  3.05764879
-  3.05764879  3.05764881  3.06699512  3.06699526  3.06699527  3.0669954
-  3.18564092  3.18564099  3.18581051  3.18581051  3.18581054  3.18581054
-  3.25357664  3.25357682  3.26068367  3.26068378  3.26068379  3.26068391
-  3.29796624  3.29796624  3.29834115  3.29834129  3.29834136  3.29834136
-  3.3516579   3.35165792  3.61369086  3.61369087  3.61369087  3.61369089
-  3.67917376  3.67917444  3.72002354  3.72002354  3.72002359  3.7200236
-  3.74819537  3.74819626  3.74819636  3.74819636  3.74821264  3.74821373
-  3.85815868  3.85849604  4.01782945  4.01782974  4.04327481  4.04398786
-  4.04398787  4.89815863  4.8981587   4.89815872  4.89815878  4.95021635
-  4.95021636  4.95028434  5.0159964   5.01599642  5.01599647  5.01599649
-  5.0429372   5.04293723  5.04293751  5.0429377   5.04300776  5.04300777
-  7.04045506  9.23651232  9.2365126   9.42563577  9.46475576  9.46475874
-  9.46475874  9.46475909  9.46751097  9.46751337  9.50061457  9.50069874
-  9.50070765  9.50070765  9.50070776  9.50079176]
-Ewald components = 0.000314592933934792, -0.215113710861397, 0.081099078945861
-    CPU time for vj and vk      9.73 sec, wall time      2.15 sec
-E1 = 31.746551408409424  E_coul = -18.15905386817497
-cycle= 1 E= -88.5117376812007  delta_E= 0.542  |g|= 0.748  |ddm|= 7.81
-    CPU time for cycle= 1     11.03 sec, wall time      2.17 sec
-    CPU time for scf_cycle   3450.02 sec, wall time    107.47 sec
-    CPU time for SCF   3452.96 sec, wall time    108.01 sec
-SCF not converged.
-SCF energy = -88.5117376812007
-kmesh: [1, 2, 2] mesh: [27, 54, 54]
+    CPU time for vj and vk      1.51 sec, wall time      1.51 sec
 arg.atm = [[  4  20   1  23   0   0]
  [  4  24   1  27   0   0]
  [  4  28   1  31   0   0]
@@ -1467,9 +1235,7 @@ arg.env = [ 0.          0.          0.          0.          0.          0.
   0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
   0.04545847  0.04722778]
 ecpbas  = []
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-0/main.py ****
-# backend to test #
-
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark/test/diamond-test-build-1/main.py ****
 import pyscf.isdf.BackEnd._config as config
 
 config.disable_fftw()
@@ -1496,8 +1262,13 @@ from pyscf.isdf.isdf_local import ISDF_Local
 
 #############################
 
+from pyscf.lib import logger
+from pyscf.lib.logger import perf_counter
+from pyscf.lib.logger import process_clock
 ke_cutoff = 70
 basis = "gth-dzvp-molopt-sr"
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
 boxlen = 3.57371000
 prim_a = np.array([[boxlen, 0.0, 0.0], [0.0, boxlen, 0.0], [0.0, 0.0, boxlen]])
@@ -1534,15 +1305,19 @@ prim_cell = isdf_tools_cell.build_supercell(
 )
 
 prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
-
 prim_mesh = prim_cell.mesh
 
 for kmesh in kmeshes:
-
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    print("kmesh:", kmesh, "mesh:", mesh)
-
+    log.info("kmesh: %s, mesh: %s", kmesh, mesh)
     kpts = prim_cell.make_kpts(kmesh)
+
+    direct = False
+    c = 30
+    rela_qr = 1e-3
+    aoR_cutoff = 1e-8
+    build_V_K_bunchsize = 512
+    with_robust_fitting = False
 
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
@@ -1555,44 +1330,54 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
     print("cell:", cell.max_memory)
     print("group:", group)
 
-    build_V_K_bunchsize = 512
+    t0 = (process_clock(), perf_counter())
     isdf = ISDF_Local(
-        cell, with_robust_fitting=True, 
-        limited_memory=True, 
-        build_V_K_bunchsize=build_V_K_bunchsize
+        cell, limited_memory=True, direct=direct,
+        with_robust_fitting=with_robust_fitting,
+        build_V_K_bunchsize=build_V_K_bunchsize,
     )
-    isdf.build(c=30, m=5, rela_cutoff=1e-4, group=group)
+    isdf.build(c=c, m=5, rela_cutoff=rela_qr, group=group)
+    t1 = log.timer("build", *t0)
 
     from pyscf.pbc import scf
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.max_cycle = 1
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    t0 = (process_clock(), perf_counter())
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    t1 = log.timer("get_j", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+    t2 = log.timer("get_k", *t0)
+
+    log.info("chk file size: %6.2e GB\n", 0.0)
     #INFO: ******************** input file end ********************
 
 
 System: uname_result(system='Linux', node='hpc-35-02.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 1
 Python 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:38:13) [GCC 12.3.0]
 numpy 1.26.4  scipy 1.14.1  h5py 3.12.1
-Date: Mon Jan 27 14:59:43 2025
+Date: Mon Jan 27 22:38:50 2025
 PySCF version 2.7.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [ENV] PYSCF_MAX_MEMORY 491520
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] ARGPARSE = False
 [CONFIG] DEBUG = False
 [CONFIG] MAX_MEMORY = 491520
-[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-0/46997106/
+[CONFIG] TMPDIR = /central/scratch/yangjunjie//diamond-test-build-1/47001396/
 [CONFIG] UNIT = angstrom
 [CONFIG] VERBOSE = 3
 [CONFIG] conf_file = None
@@ -1759,7 +1544,7 @@ bas 92, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 93, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 94, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
 bas 95, expnt(s) = [5.60533075 2.11301639 0.76991145 0.34815709 0.12821225]
-CPU time:      4223.66
+CPU time:      1122.54
 lattice vectors  a1 [6.753333149, 0.000000000, 0.000000000]
                  a2 [0.000000000, 13.506666297, 0.000000000]
                  a3 [0.000000000, 0.000000000, 13.506666297]
@@ -1779,7 +1564,7 @@ ISDF: mol.natm      = 32
 ISDF: mol.nao       = 416
 ************* get_partition *************
 ************* end get_partition *************
-       get_partition wall time:     0.286054 CPU time:     1.040226
+       get_partition wall time:     0.286791 CPU time:     1.017529
 len of partition[   0] =   2677
 len of partition[   1] =   2246
 len of partition[   2] =   2677
@@ -1814,314 +1599,120 @@ len of partition[  30] =   2664
 len of partition[  31] =   2260
 ************* get_aoR *************
 ************* end get_aoR *************
-             get_aoR wall time:     9.078636 CPU time:     9.061624
-In _build_buffer: ISDF Local size of buffer = 326.958 MB
+             get_aoR wall time:     9.105607 CPU time:     9.093502
+In _build_buffer: ISDF Local size of buffer = 307.547 MB
  ---------- In pyscf.isdf.isdf_local.select_IP_local_atm ----------
 select_IP_local_atm: atm_begin =    0, atm_end =   32
-select_IP_local_atm: npt_found =  496
-select_IP_local_atm: npt_found =  479
-select_IP_local_atm: npt_found =  512
-select_IP_local_atm: npt_found =  488
-select_IP_local_atm: npt_found =  492
-select_IP_local_atm: npt_found =  472
-select_IP_local_atm: npt_found =  507
-select_IP_local_atm: npt_found =  471
-select_IP_local_atm: npt_found =  483
-select_IP_local_atm: npt_found =  468
-select_IP_local_atm: npt_found =  485
-select_IP_local_atm: npt_found =  486
-select_IP_local_atm: npt_found =  500
-select_IP_local_atm: npt_found =  472
-select_IP_local_atm: npt_found =  494
-select_IP_local_atm: npt_found =  476
-select_IP_local_atm: npt_found =  515
-select_IP_local_atm: npt_found =  467
-select_IP_local_atm: npt_found =  495
-select_IP_local_atm: npt_found =  469
-select_IP_local_atm: npt_found =  517
-select_IP_local_atm: npt_found =  481
-select_IP_local_atm: npt_found =  519
-select_IP_local_atm: npt_found =  480
-select_IP_local_atm: npt_found =  498
-select_IP_local_atm: npt_found =  464
-select_IP_local_atm: npt_found =  493
-select_IP_local_atm: npt_found =  474
-select_IP_local_atm: npt_found =  505
-select_IP_local_atm: npt_found =  462
-select_IP_local_atm: npt_found =  491
-select_IP_local_atm: npt_found =  463
-select_IP_local_step1 wall time:     3.285308 CPU time:   209.396297
- build_aoRg_possible wall time:     0.043566 CPU time:     2.808216
+select_IP_local_atm: npt_found =  322
+select_IP_local_atm: npt_found =  288
+select_IP_local_atm: npt_found =  331
+select_IP_local_atm: npt_found =  272
+select_IP_local_atm: npt_found =  325
+select_IP_local_atm: npt_found =  289
+select_IP_local_atm: npt_found =  319
+select_IP_local_atm: npt_found =  302
+select_IP_local_atm: npt_found =  312
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  330
+select_IP_local_atm: npt_found =  303
+select_IP_local_atm: npt_found =  316
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  317
+select_IP_local_atm: npt_found =  283
+select_IP_local_atm: npt_found =  338
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  317
+select_IP_local_atm: npt_found =  278
+select_IP_local_atm: npt_found =  316
+select_IP_local_atm: npt_found =  283
+select_IP_local_atm: npt_found =  320
+select_IP_local_atm: npt_found =  297
+select_IP_local_atm: npt_found =  304
+select_IP_local_atm: npt_found =  282
+select_IP_local_atm: npt_found =  307
+select_IP_local_atm: npt_found =  309
+select_IP_local_atm: npt_found =  329
+select_IP_local_atm: npt_found =  295
+select_IP_local_atm: npt_found =  318
+select_IP_local_atm: npt_found =  288
+select_IP_local_step1 wall time:     3.931270 CPU time:   250.330198
+ build_aoRg_possible wall time:     0.055579 CPU time:     3.511346
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  975
-select_IP_local_group: npt_found =  811
+select_IP_local_group: max_rank  =  610
+select_IP_local_group: npt_found =  527
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  = 1000
-select_IP_local_group: npt_found =  823
+select_IP_local_group: max_rank  =  603
+select_IP_local_group: npt_found =  495
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  964
-select_IP_local_group: npt_found =  785
+select_IP_local_group: max_rank  =  614
+select_IP_local_group: npt_found =  507
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  978
-select_IP_local_group: npt_found =  813
+select_IP_local_group: max_rank  =  621
+select_IP_local_group: npt_found =  517
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  951
-select_IP_local_group: npt_found =  803
+select_IP_local_group: max_rank  =  616
+select_IP_local_group: npt_found =  516
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  971
-select_IP_local_group: npt_found =  794
+select_IP_local_group: max_rank  =  633
+select_IP_local_group: npt_found =  528
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  972
-select_IP_local_group: npt_found =  794
+select_IP_local_group: max_rank  =  625
+select_IP_local_group: npt_found =  514
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  970
-select_IP_local_group: npt_found =  812
+select_IP_local_group: max_rank  =  600
+select_IP_local_group: npt_found =  517
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  982
-select_IP_local_group: npt_found =  805
+select_IP_local_group: max_rank  =  645
+select_IP_local_group: npt_found =  522
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  964
-select_IP_local_group: npt_found =  798
+select_IP_local_group: max_rank  =  595
+select_IP_local_group: npt_found =  501
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  998
-select_IP_local_group: npt_found =  793
+select_IP_local_group: max_rank  =  599
+select_IP_local_group: npt_found =  496
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  999
-select_IP_local_group: npt_found =  808
+select_IP_local_group: max_rank  =  617
+select_IP_local_group: npt_found =  519
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  962
-select_IP_local_group: npt_found =  810
+select_IP_local_group: max_rank  =  586
+select_IP_local_group: npt_found =  504
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  967
-select_IP_local_group: npt_found =  811
+select_IP_local_group: max_rank  =  616
+select_IP_local_group: npt_found =  501
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  967
-select_IP_local_group: npt_found =  805
+select_IP_local_group: max_rank  =  624
+select_IP_local_group: npt_found =  506
 select_IP_local_group: nao_group =   26
 select_IP_local_group: naux_now  =   32
-select_IP_local_group: max_rank  =  954
-select_IP_local_group: npt_found =  790
-select_IP_local_step2 wall time:     1.302335 CPU time:    83.084600
-select_IP_local_step3 wall time:     0.120244 CPU time:     6.387769
+select_IP_local_group: max_rank  =  606
+select_IP_local_group: npt_found =  520
+select_IP_local_step2 wall time:     0.936757 CPU time:    59.816902
+select_IP_local_step3 wall time:     0.104334 CPU time:     6.173443
 Memory usage for aoR  :    249.983 MB
-Memory usage for aoRg :     40.901 MB
-            build_IP wall time:     4.751452 CPU time:   301.676881
-build_aux_basis_local wall time:     0.817310 CPU time:    51.227486
+Memory usage for aoRg :     26.095 MB
+            build_IP wall time:     5.027940 CPU time:   319.831890
+build_aux_basis_local wall time:     1.732053 CPU time:   108.003211
  ---------- In pyscf.isdf.isdf_local.build_V_W_local ----------
-Memory usage for V:   7721.709 MB
-Memory usage for W:   1260.765 MB
-     build_V_W_local wall time:    36.015150 CPU time:   231.863628
-
-
-******** <class 'pyscf.pbc.scf.hf.RHF'> ********
-method = RHF
-initial guess = minao
-damping factor = 0
-level_shift factor = 0
-DIIS = <class 'pyscf.scf.diis.CDIIS'>
-diis_start_cycle = 1
-diis_space = 8
-diis_damp = 0
-SCF conv_tol = 1e-07
-SCF conv_tol_grad = None
-SCF max_cycles = 1
-direct_scf = True
-direct_scf_tol = 1e-13
-chkfile to save SCF result = /central/scratch/yangjunjie/diamond-test-build-0/46997106/tmpxm4dfqv9
-max_memory 491520 MB (current use 11850 MB)
-******** PBC SCF flags ********
-kpt = [0. 0. 0.]
-Exchange divergence treatment (exxdiv) = ewald
-Ewald components = 0.00052338569450741, -0.185982990105016, 0.0768750832611235
-    madelung (= occupied orbital energy shift) = 0.21716904229876946
-    Total energy shift due to Ewald probe charge = -1/2 * Nelec*madelung = -13.8988187071
-DF object = <pyscf.isdf.isdf_local.ISDF_Local object at 0x7fbc0d890f80>
-Set gradient conv threshold to 0.000316228
+Memory usage for V:      0.000 MB
+Memory usage for W:    511.750 MB
+     build_V_W_local wall time:    20.779962 CPU time:   126.537839
 Initial guess from minao.
 Big error detected in the electron number of initial guess density matrix (Ne/cell = 127.438)!
   This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
   DM is normalized wrt the number of electrons 128
-arg.atm = [[  4  20   1  23   0   0]
- [  4  24   1  27   0   0]
- [  4  28   1  31   0   0]
- [  4  32   1  35   0   0]
- [  4  36   1  39   0   0]
- [  4  40   1  43   0   0]
- [  4  44   1  47   0   0]
- [  4  48   1  51   0   0]
- [  4  52   1  55   0   0]
- [  4  56   1  59   0   0]
- [  4  60   1  63   0   0]
- [  4  64   1  67   0   0]
- [  4  68   1  71   0   0]
- [  4  72   1  75   0   0]
- [  4  76   1  79   0   0]
- [  4  80   1  83   0   0]
- [  4  84   1  87   0   0]
- [  4  88   1  91   0   0]
- [  4  92   1  95   0   0]
- [  4  96   1  99   0   0]
- [  4 100   1 103   0   0]
- [  4 104   1 107   0   0]
- [  4 108   1 111   0   0]
- [  4 112   1 115   0   0]
- [  4 116   1 119   0   0]
- [  4 120   1 123   0   0]
- [  4 124   1 127   0   0]
- [  4 128   1 131   0   0]
- [  4 132   1 135   0   0]
- [  4 136   1 139   0   0]
- [  4 140   1 143   0   0]
- [  4 144   1 147   0   0]]
-arg.bas = [[  0   0   5   2   0 148 153   0]
- [  0   1   5   2   0 163 168   0]
- [  0   2   5   1   0 178 183   0]
- [  1   0   5   2   0 148 153   0]
- [  1   1   5   2   0 163 168   0]
- [  1   2   5   1   0 178 183   0]
- [  2   0   5   2   0 148 153   0]
- [  2   1   5   2   0 163 168   0]
- [  2   2   5   1   0 178 183   0]
- [  3   0   5   2   0 148 153   0]
- [  3   1   5   2   0 163 168   0]
- [  3   2   5   1   0 178 183   0]
- [  4   0   5   2   0 148 153   0]
- [  4   1   5   2   0 163 168   0]
- [  4   2   5   1   0 178 183   0]
- [  5   0   5   2   0 148 153   0]
- [  5   1   5   2   0 163 168   0]
- [  5   2   5   1   0 178 183   0]
- [  6   0   5   2   0 148 153   0]
- [  6   1   5   2   0 163 168   0]
- [  6   2   5   1   0 178 183   0]
- [  7   0   5   2   0 148 153   0]
- [  7   1   5   2   0 163 168   0]
- [  7   2   5   1   0 178 183   0]
- [  8   0   5   2   0 148 153   0]
- [  8   1   5   2   0 163 168   0]
- [  8   2   5   1   0 178 183   0]
- [  9   0   5   2   0 148 153   0]
- [  9   1   5   2   0 163 168   0]
- [  9   2   5   1   0 178 183   0]
- [ 10   0   5   2   0 148 153   0]
- [ 10   1   5   2   0 163 168   0]
- [ 10   2   5   1   0 178 183   0]
- [ 11   0   5   2   0 148 153   0]
- [ 11   1   5   2   0 163 168   0]
- [ 11   2   5   1   0 178 183   0]
- [ 12   0   5   2   0 148 153   0]
- [ 12   1   5   2   0 163 168   0]
- [ 12   2   5   1   0 178 183   0]
- [ 13   0   5   2   0 148 153   0]
- [ 13   1   5   2   0 163 168   0]
- [ 13   2   5   1   0 178 183   0]
- [ 14   0   5   2   0 148 153   0]
- [ 14   1   5   2   0 163 168   0]
- [ 14   2   5   1   0 178 183   0]
- [ 15   0   5   2   0 148 153   0]
- [ 15   1   5   2   0 163 168   0]
- [ 15   2   5   1   0 178 183   0]
- [ 16   0   5   2   0 148 153   0]
- [ 16   1   5   2   0 163 168   0]
- [ 16   2   5   1   0 178 183   0]
- [ 17   0   5   2   0 148 153   0]
- [ 17   1   5   2   0 163 168   0]
- [ 17   2   5   1   0 178 183   0]
- [ 18   0   5   2   0 148 153   0]
- [ 18   1   5   2   0 163 168   0]
- [ 18   2   5   1   0 178 183   0]
- [ 19   0   5   2   0 148 153   0]
- [ 19   1   5   2   0 163 168   0]
- [ 19   2   5   1   0 178 183   0]
- [ 20   0   5   2   0 148 153   0]
- [ 20   1   5   2   0 163 168   0]
- [ 20   2   5   1   0 178 183   0]
- [ 21   0   5   2   0 148 153   0]
- [ 21   1   5   2   0 163 168   0]
- [ 21   2   5   1   0 178 183   0]
- [ 22   0   5   2   0 148 153   0]
- [ 22   1   5   2   0 163 168   0]
- [ 22   2   5   1   0 178 183   0]
- [ 23   0   5   2   0 148 153   0]
- [ 23   1   5   2   0 163 168   0]
- [ 23   2   5   1   0 178 183   0]
- [ 24   0   5   2   0 148 153   0]
- [ 24   1   5   2   0 163 168   0]
- [ 24   2   5   1   0 178 183   0]
- [ 25   0   5   2   0 148 153   0]
- [ 25   1   5   2   0 163 168   0]
- [ 25   2   5   1   0 178 183   0]
- [ 26   0   5   2   0 148 153   0]
- [ 26   1   5   2   0 163 168   0]
- [ 26   2   5   1   0 178 183   0]
- [ 27   0   5   2   0 148 153   0]
- [ 27   1   5   2   0 163 168   0]
- [ 27   2   5   1   0 178 183   0]
- [ 28   0   5   2   0 148 153   0]
- [ 28   1   5   2   0 163 168   0]
- [ 28   2   5   1   0 178 183   0]
- [ 29   0   5   2   0 148 153   0]
- [ 29   1   5   2   0 163 168   0]
- [ 29   2   5   1   0 178 183   0]
- [ 30   0   5   2   0 148 153   0]
- [ 30   1   5   2   0 163 168   0]
- [ 30   2   5   1   0 178 183   0]
- [ 31   0   5   2   0 148 153   0]
- [ 31   1   5   2   0 163 168   0]
- [ 31   2   5   1   0 178 183   0]]
-arg.env = [ 0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  1.68833329  1.68833329  1.68833329  0.          3.37666657  3.37666657
-  0.          0.          5.06499986  5.06499986  1.68833329  0.
-  3.37666657  0.          3.37666657  0.          5.06499986  1.68833329
-  5.06499986  0.          0.          3.37666657  3.37666657  0.
-  1.68833329  5.06499986  5.06499986  0.          0.          0.
-  6.75333315  0.          1.68833329  1.68833329  8.44166644  0.
-  3.37666657  3.37666657  6.75333315  0.          5.06499986  5.06499986
-  8.44166644  0.          3.37666657  0.         10.12999972  0.
-  5.06499986  1.68833329 11.81833301  0.          0.          3.37666657
- 10.12999972  0.          1.68833329  5.06499986 11.81833301  0.
-  0.          6.75333315  0.          0.          1.68833329  8.44166644
-  1.68833329  0.          3.37666657 10.12999972  0.          0.
-  5.06499986 11.81833301  1.68833329  0.          3.37666657  6.75333315
-  3.37666657  0.          5.06499986  8.44166644  5.06499986  0.
-  0.         10.12999972  3.37666657  0.          1.68833329 11.81833301
-  5.06499986  0.          0.          6.75333315  6.75333315  0.
-  1.68833329  8.44166644  8.44166644  0.          3.37666657 10.12999972
-  6.75333315  0.          5.06499986 11.81833301  8.44166644  0.
-  3.37666657  6.75333315 10.12999972  0.          5.06499986  8.44166644
- 11.81833301  0.          0.         10.12999972 10.12999972  0.
-  1.68833329 11.81833301 11.81833301  0.          5.60533075  2.11301639
-  0.76991145  0.34815709  0.12821225  1.14328643  0.75521952 -0.74331592
- -0.77915081 -0.08078366  1.95761895  0.29093741  0.02780209  0.48527241
-  0.26332695  5.60533075  2.11301639  0.76991145  0.34815709  0.12821225
- -1.44059548 -1.3150188  -0.76719096 -0.28600475 -0.05699711 -0.98316391
- -1.13158177 -0.64703904  0.43083118  0.15573998  5.60533075  2.11301639
-  0.76991145  0.34815709  0.12821225  1.01465273  0.43485666  0.70818476
-  0.04545847  0.04722778]
-ecpbas  = []
-    CPU time for pbc integral int3c1e_sph     15.06 sec, wall time      9.04 sec
-    CPU time for pbc integral int3c1e_r2_origk_sph     10.92 sec, wall time     10.94 sec
-ke_cutoff for multigrid tasks:
-[2.5925925925925926, 7.777777777777778, 23.333333333333332, 70]
-meshes for multigrid tasks:
-[array([ 7, 11, 11]), array([11, 19, 19]), array([17, 31, 31]), array([27, 53, 53])]
-              get_pp wall time:    31.570148 CPU time:    40.833473
 Building PBC AO integrals incore
