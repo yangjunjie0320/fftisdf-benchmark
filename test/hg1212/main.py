@@ -32,11 +32,11 @@ cell.pseudo = {
                'Ba': 'gth-pbe',
                'Ca': 'gth-pbe'}
 
-kmesh = [4, 4, 4]
+kmesh = [1, 1, 1]
 cell.spin = 0
 cell.verbose = 5
 cell.precision = 1e-8
-cell.ke_cutoff = 200
+cell.ke_cutoff = 80
 cell.max_memory = PYSCF_MAX_MEMORY / 2
 cell.build()
 

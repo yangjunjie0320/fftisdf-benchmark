@@ -62,6 +62,7 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
 
     # solve the linear equation
+    # a_k is a numpy array, b_k is a hdf5 dataset
     w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
     assert w_k.shape == (nkpt, nip, nip)
 
@@ -506,6 +507,10 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             f = numpy.exp(-1j * t)
             assert f.shape == (ngrid, )
 
+            assert a.shape == (nip, nip)
+            assert b.shape == (nip, ngrid)
+
+            # old method
             from scipy.linalg import lstsq
             lstsq_driver = self.lstsq_driver
             tol = self.tol
@@ -524,7 +529,26 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
-            w_k.append(coul @ z.conj().T)
+            # w_k.append(coul @ z.conj().T)
+            w_ref = coul @ z.conj().T
+
+            ainv = scipy.linalg.pinv(a)
+            err = abs(z - ainv @ b.T).max()
+            print("err = % 6.4e" % err)
+            
+            zeta = pbctools.fft(ainv @ b.T * f, mesh)
+            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
+            zeta *= pcell.vol / ngrid
+
+            from pyscf.pbc.tools.pbc import ifft
+            coul = ifft(zeta, mesh) * f.conj()
+            assert coul.shape == (nip, ngrid)
+            w_sol = coul @ b.conj() @ ainv
+
+            err = abs(w_sol - w_ref).max()
+            print("err = % 6.4e" % err)
+
+            w_k.append(w_sol)
 
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
             t0 = log.timer("w[%3d]" % q, *t0)
