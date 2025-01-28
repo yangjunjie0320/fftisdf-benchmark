@@ -35,10 +35,8 @@ cell.pseudo = {
 kmesh = [1, 1, 1]
 cell.spin = 0
 cell.verbose = 5
-cell.max_memory = 160000
 cell.precision = 1e-8
 cell.ke_cutoff = 200
-# cell.mesh = [201, 201, 201]
 cell.build()
 
 kpts = cell.get_kpts(kmesh)
