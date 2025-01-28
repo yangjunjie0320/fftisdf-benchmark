@@ -24,18 +24,18 @@ function submit() {
     cd -
 }
 
-ke_cutoff=200
-for cell in diamond-conv nio-conv cco-2x2-frac; do
+ke_cutoff=40
+for cell in diamond-prim nio-prim diamond-conv nio-conv; do
     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
         for kmesh in 1-1-2 1-2-2 2-2-2 2-2-4 2-4-4 4-4-4; do
             method=gdf
-            # submit $cell $kmesh $basis $ke_cutoff $method
+            submit $cell $kmesh $basis $ke_cutoff $method
 
-            for c0 in 10 20; do
-                method=fftisdf-yang-$c0-21-21-21
-                # submit $cell $kmesh $basis $ke_cutoff $method
+            method=fftdf
+            submit $cell $kmesh $basis $ke_cutoff $method
 
-                method=fftisdf-ning-supercell-$c0
+            for c0 in 10 20 30 40; do
+                method=fftisdf-yang-$c0
                 submit $cell $kmesh $basis $ke_cutoff $method
             done
 

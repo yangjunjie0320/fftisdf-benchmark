@@ -24,8 +24,7 @@ if __name__ == "__main__":
         cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-yang")
         cmd += "python main.py "
         c0 = float(method[2])
-        m0 = "-".join(method[3:])
-        cmd += "--c0=%.2f --m0=%s " % (c0, m0)
+        cmd += "--c0=%.2f " % c0
     
     elif "fftisdf-ning" in method:
         # assert 1 == 2, method
