@@ -1663,3 +1663,4 @@ Big error detected in the electron number of initial guess density matrix (Ne/ce
   This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
   DM is normalized wrt the number of electrons 128
 Building PBC AO integrals incore
+      isdf_local_eri wall time:  2766.045738 CPU time: 80428.713848

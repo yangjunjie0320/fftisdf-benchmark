@@ -32,7 +32,7 @@ cell.pseudo = {
                'Ba': 'gth-pbe',
                'Ca': 'gth-pbe'}
 
-kmesh = [1, 1, 1]
+kmesh = [4, 4, 4]
 cell.spin = 0
 cell.verbose = 5
 cell.precision = 1e-8
