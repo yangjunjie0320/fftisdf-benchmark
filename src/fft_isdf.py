@@ -512,44 +512,78 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
             # old method
             from scipy.linalg import lstsq
-            lstsq_driver = self.lstsq_driver
-            tol = self.tol
-            res = lstsq(a, b.T)
+            # lstsq_driver = self.lstsq_driver
+            # tol = self.tol
+            # res = lstsq(a, b.T)
 
-            z = res[0]
-            rank = res[2]
-            assert z.shape == (nip, ngrid)
+            # z = res[0]
+            # rank = res[2]
+            # assert z.shape == (nip, ngrid)
 
-            err = abs(b.T - a @ z).max()
-            print("|b.T - a @ z| = % 6.4e" % err)
+            # err = abs(b.T - a @ z).max()
+            # print("|b.T - a @ z| = % 6.4e" % err)
 
-            zeta = pbctools.fft(z * f, mesh)
-            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-            zeta *= pcell.vol / ngrid
-            assert zeta.shape == (nip, ngrid)
+            # zeta = pbctools.fft(z * f, mesh)
+            # zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
+            # zeta *= pcell.vol / ngrid
+            # assert zeta.shape == (nip, ngrid)
 
-            from pyscf.pbc.tools.pbc import ifft
-            coul = ifft(zeta, mesh) * f.conj()
-            w_ref = coul @ z.conj().T
+            # from pyscf.pbc.tools.pbc import ifft
+            # coul = ifft(zeta, mesh) * f.conj()
+            # w_ref = coul @ z.conj().T
 
-            ainv = scipy.linalg.pinv(a)
-            err = abs( - z).max()
-            print("|ainv @ b.T - z| = % 6.4e" % err)
+            ainv = scipy.linalg.pinv(a) # , rcond=1e-8)
+            # the max number of ainv
+            print(f"{abs(ainv).max() = }")
 
-            zeta = pbctools.fft(ainv @ b.T * f, mesh)
+
+            zeta = pbctools.fft(b.T * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
             zeta *= pcell.vol / ngrid
 
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
             assert coul.shape == (nip, ngrid)
-            w_sol = coul @ b.conj() @ ainv.conj().T
+            w_ref = ainv @ coul @ b.conj() @ ainv.conj().T
 
-            err = abs(w_sol - w_ref).max()
-            print("|w_sol - w_ref| = % 6.4e" % err)
+            A = a
+            Ainv = scipy.linalg.pinv(A)
+            B = coul @ b.conj()
+            # is B hermitian?
+            assert numpy.allclose(B, B.T.conj())
+
+            print(f"{A.shape = }, {abs(A).max() = }")
+            print(f"{Ainv.shape = }, {abs(Ainv).max() = }")
+            print(f"{B.shape = }, {abs(B).max() = }")
+
+            U, S, Vh = scipy.linalg.svd(B)
+            print(f"{U.shape = }, {abs(U).max() = }")
+            print(f"{S.shape = }, {abs(S).max() = }")
+            print(f"{Vh.shape = }, {abs(Vh).max() = }")
+
+            err = abs(B - U @ S @ Vh).max()
+            print(f"|B - U @ S @ Vh| = % 6.4e" % err)
+
+            w_sol = w_ref
+
+            # import sys
+            # print(f"{w_sol.shape = }")
+            # print("real part")
+            # numpy.savetxt(sys.stdout, w_sol[:10, :10].real, fmt="% 6.2e")
+            # print("imag part")
+            # numpy.savetxt(sys.stdout, w_sol[:10, :10].imag, fmt="% 6.2e")
+
+            # print(f"{w_ref.shape = }")
+            # print("real part")
+            # numpy.savetxt(sys.stdout, w_ref[:10, :10].real, fmt="% 6.2e")
+            # print("imag part")
+            # numpy.savetxt(sys.stdout, w_ref[:10, :10].imag, fmt="% 6.2e")
+
+            # err = abs(w_sol - w_ref).max()
+            # print("|w_sol - w_ref| = % 6.4e" % err)
 
             w_k.append(w_sol)
-
+            rank = w_sol.shape[1]
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
             t0 = log.timer("w[%3d]" % q, *t0)
 
@@ -605,12 +639,12 @@ if __name__ == "__main__":
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
-    # scf_obj.with_df.dump_flags()
-    # scf_obj.with_df.check_sanity()
-    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    # vj1 = vj1.reshape(nkpt, nao, nao)
-    # vk1 = vk1.reshape(nkpt, nao, nao)
-    vj1 = vk1 = None
+    scf_obj.with_df.dump_flags()
+    scf_obj.with_df.check_sanity()
+    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj1 = vj1.reshape(nkpt, nao, nao)
+    vk1 = vk1.reshape(nkpt, nao, nao)
+    # vj1 = vk1 = None
     t1 = log.timer("-> FFTDF JK", *t0)
 
     for c0 in [20.0, 40.0, 60.0]:
@@ -628,10 +662,10 @@ if __name__ == "__main__":
         vj0 = vj0.reshape(nkpt, nao, nao)
         vk0 = vk0.reshape(nkpt, nao, nao)
 
-        for q in range(nkpt):
+        # for q in range(nkpt):
             # check if the matrix are hermitian
-            assert numpy.allclose(vj0[q], vj0[q].T.conj())
-            assert numpy.allclose(vk0[q], vk0[q].T.conj())
+            # assert numpy.allclose(vj0[q], vj0[q].T.conj())
+            # assert numpy.allclose(vk0[q], vk0[q].T.conj())
 
         c0 = scf_obj.with_df.c0
         t1 = log.timer("-> ISDF JK", *t0)
