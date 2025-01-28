@@ -549,7 +549,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         return vj, vk
 
-ISDF = InterpolativeSeparableDensityFitting
+FFTISDF = ISDF = WithMPI
 
 if __name__ == "__main__":
     DATA_PATH = os.getenv("DATA_PATH", None)

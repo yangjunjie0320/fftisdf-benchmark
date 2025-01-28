@@ -85,7 +85,7 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
@@ -104,6 +104,9 @@ for kmesh in kmeshes:
 
     mf = scf.RHF(cell)
     mf.with_df = isdf
-    mf.max_cycle = 1
-    mf.kernel()
+    dm0 = mf.get_init_guess(key="minao")
+
+    vj1 = mf.get_jk(cell, dm0, with_j=True, with_k=False)[0]
+    vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
+
     

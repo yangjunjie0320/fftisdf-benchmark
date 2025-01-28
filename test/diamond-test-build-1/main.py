@@ -65,10 +65,12 @@ prim_group = [[0, 1], [2, 3], [4, 5], [6, 7]]
 
 prim_mesh = prim_cell.mesh
 
-for kmesh in kmeshes:
+stdout = open("out.log", "w")
+log = logger.Logger(stdout, 5)
 
+for kmesh in kmeshes:
     mesh = [int(k * x) for k, x in zip(kmesh, prim_mesh)]
-    print("kmesh:", kmesh, "mesh:", mesh)
+    log.info("kmesh:", kmesh, "mesh:", mesh)
     kpts = prim_cell.make_kpts(kmesh)
 
     direct = False
@@ -83,9 +85,6 @@ for kmesh in kmeshes:
     from pyscf.lib.logger import process_clock
     t0 = (process_clock(), perf_counter())
 
-    stdout = open("out.log", "w")
-    log = logger.Logger(stdout, 5)
-
     cell, group = isdf_tools_cell.build_supercell_with_partition(
         atm,
         prim_a,
@@ -97,7 +96,7 @@ for kmesh in kmeshes:
         pseudo="gth-pade",
         verbose=VERBOSE,
     )
-    
+
     from pyscf import __config__
     MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
     cell.max_memory = MAX_MEMORY
@@ -127,5 +126,5 @@ for kmesh in kmeshes:
     vk1 = mf.get_jk(cell, dm0, with_j=False, with_k=True)[1]
     t2 = log.timer("get_k", *t0)
 
-    log.info("chk file size: %6.2e GB", 0.0)
-
+    log.info("chk file size: %6.2e GB\n", 0.0)
+    

@@ -18,6 +18,5 @@ dependencies:
   - torchvision
   - torchaudio
   - line_profiler
-  - pip
   - pip:
     - pyscf

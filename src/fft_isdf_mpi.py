@@ -135,7 +135,7 @@ class WithMPI(InterpolativeSeparableDensityFitting):
             res = None
         return 
 
-ISDF = WithMPI
+FFTISDF = ISDF = WithMPI
 
 if __name__ == "__main__":
     from src.utils import cell_from_poscar
