@@ -7,7 +7,7 @@ rank = comm.Get_rank()
 size = comm.Get_size()
 
 def main():
-    print(f"Rank={rank} out of {size} total ranks.")
+    print(f"Rank={rank} out of {size} total ranks.", flush=True)
     comm.Barrier()
     
     # Define the size of the (square) matrix
@@ -31,7 +31,7 @@ def main():
     comm.Barrier()
     
     if rank == 0:
-        print("Rank 0 has finished writing the dataset.")
+        print("Rank 0 has finished writing the dataset.", flush=True)
 
     norm_local = 0.0
     with h5py.File('matrix_data.h5', 'r', driver='mpio', comm=comm) as f:
@@ -42,12 +42,12 @@ def main():
                 continue
 
             norm_local += np.linalg.norm(dset[:, i])
-            print(f"reading row {i} of {matrix_size} in rank {rank} / {size}, norm_local = {norm_local}")
+            print(f"reading row {i} of {matrix_size} in rank {rank} / {size}, norm_local = {norm_local}", flush=True)
                   
     norm = comm.allreduce(norm_local, op=MPI.SUM)
     comm.Barrier()
     
-    print(f"Rank {rank} has norm {norm}")
+    print(f"Rank {rank} has norm {norm}", flush=True)
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=64
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
@@ -37,3 +37,4 @@ echo "NPROCS = $SLURM_NPROCS"
 export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 srun -n $SLURM_NPROCS python main.py
+
