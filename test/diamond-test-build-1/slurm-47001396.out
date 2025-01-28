@@ -6358,3 +6358,6 @@ Memory usage for W:  34334.282 MB
 Initial guess from minao.
 max_memory = 424772 MB (66747 in use)
               J_half wall time:    19.566927 CPU time:  1241.033391
+    CPU time for get_jk_dm_local   3114.78 sec, wall time     49.04 sec
+    CPU time for vj and vk   3114.78 sec, wall time     49.04 sec
+max_memory = 424771 MB (66748 in use)

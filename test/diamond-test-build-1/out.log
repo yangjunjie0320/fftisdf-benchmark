@@ -30,3 +30,4 @@ chk file size: 0.00e+00 GB
 
 kmesh: [2, 4, 4], mesh: [54, 108, 108]
     CPU time for build   9025.15 sec, wall time   1526.84 sec
+    CPU time for get_j   3114.78 sec, wall time     49.04 sec
