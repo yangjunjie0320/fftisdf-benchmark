@@ -16,7 +16,7 @@ from pyscf.pbc.df.df_jk import _format_dms, _format_kpts_band, _format_jks
 
 import line_profiler
 
-PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 160000))
+PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 2000))
 
 def s2k(m, p):
     """Convert a matrix from the stripe form (in super-cell)
@@ -283,6 +283,36 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     vk_kpts = numpy.asarray(vk_kpts).reshape(nset, nkpt, nao, nao)
     return _format_jks(vk_kpts, dms, input_band, kpts)
 
+def lstsq(a, b, tol=1e-10):
+    """
+    Solve the least squares problem of the form:
+        x = ainv @ b @ ainv.conj().T
+    using SVD. In which a is not full rank, and
+    ainv is the pseudo-inverse of a.
+
+    Args:
+        a: The matrix A.
+        b: The matrix B.
+        tol: The tolerance for the singular values.
+
+    Returns:
+        x: The solution to the least squares problem.
+        rank: The rank of the matrix a.
+    """
+
+    # make sure a is Hermitian
+    assert numpy.allclose(a, a.conj().T)
+
+    u, s, vh = scipy.linalg.svd(a, full_matrices=False)
+    uh = u.conj().T
+    v = vh.conj().T
+
+    r = s[None, :] * s[:, None]
+    m = abs(r) > tol ** 2
+    rank = m.sum() / m.shape[0]
+    t = (uh @ b @ u) * m / r
+    return v @ t @ vh, int(rank)
+
 class InterpolativeSeparableDensityFitting(FFTDF):
     kmesh = None
     c0 = 40.0
@@ -341,7 +371,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         c0 = self.c0
         nao = self.cell.nao_nr()
         m0 = (nao * c0) ** (1.0 / 3.0)
-        m0 = [int(m0 - 1)] * 3
+        m0 = [int(m0 + 1)] * 3
         k0 = mesh_to_cutoff(self.cell.a, m0)
         k0 = max(k0)
         log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
@@ -426,7 +456,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         from pyscf.lib.scipy_helper import pivoted_cholesky
         tol = self.tol
-        chol, perm, rank = pivoted_cholesky(x4, tol=tol)
+        chol, perm, rank = pivoted_cholesky(x4, tol=tol ** 2)
         if rank == ng:
             log.warn("The parent grid might be too coarse.")
 
@@ -510,33 +540,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             assert a.shape == (nip, nip)
             assert b.shape == (ngrid, nip)
 
-            # old method
-            from scipy.linalg import lstsq
-            # lstsq_driver = self.lstsq_driver
-            # tol = self.tol
-            # res = lstsq(a, b.T)
-
-            # z = res[0]
-            # rank = res[2]
-            # assert z.shape == (nip, ngrid)
-
-            # err = abs(b.T - a @ z).max()
-            # print("|b.T - a @ z| = % 6.4e" % err)
-
-            # zeta = pbctools.fft(z * f, mesh)
-            # zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-            # zeta *= pcell.vol / ngrid
-            # assert zeta.shape == (nip, ngrid)
-
-            # from pyscf.pbc.tools.pbc import ifft
-            # coul = ifft(zeta, mesh) * f.conj()
-            # w_ref = coul @ z.conj().T
-
-            ainv = scipy.linalg.pinv(a) # , rcond=1e-8)
-            # the max number of ainv
-            print(f"{abs(ainv).max() = }")
-
-
             zeta = pbctools.fft(b.T * f, mesh)
             zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
             zeta *= pcell.vol / ngrid
@@ -544,50 +547,12 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
             assert coul.shape == (nip, ngrid)
-            w_ref = ainv @ coul @ b.conj() @ ainv.conj().T
 
-            A = a
-            Ainv = scipy.linalg.pinv(A)
-            B = coul @ b.conj()
-            # is B hermitian?
-            assert numpy.allclose(B, B.T.conj())
-
-            print(f"{A.shape = }, {abs(A).max() = }")
-            print(f"{Ainv.shape = }, {abs(Ainv).max() = }")
-            print(f"{B.shape = }, {abs(B).max() = }")
-
-            U, S, Vh = scipy.linalg.svd(B)
-            print(f"{U.shape = }, {abs(U).max() = }")
-            print(f"{S.shape = }, {abs(S).max() = }")
-            print(f"{Vh.shape = }, {abs(Vh).max() = }")
-
-            err = abs(B - U @ S @ Vh).max()
-            print(f"|B - U @ S @ Vh| = % 6.4e" % err)
-
-            w_sol = w_ref
-
-            # import sys
-            # print(f"{w_sol.shape = }")
-            # print("real part")
-            # numpy.savetxt(sys.stdout, w_sol[:10, :10].real, fmt="% 6.2e")
-            # print("imag part")
-            # numpy.savetxt(sys.stdout, w_sol[:10, :10].imag, fmt="% 6.2e")
-
-            # print(f"{w_ref.shape = }")
-            # print("real part")
-            # numpy.savetxt(sys.stdout, w_ref[:10, :10].real, fmt="% 6.2e")
-            # print("imag part")
-            # numpy.savetxt(sys.stdout, w_ref[:10, :10].imag, fmt="% 6.2e")
-
-            # err = abs(w_sol - w_ref).max()
-            # print("|w_sol - w_ref| = % 6.4e" % err)
-
-            w_k.append(w_sol)
-            rank = w_sol.shape[1]
+            w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
+            w_k.append(w)
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
             t0 = log.timer("w[%3d]" % q, *t0)
 
-        assert 1 == 2
         w_k = numpy.asarray(w_k)
         assert w_k.shape == (nkpt, nip, nip)
         return w_k
@@ -641,17 +606,19 @@ if __name__ == "__main__":
     scf_obj.with_df.verbose = 5
     scf_obj.with_df.dump_flags()
     scf_obj.with_df.check_sanity()
+
+    vj1 = numpy.zeros((nkpt, nao, nao))
+    vk1 = numpy.zeros((nkpt, nao, nao))
     vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
-    # vj1 = vk1 = None
     t1 = log.timer("-> FFTDF JK", *t0)
 
-    for c0 in [20.0, 40.0, 60.0]:
+    for c0 in [5.0, 10.0, 15.0, 20.0]:
         scf_obj.with_df = ISDF(cell, kpts=kpts)
         scf_obj.with_df.c0 = c0
         scf_obj.with_df.verbose = 5
-        scf_obj.with_df.tol = 1e-10
+        scf_obj.with_df.tol = 1e-12
         scf_obj.with_df.build()
 
         w, x = scf_obj.with_df._w, scf_obj.with_df._x
