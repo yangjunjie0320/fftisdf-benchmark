@@ -200,3 +200,15 @@ w[ 43], rank =  374 /  560
     CPU time for w[ 43]    111.62 sec, wall time      1.76 sec
 w[ 44], rank =  374 /  560
     CPU time for w[ 44]    119.61 sec, wall time      1.88 sec
+w[ 45], rank =  374 /  560
+    CPU time for w[ 45]    388.72 sec, wall time      6.17 sec
+w[ 46], rank =  374 /  560
+    CPU time for w[ 46]    346.59 sec, wall time      5.54 sec
+w[ 47], rank =  374 /  560
+    CPU time for w[ 47]    681.00 sec, wall time     10.99 sec
+w[ 48], rank =  374 /  560
+    CPU time for w[ 48]    124.91 sec, wall time      1.97 sec
+w[ 49], rank =  374 /  560
+    CPU time for w[ 49]    122.83 sec, wall time      1.94 sec
+w[ 50], rank =  374 /  560
+    CPU time for w[ 50]    119.46 sec, wall time      1.89 sec
