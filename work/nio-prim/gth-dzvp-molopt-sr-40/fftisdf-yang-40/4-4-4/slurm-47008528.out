@@ -148,3 +148,7 @@ w[ 17], rank =  928 / 1560
     CPU time for w[ 17]   3882.08 sec, wall time     62.37 sec
 w[ 18], rank =  928 / 1560
     CPU time for w[ 18]    606.95 sec, wall time      9.64 sec
+w[ 19], rank =  928 / 1560
+    CPU time for w[ 19]    366.34 sec, wall time      5.80 sec
+w[ 20], rank =  928 / 1560
+    CPU time for w[ 20]   1197.94 sec, wall time     19.20 sec
