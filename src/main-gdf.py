@@ -15,11 +15,6 @@ def main(args):
     cell = cell_from_poscar(path)
     cell.basis = args.basis
     cell.pseudo = args.pseudo
-    cell.verbose = 0
-    cell.unit = 'aa'
-    # cell.exp_to_discard = 0.1
-    cell.max_memory = PYSCF_MAX_MEMORY
-    cell.ke_cutoff = args.ke_cutoff
     cell.build(dump_input=False)
 
     kmesh = [int(x) for x in args.kmesh.split("-")]
@@ -39,7 +34,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
-    parser.add_argument("--ke_cutoff", type=float, default=200)
+    # parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--pseudo", type=str, default="gth-pade")
 

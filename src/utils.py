@@ -43,8 +43,10 @@ def cell_from_poscar(poscar_file: str):
     c = gto.Cell()
     c.atom = ase_atoms_to_pyscf(atoms)
     c.a = numpy.array(atoms.cell)
-    # c.exp_to_discard = 1e-10
+    c.precision = 1e-10
+    c.verbose = 0
     c.unit = 'A'
+    c.exp_to_discard = 0.1
     return c
 
 def get_jk_time(cell, kmesh=None, df_obj=None, tmp=None):

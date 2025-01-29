@@ -6,7 +6,7 @@ if __name__ == "__main__":
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--cell", type=str, default="nio-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
-    parser.add_argument("--ke_cutoff", type=float, default=200)
+    # parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--method", type=str, default=None)
     args = parser.parse_args()
 
@@ -21,33 +21,34 @@ if __name__ == "__main__":
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")), "%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")
         method = method.split("-")
 
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "fftisdf-yang")
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "-".join(method[:2]))
         cmd += "python main.py "
-        c0 = float(method[2])
-        cmd += "--c0=%.2f " % c0
-    
+        cmd += "--c0=%.2f --ke_cutoff=%.2f " % (float(method[2]), float(method[3]))
+
+    elif "fftdf" in method:
+        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftdf"))
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method)
+        cmd += "python main.py "
+        cmd += "--ke_cutoff=%.2f " % float(method[1])
+
+    elif "gdf" in method:
+        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "gdf"))
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "gdf")
+        cmd += "python main.py "
+
     elif "fftisdf-ning" in method:
-        # assert 1 == 2, method
+        # is now abandoned
+        raise RuntimeError("fftisdf-ning is now abandoned")
         method = method.split("-")
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))), "%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))
 
         cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
         cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "-".join(method[:-1]))
-        print(cmd)
         c0 = float(method[-1])
         cmd += "python main.py "
         cmd += "--c0=%.2f " % c0
 
-    else:
-        if "supercell" in method:
-            cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
-
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, method))
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method)
-        cmd += "python main.py "
-
-    cmd += "--cell=%s --kmesh=%s --basis=%s " % (args.cell, args.kmesh, args.basis)
-    cmd += "--ke_cutoff=%.2f --pseudo=gth-pade " % args.ke_cutoff
+    cmd += "--cell=%s --kmesh=%s --basis=%s --pseudo=gth-pade" % (args.cell, args.kmesh, args.basis)
     cmd += "\n"
 
     print(cmd)

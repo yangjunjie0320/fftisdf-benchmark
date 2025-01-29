@@ -156,3 +156,87 @@ w[ 21], rank =  928 / 1560
     CPU time for w[ 21]   1065.56 sec, wall time     17.43 sec
 w[ 22], rank =  928 / 1560
     CPU time for w[ 22]    449.28 sec, wall time      7.16 sec
+w[ 23], rank =  928 / 1560
+    CPU time for w[ 23]   1287.45 sec, wall time     20.97 sec
+w[ 24], rank =  928 / 1560
+    CPU time for w[ 24]    361.01 sec, wall time      5.77 sec
+w[ 25], rank =  928 / 1560
+    CPU time for w[ 25]    965.04 sec, wall time     15.82 sec
+w[ 26], rank =  928 / 1560
+    CPU time for w[ 26]    756.73 sec, wall time     12.23 sec
+w[ 27], rank =  928 / 1560
+    CPU time for w[ 27]    465.74 sec, wall time      7.39 sec
+w[ 28], rank =  928 / 1560
+    CPU time for w[ 28]    363.78 sec, wall time      5.74 sec
+w[ 29], rank =  928 / 1560
+    CPU time for w[ 29]    432.96 sec, wall time      7.00 sec
+w[ 30], rank =  928 / 1560
+    CPU time for w[ 30]    663.23 sec, wall time     10.68 sec
+w[ 31], rank =  928 / 1560
+    CPU time for w[ 31]    556.68 sec, wall time      8.97 sec
+w[ 32], rank =  928 / 1560
+    CPU time for w[ 32]    768.24 sec, wall time     12.48 sec
+w[ 33], rank =  928 / 1560
+    CPU time for w[ 33]    562.21 sec, wall time      9.03 sec
+w[ 34], rank =  928 / 1560
+    CPU time for w[ 34]    925.48 sec, wall time     15.06 sec
+w[ 35], rank =  928 / 1560
+    CPU time for w[ 35]   1257.25 sec, wall time     20.55 sec
+w[ 36], rank =  928 / 1560
+    CPU time for w[ 36]    572.71 sec, wall time      9.18 sec
+w[ 37], rank =  928 / 1560
+    CPU time for w[ 37]    403.85 sec, wall time      6.42 sec
+w[ 38], rank =  928 / 1560
+    CPU time for w[ 38]   2613.08 sec, wall time     43.20 sec
+w[ 39], rank =  928 / 1560
+    CPU time for w[ 39]    422.80 sec, wall time      6.79 sec
+w[ 40], rank =  928 / 1560
+    CPU time for w[ 40]   2511.57 sec, wall time     40.96 sec
+w[ 41], rank =  928 / 1560
+    CPU time for w[ 41]    568.12 sec, wall time      9.17 sec
+w[ 42], rank =  928 / 1560
+    CPU time for w[ 42]    522.69 sec, wall time      8.44 sec
+w[ 43], rank =  928 / 1560
+    CPU time for w[ 43]    439.80 sec, wall time      7.05 sec
+w[ 44], rank =  928 / 1560
+    CPU time for w[ 44]    465.86 sec, wall time      7.43 sec
+w[ 45], rank =  928 / 1560
+    CPU time for w[ 45]    434.10 sec, wall time      6.90 sec
+w[ 46], rank =  928 / 1560
+    CPU time for w[ 46]    384.21 sec, wall time      6.18 sec
+w[ 47], rank =  928 / 1560
+    CPU time for w[ 47]    386.26 sec, wall time      6.20 sec
+w[ 48], rank =  928 / 1560
+    CPU time for w[ 48]   1075.16 sec, wall time     17.93 sec
+w[ 49], rank =  928 / 1560
+    CPU time for w[ 49]   1338.40 sec, wall time     21.77 sec
+w[ 50], rank =  928 / 1560
+    CPU time for w[ 50]   2594.85 sec, wall time     42.15 sec
+w[ 51], rank =  928 / 1560
+    CPU time for w[ 51]   1003.82 sec, wall time     16.58 sec
+w[ 52], rank =  928 / 1560
+    CPU time for w[ 52]    366.39 sec, wall time      5.79 sec
+w[ 53], rank =  928 / 1560
+    CPU time for w[ 53]    369.52 sec, wall time      5.84 sec
+w[ 54], rank =  928 / 1560
+    CPU time for w[ 54]    661.92 sec, wall time     10.70 sec
+w[ 55], rank =  928 / 1560
+    CPU time for w[ 55]   1477.75 sec, wall time     23.85 sec
+w[ 56], rank =  928 / 1560
+    CPU time for w[ 56]    361.52 sec, wall time      5.80 sec
+w[ 57], rank =  928 / 1560
+    CPU time for w[ 57]    349.64 sec, wall time      5.56 sec
+w[ 58], rank =  928 / 1560
+    CPU time for w[ 58]   1411.00 sec, wall time     23.13 sec
+w[ 59], rank =  928 / 1560
+    CPU time for w[ 59]    335.84 sec, wall time      5.39 sec
+w[ 60], rank =  928 / 1560
+    CPU time for w[ 60]    749.74 sec, wall time     12.11 sec
+w[ 61], rank =  928 / 1560
+    CPU time for w[ 61]    631.36 sec, wall time     10.24 sec
+w[ 62], rank =  928 / 1560
+    CPU time for w[ 62]    374.72 sec, wall time      5.97 sec
+w[ 63], rank =  928 / 1560
+    CPU time for w[ 63]   1270.16 sec, wall time     20.64 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/nio-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-40/4-4-4//47008528/tmp.chk
+    CPU time for building ISDF  51868.48 sec, wall time    849.19 sec

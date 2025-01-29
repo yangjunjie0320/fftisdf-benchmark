@@ -15,10 +15,6 @@ def main(args):
     cell = cell_from_poscar(path)
     cell.basis = args.basis
     cell.pseudo = args.pseudo
-    cell.verbose = 0
-    cell.unit = 'aa'
-    # cell.exp_to_discard = 0.1
-    cell.max_memory = PYSCF_MAX_MEMORY
     cell.ke_cutoff = args.ke_cutoff
     cell.build(dump_input=False)
 

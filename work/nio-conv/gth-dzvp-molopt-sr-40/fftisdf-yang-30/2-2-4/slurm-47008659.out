@@ -1,0 +1,98 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/2-2-4//47008659/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/2-2-4//47008659/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [25 25 25] (15625 PWs)
+len(kpts) = 16
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]]
+Overwritten attributes  tol kmesh c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [25 25 25]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 1.2e+02 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+kmesh = [2 2 4]
+Input parent grid mesh = [17, 17, 17], ke_cutoff =  72.08
+Final parent grid size = [17 17 17]
+
+Selecting interpolation points
+nkpts = 16, nao = 156, c0 =  30.00
+Parent grid mesh = [17 17 17], grid size = 4913
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points    241.48 sec, wall time      4.51 sec
+Pivoted Cholesky rank = 4913, nip = 4680, estimated error = 1.08e-05
+Number of interpolation points = 4680, effective CISDF =  30.00
+    CPU time for building left-hand side     71.79 sec, wall time      3.55 sec
+
+kpt = 16, ngrid = 15625, nao = 156
+ngrid = 15625, blksize = 40504, nip = 4680
+required disk space = 18 GB
+finished creating fswp: /central/scratch/yangjunjie/work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/2-2-4/47008659/3yk1vegt
+blksize = 40504, memory for aoR_loop = 48527 MB
+finished aoR_loop[       0:   15625]
+    CPU time for building right-hand side    208.54 sec, wall time     19.81 sec
+w[  0], rank = 3244 / 4680
+    CPU time for w[  0]   2771.55 sec, wall time     47.51 sec
+w[  1], rank = 3244 / 4680
+    CPU time for w[  1]   3017.68 sec, wall time     51.34 sec
+w[  2], rank = 3243 / 4680
+    CPU time for w[  2]   1758.26 sec, wall time     30.61 sec
+w[  3], rank = 3244 / 4680
+    CPU time for w[  3]   2520.61 sec, wall time     43.17 sec
+w[  4], rank = 3243 / 4680
+    CPU time for w[  4]   1737.37 sec, wall time     30.23 sec
+w[  5], rank = 3242 / 4680
+    CPU time for w[  5]   2983.83 sec, wall time     50.81 sec
+w[  6], rank = 3241 / 4680
+    CPU time for w[  6]   5064.38 sec, wall time     85.09 sec
+w[  7], rank = 3242 / 4680
+    CPU time for w[  7]   1949.16 sec, wall time     33.84 sec
+w[  8], rank = 3243 / 4680
+    CPU time for w[  8]   2441.61 sec, wall time     42.12 sec
+w[  9], rank = 3242 / 4680
+    CPU time for w[  9]   2005.11 sec, wall time     34.65 sec
+w[ 10], rank = 3241 / 4680
+    CPU time for w[ 10]   8478.78 sec, wall time    139.64 sec
+w[ 11], rank = 3242 / 4680
+    CPU time for w[ 11]   2277.50 sec, wall time     39.35 sec
+w[ 12], rank = 3241 / 4680
+    CPU time for w[ 12]   1942.23 sec, wall time     33.73 sec
+w[ 13], rank = 3241 / 4680
+    CPU time for w[ 13]   5113.59 sec, wall time     84.44 sec
+w[ 14], rank = 3240 / 4680
+    CPU time for w[ 14]   3944.87 sec, wall time     66.53 sec
+w[ 15], rank = 3241 / 4680
+    CPU time for w[ 15]   1982.90 sec, wall time     34.54 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/2-2-4//47008659/tmp.chk
+    CPU time for building ISDF  50529.94 sec, wall time    878.87 sec

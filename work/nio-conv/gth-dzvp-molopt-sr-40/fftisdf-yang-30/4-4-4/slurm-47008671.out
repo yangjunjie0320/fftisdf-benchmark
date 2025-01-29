@@ -1,0 +1,243 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/4-4-4//47008671/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/4-4-4//47008671/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [25 25 25] (15625 PWs)
+len(kpts) = 64
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  1.98557713e-01  0.00000000e+00]
+ [-1.42289801e-17  1.98557713e-01  1.98557713e-01]
+ [-2.84579601e-17  1.98557713e-01  3.97115427e-01]
+ [-4.26869402e-17  1.98557713e-01  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 0.00000000e+00  5.95673140e-01  0.00000000e+00]
+ [-1.42289801e-17  5.95673140e-01  1.98557713e-01]
+ [-2.84579601e-17  5.95673140e-01  3.97115427e-01]
+ [-4.26869402e-17  5.95673140e-01  5.95673140e-01]
+ [ 1.98557713e-01  1.42289801e-17  0.00000000e+00]
+ [ 1.98557713e-01  0.00000000e+00  1.98557713e-01]
+ [ 1.98557713e-01 -1.42289801e-17  3.97115427e-01]
+ [ 1.98557713e-01 -2.84579601e-17  5.95673140e-01]
+ [ 1.98557713e-01  1.98557713e-01  0.00000000e+00]
+ [ 1.98557713e-01  1.98557713e-01  1.98557713e-01]
+ [ 1.98557713e-01  1.98557713e-01  3.97115427e-01]
+ [ 1.98557713e-01  1.98557713e-01  5.95673140e-01]
+ [ 1.98557713e-01  3.97115427e-01  0.00000000e+00]
+ [ 1.98557713e-01  3.97115427e-01  1.98557713e-01]
+ [ 1.98557713e-01  3.97115427e-01  3.97115427e-01]
+ [ 1.98557713e-01  3.97115427e-01  5.95673140e-01]
+ [ 1.98557713e-01  5.95673140e-01  0.00000000e+00]
+ [ 1.98557713e-01  5.95673140e-01  1.98557713e-01]
+ [ 1.98557713e-01  5.95673140e-01  3.97115427e-01]
+ [ 1.98557713e-01  5.95673140e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  1.98557713e-01  0.00000000e+00]
+ [ 3.97115427e-01  1.98557713e-01  1.98557713e-01]
+ [ 3.97115427e-01  1.98557713e-01  3.97115427e-01]
+ [ 3.97115427e-01  1.98557713e-01  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  5.95673140e-01  0.00000000e+00]
+ [ 3.97115427e-01  5.95673140e-01  1.98557713e-01]
+ [ 3.97115427e-01  5.95673140e-01  3.97115427e-01]
+ [ 3.97115427e-01  5.95673140e-01  5.95673140e-01]
+ [ 5.95673140e-01  4.26869402e-17  0.00000000e+00]
+ [ 5.95673140e-01  2.84579601e-17  1.98557713e-01]
+ [ 5.95673140e-01  1.42289801e-17  3.97115427e-01]
+ [ 5.95673140e-01  0.00000000e+00  5.95673140e-01]
+ [ 5.95673140e-01  1.98557713e-01  0.00000000e+00]
+ [ 5.95673140e-01  1.98557713e-01  1.98557713e-01]
+ [ 5.95673140e-01  1.98557713e-01  3.97115427e-01]
+ [ 5.95673140e-01  1.98557713e-01  5.95673140e-01]
+ [ 5.95673140e-01  3.97115427e-01  0.00000000e+00]
+ [ 5.95673140e-01  3.97115427e-01  1.98557713e-01]
+ [ 5.95673140e-01  3.97115427e-01  3.97115427e-01]
+ [ 5.95673140e-01  3.97115427e-01  5.95673140e-01]
+ [ 5.95673140e-01  5.95673140e-01  0.00000000e+00]
+ [ 5.95673140e-01  5.95673140e-01  1.98557713e-01]
+ [ 5.95673140e-01  5.95673140e-01  3.97115427e-01]
+ [ 5.95673140e-01  5.95673140e-01  5.95673140e-01]]
+Overwritten attributes  tol kmesh c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [25 25 25]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 1.2e+02 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [17, 17, 17], ke_cutoff =  72.08
+Final parent grid size = [17 17 17]
+
+Selecting interpolation points
+nkpts = 64, nao = 156, c0 =  30.00
+Parent grid mesh = [17 17 17], grid size = 4913
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points    920.66 sec, wall time     15.81 sec
+Pivoted Cholesky rank = 4913, nip = 4680, estimated error = 2.18e-05
+Number of interpolation points = 4680, effective CISDF =  30.00
+    CPU time for building left-hand side    266.03 sec, wall time     14.37 sec
+
+kpt = 64, ngrid = 15625, nao = 156
+ngrid = 15625, blksize = 9761, nip = 4680
+required disk space = 74 GB
+finished creating fswp: /central/scratch/yangjunjie/work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/4-4-4/47008671/a9oa6nq1
+blksize = 9761, memory for aoR_loop = 46777 MB
+finished aoR_loop[       0:    9761]
+finished aoR_loop[    9761:   15625]
+    CPU time for building right-hand side    912.18 sec, wall time    119.94 sec
+w[  0], rank = 3426 / 4680
+    CPU time for w[  0]   4926.84 sec, wall time     82.37 sec
+w[  1], rank = 3425 / 4680
+    CPU time for w[  1]   6490.54 sec, wall time    108.47 sec
+w[  2], rank = 3424 / 4680
+    CPU time for w[  2]   2753.22 sec, wall time     46.41 sec
+w[  3], rank = 3425 / 4680
+    CPU time for w[  3]  11377.77 sec, wall time    189.59 sec
+w[  4], rank = 3425 / 4680
+    CPU time for w[  4]   1957.43 sec, wall time     33.88 sec
+w[  5], rank = 3424 / 4680
+    CPU time for w[  5]   2473.84 sec, wall time     42.78 sec
+w[  6], rank = 3423 / 4680
+    CPU time for w[  6]   3495.97 sec, wall time     58.51 sec
+w[  7], rank = 3424 / 4680
+    CPU time for w[  7]   2158.96 sec, wall time     37.25 sec
+w[  8], rank = 3424 / 4680
+    CPU time for w[  8]   5155.26 sec, wall time     89.33 sec
+w[  9], rank = 3423 / 4680
+    CPU time for w[  9]   5581.83 sec, wall time     94.47 sec
+w[ 10], rank = 3423 / 4680
+    CPU time for w[ 10]   2651.33 sec, wall time     45.36 sec
+w[ 11], rank = 3423 / 4680
+    CPU time for w[ 11]   2458.51 sec, wall time     42.17 sec
+w[ 12], rank = 3425 / 4680
+    CPU time for w[ 12]   1848.55 sec, wall time     32.13 sec
+w[ 13], rank = 3424 / 4680
+    CPU time for w[ 13]   4812.01 sec, wall time     79.95 sec
+w[ 14], rank = 3423 / 4680
+    CPU time for w[ 14]   1822.49 sec, wall time     31.68 sec
+w[ 15], rank = 3424 / 4680
+    CPU time for w[ 15]   5323.73 sec, wall time     89.01 sec
+w[ 16], rank = 3425 / 4680
+    CPU time for w[ 16]   5254.99 sec, wall time     87.16 sec
+w[ 17], rank = 3424 / 4680
+    CPU time for w[ 17]   1769.67 sec, wall time     31.38 sec
+w[ 18], rank = 3423 / 4680
+    CPU time for w[ 18]   1818.03 sec, wall time     31.67 sec
+w[ 19], rank = 3424 / 4680
+    CPU time for w[ 19]   1862.79 sec, wall time     32.35 sec
+w[ 20], rank = 3424 / 4680
+    CPU time for w[ 20]   1839.29 sec, wall time     32.00 sec
+w[ 21], rank = 3424 / 4680
+    CPU time for w[ 21]   4194.02 sec, wall time     70.59 sec
+w[ 22], rank = 3423 / 4680
+    CPU time for w[ 22]   1815.90 sec, wall time     31.60 sec
+w[ 23], rank = 3424 / 4680
+    CPU time for w[ 23]   7094.37 sec, wall time    116.46 sec
+w[ 24], rank = 3423 / 4680
+    CPU time for w[ 24]   2964.72 sec, wall time     50.82 sec
+w[ 25], rank = 3423 / 4680
+    CPU time for w[ 25]   1841.32 sec, wall time     32.44 sec
+w[ 26], rank = 3422 / 4680
+    CPU time for w[ 26]   1772.49 sec, wall time     31.05 sec
+w[ 27], rank = 3423 / 4680
+    CPU time for w[ 27]   2925.98 sec, wall time     49.87 sec
+w[ 28], rank = 3424 / 4680
+    CPU time for w[ 28]   1766.00 sec, wall time     30.85 sec
+w[ 29], rank = 3424 / 4680
+    CPU time for w[ 29]   8291.16 sec, wall time    140.27 sec
+w[ 30], rank = 3423 / 4680
+    CPU time for w[ 30]   9303.05 sec, wall time    151.56 sec
+w[ 31], rank = 3424 / 4680
+    CPU time for w[ 31]   1830.14 sec, wall time     31.84 sec
+w[ 32], rank = 3424 / 4680
+    CPU time for w[ 32]   1843.86 sec, wall time     31.98 sec
+w[ 33], rank = 3423 / 4680
+    CPU time for w[ 33]   3050.43 sec, wall time     53.18 sec
+w[ 34], rank = 3423 / 4680
+    CPU time for w[ 34]   1961.83 sec, wall time     33.84 sec
+w[ 35], rank = 3423 / 4680
+    CPU time for w[ 35]   1904.43 sec, wall time     32.92 sec
+w[ 36], rank = 3423 / 4680
+    CPU time for w[ 36]   7741.98 sec, wall time    132.81 sec
+w[ 37], rank = 3423 / 4680
+    CPU time for w[ 37]   5341.51 sec, wall time     90.71 sec
+w[ 38], rank = 3422 / 4680
+    CPU time for w[ 38]   1855.97 sec, wall time     32.46 sec
+w[ 39], rank = 3423 / 4680
+    CPU time for w[ 39]   2326.22 sec, wall time     39.66 sec
+w[ 40], rank = 3423 / 4680
+    CPU time for w[ 40]  10310.48 sec, wall time    174.03 sec
+w[ 41], rank = 3422 / 4680
+    CPU time for w[ 41]   1825.87 sec, wall time     31.80 sec
+w[ 42], rank = 3421 / 4680
+    CPU time for w[ 42]   1853.57 sec, wall time     32.03 sec
+w[ 43], rank = 3422 / 4680
+    CPU time for w[ 43]   1888.36 sec, wall time     33.18 sec
+w[ 44], rank = 3423 / 4680
+    CPU time for w[ 44]   3721.84 sec, wall time     63.43 sec
+w[ 45], rank = 3423 / 4680
+    CPU time for w[ 45]   2600.18 sec, wall time     44.14 sec
+w[ 46], rank = 3422 / 4680
+    CPU time for w[ 46]   1828.00 sec, wall time     31.91 sec
+w[ 47], rank = 3423 / 4680
+    CPU time for w[ 47]   7964.12 sec, wall time    135.00 sec
+w[ 48], rank = 3425 / 4680
+    CPU time for w[ 48]   1864.55 sec, wall time     32.41 sec
+w[ 49], rank = 3424 / 4680
+    CPU time for w[ 49]   1893.62 sec, wall time     32.87 sec
+w[ 50], rank = 3423 / 4680
+    CPU time for w[ 50]   4901.50 sec, wall time     81.62 sec
+w[ 51], rank = 3424 / 4680
+    CPU time for w[ 51]   2115.53 sec, wall time     36.55 sec
+w[ 52], rank = 3424 / 4680
+    CPU time for w[ 52]   1787.18 sec, wall time     31.16 sec
+w[ 53], rank = 3424 / 4680
+    CPU time for w[ 53]   2052.98 sec, wall time     35.49 sec
+w[ 54], rank = 3423 / 4680
+    CPU time for w[ 54]   2850.62 sec, wall time     49.24 sec
+w[ 55], rank = 3424 / 4680
+    CPU time for w[ 55]   9375.59 sec, wall time    155.30 sec
+w[ 56], rank = 3423 / 4680
+    CPU time for w[ 56]   5053.99 sec, wall time     83.82 sec
+w[ 57], rank = 3423 / 4680
+    CPU time for w[ 57]   4020.00 sec, wall time     69.36 sec
+w[ 58], rank = 3422 / 4680
+    CPU time for w[ 58]   5832.85 sec, wall time     95.80 sec
+w[ 59], rank = 3423 / 4680
+    CPU time for w[ 59]   4717.24 sec, wall time     79.94 sec
+w[ 60], rank = 3424 / 4680
+    CPU time for w[ 60]   2720.12 sec, wall time     47.84 sec
+w[ 61], rank = 3424 / 4680
+    CPU time for w[ 61]   3995.96 sec, wall time     67.51 sec
+w[ 62], rank = 3423 / 4680
+    CPU time for w[ 62]   6973.76 sec, wall time    118.18 sec
+w[ 63], rank = 3424 / 4680
+    CPU time for w[ 63]   1834.16 sec, wall time     31.99 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/nio-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-30/4-4-4//47008671/tmp.chk
+    CPU time for building ISDF 243787.05 sec, wall time   4259.94 sec

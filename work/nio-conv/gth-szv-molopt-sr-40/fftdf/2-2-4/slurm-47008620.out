@@ -1,0 +1,37 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-szv-molopt-sr-40/fftdf/2-2-4//47008620/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/nio-conv/gth-szv-molopt-sr-40/fftdf/2-2-4//47008620/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+WARNING!
+  Very diffused basis functions are found in the basis set. They may lead to severe
+  linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
+  to remove the diffused Gaussians whose exponents are less than 0.1.
+
+
+WARN: ke_cutoff/mesh (40 / [25 25 25]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 1.2e+02 Eh.
+Recommended ke_cutoff/mesh are 1166.24 / [123 123 123].
+
+fft_jk: get_k_kpts max_memory 490621.333504  blksize 56
+    CPU time for get_k_kpts: make_kpt (0,*)    363.20 sec, wall time     13.59 sec
+    CPU time for get_k_kpts: make_kpt (1,*)    371.06 sec, wall time     12.68 sec
+    CPU time for get_k_kpts: make_kpt (2,*)    376.03 sec, wall time     13.02 sec
+    CPU time for get_k_kpts: make_kpt (3,*)    379.66 sec, wall time     13.23 sec
+    CPU time for get_k_kpts: make_kpt (4,*)    381.68 sec, wall time     13.15 sec
+    CPU time for get_k_kpts: make_kpt (5,*)    376.59 sec, wall time     13.17 sec
+    CPU time for get_k_kpts: make_kpt (6,*)    364.60 sec, wall time     12.55 sec
+    CPU time for get_k_kpts: make_kpt (7,*)    366.67 sec, wall time     12.70 sec
+    CPU time for get_k_kpts: make_kpt (8,*)    362.35 sec, wall time     12.62 sec
+    CPU time for get_k_kpts: make_kpt (9,*)    365.85 sec, wall time     12.77 sec
+    CPU time for get_k_kpts: make_kpt (10,*)    370.43 sec, wall time     12.71 sec
+    CPU time for get_k_kpts: make_kpt (11,*)    364.54 sec, wall time     12.84 sec
+    CPU time for get_k_kpts: make_kpt (12,*)    368.25 sec, wall time     12.77 sec
+    CPU time for get_k_kpts: make_kpt (13,*)    371.06 sec, wall time     12.79 sec
+    CPU time for get_k_kpts: make_kpt (14,*)    363.91 sec, wall time     12.69 sec
+    CPU time for get_k_kpts: make_kpt (15,*)    367.33 sec, wall time     12.65 sec

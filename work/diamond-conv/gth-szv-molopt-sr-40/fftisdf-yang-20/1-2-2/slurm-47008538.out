@@ -47,3 +47,11 @@ finished aoR_loop[       0:    9261]
     CPU time for building right-hand side     36.43 sec, wall time      0.69 sec
 w[  0], rank =  628 /  640
     CPU time for w[  0]     26.95 sec, wall time      0.48 sec
+w[  1], rank =  628 /  640
+    CPU time for w[  1]     26.71 sec, wall time      0.42 sec
+w[  2], rank =  628 /  640
+    CPU time for w[  2]     25.84 sec, wall time      0.41 sec
+w[  3], rank =  627 /  640
+    CPU time for w[  3]     26.28 sec, wall time      0.41 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/diamond-conv/gth-szv-molopt-sr-40/fftisdf-yang-20/1-2-2//47008538/tmp.chk
+    CPU time for building ISDF    178.53 sec, wall time      2.99 sec

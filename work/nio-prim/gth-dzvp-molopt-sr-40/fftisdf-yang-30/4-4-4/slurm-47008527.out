@@ -230,3 +230,13 @@ w[ 58], rank =  914 / 1170
     CPU time for w[ 58]    233.84 sec, wall time      3.68 sec
 w[ 59], rank =  914 / 1170
     CPU time for w[ 59]    428.87 sec, wall time      6.83 sec
+w[ 60], rank =  914 / 1170
+    CPU time for w[ 60]    444.87 sec, wall time      7.04 sec
+w[ 61], rank =  914 / 1170
+    CPU time for w[ 61]    217.93 sec, wall time      3.43 sec
+w[ 62], rank =  914 / 1170
+    CPU time for w[ 62]    321.51 sec, wall time      5.08 sec
+w[ 63], rank =  914 / 1170
+    CPU time for w[ 63]    297.79 sec, wall time      4.71 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/nio-prim/gth-dzvp-molopt-sr-40/fftisdf-yang-30/4-4-4//47008527/tmp.chk
+    CPU time for building ISDF  22340.89 sec, wall time    361.01 sec

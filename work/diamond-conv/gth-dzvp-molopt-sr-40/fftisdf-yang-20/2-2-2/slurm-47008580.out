@@ -1,0 +1,69 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-2//47008580/
+PYSCF_TMPDIR = /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-2//47008580/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 8
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.62240176e-17 -2.62240176e-17  4.66885213e-01]
+ [ 0.00000000e+00  4.66885213e-01  0.00000000e+00]
+ [-2.62240176e-17  4.66885213e-01  4.66885213e-01]
+ [ 4.66885213e-01  2.62240176e-17  0.00000000e+00]
+ [ 4.66885213e-01  0.00000000e+00  4.66885213e-01]
+ [ 4.66885213e-01  4.66885213e-01  0.00000000e+00]
+ [ 4.66885213e-01  4.66885213e-01  4.66885213e-01]]
+Overwritten attributes  kmesh tol c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 569.817 / [75 75 75].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [13, 13, 13], ke_cutoff =  56.05
+Final parent grid size = [13 13 13]
+
+Selecting interpolation points
+nkpts = 8, nao = 104, c0 =  20.00
+Parent grid mesh = [13 13 13], grid size = 2197
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     91.91 sec, wall time      1.55 sec
+Pivoted Cholesky rank = 2197, nip = 2080, estimated error = 3.03e-04
+Number of interpolation points = 2080, effective CISDF =  20.00
+    CPU time for building left-hand side     32.16 sec, wall time      0.58 sec
+
+kpt = 8, ngrid = 9261, nao = 104
+ngrid = 9261, blksize = 184265, nip = 2080
+required disk space = 2 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-2/47008580/1hftkm5f
+blksize = 184265, memory for aoR_loop = 49058 MB
+finished aoR_loop[       0:    9261]
+    CPU time for building right-hand side     60.45 sec, wall time      2.87 sec
+w[  0], rank = 1965 / 2080
+    CPU time for w[  0]    255.53 sec, wall time      4.44 sec
+w[  1], rank = 1964 / 2080
+    CPU time for w[  1]   1095.52 sec, wall time     18.05 sec
+w[  2], rank = 1964 / 2080
+    CPU time for w[  2]    487.21 sec, wall time      8.58 sec
+w[  3], rank = 1963 / 2080
+    CPU time for w[  3]    165.27 sec, wall time      3.01 sec
+w[  4], rank = 1964 / 2080
+    CPU time for w[  4]   2643.32 sec, wall time     44.91 sec
+w[  5], rank = 1963 / 2080
+    CPU time for w[  5]    482.09 sec, wall time      8.06 sec
+w[  6], rank = 1963 / 2080
+    CPU time for w[  6]    157.21 sec, wall time      2.78 sec
+w[  7], rank = 1962 / 2080
+    CPU time for w[  7]    151.34 sec, wall time      2.70 sec
+Saving FFTISDF results to /central/scratch/yangjunjie///work/diamond-conv/gth-dzvp-molopt-sr-40/fftisdf-yang-20/2-2-2//47008580/tmp.chk
+    CPU time for building ISDF   5633.63 sec, wall time     98.08 sec
