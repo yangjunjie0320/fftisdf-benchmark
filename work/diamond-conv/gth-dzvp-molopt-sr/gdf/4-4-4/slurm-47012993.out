@@ -1,0 +1,109 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4//47012993/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4//47012993/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = 0.1
+_cderi_to_save = /central/scratch/yangjunjie//work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4//47012993/gdf.chk
+len(kpts) = 64
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.31120088e-17 -1.31120088e-17  2.33442606e-01]
+ [-2.62240176e-17 -2.62240176e-17  4.66885213e-01]
+ [-3.93360265e-17 -3.93360265e-17  7.00327819e-01]
+ [ 0.00000000e+00  2.33442606e-01  0.00000000e+00]
+ [-1.31120088e-17  2.33442606e-01  2.33442606e-01]
+ [-2.62240176e-17  2.33442606e-01  4.66885213e-01]
+ [-3.93360265e-17  2.33442606e-01  7.00327819e-01]
+ [ 0.00000000e+00  4.66885213e-01  0.00000000e+00]
+ [-1.31120088e-17  4.66885213e-01  2.33442606e-01]
+ [-2.62240176e-17  4.66885213e-01  4.66885213e-01]
+ [-3.93360265e-17  4.66885213e-01  7.00327819e-01]
+ [ 0.00000000e+00  7.00327819e-01  0.00000000e+00]
+ [-1.31120088e-17  7.00327819e-01  2.33442606e-01]
+ [-2.62240176e-17  7.00327819e-01  4.66885213e-01]
+ [-3.93360265e-17  7.00327819e-01  7.00327819e-01]
+ [ 2.33442606e-01  1.31120088e-17  0.00000000e+00]
+ [ 2.33442606e-01  0.00000000e+00  2.33442606e-01]
+ [ 2.33442606e-01 -1.31120088e-17  4.66885213e-01]
+ [ 2.33442606e-01 -2.62240176e-17  7.00327819e-01]
+ [ 2.33442606e-01  2.33442606e-01  0.00000000e+00]
+ [ 2.33442606e-01  2.33442606e-01  2.33442606e-01]
+ [ 2.33442606e-01  2.33442606e-01  4.66885213e-01]
+ [ 2.33442606e-01  2.33442606e-01  7.00327819e-01]
+ [ 2.33442606e-01  4.66885213e-01  0.00000000e+00]
+ [ 2.33442606e-01  4.66885213e-01  2.33442606e-01]
+ [ 2.33442606e-01  4.66885213e-01  4.66885213e-01]
+ [ 2.33442606e-01  4.66885213e-01  7.00327819e-01]
+ [ 2.33442606e-01  7.00327819e-01  0.00000000e+00]
+ [ 2.33442606e-01  7.00327819e-01  2.33442606e-01]
+ [ 2.33442606e-01  7.00327819e-01  4.66885213e-01]
+ [ 2.33442606e-01  7.00327819e-01  7.00327819e-01]
+ [ 4.66885213e-01  2.62240176e-17  0.00000000e+00]
+ [ 4.66885213e-01  1.31120088e-17  2.33442606e-01]
+ [ 4.66885213e-01  0.00000000e+00  4.66885213e-01]
+ [ 4.66885213e-01 -1.31120088e-17  7.00327819e-01]
+ [ 4.66885213e-01  2.33442606e-01  0.00000000e+00]
+ [ 4.66885213e-01  2.33442606e-01  2.33442606e-01]
+ [ 4.66885213e-01  2.33442606e-01  4.66885213e-01]
+ [ 4.66885213e-01  2.33442606e-01  7.00327819e-01]
+ [ 4.66885213e-01  4.66885213e-01  0.00000000e+00]
+ [ 4.66885213e-01  4.66885213e-01  2.33442606e-01]
+ [ 4.66885213e-01  4.66885213e-01  4.66885213e-01]
+ [ 4.66885213e-01  4.66885213e-01  7.00327819e-01]
+ [ 4.66885213e-01  7.00327819e-01  0.00000000e+00]
+ [ 4.66885213e-01  7.00327819e-01  2.33442606e-01]
+ [ 4.66885213e-01  7.00327819e-01  4.66885213e-01]
+ [ 4.66885213e-01  7.00327819e-01  7.00327819e-01]
+ [ 7.00327819e-01  3.93360265e-17  0.00000000e+00]
+ [ 7.00327819e-01  2.62240176e-17  2.33442606e-01]
+ [ 7.00327819e-01  1.31120088e-17  4.66885213e-01]
+ [ 7.00327819e-01 -1.54074396e-33  7.00327819e-01]
+ [ 7.00327819e-01  2.33442606e-01  0.00000000e+00]
+ [ 7.00327819e-01  2.33442606e-01  2.33442606e-01]
+ [ 7.00327819e-01  2.33442606e-01  4.66885213e-01]
+ [ 7.00327819e-01  2.33442606e-01  7.00327819e-01]
+ [ 7.00327819e-01  4.66885213e-01  0.00000000e+00]
+ [ 7.00327819e-01  4.66885213e-01  2.33442606e-01]
+ [ 7.00327819e-01  4.66885213e-01  4.66885213e-01]
+ [ 7.00327819e-01  4.66885213e-01  7.00327819e-01]
+ [ 7.00327819e-01  7.00327819e-01  0.00000000e+00]
+ [ 7.00327819e-01  7.00327819e-01  2.33442606e-01]
+ [ 7.00327819e-01  7.00327819e-01  4.66885213e-01]
+ [ 7.00327819e-01  7.00327819e-01  7.00327819e-01]]
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4/main.py", line 42, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark/work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4/main.py", line 30, in main
+    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi_to_save)
+  File "/home/junjiey/work/fftisdf-benchmark/src/utils.py", line 75, in get_jk_time
+    scf_obj.with_df = df_obj.build()
+                      ^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/df.py", line 268, in build
+    self._make_j3c(self.cell, self.auxcell, None, cderi)
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/df.py", line 295, in _make_j3c
+    dfbuilder.make_j3c(cderi_file, j_only=j_only, dataname=self._dataname,
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/rsdf_builder.py", line 927, in make_j3c
+    fswap = self.outcore_auxe2(cderi_file, intor, aosym, comp, j_only,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/pyscf/pbc/df/rsdf_builder.py", line 537, in outcore_auxe2
+    fswap[f'{dataname}I/{idx}'][row0:row1] = outI[k]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.12/site-packages/h5py/_hl/dataset.py", line 1022, in __setitem__
+    self.id.write(mspace, fspace, val, mtype, dxpl=self._dxpl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5d.pyx", line 281, in h5py.h5d.DatasetID.write
+  File "h5py/_proxy.pyx", line 115, in h5py._proxy.dset_rw
+OSError: [Errno 122] Can't write data (file write failed: time = Tue Jan 28 23:57:31 2025
+, filename = '/central/scratch/yangjunjie/work/diamond-conv/gth-dzvp-molopt-sr/gdf/4-4-4/47012993/.outcore_auxe2_swapch1jyyam', file descriptor = 6, errno = 122, error message = 'Disk quota exceeded', buf = 0x7f724b61ce10, total write size = 52416000, bytes this sub-write = 52416000, bytes actually written = 18446744073709551615, offset = 0)

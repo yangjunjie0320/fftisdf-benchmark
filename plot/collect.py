@@ -31,8 +31,8 @@ def collect(d):
             info += "" + ("%6.2e" % t3 if not numpy.isnan(t3) else "     nan") + ", "
             info += "" + ("%6.2e" % (size) if not numpy.isnan(size) else "     nan")
 
-        vj = None
-        vk = None
+        vj = numpy.nan
+        vk = numpy.nan
         if os.path.exists(os.path.join(d1, "vjk.chk")):
             vj = chkfile.load(os.path.join(d1, "vjk.chk"), "vj")
             vk = chkfile.load(os.path.join(d1, "vjk.chk"), "vk")
@@ -66,24 +66,32 @@ def parse(d1, d2):
 
     # assert dd_ref is not None
 
-    vj_ref = {}
-    vk_ref = {}
+    vj_ref = None
+    vk_ref = None
 
     for k, v in dd_ref.items():
+        if vj_ref is None:
+            vj_ref = {}
+
+        if vk_ref is None:
+            vk_ref = {}
+
         vj_ref[k] = v["vj"]
         vk_ref[k] = v["vk"]
 
     for method, info in dd.items():
         for k, v in info.items():
-            vj_sol = v.get("vj")
-            vk_sol = v.get("vk")
+            vj_sol = v.get("vj", numpy.inf)
+            vk_sol = v.get("vk", numpy.inf)
 
-            if vj_sol is not None and vk_sol is not None and vj_ref is not None and vk_ref is not None:
-                vj_err = abs(vj_sol - vj_ref.get(k)).max()
-                vk_err = abs(vk_sol - vk_ref.get(k)).max()
-                v["info"] += ", %6.2e, %6.2e" % (vj_err, vk_err)
+            vj_err = numpy.array(abs(vj_sol - vj_ref.get(k, numpy.inf))).max()
+            vk_err = numpy.array(abs(vk_sol - vk_ref.get(k, numpy.inf))).max()
+
+            if numpy.isnan(vj_err) or numpy.isnan(vk_err):
+                v["info"] += ",      nan,      nan"
             else:
-                v["info"] += ",     nan,     nan"
+                v["info"] += ", %6.2e, %6.2e" % (vj_err, vk_err)
+
 
     for method, info in sorted(dd.items()):
         f.write("# %s\n" % method)
@@ -102,19 +110,18 @@ if __name__ == "__main__":
         os.makedirs("./data")
 
     for d1 in [os.path.join(prefix, x) for x in os.listdir(prefix)]:
-        if not ("diamond-prim" in d1 or "nio-prim" in d1):
-            continue
-
         if not os.path.isdir(d1):
             continue
 
         for d2 in [os.path.join(d1, x) for x in os.listdir(d1)]:
             if not os.path.isdir(d2):
                 continue
+
+            parse(d1, d2)
             
-            try:
-                parse(d1, d2)
-            except Exception as e:
-                print(e)
-                continue
+            # try:
+                
+            # except Exception as e:
+            #     print(e)
+            #     continue
 

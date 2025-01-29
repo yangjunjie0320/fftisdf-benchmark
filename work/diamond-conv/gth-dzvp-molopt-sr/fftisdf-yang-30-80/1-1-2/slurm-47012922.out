@@ -43,3 +43,9 @@ finished creating fswp: /central/scratch/yangjunjie/work/diamond-conv/gth-dzvp-m
 blksize = 491557, memory for aoR_loop = 49077 MB
 finished aoR_loop[       0:   24389]
     CPU time for building right-hand side     57.25 sec, wall time      2.95 sec
+w[  0], rank = 2895 / 3120
+    CPU time for w[  0]   3062.86 sec, wall time     49.96 sec
+w[  1], rank = 2894 / 3120
+    CPU time for w[  1]   2827.73 sec, wall time     46.41 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-conv/gth-dzvp-molopt-sr/fftisdf-yang-30-80/1-1-2//47012922/tmp.chk
+    CPU time for building ISDF   6016.10 sec, wall time    100.96 sec

@@ -17,3 +17,26 @@ _cderi_to_save = /central/scratch/yangjunjie//work/diamond-conv/gth-dzvp-molopt-
 len(kpts) = 2
     kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
  [-2.62240176e-17 -2.62240176e-17  4.66885213e-01]]
+    CPU time for j3c  11114.07 sec, wall time    207.95 sec
+max_memory 491004 MB, blksize 240
+max_memory 491004 MB, blksize 240
+    CPU time for get_j pass 1      5.41 sec, wall time      0.18 sec
+max_memory 491004 MB, blksize 240
+max_memory 491004 MB, blksize 240
+    CPU time for get_j pass 2     31.52 sec, wall time      0.51 sec
+    CPU time for get_j     37.51 sec, wall time      0.70 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 32 / 104
+max_memory 490903 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)    102.66 sec, wall time      1.62 sec
+max_memory 490903 MB, blksize 240
+max_memory 490903 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)    337.48 sec, wall time      5.30 sec
+    CPU time for buf1      10.40 sec, wall time       0.17 sec
+    CPU time for ct11     132.23 sec, wall time       2.07 sec
+    CPU time for ct12     191.89 sec, wall time       3.01 sec
+    CPU time for buf2       0.00 sec, wall time       0.00 sec
+    CPU time for ct21      25.29 sec, wall time       0.40 sec
+    CPU time for ct22      69.94 sec, wall time       1.10 sec
+    CPU time for load      10.19 sec, wall time       0.17 sec
+    CPU time for get_k_kpts    449.72 sec, wall time      7.07 sec

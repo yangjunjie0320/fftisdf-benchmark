@@ -1,0 +1,42 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/gdf/1-1-2//47013009/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/gdf/1-1-2//47013009/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = 0.1
+_cderi_to_save = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/gdf/1-1-2//47013009/gdf.chk
+len(kpts) = 2
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]]
+    CPU time for j3c   2674.20 sec, wall time     43.26 sec
+max_memory 491057 MB, blksize 240
+max_memory 491057 MB, blksize 240
+    CPU time for get_j pass 1      6.05 sec, wall time      0.12 sec
+max_memory 491057 MB, blksize 240
+max_memory 491057 MB, blksize 240
+    CPU time for get_j pass 2      0.76 sec, wall time      0.02 sec
+    CPU time for get_j      8.35 sec, wall time      0.16 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 52 / 56
+max_memory 491010 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)      2.76 sec, wall time      0.04 sec
+max_memory 491010 MB, blksize 240
+max_memory 491010 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)     69.35 sec, wall time      1.10 sec
+    CPU time for buf1       2.94 sec, wall time       0.05 sec
+    CPU time for ct11       9.95 sec, wall time       0.16 sec
+    CPU time for ct12       7.49 sec, wall time       0.12 sec
+    CPU time for buf2       0.00 sec, wall time       0.00 sec
+    CPU time for ct21       1.45 sec, wall time       0.02 sec
+    CPU time for ct22      42.49 sec, wall time       0.68 sec
+    CPU time for load       7.71 sec, wall time       0.12 sec
+    CPU time for get_k_kpts     72.29 sec, wall time      1.15 sec

@@ -131,3 +131,11 @@ w[ 27], rank = 1224 / 1280
     CPU time for w[ 27]   1153.05 sec, wall time     18.62 sec
 w[ 28], rank = 1224 / 1280
     CPU time for w[ 28]   1180.36 sec, wall time     19.00 sec
+w[ 29], rank = 1224 / 1280
+    CPU time for w[ 29]   1113.18 sec, wall time     17.93 sec
+w[ 30], rank = 1224 / 1280
+    CPU time for w[ 30]   1090.10 sec, wall time     17.64 sec
+w[ 31], rank = 1224 / 1280
+    CPU time for w[ 31]   1148.85 sec, wall time     18.66 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-conv/gth-szv-molopt-sr/fftisdf-yang-40-80/2-4-4//47012891/tmp.chk
+    CPU time for building ISDF  36748.64 sec, wall time    610.60 sec

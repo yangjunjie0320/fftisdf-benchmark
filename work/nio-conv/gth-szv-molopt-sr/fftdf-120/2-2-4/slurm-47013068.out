@@ -1,0 +1,23 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/fftdf-120/2-2-4//47013068/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/fftdf-120/2-2-4//47013068/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+WARN: ke_cutoff/mesh (120 / [41 41 41]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 89 Eh.
+Recommended ke_cutoff/mesh are 1364.21 / [133 133 133].
+
+fft_jk: get_k_kpts max_memory 489177.604096  blksize 56
+    CPU time for get_k_kpts: make_kpt (0,*) 274326.06 sec, wall time   4370.01 sec
+    CPU time for get_k_kpts: make_kpt (1,*) 276296.91 sec, wall time   4396.97 sec
+    CPU time for get_k_kpts: make_kpt (2,*) 275729.89 sec, wall time   4389.11 sec
+    CPU time for get_k_kpts: make_kpt (3,*) 277154.57 sec, wall time   4410.22 sec
+    CPU time for get_k_kpts: make_kpt (4,*) 277335.07 sec, wall time   4412.38 sec
+    CPU time for get_k_kpts: make_kpt (5,*) 276752.21 sec, wall time   4402.75 sec
+slurmstepd: error: *** JOB 47013068 ON hpc-34-06 CANCELLED AT 2025-01-29T07:13:30 DUE TO TIME LIMIT ***

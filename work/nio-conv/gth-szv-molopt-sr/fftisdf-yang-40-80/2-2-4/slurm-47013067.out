@@ -1,0 +1,93 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/fftisdf-yang-40-80/2-2-4//47013067/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/fftisdf-yang-40-80/2-2-4//47013067/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [33 33 33] (35937 PWs)
+len(kpts) = 16
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.42289801e-17 -1.42289801e-17  1.98557713e-01]
+ [-2.84579601e-17 -2.84579601e-17  3.97115427e-01]
+ [-4.26869402e-17 -4.26869402e-17  5.95673140e-01]
+ [ 0.00000000e+00  3.97115427e-01  0.00000000e+00]
+ [-1.42289801e-17  3.97115427e-01  1.98557713e-01]
+ [-2.84579601e-17  3.97115427e-01  3.97115427e-01]
+ [-4.26869402e-17  3.97115427e-01  5.95673140e-01]
+ [ 3.97115427e-01  2.84579601e-17  0.00000000e+00]
+ [ 3.97115427e-01  1.42289801e-17  1.98557713e-01]
+ [ 3.97115427e-01  0.00000000e+00  3.97115427e-01]
+ [ 3.97115427e-01 -1.42289801e-17  5.95673140e-01]
+ [ 3.97115427e-01  3.97115427e-01  0.00000000e+00]
+ [ 3.97115427e-01  3.97115427e-01  1.98557713e-01]
+ [ 3.97115427e-01  3.97115427e-01  3.97115427e-01]
+ [ 3.97115427e-01  3.97115427e-01  5.95673140e-01]]
+Overwritten attributes  c0 kmesh tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (80 / [33 33 33]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 1.3e+02 Eh.
+Recommended ke_cutoff/mesh are 1364.21 / [133 133 133].
+
+kmesh = [2 2 4]
+Input parent grid mesh = [14, 14, 14], ke_cutoff =  40.55
+Final parent grid size = [13 13 13]
+
+Selecting interpolation points
+nkpts = 16, nao = 56, c0 =  40.00
+Parent grid mesh = [13 13 13], grid size = 2197
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points    102.72 sec, wall time      1.71 sec
+Pivoted Cholesky rank = 2197, nip = 2197, estimated error = 4.05e-06
+Number of interpolation points = 2197, effective CISDF =  39.23
+    CPU time for building left-hand side     43.01 sec, wall time      1.04 sec
+
+kpt = 16, ngrid = 35937, nao = 56
+ngrid = 35937, blksize = 87119, nip = 2197
+required disk space = 20 GB
+finished creating fswp: /central/scratch/yangjunjie/work/nio-conv/gth-szv-molopt-sr/fftisdf-yang-40-80/2-2-4/47013067/o33h0957
+blksize = 87119, memory for aoR_loop = 48998 MB
+finished aoR_loop[       0:   35937]
+    CPU time for building right-hand side    178.41 sec, wall time     20.73 sec
+w[  0], rank = 1859 / 2197
+    CPU time for w[  0]    206.90 sec, wall time      4.99 sec
+w[  1], rank = 1859 / 2197
+    CPU time for w[  1]    207.52 sec, wall time      4.78 sec
+w[  2], rank = 1858 / 2197
+    CPU time for w[  2]    211.50 sec, wall time      4.88 sec
+w[  3], rank = 1859 / 2197
+    CPU time for w[  3]    212.13 sec, wall time      4.93 sec
+w[  4], rank = 1858 / 2197
+    CPU time for w[  4]    209.18 sec, wall time      4.87 sec
+w[  5], rank = 1857 / 2197
+    CPU time for w[  5]    210.54 sec, wall time      4.90 sec
+w[  6], rank = 1856 / 2197
+    CPU time for w[  6]    859.62 sec, wall time     15.61 sec
+w[  7], rank = 1857 / 2197
+    CPU time for w[  7]    213.74 sec, wall time      5.19 sec
+w[  8], rank = 1858 / 2197
+    CPU time for w[  8]    209.89 sec, wall time      4.80 sec
+w[  9], rank = 1857 / 2197
+    CPU time for w[  9]    291.44 sec, wall time      6.19 sec
+w[ 10], rank = 1856 / 2197
+    CPU time for w[ 10]    243.36 sec, wall time      5.42 sec
+w[ 11], rank = 1857 / 2197
+    CPU time for w[ 11]    214.63 sec, wall time      4.96 sec
+w[ 12], rank = 1856 / 2197
+    CPU time for w[ 12]    221.13 sec, wall time      4.99 sec
+w[ 13], rank = 1855 / 2197
+    CPU time for w[ 13]    219.52 sec, wall time      5.05 sec
+w[ 14], rank = 1853 / 2197
+    CPU time for w[ 14]    221.55 sec, wall time      4.99 sec
+w[ 15], rank = 1855 / 2197
+    CPU time for w[ 15]    226.89 sec, wall time      5.13 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/nio-conv/gth-szv-molopt-sr/fftisdf-yang-40-80/2-2-4//47013067/tmp.chk
+    CPU time for building ISDF   4515.61 sec, wall time    116.02 sec
