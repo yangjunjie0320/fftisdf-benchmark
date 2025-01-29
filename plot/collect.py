@@ -1,30 +1,22 @@
 import numpy, scipy, os, sys
 from pyscf.lib import chkfile
 
-def collect(d, ref=None):
+def collect(d):
     assert os.path.exists(d), d
 
-    # find the fftdf directory or the gdf directory
-    fftdf_dir = None
-    gdf_dir = None
-    for t in os.listdir(d):
-        if os.path.isdir(os.path.join(d, t)) and "fftdf" in t:
-            fftdf_dir = os.path.join(d, t)
-        elif os.path.isdir(os.path.join(d, t)) and "gdf" in t:
-            gdf_dir = os.path.join(d, t)
+    vj = None
+    vk = None
 
-    ref = fftdf_dir if fftdf_dir is not None else gdf_dir
-    vj_ref = None
-    vk_ref = None
+    if os.path.exists(os.path.join(d, "vjk.chk")):
+        vj = chkfile.load(os.path.join(d, "vjk.chk"), "vj")
+        vk = chkfile.load(os.path.join(d, "vjk.chk"), "vk")
 
-    if ref is not None:
-        from pyscf.lib import chkfile
-        vj_ref = chkfile.load(os.path.join(ref, "vjk.chk"), "vj")
-        vk_ref = chkfile.load(os.path.join(ref, "vk.chk"), "vk")
-
-    info = {}
+    # info = {}
+    res = {}
     for d1 in [os.path.join(d, t) for t in os.listdir(d) if os.path.isdir(os.path.join(d, t))]:
-        info[os.path.basename(d1)] = ""
+        info = ""
+        kmesh = [int(x) for x in os.path.basename(d1).split("-")]
+        info += "%4d, " % numpy.prod(kmesh)
 
         with open(os.path.join(d1, "out.log"), "r") as f:
             lines = f.readlines()
@@ -34,32 +26,64 @@ def collect(d, ref=None):
             size = float(lines[3].split()[-2]) if len(lines) > 3 else numpy.nan
 
             # info[os.path.basename(d1)] = "" + ("%8d" % int(t1)) + ", "
-            info[os.path.basename(d1)] += "" + ("%6.2e" % t1 if not numpy.isnan(t1) else "     nan") + ", "
-            info[os.path.basename(d1)] += "" + ("%6.2e" % t2 if not numpy.isnan(t2) else "     nan") + ", "
-            info[os.path.basename(d1)] += "" + ("%6.2e" % t3 if not numpy.isnan(t3) else "     nan") + ", "
-            info[os.path.basename(d1)] += "" + ("%6.2e" % (size) if not numpy.isnan(size) else "     nan")
+            info += "" + ("%6.2e" % t1 if not numpy.isnan(t1) else "     nan") + ", "
+            info += "" + ("%6.2e" % t2 if not numpy.isnan(t2) else "     nan") + ", "
+            info += "" + ("%6.2e" % t3 if not numpy.isnan(t3) else "     nan") + ", "
+            info += "" + ("%6.2e" % (size) if not numpy.isnan(size) else "     nan")
 
-        if vj_ref is not None:
-            vj_sol = chkfile.load(os.path.join(d1, "vjk.chk"), "vj")
-            info[os.path.basename(d1)] += ", %6.2e" % abs(vj_ref - vj_sol).max()
-        else:
-            info[os.path.basename(d1)] += ", nan"
+        vj = None
+        vk = None
+        if os.path.exists(os.path.join(d1, "vjk.chk")):
+            vj = chkfile.load(os.path.join(d1, "vjk.chk"), "vj")
+            vk = chkfile.load(os.path.join(d1, "vjk.chk"), "vk")
+        
+        res[numpy.prod(kmesh)] = {"info": info, "vj": vj, "vk": vk}
+    return res
 
-        if vk_ref is not None:
-            vk_sol = chkfile.load(os.path.join(d1, "vk.chk"), "vk")
-            info[os.path.basename(d1)] += ", %6.2e" % abs(vk_ref - vk_sol).max()
-        else:
-            info[os.path.basename(d1)] += ", nan"
+def parse(d1, d2):
+    f = open(os.path.join("./data/%s-%s.log" % (os.path.basename(d1), os.path.basename(d2))), "w")
 
-    res = []
-    for k, v in sorted(info.items()):
-        kmesh = [int(x) for x in k.split("-")]
-        res.append("%4d, %s" % (numpy.prod(kmesh), v))
-    return "\n".join(res)
+    dd = {}
+    for d3 in [os.path.join(d2, x) for x in os.listdir(d2)]:
+        if not os.path.isdir(d3):
+            continue
+        
+        res = collect(d3)
+        dd[os.path.basename(d3)] = {k: v for k, v in res.items()}
+
+    dd_ref = dd.get("fftdf") or dd.get("gdf")
+    vj_ref = {}
+    vk_ref = {}
+
+    for k, v in dd_ref.items():
+        vj_ref[k] = v["vj"]
+        vk_ref[k] = v["vk"]
+
+    for method, info in dd.items():
+        for k, v in info.items():
+            vj_sol = v.get("vj")
+            vk_sol = v.get("vk")
+
+            if vj_sol is not None and vk_sol is not None and vj_ref is not None and vk_ref is not None:
+                vj_err = abs(vj_sol - vj_ref.get(k)).max()
+                vk_err = abs(vk_sol - vk_ref.get(k)).max()
+                v["info"] += ", %6.2e, %6.2e" % (vj_err, vk_err)
+            else:
+                v["info"] += ",     nan,     nan"
+
+
+    for method, info in sorted(dd.items()):
+        f.write("# %s\n" % method)
+        title = "%8s, " * 7
+        title = title % ("nk", "build", "vj_time", "vk_time", "size", "vj_err", "vk_err")
+        f.write("# " + title[6:-2] + "\n")
+        for k, v in sorted(info.items()):
+            f.write("%s\n" % v["info"])
+        f.write("\n")
+    f.close()
 
 if __name__ == "__main__":
-    prefix = "/Users/yangjunjie/work/fftisdf-benchmark/work/"
-    dirs = [os.path.join(prefix, d) for d in os.listdir(prefix) if os.path.isdir(os.path.join(prefix, d))]
+    prefix = "/home/junjiey/work/fftisdf-benchmark/work/"
 
     if not os.path.exists("./data"):
         os.makedirs("./data")
@@ -71,17 +95,10 @@ if __name__ == "__main__":
         for d2 in [os.path.join(d1, x) for x in os.listdir(d1)]:
             if not os.path.isdir(d2):
                 continue
-
-            f = open(os.path.join("./data/%s-%s.log" % (os.path.basename(d1), os.path.basename(d2))), "w")
-
-            dd = {}
-            for d3 in [os.path.join(d2, x) for x in os.listdir(d2)]:
-                if not os.path.isdir(d3):
-                    continue
-                
-                dd[os.path.basename(d3)] = "# %2s, %8s, %8s, %8s, %8s, %8s, %8s" % ("nk", "build", "get_j", "get_k", "size", "vj_err", "vk_err")
-                dd[os.path.basename(d3)] += "\n%s" % collect(d3)
             
-            f.write("\n\n".join("# %s\n%s" % (k, v) for k, v in sorted(dd.items())))
+            try:
+                parse(d1, d2)
+            except Exception as e:
+                print(e)
+                continue
 
-            f.close()
