@@ -1,0 +1,69 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-20-40/2-2-2//47012468/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-20-40/2-2-2//47012468/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 8
+    kpts = [[ 0.          0.          0.        ]
+ [-0.38121014 -0.26955632  0.66027542]
+ [ 0.          0.80866896  0.        ]
+ [-0.38121014  0.53911264  0.66027542]
+ [ 0.76242029 -0.26955632  0.        ]
+ [ 0.38121014 -0.53911264  0.66027542]
+ [ 0.76242029  0.53911264  0.        ]
+ [ 0.38121014  0.26955632  0.66027542]]
+Overwritten attributes  c0 tol kmesh  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [6, 6, 6], ke_cutoff =  12.45
+Final parent grid size = [7 5 7]
+
+Selecting interpolation points
+nkpts = 8, nao = 8, c0 =  20.00
+Parent grid mesh = [7 5 7], grid size = 245
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     14.69 sec, wall time      0.23 sec
+Pivoted Cholesky rank = 245, nip = 160, estimated error = 4.36e-03
+Number of interpolation points = 160, effective CISDF =  20.00
+    CPU time for building left-hand side      9.58 sec, wall time      0.15 sec
+
+kpt = 8, ngrid = 3375, nao = 8
+ngrid = 3375, blksize = 2398787, nip = 160
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-20-40/2-2-2/47012468/5zz7frsj
+blksize = 2398787, memory for aoR_loop = 49127 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side     26.18 sec, wall time      0.43 sec
+w[  0], rank =  160 /  160
+    CPU time for w[  0]     13.47 sec, wall time      0.22 sec
+w[  1], rank =  160 /  160
+    CPU time for w[  1]      3.24 sec, wall time      0.05 sec
+w[  2], rank =  160 /  160
+    CPU time for w[  2]      3.25 sec, wall time      0.05 sec
+w[  3], rank =  160 /  160
+    CPU time for w[  3]      3.19 sec, wall time      0.05 sec
+w[  4], rank =  160 /  160
+    CPU time for w[  4]      3.12 sec, wall time      0.05 sec
+w[  5], rank =  160 /  160
+    CPU time for w[  5]      3.06 sec, wall time      0.05 sec
+w[  6], rank =  160 /  160
+    CPU time for w[  6]      3.31 sec, wall time      0.05 sec
+w[  7], rank =  160 /  160
+    CPU time for w[  7]      3.13 sec, wall time      0.05 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-20-40/2-2-2//47012468/tmp.chk
+    CPU time for building ISDF     87.14 sec, wall time      1.40 sec

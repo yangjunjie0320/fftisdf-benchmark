@@ -51,7 +51,21 @@ def parse(d1, d2):
         res = collect(d3)
         dd[os.path.basename(d3)] = {k: v for k, v in res.items()}
 
-    dd_ref = dd.get("fftdf") or dd.get("gdf")
+    ke_max = 0.0
+    dd_ref = None
+
+    for method, info in dd.items():        
+        if "fftdf" in method:
+            ke = float(method.split("-")[1])
+            if ke > ke_max:
+                ke_max = ke
+                dd_ref = info
+
+    if dd_ref is None:
+        dd_ref = dd.get("gdf")
+
+    # assert dd_ref is not None
+
     vj_ref = {}
     vk_ref = {}
 
@@ -71,7 +85,6 @@ def parse(d1, d2):
             else:
                 v["info"] += ",     nan,     nan"
 
-
     for method, info in sorted(dd.items()):
         f.write("# %s\n" % method)
         title = "%8s, " * 7
@@ -89,6 +102,9 @@ if __name__ == "__main__":
         os.makedirs("./data")
 
     for d1 in [os.path.join(prefix, x) for x in os.listdir(prefix)]:
+        if not ("diamond-prim" in d1 or "nio-prim" in d1):
+            continue
+
         if not os.path.isdir(d1):
             continue
 

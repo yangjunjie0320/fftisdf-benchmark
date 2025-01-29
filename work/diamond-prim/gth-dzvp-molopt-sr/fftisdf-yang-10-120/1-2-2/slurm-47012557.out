@@ -1,0 +1,57 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/fftisdf-yang-10-120/1-2-2//47012557/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/fftisdf-yang-10-120/1-2-2//47012557/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [25 25 25] (15625 PWs)
+len(kpts) = 4
+    kpts = [[ 0.          0.          0.        ]
+ [-0.38121014 -0.26955632  0.66027542]
+ [ 0.          0.80866896  0.        ]
+ [-0.38121014  0.53911264  0.66027542]]
+Overwritten attributes  kmesh c0 tol  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (120 / [25 25 25]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 0.68 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+kmesh = [1 2 2]
+Input parent grid mesh = [7, 7, 7], ke_cutoff =  28.02
+Final parent grid size = [9 7 9]
+
+Selecting interpolation points
+nkpts = 4, nao = 26, c0 =  10.00
+Parent grid mesh = [9 7 9], grid size = 567
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     11.25 sec, wall time      0.18 sec
+Pivoted Cholesky rank = 567, nip = 260, estimated error = 9.52e-03
+Number of interpolation points = 260, effective CISDF =  10.00
+    CPU time for building left-hand side      7.96 sec, wall time      0.12 sec
+
+kpt = 4, ngrid = 15625, nao = 26
+ngrid = 15625, blksize = 2952006, nip = 260
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/gth-dzvp-molopt-sr/fftisdf-yang-10-120/1-2-2/47012557/b8qwtx0d
+blksize = 2952006, memory for aoR_loop = 49121 MB
+finished aoR_loop[       0:   15625]
+    CPU time for building right-hand side     34.33 sec, wall time      0.59 sec
+w[  0], rank =  260 /  260
+    CPU time for w[  0]     15.77 sec, wall time      0.30 sec
+w[  1], rank =  260 /  260
+    CPU time for w[  1]     14.03 sec, wall time      0.22 sec
+w[  2], rank =  260 /  260
+    CPU time for w[  2]     12.68 sec, wall time      0.20 sec
+w[  3], rank =  260 /  260
+    CPU time for w[  3]     13.07 sec, wall time      0.21 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/fftisdf-yang-10-120/1-2-2//47012557/tmp.chk
+    CPU time for building ISDF    111.90 sec, wall time      1.87 sec

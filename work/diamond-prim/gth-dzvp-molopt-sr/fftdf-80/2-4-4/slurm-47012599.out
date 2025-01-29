@@ -1,0 +1,48 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/fftdf-80/2-4-4//47012599/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/fftdf-80/2-4-4//47012599/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+fft_jk: get_k_kpts max_memory 490938.068992  blksize 26
+    CPU time for get_k_kpts: make_kpt (0,*)    439.40 sec, wall time      7.05 sec
+    CPU time for get_k_kpts: make_kpt (1,*)    420.89 sec, wall time      6.78 sec
+    CPU time for get_k_kpts: make_kpt (2,*)    438.74 sec, wall time      7.03 sec
+    CPU time for get_k_kpts: make_kpt (3,*)    390.23 sec, wall time      6.25 sec
+    CPU time for get_k_kpts: make_kpt (4,*)    399.98 sec, wall time      6.41 sec
+    CPU time for get_k_kpts: make_kpt (5,*)    431.67 sec, wall time      6.93 sec
+    CPU time for get_k_kpts: make_kpt (6,*)    412.08 sec, wall time      6.61 sec
+    CPU time for get_k_kpts: make_kpt (7,*)    415.87 sec, wall time      6.64 sec
+    CPU time for get_k_kpts: make_kpt (8,*)    424.38 sec, wall time      6.76 sec
+    CPU time for get_k_kpts: make_kpt (9,*)    420.29 sec, wall time      6.70 sec
+    CPU time for get_k_kpts: make_kpt (10,*)    399.12 sec, wall time      6.33 sec
+    CPU time for get_k_kpts: make_kpt (11,*)    430.46 sec, wall time      6.88 sec
+    CPU time for get_k_kpts: make_kpt (12,*)    408.33 sec, wall time      6.52 sec
+    CPU time for get_k_kpts: make_kpt (13,*)    438.03 sec, wall time      6.98 sec
+    CPU time for get_k_kpts: make_kpt (14,*)    419.90 sec, wall time      6.75 sec
+    CPU time for get_k_kpts: make_kpt (15,*)    434.07 sec, wall time      6.94 sec
+    CPU time for get_k_kpts: make_kpt (16,*)    418.09 sec, wall time      6.63 sec
+    CPU time for get_k_kpts: make_kpt (17,*)    438.20 sec, wall time      6.99 sec
+    CPU time for get_k_kpts: make_kpt (18,*)    416.16 sec, wall time      6.68 sec
+    CPU time for get_k_kpts: make_kpt (19,*)    410.81 sec, wall time      6.54 sec
+    CPU time for get_k_kpts: make_kpt (20,*)    393.44 sec, wall time      6.24 sec
+    CPU time for get_k_kpts: make_kpt (21,*)    411.07 sec, wall time      6.55 sec
+    CPU time for get_k_kpts: make_kpt (22,*)    413.26 sec, wall time      6.59 sec
+    CPU time for get_k_kpts: make_kpt (23,*)    427.36 sec, wall time      6.83 sec
+    CPU time for get_k_kpts: make_kpt (24,*)    438.27 sec, wall time      7.01 sec
+    CPU time for get_k_kpts: make_kpt (25,*)    445.56 sec, wall time      7.08 sec
+    CPU time for get_k_kpts: make_kpt (26,*)    423.18 sec, wall time      6.80 sec
+    CPU time for get_k_kpts: make_kpt (27,*)    440.11 sec, wall time      7.04 sec
+    CPU time for get_k_kpts: make_kpt (28,*)    445.10 sec, wall time      7.05 sec
+    CPU time for get_k_kpts: make_kpt (29,*)    433.58 sec, wall time      6.96 sec
+    CPU time for get_k_kpts: make_kpt (30,*)    410.68 sec, wall time      6.55 sec
+    CPU time for get_k_kpts: make_kpt (31,*)    425.63 sec, wall time      6.81 sec

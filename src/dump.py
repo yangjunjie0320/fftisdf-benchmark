@@ -27,7 +27,9 @@ if __name__ == "__main__":
 
     elif "fftdf" in method:
         assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftdf"))
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method)
+        method = method.split("-")
+
+        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method[0])
         cmd += "python main.py "
         cmd += "--ke_cutoff=%.2f " % float(method[1])
 
