@@ -1,0 +1,69 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47047332/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47047332/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class '__main__.InterpolativeSeparableDensityFitting'> ********
+mesh = [81 81 81] (531441 PWs)
+len(kpts) = 64
+Overwritten attributes  c0 kmesh tol  of <class '__main__.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (1000 / [81 81 81]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 7.9e-07 Eh.
+Recommended ke_cutoff/mesh are 1368.68 / [95 95 95].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff = 110.38
+Final parent grid size = [17 15 17]
+
+Selecting interpolation points
+nkpts = 64, nao = 39, c0 =  80.00
+Parent grid mesh = [17 15 17], grid size = 4335
+    CPU time for select interpolation points    707.41 sec, wall time     11.88 sec
+Pivoted Cholesky rank = 4112, nip = 3120, estimated error = 5.69e-06
+Number of interpolation points = 3120, effective CISDF =  80.00
+    CPU time for building left-hand side    106.57 sec, wall time      6.46 sec
+
+kpt = 64, ngrid = 531441, nao = 39
+ngrid = 531441, blksize = 15053, nip = 3120
+required disk space = 1697 GB
+finished creating fswp: /central/scratch/yangjunjie/nio-dzvp-444/47047332/lhkr575f
+blksize = 15053, memory for aoR_loop = 48092 MB
+finished aoR_loop[       0:   15053]
+finished aoR_loop[   15053:   30106]
+finished aoR_loop[   30106:   45159]
+finished aoR_loop[   45159:   60212]
+finished aoR_loop[   60212:   75265]
+finished aoR_loop[   75265:   90318]
+finished aoR_loop[   90318:  105371]
+finished aoR_loop[  105371:  120424]
+finished aoR_loop[  120424:  135477]
+finished aoR_loop[  135477:  150530]
+finished aoR_loop[  150530:  165583]
+finished aoR_loop[  165583:  180636]
+finished aoR_loop[  180636:  195689]
+finished aoR_loop[  195689:  210742]
+finished aoR_loop[  210742:  225795]
+finished aoR_loop[  225795:  240848]
+finished aoR_loop[  240848:  255901]
+finished aoR_loop[  255901:  270954]
+finished aoR_loop[  270954:  286007]
+finished aoR_loop[  286007:  301060]
+finished aoR_loop[  301060:  316113]
+finished aoR_loop[  316113:  331166]
+finished aoR_loop[  331166:  346219]
+finished aoR_loop[  346219:  361272]
+finished aoR_loop[  361272:  376325]
+finished aoR_loop[  376325:  391378]
+finished aoR_loop[  391378:  406431]
+finished aoR_loop[  406431:  421484]
+finished aoR_loop[  421484:  436537]
+finished aoR_loop[  436537:  451590]
+finished aoR_loop[  451590:  466643]

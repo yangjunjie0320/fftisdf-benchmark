@@ -25,7 +25,7 @@ def main(args):
     from fft_isdf import ISDF
     df_obj = ISDF(cell, kpts=kpts)
     df_obj.c0 = args.c0
-    df_obj.tol = 1e-10
+    df_obj.tol = 1e-8
     df_obj.verbose = 10
     df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 

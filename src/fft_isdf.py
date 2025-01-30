@@ -308,7 +308,7 @@ def lstsq(a, b, tol=1e-10):
     v = vh.conj().T
 
     r = s[None, :] * s[:, None]
-    m = abs(r) > tol ** 2
+    m = abs(r) > tol
     rank = m.sum() / m.shape[0]
     t = (uh @ b @ u) * m / r
     return v @ t @ vh, int(rank)
@@ -320,7 +320,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
     tol = 1e-10
     blksize = 800
-    lstsq_driver = "gelsy"
     wrap_around = False
 
     _isdf = None
