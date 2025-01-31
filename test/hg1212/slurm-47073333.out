@@ -366,3 +366,12 @@ required disk space = 114 GB
 finished creating fswp: /central/scratch/yangjunjie/hg1212/47073333/5s1nry8i
 blksize = 3219723, memory for aoR_loop = 24521 MB
 finished aoR_loop[       0: 3219723]
+finished aoR_loop[ 3219723: 6439446]
+finished aoR_loop[ 6439446: 9659169]
+finished aoR_loop[ 9659169:12878892]
+finished aoR_loop[12878892:14982583]
+    CPU time for building right-hand side   9328.47 sec, wall time    432.05 sec
+w[  0], rank =  476 /  476
+    CPU time for w[  0]   2372.14 sec, wall time    266.02 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//hg1212/47073333/tmp.chk
+    CPU time for building ISDF  11727.71 sec, wall time    699.42 sec
