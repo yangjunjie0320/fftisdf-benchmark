@@ -37,6 +37,12 @@ def collect(d):
             vj = chkfile.load(os.path.join(d1, "vjk.chk"), "vj")
             vk = chkfile.load(os.path.join(d1, "vjk.chk"), "vk")
         
+        if vj is None:
+            vj = numpy.nan
+
+        if vk is None:
+            vk = numpy.nan
+
         res[numpy.prod(kmesh)] = {"info": info, "vj": vj, "vk": vk}
     return res
 
