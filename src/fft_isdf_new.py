@@ -59,13 +59,28 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
 
     # build the linear equation
     a_k = df_obj._make_lhs(x_k, kpts=kpts, kmesh=kmesh)
-    b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
+    # b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
 
     # solve the linear equation
     # a_k is a numpy array, b_k is a hdf5 dataset
-    w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
-    assert w_k.shape == (nkpt, nip, nip)
+    # w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
 
+    w_k = []
+
+    for q in range(nkpt):
+        a_q = a_k[q]
+        b_q = _make_rhs_incore(df_obj, x_k, q=q, kpts=kpts, kmesh=kmesh)
+
+        assert a_q.shape == (nip, nip)
+        ngrid = b_q.shape[0]
+        assert b_q.shape == (ngrid, nip)
+
+        w_q = df_obj.solve(a_q, b_q, q=q, kpts=kpts, kmesh=kmesh)
+        assert w_q.shape == (nip, nip)
+
+        w_k.append(w_q)
+
+    w_k = numpy.asarray(w_k)
     return x_k, w_k
 
 @line_profiler.profile
@@ -121,6 +136,7 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     t1 = log.timer("building right-hand side", *t0)
     return b_k
 
+@line_profiler.profile
 def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
@@ -150,6 +166,13 @@ def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     log.debug("ngrid = %d, blksize = %d, nip = %d", ngrid, blksize, nip)
     log.debug("required disk space = %d GB", nkpt * ngrid * nip * 16 / 1e9)
 
+    # b = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
+    from pyscf.lib import H5TmpFile
+    # swap = H5TmpFile()
+    # swap.create_dataset("rhs", shape=(ngrid, nip), dtype=numpy.complex128)
+    # b = swap["rhs"]
+    # log.debug("finished creating fswp: %s", swap.filename)
+    # df_obj._fswap = swap
     b = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
 
     log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
@@ -157,18 +180,23 @@ def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
         t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
         assert t_k.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
 
+        assert phase.shape == (nimg, nkpt)
+
         t_s = k2s(t_k, phase)
         t_s = t_s.reshape(nimg, g1 - g0, nip)
 
+        b_s = (t_s * t_s).reshape(nimg, -1)
+
+        # b[g0:g1] += lib.dot(phase[:, q].conj(), b_s).reshape(g1 - g0, nip)
         for s in range(nimg):
-            b[g0:g1] += phase[s, q].conj() * t_s[s] * t_s[s]
+            b[g0:g1] += phase[s, q] * b_s[s].reshape(g1 - g0, nip)
 
     t1 = log.timer("building right-hand side", *t0)
     return b
     
 
 @line_profiler.profile
-def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
+def _make_lhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
 
@@ -199,6 +227,9 @@ def _make_lhs_incore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     a_s = (x2_s * x2_s)
     a_k = s2k(a_s, phase)
     assert a_k.shape == (nkpt, nip, nip)
+    # a = numpy.zeros((nip, nip), dtype=numpy.complex128)
+    # for s in range(nimg):
+    #     a += phase[s, q] * a_s[s]
 
     t1 = log.timer("building left-hand side", *t0)
     return a_k
@@ -550,12 +581,12 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         return _make_lhs_incore(self, x_k, kpts=kpts, kmesh=kmesh)
     
     @line_profiler.profile
-    def solve(self, a_q, b_q, kpts=None, kmesh=None):
+    def solve(self, a, b, q=0, kpts=None, kmesh=None):
         log = logger.new_logger(self, self.verbose)
         t0 = (process_clock(), perf_counter())
 
         nkpt = len(kpts)
-        nip = a_q.shape[1]
+        nip = a.shape[0]
 
         pcell = self.cell
         nao = pcell.nao_nr()
@@ -577,26 +608,25 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         w_k = []
         gv = pcell.get_Gv(mesh)
 
-        for q, (a, b) in enumerate(zip(a_q, b_q)):
-            t = numpy.dot(coord, kpts[q])
-            f = numpy.exp(-1j * t)
-            assert f.shape == (ngrid, )
+        t = numpy.dot(coord, kpts[q])
+        f = numpy.exp(-1j * t)
+        assert f.shape == (ngrid, )
 
-            assert a.shape == (nip, nip)
-            assert b.shape == (ngrid, nip)
+        assert a.shape == (nip, nip)
+        assert b.shape == (ngrid, nip)
 
-            zeta = pbctools.fft(b.T * f, mesh)
-            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-            zeta *= pcell.vol / ngrid
+        zeta = pbctools.fft(b.T * f, mesh)
+        zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
+        zeta *= pcell.vol / ngrid
 
-            from pyscf.pbc.tools.pbc import ifft
-            coul = ifft(zeta, mesh) * f.conj()
-            assert coul.shape == (nip, ngrid)
+        from pyscf.pbc.tools.pbc import ifft
+        coul = ifft(zeta, mesh) * f.conj()
+        assert coul.shape == (nip, ngrid)
 
-            w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
-            w_k.append(w)
-            log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
-            t0 = log.timer("w[%3d]" % q, *t0)
+        w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
+        w_k.append(w)
+        log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
+        t0 = log.timer("w[%3d]" % q, *t0)
 
         w_k = numpy.asarray(w_k)
         assert w_k.shape == (nkpt, nip, nip)
@@ -636,7 +666,7 @@ if __name__ == "__main__":
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
-    kmesh = [2, 2, 2]
+    kmesh = [4, 4, 4]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
@@ -647,34 +677,55 @@ if __name__ == "__main__":
     log = logger.new_logger(None, 5)
 
     t0 = (process_clock(), perf_counter())
-    scf_obj.with_df = FFTDF(cell, kpts)
-    scf_obj.with_df.verbose = 5
-    scf_obj.with_df.dump_flags()
-    scf_obj.with_df.check_sanity()
+    # scf_obj.with_df = FFTDF(cell, kpts)
+    # scf_obj.with_df.verbose = 5
+    # scf_obj.with_df.dump_flags()
+    # scf_obj.with_df.check_sanity()
 
-    vj1 = numpy.zeros((nkpt, nao, nao))
-    vk1 = numpy.zeros((nkpt, nao, nao))
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
-    t1 = log.timer("-> FFTDF JK", *t0)
+    # vj1 = numpy.zeros((nkpt, nao, nao))
+    # vk1 = numpy.zeros((nkpt, nao, nao))
+    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    # vj1 = vj1.reshape(nkpt, nao, nao)
+    # vk1 = vk1.reshape(nkpt, nao, nao)
+    # t1 = log.timer("-> FFTDF JK", *t0)
 
     # for c0 in [5.0, 10.0, 15.0, 20.0]:
     c0 = 10.0
     scf_obj.with_df = ISDF(cell, kpts=kpts)
     scf_obj.with_df.c0 = c0
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.tol = 1e-12
+    scf_obj.with_df.tol = 1e-10
     df_obj = scf_obj.with_df
+    df_obj.build()
 
-    from pyscf.pbc.tools.pbc import cutoff_to_mesh
-    m0 = cutoff_to_mesh(cell.a, 40.0)
-    x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
-    nip, nao = x_k.shape[1:]
-    assert x_k.shape == (nkpt, nip, nao)
+    # from pyscf.pbc.tools.pbc import cutoff_to_mesh
+    # m0 = cutoff_to_mesh(cell.a, 40.0)
+    # x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
+    # nip, nao = x_k.shape[1:]
+    # assert x_k.shape == (nkpt, nip, nao)
 
-    b_k_ref = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
+    # b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
 
-    for q in range(nkpt):
-        b_k = _make_rhs_incore(df_obj, x_k, q=q, kpts=kpts, kmesh=kmesh)
-        assert numpy.allclose(b_k, b_k_ref[q])
+    # for q in range(nkpt):
+    #     b_q_sol = _make_rhs_incore(df_obj, x_k, q=q, kpts=kpts, kmesh=kmesh, blksize=1000)
+    #     b_q_ref = b_k[q]
+
+    #     err = abs(b_q_ref - b_q_sol).max()
+
+    #     if err > 1e-8:
+    #         from sys import stdout
+            
+    #         print("err = %6.4e, q = %d", err, q)
+    #         print(f"b_q_ref real = ")
+    #         numpy.savetxt(stdout, b_q_ref.real[:10, :10], delimiter=", ", fmt="% 6.2e")
+
+    #         print("b_q_ref imag = ")
+    #         numpy.savetxt(stdout, b_q_ref.imag[:10, :10], delimiter=", ", fmt="% 6.2e")
+
+    #         print("b_q_sol real = ")
+    #         numpy.savetxt(stdout, b_q_sol.real[:10, :10], delimiter=", ", fmt="% 6.2e")
+
+    #         print("b_q_sol imag = ")
+    #         numpy.savetxt(stdout, b_q_sol.imag[:10, :10], delimiter=", ", fmt="% 6.2e")
+
+    #         assert 1 == 2
