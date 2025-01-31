@@ -29,3 +29,17 @@ Parent grid mesh = [17 15 17], grid size = 4335
     CPU time for select interpolation points    709.28 sec, wall time     11.95 sec
 Pivoted Cholesky rank = 4112, nip = 3120, estimated error = 5.69e-06
 Number of interpolation points = 3120, effective CISDF =  80.00
+    CPU time for building left-hand side    122.68 sec, wall time      6.78 sec
+
+kpt = 64, ngrid = 531441, nao = 39
+ngrid = 531441, blksize = 15051, nip = 3120
+required disk space = 1697 GB
+finished creating fswp: /central/scratch/yangjunjie/nio-dzvp-444/47071045/j3cc1k0v
+blksize = 15051, memory for aoR_loop = 48086 MB
+finished aoR_loop[       0:   15051]
+finished aoR_loop[   15051:   30102]
+finished aoR_loop[   30102:   45153]
+finished aoR_loop[   45153:   60204]
+finished aoR_loop[   60204:   75255]
+finished aoR_loop[   75255:   90306]
+finished aoR_loop[   90306:  105357]
