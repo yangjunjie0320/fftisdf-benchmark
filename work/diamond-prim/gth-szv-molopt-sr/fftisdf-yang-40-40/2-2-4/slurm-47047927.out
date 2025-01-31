@@ -1,0 +1,93 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-40-40/2-2-4//47047927/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-40-40/2-2-4//47047927/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 16
+    kpts = [[ 0.          0.          0.        ]
+ [-0.19060507 -0.13477816  0.33013771]
+ [-0.38121014 -0.26955632  0.66027542]
+ [-0.57181522 -0.40433448  0.99041314]
+ [ 0.          0.80866896  0.        ]
+ [-0.19060507  0.6738908   0.33013771]
+ [-0.38121014  0.53911264  0.66027542]
+ [-0.57181522  0.40433448  0.99041314]
+ [ 0.76242029 -0.26955632  0.        ]
+ [ 0.57181522 -0.40433448  0.33013771]
+ [ 0.38121014 -0.53911264  0.66027542]
+ [ 0.19060507 -0.6738908   0.99041314]
+ [ 0.76242029  0.53911264  0.        ]
+ [ 0.57181522  0.40433448  0.33013771]
+ [ 0.38121014  0.26955632  0.66027542]
+ [ 0.19060507  0.13477816  0.99041314]]
+Overwritten attributes  tol c0 kmesh  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+kmesh = [2 2 4]
+Input parent grid mesh = [7, 7, 7], ke_cutoff =  28.02
+Final parent grid size = [9 7 9]
+
+Selecting interpolation points
+nkpts = 16, nao = 8, c0 =  40.00
+Parent grid mesh = [9 7 9], grid size = 567
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     60.08 sec, wall time      0.95 sec
+Pivoted Cholesky rank = 567, nip = 320, estimated error = 8.89e-04
+Number of interpolation points = 320, effective CISDF =  40.00
+    CPU time for building left-hand side     12.23 sec, wall time      0.20 sec
+
+kpt = 16, ngrid = 3375, nao = 8
+ngrid = 3375, blksize = 599610, nip = 320
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-40-40/2-2-4/47047927/39uqjunt
+blksize = 599610, memory for aoR_loop = 49120 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side     34.92 sec, wall time      0.60 sec
+w[  0], rank =   47 /  320
+    CPU time for w[  0]     15.37 sec, wall time      0.24 sec
+w[  1], rank =   47 /  320
+    CPU time for w[  1]      5.99 sec, wall time      0.09 sec
+w[  2], rank =   47 /  320
+    CPU time for w[  2]      6.25 sec, wall time      0.10 sec
+w[  3], rank =   47 /  320
+    CPU time for w[  3]      5.87 sec, wall time      0.09 sec
+w[  4], rank =   46 /  320
+    CPU time for w[  4]      6.38 sec, wall time      0.10 sec
+w[  5], rank =   46 /  320
+    CPU time for w[  5]      6.06 sec, wall time      0.10 sec
+w[  6], rank =   46 /  320
+    CPU time for w[  6]      6.26 sec, wall time      0.10 sec
+w[  7], rank =   46 /  320
+    CPU time for w[  7]      6.26 sec, wall time      0.10 sec
+w[  8], rank =   46 /  320
+    CPU time for w[  8]      6.06 sec, wall time      0.09 sec
+w[  9], rank =   46 /  320
+    CPU time for w[  9]      6.19 sec, wall time      0.10 sec
+w[ 10], rank =   46 /  320
+    CPU time for w[ 10]      6.12 sec, wall time      0.10 sec
+w[ 11], rank =   46 /  320
+    CPU time for w[ 11]      6.19 sec, wall time      0.10 sec
+w[ 12], rank =   46 /  320
+    CPU time for w[ 12]      6.00 sec, wall time      0.09 sec
+w[ 13], rank =   46 /  320
+    CPU time for w[ 13]      6.19 sec, wall time      0.10 sec
+w[ 14], rank =   46 /  320
+    CPU time for w[ 14]      5.87 sec, wall time      0.09 sec
+w[ 15], rank =   46 /  320
+    CPU time for w[ 15]      5.94 sec, wall time      0.09 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/gth-szv-molopt-sr/fftisdf-yang-40-40/2-2-4//47047927/tmp.chk
+    CPU time for building ISDF    221.99 sec, wall time      3.55 sec

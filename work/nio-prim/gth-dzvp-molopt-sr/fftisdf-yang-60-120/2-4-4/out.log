@@ -1,0 +1,4 @@
+    CPU time for build  73491.52 sec, wall time   1224.57 sec
+    CPU time for get_j      8.61 sec, wall time      0.90 sec
+    CPU time for get_k     73.53 sec, wall time      4.68 sec
+chk file size: 2.85e+00 GB

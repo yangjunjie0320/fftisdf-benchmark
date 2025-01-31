@@ -36,7 +36,7 @@ kmesh = [1, 1, 1]
 cell.spin = 0
 cell.verbose = 5
 cell.precision = 1e-8
-cell.ke_cutoff = 80
+cell.ke_cutoff = 1000
 cell.max_memory = PYSCF_MAX_MEMORY / 2
 cell.build()
 
@@ -44,8 +44,9 @@ kpts = cell.get_kpts(kmesh)
 
 from fft_isdf import ISDF
 df_obj = ISDF(cell, kpts=kpts)
-df_obj.c0 = 20.0
-df_obj.tol = 1e-16
+df_obj.c0 = 10.0
+df_obj.tol = 1e-8
 df_obj.verbose = 10
 df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 df_obj.build()
+

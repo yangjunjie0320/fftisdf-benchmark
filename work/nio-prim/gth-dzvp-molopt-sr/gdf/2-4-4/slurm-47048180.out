@@ -1,0 +1,687 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/nio-prim/gth-dzvp-molopt-sr/gdf/2-4-4//47048180/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/nio-prim/gth-dzvp-molopt-sr/gdf/2-4-4//47048180/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = 0.1
+_cderi_to_save = /central/scratch/yangjunjie//work/nio-prim/gth-dzvp-molopt-sr/gdf/2-4-4//47048180/gdf.chk
+len(kpts) = 32
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.62121641e-01 -1.14637399e-01  2.80803037e-01]
+ [-3.24243283e-01 -2.29274798e-01  5.61606073e-01]
+ [-4.86364924e-01 -3.43912196e-01  8.42409110e-01]
+ [ 1.34152098e-09  3.43912129e-01  0.00000000e+00]
+ [-1.62121640e-01  2.29274730e-01  2.80803037e-01]
+ [-3.24243281e-01  1.14637331e-01  5.61606073e-01]
+ [-4.86364922e-01 -6.72557783e-08  8.42409110e-01]
+ [ 2.68304197e-09  6.87824258e-01  0.00000000e+00]
+ [-1.62121639e-01  5.73186859e-01  2.80803037e-01]
+ [-3.24243280e-01  4.58549461e-01  5.61606073e-01]
+ [-4.86364921e-01  3.43912062e-01  8.42409110e-01]
+ [ 4.02456295e-09  1.03173639e+00  0.00000000e+00]
+ [-1.62121637e-01  9.17098988e-01  2.80803037e-01]
+ [-3.24243278e-01  8.02461590e-01  5.61606073e-01]
+ [-4.86364920e-01  6.87824191e-01  8.42409110e-01]
+ [ 6.48486565e-01 -2.29274661e-01  0.00000000e+00]
+ [ 4.86364923e-01 -3.43912060e-01  2.80803037e-01]
+ [ 3.24243282e-01 -4.58549459e-01  5.61606073e-01]
+ [ 1.62121641e-01 -5.73186858e-01  8.42409110e-01]
+ [ 6.48486566e-01  1.14637468e-01  0.00000000e+00]
+ [ 4.86364925e-01  6.88048341e-08  2.80803037e-01]
+ [ 3.24243283e-01 -1.14637330e-01  5.61606073e-01]
+ [ 1.62121642e-01 -2.29274729e-01  8.42409110e-01]
+ [ 6.48486567e-01  4.58549597e-01  0.00000000e+00]
+ [ 4.86364926e-01  3.43912198e-01  2.80803037e-01]
+ [ 3.24243285e-01  2.29274799e-01  5.61606073e-01]
+ [ 1.62121643e-01  1.14637400e-01  8.42409110e-01]
+ [ 6.48486569e-01  8.02461726e-01  0.00000000e+00]
+ [ 4.86364927e-01  6.87824327e-01  2.80803037e-01]
+ [ 3.24243286e-01  5.73186928e-01  5.61606073e-01]
+ [ 1.62121645e-01  4.58549529e-01  8.42409110e-01]]
+    CPU time for j3c   8808.89 sec, wall time    199.29 sec
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+    CPU time for get_j pass 1     14.08 sec, wall time      0.41 sec
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+max_memory 490151 MB, blksize 240
+    CPU time for get_j pass 2      7.52 sec, wall time      0.32 sec
+    CPU time for get_j     21.61 sec, wall time      0.73 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 13 / 39
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)      3.45 sec, wall time      0.05 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)      2.74 sec, wall time      0.04 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)      5.06 sec, wall time      0.08 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)      6.42 sec, wall time      0.10 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (4,*)      8.97 sec, wall time      0.14 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (5,*)      8.30 sec, wall time      0.13 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (6,*)     10.58 sec, wall time      0.17 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (7,*)     13.04 sec, wall time      0.20 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (8,*)     15.06 sec, wall time      0.24 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (9,*)     16.46 sec, wall time      0.26 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (10,*)     17.07 sec, wall time      0.27 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (11,*)     18.38 sec, wall time      0.29 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (12,*)     25.05 sec, wall time      0.39 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (13,*)     24.81 sec, wall time      0.39 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (14,*)     27.88 sec, wall time      0.44 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (15,*)     24.48 sec, wall time      0.38 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (16,*)     33.11 sec, wall time      0.52 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (17,*)     29.88 sec, wall time      0.47 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (18,*)     34.91 sec, wall time      0.55 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (19,*)     30.70 sec, wall time      0.48 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (20,*)     32.80 sec, wall time      0.52 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (21,*)     38.11 sec, wall time      0.60 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (22,*)     36.94 sec, wall time      0.58 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (23,*)     39.57 sec, wall time      0.62 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (24,*)     53.35 sec, wall time      0.84 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (25,*)     48.25 sec, wall time      0.76 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (26,*)     50.56 sec, wall time      0.80 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (27,*)     47.30 sec, wall time      0.74 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (28,*)     45.37 sec, wall time      0.71 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (29,*)     52.02 sec, wall time      0.82 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (30,*)     48.96 sec, wall time      0.77 sec
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+max_memory 490123 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (31,*)     52.33 sec, wall time      0.82 sec
+    CPU time for buf1      57.72 sec, wall time       0.91 sec
+    CPU time for ct11     100.86 sec, wall time       1.58 sec
+    CPU time for ct12      64.20 sec, wall time       1.01 sec
+    CPU time for buf2       0.79 sec, wall time       0.01 sec
+    CPU time for ct21       8.48 sec, wall time       0.13 sec
+    CPU time for ct22     217.61 sec, wall time       3.43 sec
+    CPU time for load     432.70 sec, wall time       6.80 sec
+    CPU time for get_k_kpts    902.12 sec, wall time     14.18 sec

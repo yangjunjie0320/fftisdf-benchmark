@@ -1,0 +1,57 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/gdf/1-2-2//47047977/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/gdf/1-2-2//47047977/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class 'pyscf.pbc.df.df.GDF'> ********
+auxbasis = None
+exp_to_discard = 0.1
+_cderi_to_save = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/gdf/1-2-2//47047977/gdf.chk
+len(kpts) = 4
+    kpts = [[ 0.          0.          0.        ]
+ [-0.38121014 -0.26955632  0.66027542]
+ [ 0.          0.80866896  0.        ]
+ [-0.38121014  0.53911264  0.66027542]]
+    CPU time for j3c   2141.88 sec, wall time    170.22 sec
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+    CPU time for get_j pass 1      5.15 sec, wall time      0.08 sec
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+max_memory 491078 MB, blksize 240
+    CPU time for get_j pass 2      0.32 sec, wall time      0.01 sec
+    CPU time for get_j      5.50 sec, wall time      0.10 sec
+get_k_kpts: build K from symm mo coeff
+get_k_kpts: rank(dm) = 8 / 26
+max_memory 491074 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (0,*)      1.28 sec, wall time      0.02 sec
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (1,*)      2.09 sec, wall time      0.03 sec
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (2,*)      3.33 sec, wall time      0.05 sec
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+max_memory 491074 MB, blksize 240
+    CPU time for get_k_kpts: make_kpt ki>=kj (3,*)      4.36 sec, wall time      0.07 sec
+    CPU time for buf1       0.43 sec, wall time       0.01 sec
+    CPU time for ct11       1.08 sec, wall time       0.02 sec
+    CPU time for ct12       0.94 sec, wall time       0.01 sec
+    CPU time for buf2       0.01 sec, wall time       0.00 sec
+    CPU time for ct21       0.18 sec, wall time       0.00 sec
+    CPU time for ct22       3.21 sec, wall time       0.05 sec
+    CPU time for load       5.05 sec, wall time       0.08 sec
+    CPU time for get_k_kpts     11.13 sec, wall time      0.17 sec
