@@ -1,0 +1,31 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47071045/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47071045/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.7.0
+1.14.1
+1.26.4
+
+
+******** <class '__main__.InterpolativeSeparableDensityFitting'> ********
+mesh = [81 81 81] (531441 PWs)
+len(kpts) = 64
+Overwritten attributes  tol kmesh c0  of <class '__main__.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (1000 / [81 81 81]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 7.9e-07 Eh.
+Recommended ke_cutoff/mesh are 1368.68 / [95 95 95].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [15, 15, 15], ke_cutoff = 110.38
+Final parent grid size = [17 15 17]
+
+Selecting interpolation points
+nkpts = 64, nao = 39, c0 =  80.00
+Parent grid mesh = [17 15 17], grid size = 4335
+    CPU time for select interpolation points    709.28 sec, wall time     11.95 sec
+Pivoted Cholesky rank = 4112, nip = 3120, estimated error = 5.69e-06
+Number of interpolation points = 3120, effective CISDF =  80.00

@@ -554,9 +554,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             coul = ifft(zeta, mesh) * f.conj()
             assert coul.shape == (nip, ngrid)
 
-            from pyscf.lib.chkfile import dump
-            dump("tmp.chk", "a-q-%d" % q, a)
-            dump("tmp.chk", "b-q-%d" % q, coul @ b.conj())
+            # from pyscf.lib.chkfile import dump
+            # dump("tmp.chk", "a-q-%d" % q, a)
+            # dump("tmp.chk", "b-q-%d" % q, coul @ b.conj())
             w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
             w_k.append(w)
             log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
