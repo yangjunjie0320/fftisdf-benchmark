@@ -605,7 +605,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         coord = grids.coords
         ngrid = coord.shape[0]
 
-        w_k = []
         gv = pcell.get_Gv(mesh)
 
         t = numpy.dot(coord, kpts[q])
@@ -615,22 +614,23 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         assert a.shape == (nip, nip)
         assert b.shape == (ngrid, nip)
 
-        zeta = pbctools.fft(b.T * f, mesh)
-        zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-        zeta *= pcell.vol / ngrid
+        v = numpy.zeros((nip, nip), dtype=numpy.complex128)
 
-        from pyscf.pbc.tools.pbc import ifft
-        coul = ifft(zeta, mesh) * f.conj()
-        assert coul.shape == (nip, ngrid)
+        for i in range(nip):
+            zeta = pbctools.fft(b[:, i].T * f, mesh)
+            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
+            zeta *= pcell.vol / ngrid
 
-        w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
-        w_k.append(w)
+            from pyscf.pbc.tools.pbc import ifft
+            coul = ifft(zeta, mesh) * f.conj()
+            assert coul.shape == (ngrid, )
+
+            v[:, i] = coul @ b.conj()
+
+        w, rank = lstsq(a, v, tol=self.tol)
         log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
         t0 = log.timer("w[%3d]" % q, *t0)
-
-        w_k = numpy.asarray(w_k)
-        assert w_k.shape == (nkpt, nip, nip)
-        return w_k
+        return w
     
     def get_jk(self, dm, hermi=1, kpts=None, kpts_band=None,
                with_j=True, with_k=True, omega=None, exxdiv=None):
@@ -666,7 +666,8 @@ if __name__ == "__main__":
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
-    kmesh = [4, 4, 4]
+    # kmesh = [4, 4, 4]
+    kmesh = [2, 2, 2]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
@@ -677,19 +678,20 @@ if __name__ == "__main__":
     log = logger.new_logger(None, 5)
 
     t0 = (process_clock(), perf_counter())
-    # scf_obj.with_df = FFTDF(cell, kpts)
-    # scf_obj.with_df.verbose = 5
-    # scf_obj.with_df.dump_flags()
-    # scf_obj.with_df.check_sanity()
+    scf_obj.with_df = FFTDF(cell, kpts)
+    scf_obj.with_df.verbose = 5
+    scf_obj.with_df.dump_flags()
+    scf_obj.with_df.check_sanity()
 
-    # vj1 = numpy.zeros((nkpt, nao, nao))
-    # vk1 = numpy.zeros((nkpt, nao, nao))
-    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    # vj1 = vj1.reshape(nkpt, nao, nao)
-    # vk1 = vk1.reshape(nkpt, nao, nao)
-    # t1 = log.timer("-> FFTDF JK", *t0)
+    vj1 = numpy.zeros((nkpt, nao, nao))
+    vk1 = numpy.zeros((nkpt, nao, nao))
+    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj1 = vj1.reshape(nkpt, nao, nao)
+    vk1 = vk1.reshape(nkpt, nao, nao)
+    t1 = log.timer("-> FFTDF JK", *t0)
 
     # for c0 in [5.0, 10.0, 15.0, 20.0]:
+    t0 = (process_clock(), perf_counter())
     c0 = 10.0
     scf_obj.with_df = ISDF(cell, kpts=kpts)
     scf_obj.with_df.c0 = c0
@@ -697,6 +699,21 @@ if __name__ == "__main__":
     scf_obj.with_df.tol = 1e-10
     df_obj = scf_obj.with_df
     df_obj.build()
+    t1 = log.timer("-> ISDF build", *t0)
+
+    t0 = (process_clock(), perf_counter())
+    vj2 = numpy.zeros((nkpt, nao, nao))
+    vk2 = numpy.zeros((nkpt, nao, nao))
+    vj2, vk2 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj2 = vj2.reshape(nkpt, nao, nao)
+    vk2 = vk2.reshape(nkpt, nao, nao)
+    t1 = log.timer("-> ISDF JK", *t0)
+
+    err_j = abs(vj1 - vj2).max()
+    err_k = abs(vk1 - vk2).max()
+    print(f"err_j = {err_j}, err_k = {err_k}")
+    assert err_j < 1e-10
+    assert err_k < 1e-10
 
     # from pyscf.pbc.tools.pbc import cutoff_to_mesh
     # m0 = cutoff_to_mesh(cell.a, 40.0)
