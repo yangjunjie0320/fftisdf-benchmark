@@ -18,21 +18,27 @@ import line_profiler
 
 PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 2000))
 
-def s2k(m, p):
+# Naming convention:
+# *_kpt: k-space array, which shapes as (nkpt, x, x)
+# *_spc: super-cell stripe array, which shapes as (nspc, x, x)
+# *_full: full array, shapes as (nspc * x, nspc * x)
+# *_k1, *_k2: the k-space array at specified k-point
+
+def spc_to_kpt(m_spc, phase):
     """Convert a matrix from the stripe form (in super-cell)
     to the k-space form.
     """
-    nimg, nkpt = p.shape
-    n = p.T.conj() @ m.reshape(nimg, -1)
-    return n.reshape(m.shape)
+    nspc, nkpt = phase.shape
+    m_kpt = lib.dot(phase.conj().T, m_spc.reshape(nspc, -1))
+    return m_kpt.reshape(m_spc.shape)
 
-def k2s(m, p):
+def kpt_to_spc(m_kpt, phase):
     """Convert a matrix from the k-space form to
     stripe form (in super-cell).
     """
-    nimg, nkpt = p.shape
-    n = p @ m.reshape(nkpt, -1)
-    return n.reshape(m.shape)
+    nimg, nkpt = phase.shape
+    m_spc = lib.dot(phase, m_kpt.reshape(nkpt, -1))
+    return m_spc.reshape(m_kpt.shape)
 
 @line_profiler.profile
 def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
@@ -49,16 +55,14 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     nkpt = len(kpts)
 
     # build the interpolation vectors
-    x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
-    nip, nao = x_k.shape[1:]
-    assert x_k.shape == (nkpt, nip, nao)
-    log.info(
-        "Number of interpolation points = %d, effective CISDF = %6.2f",
-        nip, nip / nao
-    )
+    inp_vec_kpt = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
+    # x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
+    nip, nao = inp_vec_kpt.shape[1:]
+    assert inp_vec_kpt.shape == (nkpt, nip, nao)
+    log.info("nip = %d, cisdf = %6.2f", nip, nip / nao)
 
     # build the linear equation
-    a_k = df_obj._make_lhs(x_k, kpts=kpts, kmesh=kmesh)
+    lhs_kpt = df_obj._make_lhs(inp_vec_kpt, kpts=kpts, kmesh=kmesh)
     # b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
 
     # solve the linear equation
@@ -68,8 +72,11 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     w_k = []
 
     for q in range(nkpt):
-        a_q = a_k[q]
-        b_q = _make_rhs_incore(df_obj, x_k, q=q, kpts=kpts, kmesh=kmesh)
+        a_q = lhs_kpt[q]
+        b_q = _make_rhs_incore(
+            df_obj, inp_vec_kpt, 
+            q=q, kpts=kpts, kmesh=kmesh
+            )
 
         assert a_q.shape == (nip, nip)
         ngrid = b_q.shape[0]
@@ -125,11 +132,11 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
         t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
         assert t_k.shape == (nkpt, g1 - g0, nip)
 
-        t_s = k2s(t_k, phase)
+        t_s = kpt_to_spc(t_k, phase)
         t_s = t_s.reshape(nimg, g1 - g0, nip)
 
         b_s = (t_s * t_s)
-        b_k[:, g0:g1, :] = s2k(b_s, phase).conj()
+        b_k[:, g0:g1, :] = spc_to_kpt(b_s, phase).conj()
 
         log.debug("finished aoR_loop[%8d:%8d]", g0, g1)
 
@@ -137,7 +144,7 @@ def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
     return b_k
 
 @line_profiler.profile
-def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
+def _make_rhs(df_obj, x_kpt, q=0, blksize=8000):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
 
@@ -147,13 +154,15 @@ def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     coord = grids.coords
     ngrid = coord.shape[0]
 
+    kpts = df_obj.kpts
+    kmesh = df_obj.kmesh
     nkpt = nimg = len(kpts)
     assert numpy.prod(kmesh) == nkpt
 
     pcell = df_obj.cell
     nao = pcell.nao_nr()
-    nip = x_k.shape[1]
-    assert x_k.shape == (nkpt, nip, nao)
+    nip = x_kpt.shape[1]
+    assert x_kpt.shape == (nkpt, nip, nao)
 
     wrap_around = df_obj.wrap_around
     scell, phase = get_phase(
@@ -162,37 +171,24 @@ def _make_rhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     )
     assert phase.shape == (nimg, nkpt)
 
-    log.debug("\nkpt = %d, ngrid = %d, nao = %d", nkpt, ngrid, nao)
-    log.debug("ngrid = %d, blksize = %d, nip = %d", ngrid, blksize, nip)
-    log.debug("required disk space = %d GB", nkpt * ngrid * nip * 16 / 1e9)
+    log.debug("\nnkpt = %d, nao = %d", nkpt, nao)
+    log.debug("ngrid = %d, blksize = %d", ngrid, blksize)
+    log.debug("required disk space = %d GB", ngrid * nip * 16 / 1e9)
 
-    # b = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
-    from pyscf.lib import H5TmpFile
-    # swap = H5TmpFile()
-    # swap.create_dataset("rhs", shape=(ngrid, nip), dtype=numpy.complex128)
-    # b = swap["rhs"]
-    # log.debug("finished creating fswp: %s", swap.filename)
-    # df_obj._fswap = swap
-    b = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
+    bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
 
     log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
-    for ao_k, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
-        t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
-        assert t_k.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
+    for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
+        t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], x_kpt)])
+        assert t_kpt.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
 
-        assert phase.shape == (nimg, nkpt)
-
-        t_s = k2s(t_k, phase)
-        t_s = t_s.reshape(nimg, g1 - g0, nip)
-
-        b_s = (t_s * t_s).reshape(nimg, -1)
-
-        # b[g0:g1] += lib.dot(phase[:, q].conj(), b_s).reshape(g1 - g0, nip)
-        for s in range(nimg):
-            b[g0:g1] += phase[s, q] * b_s[s].reshape(g1 - g0, nip)
+        t_spc = kpt_to_spc(t_kpt, phase)
+        t_spc = t_spc.reshape(nimg, g1 - g0, nip)
+        for s, ts in enumerate(t_spc):
+            bq[g0:g1] += phase[s, q] * ts * ts
 
     t1 = log.timer("building right-hand side", *t0)
-    return b
+    return bq
     
 
 @line_profiler.profile
@@ -221,11 +217,11 @@ def _make_lhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
     x2_k = numpy.asarray([x.conj() @ x.T for x in x_k])
     assert x2_k.shape == (nkpt, nip, nip)
 
-    x2_s = k2s(x2_k, phase)
+    x2_s = kpt_to_spc(x2_k, phase)
     assert x2_s.shape == (nimg, nip, nip)
 
     a_s = (x2_s * x2_s)
-    a_k = s2k(a_s, phase)
+    a_k = spc_to_kpt(a_s, phase)
     assert a_k.shape == (nkpt, nip, nip)
     # a = numpy.zeros((nip, nip), dtype=numpy.complex128)
     # for s in range(nimg):
@@ -331,7 +327,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     x_k = df_obj._x
     nip = x_k.shape[1]
 
-    w_s = k2s(df_obj._w, phase)
+    w_s = kpt_to_spc(df_obj._w, phase)
     w_s = w_s * numpy.sqrt(nkpt)
     w_s = w_s.reshape(nimg, nip, nip)
     
@@ -344,7 +340,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         rho_k = numpy.asarray(rho_k) / nkpt
         assert rho_k.shape == (nkpt, nip, nip)
 
-        rho_s = k2s(rho_k, phase)
+        rho_s = kpt_to_spc(rho_k, phase)
         assert rho_s.shape == (nimg, nip, nip)
         rho_s = rho_s.transpose(0, 2, 1)
 
@@ -352,7 +348,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         v_s = numpy.asarray(v_s).reshape(nimg, nip, nip)
 
         # v_k = phase.T.conj() @ v_s.reshape(nimg, -1)
-        v_k = s2k(v_s, phase).conj()
+        v_k = spc_to_kpt(v_s, phase).conj()
         assert v_k.shape == (nkpt, nip, nip)
 
         vk_kpts.append([x.conj().T @ v @ x for x, v in zip(x_k, v_k)])
