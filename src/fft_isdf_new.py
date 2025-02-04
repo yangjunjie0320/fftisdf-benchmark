@@ -87,8 +87,13 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     tol = df_obj.tol
 
     # build the interpolation vectors
-    inpv_kpt = df_obj.get_inpv(c0=c0)
-    nip, nao = inpv_kpt.shape[1:]
+    g0 = df_obj.get_inpv(c0=c0)
+    nip = g0.shape[0]
+    assert g0.shape == (nip, 3)
+    nao = cell.nao_nr()
+
+    inpv_kpt = cell.pbc_eval_gto("GTOval", g0, kpts=kpts)
+    inpv_kpt = numpy.asarray(inpv_kpt, dtype=numpy.complex128)
     assert inpv_kpt.shape == (nkpt, nip, nao)
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
 
@@ -255,8 +260,8 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
         for j0, j1 in lib.prange(0, nip, blksize):
             kern_qij = numpy.dot(w_qi.T.conj(), eta_q[:, j0:j1])
             assert kern_qij.shape == (i1 - i0, j1 - j0)
-            kern_q[i0:i1, j0:j1] += kern_qij
-            kern_q[j0:j1, i0:i1] += kern_qij.conj()
+            kern_q[i0:i1, j0:j1] = kern_qij
+            kern_q[j0:j1, i0:i1] = kern_qij.conj()
 
     return kern_q
 
@@ -507,49 +512,48 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     def get_inpv(self, c0=None):
         nao = self.cell.nao_nr()
         nip = nao * c0
-        m0 = numpy.power(nip, 1/3) + 1
+
+        nkpt = len(self.kpts)
 
         from pyscf.pbc.tools.pbc import mesh_to_cutoff
         lv = self.cell.lattice_vectors()
-        k0 = mesh_to_cutoff(lv, [int(m0)] * 3)
-        print(f"k0 = {k0}")
+        k0 = mesh_to_cutoff(lv, [int(numpy.power(nip, 1/3) + 1)] * 3)
         k0 = max(k0)
 
         from pyscf.pbc.tools.pbc import cutoff_to_mesh
-        m0 = cutoff_to_mesh(lv, k0)
-
-        # generate grids
-        g0 = self.cell.gen_uniform_grids(m0)
+        g0 = self.cell.gen_uniform_grids(cutoff_to_mesh(lv, k0))
         log = logger.new_logger(self, self.verbose)
-        t0 = (process_clock(), perf_counter())
 
         pcell = self.cell
         nao = pcell.nao_nr()
         ng = len(g0)
 
-        x2 = numpy.zeros((ng, ng))
-        x2 = pcell.pbc_eval_gto("GTOval", g0)
-        x2 = (x2.conj() @ x2.T).real
-        x4 = (x2 * x2) / nkpt
+        # x2 = numpy.zeros((ng, ng))
+        # x2 = pcell.pbc_eval_gto("GTOval", g0)
+        # x2 = (x2.conj() @ x2.T).real
+        # x4 = (x2 * x2) / nkpt
+        t0 = numpy.zeros((ng, ng))
+        for q in range(nkpt):
+            xq = pcell.pbc_eval_gto("GTOval", g0, kpts=self.kpts[q])
+            tq = numpy.dot(xq.conj(), xq.T)
+            t0 += tq.real
+        m0 = (t0 * t0) / nkpt
 
         from pyscf.lib.scipy_helper import pivoted_cholesky
         tol = self.tol
-        chol, perm, rank = pivoted_cholesky(x4, tol=tol ** 2)
+        chol, perm, rank = pivoted_cholesky(m0, tol=tol ** 2)
         if rank == ng:
             log.warn("The parent grid might be too coarse.")
 
-        nip = min(int(nao * c0), rank)
+        nip = min(int(nip), rank)
         mask = perm[:nip]
 
-        t1 = log.timer("select interpolation points", *t0)
         log.info(
             "Pivoted Cholesky rank = %d, nip = %d, estimated error = %6.2e",
             rank, nip, chol[nip-1, nip-1]
         )
 
-        x_k = pcell.pbc_eval_gto("GTOval", g0[mask], kpts=self.kpts)
-        x_k = numpy.asarray(x_k, dtype=numpy.complex128)
-        return x_k.reshape(nkpt, nip, nao)
+        return g0[mask]
     
     def get_jk(self, dm, hermi=1, kpts=None, kpts_band=None,
                with_j=True, with_k=True, omega=None, exxdiv=None):
@@ -604,35 +608,35 @@ if __name__ == "__main__":
 
     vj1 = numpy.zeros((nkpt, nao, nao))
     vk1 = numpy.zeros((nkpt, nao, nao))
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
 
-    # for c0 in [5.0, 10.0, 15.0, 20.0]:
-    t0 = (process_clock(), perf_counter())
-    c0 = 10.0
-    scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = c0
-    scf_obj.with_df.verbose = 5
-    scf_obj.with_df.tol = 1e-10
-    df_obj = scf_obj.with_df
-    df_obj.build()
-    t1 = log.timer("-> ISDF build", *t0)
+    for c0 in [5.0, 10.0, 15.0, 20.0]:
+        t0 = (process_clock(), perf_counter())
+        # c0 = 40.0
+        scf_obj.with_df = ISDF(cell, kpts=kpts)
+        scf_obj.with_df.c0 = c0
+        scf_obj.with_df.verbose = 0
+        scf_obj.with_df.tol = 1e-12
+        df_obj = scf_obj.with_df
+        df_obj.build()
+        t1 = log.timer("-> ISDF build", *t0)
 
-    t0 = (process_clock(), perf_counter())
-    vj2 = numpy.zeros((nkpt, nao, nao))
-    vk2 = numpy.zeros((nkpt, nao, nao))
-    vj2, vk2 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj2 = vj2.reshape(nkpt, nao, nao)
-    vk2 = vk2.reshape(nkpt, nao, nao)
-    t1 = log.timer("-> ISDF JK", *t0)
+        t0 = (process_clock(), perf_counter())
+        vj1 = numpy.zeros((nkpt, nao, nao))
+        vk1 = numpy.zeros((nkpt, nao, nao))
+        vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+        vj1 = vj1.reshape(nkpt, nao, nao)
+        vk1 = vk1.reshape(nkpt, nao, nao)
+        t1 = log.timer("-> ISDF JK", *t0)
 
-    err_j = abs(vj1 - vj2).max()
-    err_k = abs(vk1 - vk2).max()
-    print(f"err_j = {err_j}, err_k = {err_k}")
-    assert err_j < 1e-10
-    assert err_k < 1e-10
+        err = abs(vj0 - vj1).max()
+        print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+
+        err = abs(vk0 - vk1).max()
+        print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
 
     # from pyscf.pbc.tools.pbc import cutoff_to_mesh
     # m0 = cutoff_to_mesh(cell.a, 40.0)

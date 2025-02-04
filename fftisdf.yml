@@ -1,4 +1,4 @@
-name: fftisdf-with-mpi
+name: fftisdf
 channels:
   - defaults
   - conda-forge
@@ -7,11 +7,10 @@ dependencies:
   - python==3.9
   - numpy
   - scipy
-  - hdf5=*=mpi*
-  - h5py=*=mpi*
   - ase
   - mp-api
   - mpi4py
+  - openmpi
   - cotengra
   - opt_einsum
   - pytorch

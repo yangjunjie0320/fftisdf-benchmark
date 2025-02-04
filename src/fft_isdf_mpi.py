@@ -7,13 +7,21 @@ import scipy.linalg
 
 import pyscf
 from pyscf import lib
-TMPDIR = lib.param.TMPDIR
 from pyscf.lib import logger, current_memory
 from pyscf.lib.logger import process_clock, perf_counter
-from pyscf.pbc.tools.k2gamma import get_phase
 
+from pyscf.pbc.df.fft import FFTDF
 from pyscf.pbc import tools as pbctools
-from fft_isdf import InterpolativeSeparableDensityFitting
+from pyscf.pbc.lib.kpts_helper import is_zero
+
+from pyscf.pbc.tools.k2gamma import get_phase
+from pyscf.pbc.df.df_jk import _format_dms, _format_kpts_band, _format_jks
+
+import line_profiler
+
+PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 2000))
+
+import fft_isdf_new
 
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
@@ -21,135 +29,104 @@ size = comm.Get_size()
 print("rank = %d, size = %d" % (rank, size))
 comm.Barrier()
 
-class WithMPI(InterpolativeSeparableDensityFitting):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # broadcast the fswap file to all ranks
-        fswap_name = None if rank != 0 else self._fswap.filename
-        fswap_name = comm.bcast(fswap_name, root=0)
-
-
-    def _make_inp_vec(self, m0=None, c0=None, kpts=None, kmesh=None):
-        if rank == 0:
-            res = super()._make_inp_vec(m0, c0, kpts, kmesh)
-        else:
-            res = None
-        res = comm.bcast(res, root=0)
-        return res
-
-    def solve(self, a_q, b_q, kpts=None, kmesh=None):
-        log = logger.new_logger(self, self.verbose)
-        t0 = (process_clock(), perf_counter())
-
-        nkpt = len(kpts)
-        nip = a_q.shape[1]
-
-        pcell = self.cell
-        nao = pcell.nao_nr()
-
-        wrap_around = self.wrap_around
-        scell, phase = get_phase(
-            pcell, kpts, kmesh=kmesh,
-            wrap_around=wrap_around
-        )
-        nimg = phase.shape[0]
-        assert phase.shape == (nimg, nkpt)
-
-        grids = self.grids
-        assert grids is not None
-        mesh = grids.mesh
-        coord = grids.coords
-        ngrid = coord.shape[0]
-
-        assert a_q.shape == (nkpt, nip, nip)
-        assert b_q.shape == (nkpt, ngrid, nip)
-
-        w_k = []
-        gv = pcell.get_Gv(mesh)
-
-        for q in range(nkpt):
-            if q % size != rank:
-                continue
-
-            # solving the over-determined linear equation
-            # aq @ zq = bq
-            a = a_q[q]
-            b = b_q[q]
-            f = numpy.exp(-1j * numpy.dot(coord, kpts[q]))
-            assert f.shape == (ngrid, )
-
-            from scipy.linalg import lstsq
-            lstsq_driver = self.lstsq_driver
-            tol = self.tol
-            res = lstsq(
-                a, b.T, cond=tol,
-                lapack_driver=lstsq_driver
-            )
-            z = res[0].T
-            rank = res[2]
-
-            zeta = pbctools.fft((f[:, None] * z).T, mesh)
-            assert zeta.shape == (nip, ngrid)
-            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-            zeta *= pcell.vol / ngrid
-            assert zeta.shape == (nip, ngrid)
-
-            from pyscf.pbc.tools.pbc import ifft
-            coul = ifft(zeta, mesh) * f.conj()
-            w_k.append((q, coul @ z.conj()))
-
-            log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
-            t0 = log.timer("w[%3d]" % q, *t0)
-
-        w_k = comm.gather(w_k, root=0)
-        if rank == 0:
-            w_k = sorted(w_k, key=lambda x: x[0])
-            w_k = numpy.asarray([x[1] for x in w_k])
-            assert w_k.shape == (nkpt, nip, nip)
-        return w_k
+def build(df_obj, c0=None, kpts=None, kmesh=None):
+    """
+    Build the FFT-ISDF object.
     
-    def _make_rhs(self, x_k, kpts=None, kmesh=None):
-        if kpts is None:
-            kpts = self.kpts
-        
-        if kmesh is None:
-            kmesh = self.kmesh
-        
-        nip = x_k.shape[1]
-        nao = self.cell.nao_nr()
-        ngrid = self.grids.coords.shape[0]
-        nkpt = len(kpts)
+    Args:
+        df_obj: The FFT-ISDF object to build.
+    """
+    log = logger.new_logger(df_obj, df_obj.verbose)
 
-        assert x_k.shape == (nkpt, nip, nao)
+    cell = df_obj.cell
+    assert numpy.allclose(cell.get_kpts(kmesh), kpts)
+    nkpt = len(kpts)
 
-        from pyscf.lib import current_memory
-        memory = self.max_memory - current_memory()[0]
-        blksize = memory / (nkpt * nip * 16) * 1e6 * 0.1
-        blksize = max(blksize, self.blksize)
-        blksize = int(blksize)
+    tol = df_obj.tol
 
-        if rank == 0:
-            res = super()._make_rhs(x_k, kpts=kpts, kmesh=kmesh, blksize=blksize)
-        else:
-            res = None
-        return None
+    # build the interpolation vectors
+    g0 = df_obj.get_inpv(c0=c0)
+    nip = g0.shape[0]
+    assert g0.shape == (nip, 3)
+    nao = cell.nao_nr()
+
+    inpv_kpt = cell.pbc_eval_gto("GTOval", g0, kpts=kpts)
+    inpv_kpt = numpy.asarray(inpv_kpt, dtype=numpy.complex128)
+    assert inpv_kpt.shape == (nkpt, nip, nao)
+    log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
+
+    coul_kpt = []
+    for q in range(nkpt):
+        if rank != q % size:
+            continue
+
+        print("q = %d, rank = %d" % (q, rank))
+
+        t0 = (process_clock(), perf_counter())
+        from pyscf.lib import H5TmpFile
+        fswp = H5TmpFile()
+
+        from fft_isdf_new import get_lhs_and_rhs
+        metx_q, eta_q = get_lhs_and_rhs(
+            df_obj, inpv_kpt, kpt=kpts[q], 
+            fswp=fswp
+        )
+
+        # xi_q: solution for least-squares fitting
+        # rho = xi_q * inpv_kpt.conj().T * inpv_kpt
+        # but we would not explicitly compute
+
+        ngrid = eta_q.shape[0]
+        assert metx_q.shape == (nip, nip)
+        assert eta_q.shape == (ngrid, nip)
+
+        from fft_isdf_new import get_coul
+        kern_q = get_coul(
+            df_obj, eta_q, kpt=kpts[q], 
+            tol=tol, fswp=fswp
+        )
+
+        from fft_isdf_new import lstsq
+        res = lstsq(metx_q, kern_q, tol=tol)
+        coul_q = res[0]
+        assert coul_q.shape == (nip, nip)
+
+        coul_kpt.append((q, coul_q))
+        log.timer("solving Coulomb kernel", *t0)
+        log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, res[1], nip)
+
+    comm.Barrier()
+    if rank == 0:
+        coul_kpt = comm.gather(coul_kpt, root=0)
+        coul_kpt = sorted(coul_kpt, key=lambda x: x[0])
+        coul_kpt = [x[1] for x in coul_kpt]
+        coul_kpt = numpy.asarray(coul_kpt)
+
+    coul_kpt = numpy.asarray(coul_kpt)
+    coul_kpt = coul_kpt.reshape(nkpt, nip, nip)
+    return inpv_kpt, coul_kpt
+
+fft_isdf_new.build = build
+
+class WithMPI(fft_isdf_new.FFTISDF):
+    pass
 
 FFTISDF = ISDF = WithMPI
 
 if __name__ == "__main__":
-    from src.utils import cell_from_poscar
+    DATA_PATH = os.getenv("DATA_PATH", "../data/")
+    from utils import cell_from_poscar
 
-    cell = cell_from_poscar("../data/diamond-conv.vasp")
-    cell.basis = 'gth-szv-molopt-sr'
+    cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
+    cell.basis = 'gth-dzvp-molopt-sr'
     cell.pseudo = 'gth-pade'
     cell.verbose = 0
     cell.unit = 'aa'
-    cell.precision = 1e-10
     cell.exp_to_discard = 0.1
-    cell.max_memory = 4000
-    cell.ke_cutoff = 20
+    cell.max_memory = PYSCF_MAX_MEMORY
+    cell.ke_cutoff = 80.0
     cell.build(dump_input=False)
+    nao = cell.nao_nr()
 
     kmesh = [4, 4, 4]
     nkpt = nimg = numpy.prod(kmesh)
@@ -159,16 +136,15 @@ if __name__ == "__main__":
     scf_obj.exxdiv = None
     dm_kpts = scf_obj.get_init_guess()
 
-    
+    from 
     stdout = sys.stdout if rank == 0 else open(TMPDIR + "/fft_isdf_mpi_%d.log" % rank, "w")
     cell.stdout = stdout
 
     scf_obj.with_df = ISDF(cell, kpts=kpts)
     scf_obj.with_df.c0 = 10.0
-    scf_obj.with_df.m0 = [11, 11, 11]
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.stdout = stdout
-    scf_obj.with_df.tol = 1e-20
+    # scf_obj.with_df.stdout = stdout
+    scf_obj.with_df.tol = 1e-10
     scf_obj.with_df.build()
 
     log = logger.new_logger(None, 5)
