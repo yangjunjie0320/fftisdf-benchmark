@@ -215,6 +215,7 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
 
+    kpts = df_obj.kpts
     nkpt = len(kpts)
     pcell = df_obj.cell
     nao = pcell.nao_nr()
