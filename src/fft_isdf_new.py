@@ -610,7 +610,7 @@ if __name__ == "__main__":
 
     vj0 = numpy.zeros((nkpt, nao, nao))
     vk0 = numpy.zeros((nkpt, nao, nao))
-    # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj0 = vj0.reshape(nkpt, nao, nao)
     vk0 = vk0.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
