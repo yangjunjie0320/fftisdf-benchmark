@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=nio-dzvp-444
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=4
-#SBATCH --cpus-per-task=16
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=32
 #SBATCH --mem=480GB 
-#SBATCH --time=40:00:00 
+#SBATCH --time=00:10:00 
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration

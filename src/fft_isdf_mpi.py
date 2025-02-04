@@ -62,8 +62,6 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         if rank != q % size:
             continue
 
-        print("q = %d, rank = %d" % (q, rank))
-
         t0 = (process_clock(), perf_counter())
         from pyscf.lib import H5TmpFile
         fswp = H5TmpFile()
@@ -95,17 +93,27 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
 
         coul_kpt.append((q, coul_q))
         log.timer("solving Coulomb kernel", *t0)
+        # print("q = %d, rank = %d / %d" % (q, rank, size))
         log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, res[1], nip)
 
     comm.Barrier()
     if rank == 0:
         coul_kpt = comm.gather(coul_kpt, root=0)
+
+        for i, x in coul_kpt:
+            print("i = %d, x = %s" % (i, x.shape))
+
         coul_kpt = sorted(coul_kpt, key=lambda x: x[0])
         coul_kpt = [x[1] for x in coul_kpt]
         coul_kpt = numpy.asarray(coul_kpt)
+        comm.bcast(coul_kpt, root=0)
 
     coul_kpt = numpy.asarray(coul_kpt)
     coul_kpt = coul_kpt.reshape(nkpt, nip, nip)
+    print("coul_kpt = %s" % str(coul_kpt.shape))
+
+    assert 1 == 2
+    comm.Barrier()
     return inpv_kpt, coul_kpt
 
 fft_isdf_new.build = build
@@ -119,6 +127,8 @@ if __name__ == "__main__":
     DATA_PATH = os.getenv("DATA_PATH", "../data/")
     from utils import cell_from_poscar
 
+    TMPDIR = lib.param.TMPDIR
+
     cell = cell_from_poscar(os.path.join(DATA_PATH, "diamond-prim.vasp"))
     cell.basis = 'gth-dzvp-molopt-sr'
     cell.pseudo = 'gth-pade'
@@ -127,7 +137,9 @@ if __name__ == "__main__":
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
     cell.ke_cutoff = 80.0
+    cell.stdout = sys.stdout if rank == 0 else open(TMPDIR + "out-%d.log" % rank, "w")
     cell.build(dump_input=False)
+
     nao = cell.nao_nr()
 
     # kmesh = [4, 4, 4]
@@ -152,14 +164,14 @@ if __name__ == "__main__":
     # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
-    t1 = log.timer("-> FFTDF JK", *t0)
+    # t1 = log.timer("-> FFTDF JK", *t0)
 
     for c0 in [5.0, 10.0, 15.0, 20.0]:
         t0 = (process_clock(), perf_counter())
         # c0 = 40.0
         scf_obj.with_df = ISDF(cell, kpts=kpts)
         scf_obj.with_df.c0 = c0
-        scf_obj.with_df.verbose = 0
+        scf_obj.with_df.verbose = 5
         scf_obj.with_df.tol = 1e-12
         df_obj = scf_obj.with_df
         df_obj.build()
