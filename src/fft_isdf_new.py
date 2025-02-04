@@ -36,325 +36,9 @@ def kpt_to_spc(m_kpt, phase):
     """Convert a matrix from the k-space form to
     stripe form (in super-cell).
     """
-    nimg, nkpt = phase.shape
+    nspc, nkpt = phase.shape
     m_spc = lib.dot(phase, m_kpt.reshape(nkpt, -1))
     return m_spc.reshape(m_kpt.shape)
-
-@line_profiler.profile
-def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
-    """
-    Build the FFT-ISDF object.
-    
-    Args:
-        df_obj: The FFT-ISDF object to build.
-    """
-    log = logger.new_logger(df_obj, df_obj.verbose)
-
-    cell = df_obj.cell
-    assert numpy.allclose(cell.get_kpts(kmesh), kpts)
-    nkpt = len(kpts)
-
-    # build the interpolation vectors
-    inp_vec_kpt = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
-    # x_k = df_obj._make_inp_vec(m0=m0, c0=c0, kpts=kpts, kmesh=kmesh)
-    nip, nao = inp_vec_kpt.shape[1:]
-    assert inp_vec_kpt.shape == (nkpt, nip, nao)
-    log.info("nip = %d, cisdf = %6.2f", nip, nip / nao)
-
-    # build the linear equation
-    lhs_kpt = df_obj._make_lhs(inp_vec_kpt, kpts=kpts, kmesh=kmesh)
-    # b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
-
-    # solve the linear equation
-    # a_k is a numpy array, b_k is a hdf5 dataset
-    # w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
-
-    w_k = []
-
-    for q in range(nkpt):
-        a_q = lhs_kpt[q]
-        b_q = _make_rhs_incore(
-            df_obj, inp_vec_kpt, 
-            q=q, kpts=kpts, kmesh=kmesh
-            )
-
-        assert a_q.shape == (nip, nip)
-        ngrid = b_q.shape[0]
-        assert b_q.shape == (ngrid, nip)
-
-        w_q = df_obj.solve(a_q, b_q, q=q, kpts=kpts, kmesh=kmesh)
-        assert w_q.shape == (nip, nip)
-
-        w_k.append(w_q)
-
-    w_k = numpy.asarray(w_k)
-    return x_k, w_k
-
-@line_profiler.profile
-def _make_rhs_outcore(df_obj, x_k, kpts=None, kmesh=None, blksize=8000):
-    log = logger.new_logger(df_obj, df_obj.verbose)
-    t0 = (process_clock(), perf_counter())
-
-    grids = df_obj.grids
-    assert grids is not None
-
-    coord = grids.coords
-    ngrid = coord.shape[0]
-
-    nkpt = nimg = len(kpts)
-    assert numpy.prod(kmesh) == nkpt
-
-    pcell = df_obj.cell
-    nao = pcell.nao_nr()
-    nip = x_k.shape[1]
-    assert x_k.shape == (nkpt, nip, nao)
-
-    wrap_around = df_obj.wrap_around
-    scell, phase = get_phase(
-        pcell, kpts, kmesh=kmesh,
-        wrap_around=wrap_around
-    )
-    assert phase.shape == (nimg, nkpt)
-
-    log.debug("\nkpt = %d, ngrid = %d, nao = %d", nkpt, ngrid, nao)
-    log.debug("ngrid = %d, blksize = %d, nip = %d", ngrid, blksize, nip)
-    log.debug("required disk space = %d GB", nkpt * ngrid * nip * 16 / 1e9)
-
-    fswap = df_obj._fswap
-    assert fswap is not None
-
-    fswap.create_dataset("rhs", shape=(nkpt, ngrid, nip), dtype=numpy.complex128)
-    b_k = fswap["rhs"]
-    log.debug("finished creating fswp: %s", fswap.filename)
-    
-    log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
-    for ao_k, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
-        t_k = numpy.asarray([f.conj() @ x.T for f, x in zip(ao_k[0], x_k)])
-        assert t_k.shape == (nkpt, g1 - g0, nip)
-
-        t_s = kpt_to_spc(t_k, phase)
-        t_s = t_s.reshape(nimg, g1 - g0, nip)
-
-        b_s = (t_s * t_s)
-        b_k[:, g0:g1, :] = spc_to_kpt(b_s, phase).conj()
-
-        log.debug("finished aoR_loop[%8d:%8d]", g0, g1)
-
-    t1 = log.timer("building right-hand side", *t0)
-    return b_k
-
-@line_profiler.profile
-def _make_rhs(df_obj, x_kpt, q=0, blksize=8000):
-    log = logger.new_logger(df_obj, df_obj.verbose)
-    t0 = (process_clock(), perf_counter())
-
-    grids = df_obj.grids
-    assert grids is not None
-
-    coord = grids.coords
-    ngrid = coord.shape[0]
-
-    kpts = df_obj.kpts
-    kmesh = df_obj.kmesh
-    nkpt = nimg = len(kpts)
-    assert numpy.prod(kmesh) == nkpt
-
-    pcell = df_obj.cell
-    nao = pcell.nao_nr()
-    nip = x_kpt.shape[1]
-    assert x_kpt.shape == (nkpt, nip, nao)
-
-    wrap_around = df_obj.wrap_around
-    scell, phase = get_phase(
-        pcell, kpts, kmesh=kmesh,
-        wrap_around=wrap_around
-    )
-    assert phase.shape == (nimg, nkpt)
-
-    log.debug("\nnkpt = %d, nao = %d", nkpt, nao)
-    log.debug("ngrid = %d, blksize = %d", ngrid, blksize)
-    log.debug("required disk space = %d GB", ngrid * nip * 16 / 1e9)
-
-    bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
-
-    log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
-    for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
-        t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], x_kpt)])
-        assert t_kpt.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
-
-        t_spc = kpt_to_spc(t_kpt, phase)
-        t_spc = t_spc.reshape(nimg, g1 - g0, nip)
-        for s, ts in enumerate(t_spc):
-            bq[g0:g1] += phase[s, q] * ts * ts
-
-    t1 = log.timer("building right-hand side", *t0)
-    return bq
-    
-
-@line_profiler.profile
-def _make_lhs_incore(df_obj, x_k, q=0, kpts=None, kmesh=None, blksize=8000):
-    log = logger.new_logger(df_obj, df_obj.verbose)
-    t0 = (process_clock(), perf_counter())
-
-    nkpt = nimg = len(kpts)
-    assert numpy.prod(kmesh) == nkpt
-
-    pcell = df_obj.cell
-    nao = pcell.nao_nr()
-    nip = x_k.shape[1]
-    assert x_k.shape == (nkpt, nip, nao)
-
-    wrap_around = df_obj.wrap_around
-    scell, phase = get_phase(
-        pcell, kpts, kmesh=kmesh,
-        wrap_around=wrap_around
-    )
-    assert phase.shape == (nimg, nkpt)
-
-    nip, nao = x_k.shape[1:]
-    assert x_k.shape == (nkpt, nip, nao)
-
-    x2_k = numpy.asarray([x.conj() @ x.T for x in x_k])
-    assert x2_k.shape == (nkpt, nip, nip)
-
-    x2_s = kpt_to_spc(x2_k, phase)
-    assert x2_s.shape == (nimg, nip, nip)
-
-    a_s = (x2_s * x2_s)
-    a_k = spc_to_kpt(a_s, phase)
-    assert a_k.shape == (nkpt, nip, nip)
-    # a = numpy.zeros((nip, nip), dtype=numpy.complex128)
-    # for s in range(nimg):
-    #     a += phase[s, q] * a_s[s]
-
-    t1 = log.timer("building left-hand side", *t0)
-    return a_k
-
-@line_profiler.profile
-def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
-               exxdiv=None):
-    """
-    Get the J matrix for a set of k-points.
-    
-    Args:
-        df_obj: The FFT-ISDF object. 
-        dm_kpts: Density matrices at each k-point.
-        hermi: Whether the density matrices are Hermitian.
-        kpts: The k-points to calculate J for.
-        kpts_band: The k-points of the bands.
-        exxdiv: The divergence of the exchange functional (ignored).
-        
-    Returns:
-        The J matrix at the specified k-points.
-    """
-    cell = df_obj.cell
-    assert cell.low_dim_ft_type != 'inf_vacuum'
-    assert cell.dimension > 1
-
-    pcell = df_obj.cell
-    kmesh = df_obj.kmesh
-    wrap_around = df_obj.wrap_around
-    scell, phase = get_phase(
-        pcell, df_obj.kpts, kmesh=kmesh,
-        wrap_around=wrap_around
-    )
-
-    nao = pcell.nao_nr()
-    nkpt = nimg = numpy.prod(kmesh)
-
-    dm_kpts = lib.asarray(dm_kpts, order='C')
-    dms = _format_dms(dm_kpts, kpts)
-    nset, nkpt, nao = dms.shape[:3]
-
-    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
-    nband = len(kpts_band)
-    assert nband == nkpt, "not supporting kpts_band"
-
-    x_k = df_obj._x
-    w_k = df_obj._w
-    w0 = w_k[0] # .real
-
-    nip = x_k.shape[1]
-    assert x_k.shape == (nkpt, nip, nao)
-    assert w_k.shape == (nkpt, nip, nip)
-    assert w0.shape == (nip, nip)
-
-    rho = numpy.einsum("kIm,kIn,xkmn->xI", x_k, x_k.conj(), dms, optimize=True)
-    rho *= 1.0 / nkpt
-    assert rho.shape == (nset, nip)
-
-    v0 = numpy.einsum("IJ,xJ->xI", w0, rho, optimize=True)
-    assert v0.shape == (nset, nip)
-
-    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
-    nband = len(kpts_band)
-    assert nband == nkpt, "not supporting kpts_band"
-
-    vj_kpts = numpy.einsum("kIm,kIn,xI->xkmn", x_k.conj(), x_k, v0, optimize=True)
-    assert vj_kpts.shape == (nset, nkpt, nao, nao)
-
-    if is_zero(kpts_band):
-        vj_kpts = vj_kpts.real
-    return _format_jks(vj_kpts, dms, input_band, kpts)
-
-@line_profiler.profile
-def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
-               exxdiv=None):
-    cell = df_obj.cell
-    assert cell.low_dim_ft_type != 'inf_vacuum'
-    assert cell.dimension > 1
-
-    pcell = df_obj.cell
-    kmesh = df_obj.kmesh
-    wrap_around = df_obj.wrap_around
-    scell, phase = get_phase(
-        pcell, df_obj.kpts, kmesh=kmesh,
-        wrap_around=wrap_around
-    )
-
-    nao = pcell.nao_nr()
-    nkpt = nimg = numpy.prod(kmesh)
-
-    dm_kpts = lib.asarray(dm_kpts, order='C')
-    dms = _format_dms(dm_kpts, kpts)
-    nset, nkpt, nao = dms.shape[:3]
-
-    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
-    nband = len(kpts_band)
-    assert nband == nkpt, "not supporting kpts_band"
-    assert exxdiv is None, f"exxdiv = {exxdiv}"
-
-    x_k = df_obj._x
-    nip = x_k.shape[1]
-
-    w_s = kpt_to_spc(df_obj._w, phase)
-    w_s = w_s * numpy.sqrt(nkpt)
-    w_s = w_s.reshape(nimg, nip, nip)
-    
-    assert x_k.shape == (nkpt, nip, nao)
-    assert w_s.shape == (nimg, nip, nip)
-
-    vk_kpts = []
-    for dm in dms:
-        rho_k = [x @ d @ x.conj().T for x, d in zip(x_k, dm)]
-        rho_k = numpy.asarray(rho_k) / nkpt
-        assert rho_k.shape == (nkpt, nip, nip)
-
-        rho_s = kpt_to_spc(rho_k, phase)
-        assert rho_s.shape == (nimg, nip, nip)
-        rho_s = rho_s.transpose(0, 2, 1)
-
-        v_s = w_s * rho_s
-        v_s = numpy.asarray(v_s).reshape(nimg, nip, nip)
-
-        # v_k = phase.T.conj() @ v_s.reshape(nimg, -1)
-        v_k = spc_to_kpt(v_s, phase).conj()
-        assert v_k.shape == (nkpt, nip, nip)
-
-        vk_kpts.append([x.conj().T @ v @ x for x, v in zip(x_k, v_k)])
-
-    vk_kpts = numpy.asarray(vk_kpts).reshape(nset, nkpt, nao, nao)
-    return _format_jks(vk_kpts, dms, input_band, kpts)
 
 def lstsq(a, b, tol=1e-10):
     """
@@ -386,13 +70,325 @@ def lstsq(a, b, tol=1e-10):
     t = (uh @ b @ u) * m / r
     return v @ t @ vh, int(rank)
 
-class InterpolativeSeparableDensityFitting(FFTDF):
-    kmesh = None
-    c0 = 40.0
-    m0 = None
+@line_profiler.profile
+def build(df_obj, c0=None, kpts=None, kmesh=None):
+    """
+    Build the FFT-ISDF object.
+    
+    Args:
+        df_obj: The FFT-ISDF object to build.
+    """
+    log = logger.new_logger(df_obj, df_obj.verbose)
 
-    tol = 1e-10
-    blksize = 800
+    cell = df_obj.cell
+    assert numpy.allclose(cell.get_kpts(kmesh), kpts)
+    nkpt = len(kpts)
+
+    tol = df_obj.tol
+
+    # build the interpolation vectors
+    inpv_kpt = df_obj.get_inpv(c0=c0)
+    nip, nao = inpv_kpt.shape[1:]
+    assert inpv_kpt.shape == (nkpt, nip, nao)
+    log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
+
+    coul_kpt = []
+    for q in range(nkpt):
+        t0 = (process_clock(), perf_counter())
+        from pyscf.lib import H5TmpFile
+        fswp = H5TmpFile()
+
+        # metx_q: metric for least-squares
+        # eta_q: right-hand side for least-squares
+        metx_q, eta_q = get_lhs_and_rhs(
+            df_obj, inpv_kpt, kpt=kpts[q], 
+            fswp=fswp
+        )
+
+        # xi_q: solution for least-squares fitting
+        # rho = xi_q * inpv_kpt.conj().T * inpv_kpt
+        # but we would not explicitly compute
+
+        ngrid = eta_q.shape[0]
+        assert metx_q.shape == (nip, nip)
+        assert eta_q.shape == (ngrid, nip)
+
+        kern_q = get_coul(
+            df_obj, eta_q, kpt=kpts[q], 
+            tol=tol, fswp=fswp
+        )
+        coul_q, rank = lstsq(metx_q, kern_q, tol=tol)
+        assert coul_q.shape == (nip, nip)
+
+        coul_kpt.append(coul_q)
+        log.timer("solving Coulomb kernel for q = %3d / %3d, rank = %d / %d" % (q, nkpt, rank, nip), *t0)
+
+    coul_kpt = numpy.asarray(coul_kpt)
+    return inpv_kpt, coul_kpt
+
+@line_profiler.profile
+def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
+    log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
+
+    grids = df_obj.grids
+    assert grids is not None
+
+    coord = grids.coords
+    ngrid = coord.shape[0]
+
+    from pyscf.pbc.tools.k2gamma import kpts_to_kmesh
+    kpts = df_obj.kpts
+    kmesh = df_obj.kmesh
+    nkpt = nspc = len(kpts)
+    assert numpy.prod(kmesh) == nkpt
+
+    ix = numpy.where(numpy.linalg.norm(kpts - kpt, axis=1) < 1e-10)[0]
+    assert len(ix) == 1
+    q = ix[0]
+    assert numpy.allclose(kpts[q], kpt)
+
+    pcell = df_obj.cell
+    nao = pcell.nao_nr()
+    nip = inpv_kpt.shape[1]
+    assert inpv_kpt.shape == (nkpt, nip, nao)
+
+    wrap_around = df_obj.wrap_around
+    scell, phase = get_phase(
+        pcell, kpts, kmesh=kmesh,
+        wrap_around=wrap_around
+    )
+    assert phase.shape == (nspc, nkpt)
+
+    log.debug("\nnkpt = %d, nao = %d", nkpt, nao)
+    log.debug("ngrid = %d, blksize = %d", ngrid, blksize)
+    log.debug("required disk space = %d GB", ngrid * nip * 16 / 1e9)
+
+    t_kpt = numpy.asarray([xk.conj() @ xk.T for xk in inpv_kpt])
+    assert t_kpt.shape == (nkpt, nip, nip)
+
+    t_spc = kpt_to_spc(t_kpt, phase)
+    assert t_spc.shape == (nspc, nip, nip)
+
+    aq = numpy.zeros((nip, nip), dtype=numpy.complex128)
+    for s, ts in enumerate(t_spc):
+        aq += phase[s, q] * ts * ts
+
+    bq = None
+    if fswp is not None:
+        bq = fswp.create_dataset("bq", data=numpy.zeros((ngrid, nip), dtype=numpy.complex128))
+        log.debug("Saving bq to %s, memory for bq = %d GB", fswp.filename, bq.size * 16 / 1e9)
+    else:
+        bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
+        log.debug("Memory for bq = %d GB", bq.size * 16 / 1e9)
+    assert bq is not None
+
+    log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
+    for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
+        t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], inpv_kpt)])
+        assert t_kpt.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
+
+        t_spc = kpt_to_spc(t_kpt, phase)
+        t_spc = t_spc.reshape(nspc, g1 - g0, nip)
+
+        for s, ts in enumerate(t_spc):
+            bq[g0:g1] += phase[s, q] * ts * ts
+
+    t1 = log.timer("get_lhs_and_rhs for q = %d / %d" % (q, nkpt), *t0)
+    return aq, bq
+
+def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
+    log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
+
+    ngrid, nip = eta_q.shape
+    assert eta_q.shape == (ngrid, nip)
+
+    log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
+
+    nkpt = len(kpts)
+    pcell = df_obj.cell
+    nao = pcell.nao_nr()
+
+    wrap_around = df_obj.wrap_around
+    scell, phase = get_phase(
+        pcell, kpts, kmesh=kmesh,
+        wrap_around=wrap_around
+    )
+    nspc = phase.shape[0]
+    assert phase.shape == (nspc, nkpt)
+
+    grids = df_obj.grids
+    assert grids is not None
+    mesh = grids.mesh
+    coord = grids.coords
+    ngrid = coord.shape[0]
+
+    # assume (nip, nip) could be maintained in memory
+    # while (nip, ngrid) could not
+    kern_q = numpy.zeros((nip, nip), dtype=numpy.complex128)
+
+    gv = pcell.get_Gv(mesh)
+    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.1
+    blksize = max(max_memory * 1e6 // (ngrid * 16), 1)
+    blksize = min(int(blksize), nip)
+
+    for i0, i1 in lib.prange(0, nip, blksize):
+        eta_qi = eta_q[:, i0:i1]
+        assert eta_qi.shape == (ngrid, i1 - i0)
+
+        t = numpy.dot(coord, kpt)
+        f = numpy.exp(-1j * t)
+        assert f.shape == (ngrid, )
+
+        v_qi = pbctools.fft(eta_qi.T * f, mesh)
+        v_qi *= pbctools.get_coulG(pcell, k=kpt, mesh=mesh, Gv=gv)
+        v_qi *= pcell.vol / ngrid
+
+        from pyscf.pbc.tools.pbc import ifft
+        w_qi = ifft(v_qi, mesh) * f.conj()
+        w_qi = w_qi.T
+        assert w_qi.shape == (ngrid, i1 - i0)
+
+        for j0, j1 in lib.prange(0, nip, blksize):
+            kern_qij = numpy.dot(w_qi.T.conj(), eta_q[:, j0:j1])
+            assert kern_qij.shape == (i1 - i0, j1 - j0)
+            kern_q[i0:i1, j0:j1] += kern_qij
+            kern_q[j0:j1, i0:i1] += kern_qij.conj()
+
+    return kern_q
+
+@line_profiler.profile
+def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
+               exxdiv=None):
+    """
+    Get the J matrix for a set of k-points.
+    
+    Args:
+        df_obj: The FFT-ISDF object. 
+        dm_kpts: Density matrices at each k-point.
+        hermi: Whether the density matrices are Hermitian.
+        kpts: The k-points to calculate J for.
+        kpts_band: The k-points of the bands.
+        exxdiv: The divergence of the exchange functional (ignored).
+        
+    Returns:
+        The J matrix at the specified k-points.
+    """
+    cell = df_obj.cell
+    assert cell.low_dim_ft_type != 'inf_vacuum'
+    assert cell.dimension > 1
+
+    pcell = df_obj.cell
+    kmesh = df_obj.kmesh
+    wrap_around = df_obj.wrap_around
+    scell, phase = get_phase(
+        pcell, df_obj.kpts, kmesh=kmesh,
+        wrap_around=wrap_around
+    )
+
+    nao = pcell.nao_nr()
+    nkpt = nspc = numpy.prod(kmesh)
+
+    dm_kpts = lib.asarray(dm_kpts, order='C')
+    dms = _format_dms(dm_kpts, kpts)
+    nset, nkpt, nao = dms.shape[:3]
+
+    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
+    nband = len(kpts_band)
+    assert nband == nkpt, "not supporting kpts_band"
+
+    inpv_kpt = df_obj._inpv_kpt
+    coul_kpt = df_obj._coul_kpt
+
+    nip = inpv_kpt.shape[1]
+    assert inpv_kpt.shape == (nkpt, nip, nao)
+    assert coul_kpt.shape == (nkpt, nip, nip)
+
+    coul0 = coul_kpt[0]
+    assert coul0.shape == (nip, nip)
+
+    rho = numpy.einsum("kIm,kIn,xkmn->xI", inpv_kpt, inpv_kpt.conj(), dms, optimize=True)
+    rho *= 1.0 / nkpt
+    assert rho.shape == (nset, nip)
+
+    v0 = numpy.einsum("IJ,xJ->xI", coul0, rho, optimize=True)
+    assert v0.shape == (nset, nip)
+
+    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
+    nband = len(kpts_band)
+    assert nband == nkpt, "not supporting kpts_band"
+
+    vj_kpts = numpy.einsum("kIm,kIn,xI->xkmn", inpv_kpt.conj(), inpv_kpt, v0, optimize=True)
+    assert vj_kpts.shape == (nset, nkpt, nao, nao)
+
+    if is_zero(kpts_band):
+        vj_kpts = vj_kpts.real
+    return _format_jks(vj_kpts, dms, input_band, kpts)
+
+@line_profiler.profile
+def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
+               exxdiv=None):
+    cell = df_obj.cell
+    assert cell.low_dim_ft_type != 'inf_vacuum'
+    assert cell.dimension > 1
+
+    pcell = df_obj.cell
+    kmesh = df_obj.kmesh
+    wrap_around = df_obj.wrap_around
+    scell, phase = get_phase(
+        pcell, df_obj.kpts, kmesh=kmesh,
+        wrap_around=wrap_around
+    )
+
+    nao = pcell.nao_nr()
+    nkpt = nspc = numpy.prod(kmesh)
+
+    dm_kpts = lib.asarray(dm_kpts, order='C')
+    dms = _format_dms(dm_kpts, kpts)
+    nset, nkpt, nao = dms.shape[:3]
+
+    kpts_band, input_band = _format_kpts_band(kpts_band, kpts), kpts_band
+    nband = len(kpts_band)
+    assert nband == nkpt, "not supporting kpts_band"
+    assert exxdiv is None, f"exxdiv = {exxdiv}"
+
+    inpv_kpt = df_obj._inpv_kpt
+    coul_kpt = df_obj._coul_kpt
+
+    nip = inpv_kpt.shape[1]
+    coul_spc = kpt_to_spc(coul_kpt, phase)
+    coul_spc = coul_spc * numpy.sqrt(nkpt)
+    coul_spc = coul_spc.reshape(nspc, nip, nip)
+    
+    assert inpv_kpt.shape == (nkpt, nip, nao)
+    assert coul_kpt.shape == (nkpt, nip, nip)
+    assert coul_spc.shape == (nspc, nip, nip)
+
+    vks = []
+    for dm_kpt in dms:
+        rho_kpt = [x @ d @ x.conj().T for x, d in zip(inpv_kpt, dm_kpt)]
+        rho_kpt = numpy.asarray(rho_kpt) / nkpt
+        assert rho_kpt.shape == (nkpt, nip, nip)
+
+        rho_spc = kpt_to_spc(rho_kpt, phase)
+        assert rho_spc.shape == (nspc, nip, nip)
+        rho_spc = rho_spc.transpose(0, 2, 1)
+
+        v_spc = coul_spc * rho_spc
+        v_spc = numpy.asarray(v_spc).reshape(nspc, nip, nip)
+
+        v_kpt = phase.T.conj() @ v_spc.reshape(nspc, -1)
+        v_kpt = v_kpt.reshape(nkpt, nip, nip)
+        assert v_kpt.shape == (nkpt, nip, nip)
+
+        vks.append([xk.conj().T @ vk @ xk for xk, vk in zip(inpv_kpt, v_kpt)])
+
+    vks = numpy.asarray(vks).reshape(nset, nkpt, nao, nao)
+    return _format_jks(vks, dms, input_band, kpts)
+
+class InterpolativeSeparableDensityFitting(FFTDF):
     wrap_around = False
 
     _isdf = None
@@ -402,15 +398,20 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     _w = None
     _fswap = None
 
-    _keys = ['_isdf', '_x', '_w', '_fswap']
+    _keys = ['_isdf', '_coul_kpt', '_inpv_kpt']
 
     def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0):
         FFTDF.__init__(self, cell, kpts)
+
+        # from pyscf.pbc.lib.kpts import KPoints
+        # self.kpts = KPoints(cell, kpts)
+        # self.kpts.build()
+
         self.kmesh = kmesh
         self.c0 = c0
 
-        from pyscf.lib import H5TmpFile
-        self._fswap = H5TmpFile()
+        self.tol = 1e-10
+        self.blksize = 800
 
     def dump_flags(self, verbose=None):
         log = logger.new_logger(self, verbose)
@@ -437,21 +438,21 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         assert numpy.allclose(self.kpts, kpts), \
             "kpts mismatch, only uniform kpts is supported"
 
-        from pyscf.pbc.tools.pbc import mesh_to_cutoff
-        from pyscf.pbc.tools.pbc import cutoff_to_mesh
+        if self._isdf is not None:
+            raise NotImplementedError
 
-        c0 = self.c0
-        nao = self.cell.nao_nr()
-        m0 = (nao * c0) ** (1.0 / 3.0)
-        m0 = [int(m0 + 1)] * 3
-        k0 = mesh_to_cutoff(self.cell.a, m0)
-        k0 = max(k0)
-        log.info("Input parent grid mesh = %s, ke_cutoff = %6.2f", m0, k0)
+        inpv_kpt, coul_kpt = build(
+            df_obj=self,
+            c0=self.c0,
+            kpts=kpts,
+            kmesh=kmesh
+        )
 
-        m0 = cutoff_to_mesh(self.cell.a, k0)
-        # self.m0 = m0
-        log.info("Final parent grid size = %s", m0)
-        self._x, self._w = build(self, c0=c0, m0=m0, kpts=kpts, kmesh=kmesh)
+        self._coul_kpt = coul_kpt
+        self._inpv_kpt = inpv_kpt
+
+        if self._isdf_to_save is not None:
+            self._isdf = self._isdf_to_save
 
         if self._isdf is None:
             import tempfile
@@ -460,8 +461,8 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         
         log.info("Saving FFTISDF results to %s", self._isdf)
         from pyscf.lib.chkfile import dump
-        dump(self._isdf, "x", self._x)
-        dump(self._isdf, "w", self._w)
+        dump(self._isdf, "coul_kpt", coul_kpt)
+        dump(self._isdf, "inpv_kpt", inpv_kpt)
 
         t1 = log.timer("building ISDF", *t0)
         return self
@@ -490,23 +491,34 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         ni = self._numint
         nao = cell.nao_nr()
         p1 = 0
-        for ao_k1_etc in ni.block_loop(cell, grids, nao, deriv, kpts,
-                                       max_memory=max_memory,
-                                       blksize=blksize):
-            coords = ao_k1_etc[4]
+
+        block_loop = ni.block_loop(
+            cell, grids, nao, deriv, kpts,
+            max_memory=max_memory,
+            blksize=blksize
+            )
+        
+        for ao_etc_kpt in block_loop:
+            coords = ao_etc_kpt[4]
             p0, p1 = p1, p1 + coords.shape[0]
-            yield ao_k1_etc, p0, p1
+            yield ao_etc_kpt, p0, p1
     
-    def _make_inp_vec(self, m0=None, c0=None, kpts=None, kmesh=None):
-        assert m0 is not None
+    def get_inpv(self, c0=None):
+        nao = self.cell.nao_nr()
+        nip = nao * c0
+        m0 = numpy.power(nip, 1/3) + 1
+
+        from pyscf.pbc.tools.pbc import mesh_to_cutoff
+        lv = self.cell.lattice_vectors()
+        k0 = mesh_to_cutoff(lv, [int(m0)] * 3)
+        print(f"k0 = {k0}")
+        k0 = max(k0)
+
+        from pyscf.pbc.tools.pbc import cutoff_to_mesh
+        m0 = cutoff_to_mesh(lv, k0)
+
+        # generate grids
         g0 = self.cell.gen_uniform_grids(m0)
-
-        if c0 is None:
-            c0 = self.c0
-
-        if kpts is None:
-            kpts = self.kpts
-
         log = logger.new_logger(self, self.verbose)
         t0 = (process_clock(), perf_counter())
 
@@ -514,16 +526,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         nao = pcell.nao_nr()
         ng = len(g0)
 
-        nkpt = nimg = len(kpts)
-
-        log.debug("\nSelecting interpolation points")
-        log.debug("nkpts = %s, nao = %s, c0 = %6.2f", nkpt, nao, c0)
-        log.debug("Parent grid mesh = %s, grid size = %s", m0, ng)
-
         x2 = numpy.zeros((ng, ng))
-        for q in range(nkpt):
-            x = pcell.pbc_eval_gto("GTOval", g0, kpts=kpts[q])
-            x2 += (x.conj() @ x.T).real
+        x2 = pcell.pbc_eval_gto("GTOval", g0)
+        x2 = (x2.conj() @ x2.T).real
         x4 = (x2 * x2) / nkpt
 
         from pyscf.lib.scipy_helper import pivoted_cholesky
@@ -541,92 +546,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             rank, nip, chol[nip-1, nip-1]
         )
 
-        x_k = pcell.pbc_eval_gto("GTOval", g0[mask], kpts=kpts)
+        x_k = pcell.pbc_eval_gto("GTOval", g0[mask], kpts=self.kpts)
         x_k = numpy.asarray(x_k, dtype=numpy.complex128)
         return x_k.reshape(nkpt, nip, nao)
-    
-    def _make_rhs(self, x_k, kpts=None, kmesh=None, blksize=None):
-        if kpts is None:
-            kpts = self.kpts
-        
-        if kmesh is None:
-            kmesh = self.kmesh
-        
-        nip = x_k.shape[1]
-        nao = self.cell.nao_nr()
-        ngrid = self.grids.coords.shape[0]
-        nkpt = len(kpts)
-
-        assert x_k.shape == (nkpt, nip, nao)
-
-        from pyscf.lib import current_memory
-        memory = self.max_memory - current_memory()[0]
-        blksize = memory / (nkpt * nip * 16) * 1e6 * 0.1
-        blksize = max(blksize, self.blksize)
-        blksize = int(blksize)
-
-        return _make_rhs_outcore(self, x_k, kpts=kpts, kmesh=kmesh, blksize=blksize)
-    
-    def _make_lhs(self, x_k, kpts=None, kmesh=None):
-        if kpts is None:
-            kpts = self.kpts
-
-        if kmesh is None:
-            kmesh = self.kmesh
-            
-        return _make_lhs_incore(self, x_k, kpts=kpts, kmesh=kmesh)
-    
-    @line_profiler.profile
-    def solve(self, a, b, q=0, kpts=None, kmesh=None):
-        log = logger.new_logger(self, self.verbose)
-        t0 = (process_clock(), perf_counter())
-
-        nkpt = len(kpts)
-        nip = a.shape[0]
-
-        pcell = self.cell
-        nao = pcell.nao_nr()
-
-        wrap_around = self.wrap_around
-        scell, phase = get_phase(
-            pcell, kpts, kmesh=kmesh,
-            wrap_around=wrap_around
-        )
-        nimg = phase.shape[0]
-        assert phase.shape == (nimg, nkpt)
-
-        grids = self.grids
-        assert grids is not None
-        mesh = grids.mesh
-        coord = grids.coords
-        ngrid = coord.shape[0]
-
-        gv = pcell.get_Gv(mesh)
-
-        t = numpy.dot(coord, kpts[q])
-        f = numpy.exp(-1j * t)
-        assert f.shape == (ngrid, )
-
-        assert a.shape == (nip, nip)
-        assert b.shape == (ngrid, nip)
-
-        v = numpy.zeros((nip, nip), dtype=numpy.complex128)
-
-        for i in range(nip):
-            zeta = pbctools.fft(b[:, i].T * f, mesh)
-            zeta *= pbctools.get_coulG(pcell, k=kpts[q], mesh=mesh, Gv=gv)
-            zeta *= pcell.vol / ngrid
-
-            from pyscf.pbc.tools.pbc import ifft
-            coul = ifft(zeta, mesh) * f.conj()
-            assert coul.shape == (ngrid, )
-
-            v[:, i] = coul @ b.conj()
-
-        w, rank = lstsq(a, v, tol=self.tol)
-        log.info("w[%3d], rank = %4d / %4d", q, rank, a.shape[1])
-        t0 = log.timer("w[%3d]" % q, *t0)
-        return w
     
     def get_jk(self, dm, hermi=1, kpts=None, kpts_band=None,
                with_j=True, with_k=True, omega=None, exxdiv=None):
@@ -664,7 +586,7 @@ if __name__ == "__main__":
 
     # kmesh = [4, 4, 4]
     kmesh = [2, 2, 2]
-    nkpt = nimg = numpy.prod(kmesh)
+    nkpt = nspc = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
     scf_obj = pyscf.pbc.scf.KRHF(cell, kpts=kpts)
@@ -681,7 +603,7 @@ if __name__ == "__main__":
 
     vj1 = numpy.zeros((nkpt, nao, nao))
     vk1 = numpy.zeros((nkpt, nao, nao))
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
