@@ -121,7 +121,8 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         assert coul_q.shape == (nip, nip)
 
         coul_kpt.append(coul_q)
-        log.timer("solving Coulomb kernel for q = %3d / %3d, rank = %d / %d" % (q, nkpt, rank, nip), *t0)
+        log.timer("solving Coulomb kernel", *t0)
+        log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, rank, nip)
 
     coul_kpt = numpy.asarray(coul_kpt)
     return inpv_kpt, coul_kpt
@@ -194,7 +195,7 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
         for s, ts in enumerate(t_spc):
             bq[g0:g1] += phase[s, q] * ts * ts
 
-    t1 = log.timer("get_lhs_and_rhs for q = %d / %d" % (q, nkpt), *t0)
+    log.timer("get_lhs_and_rhs", *t0)
     return aq, bq
 
 def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
@@ -603,7 +604,7 @@ if __name__ == "__main__":
 
     vj1 = numpy.zeros((nkpt, nao, nao))
     vk1 = numpy.zeros((nkpt, nao, nao))
-    # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj1 = vj1.reshape(nkpt, nao, nao)
     vk1 = vk1.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
