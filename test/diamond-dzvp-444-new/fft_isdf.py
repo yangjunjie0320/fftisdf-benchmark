@@ -260,10 +260,10 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
         assert w_qi.shape == (ngrid, i1 - i0)
 
         for j0, j1 in lib.prange(0, nip, blksize):
-            kern_qij = numpy.dot(w_qi.T.conj(), eta_q[:, j0:j1])
+            kern_qij = numpy.dot(w_qi.T, eta_q[:, j0:j1].conj())
             assert kern_qij.shape == (i1 - i0, j1 - j0)
             kern_q[i0:i1, j0:j1] = kern_qij
-            kern_q[j0:j1, i0:i1] = kern_qij.conj()
+            # kern_q[j0:j1, i0:i1] = kern_qij.conj()
 
     return kern_q
 
@@ -610,7 +610,7 @@ if __name__ == "__main__":
 
     vj0 = numpy.zeros((nkpt, nao, nao))
     vk0 = numpy.zeros((nkpt, nao, nao))
-    # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
     vj0 = vj0.reshape(nkpt, nao, nao)
     vk0 = vk0.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)

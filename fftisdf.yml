@@ -9,7 +9,6 @@ dependencies:
   - scipy
   - ase
   - mp-api
-  - mpi4py
   - cotengra
   - opt_einsum
   - pytorch
@@ -19,3 +18,4 @@ dependencies:
   - pip
   - pip:
     - pyscf
+    - mpi4py-mpich

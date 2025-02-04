@@ -1,0 +1,7 @@
+OMP_NUM_THREADS = 16
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47167578/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47167578/
+
+/home/junjiey/anaconda3/envs/fftisdf-with-mpich/bin/python

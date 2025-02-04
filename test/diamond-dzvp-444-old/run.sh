@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=nio-dzvp-444
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=4
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=64 
 #SBATCH --mem=480GB 
 #SBATCH --time=40:00:00 
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
-source /home/junjiey/anaconda3/bin/activate fftisdf-with-mpich
+source /home/junjiey/anaconda3/bin/activate fftisdf
 export DATA_PATH=/home/junjiey/work/fftisdf-benchmark/data/
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK;
@@ -34,8 +34,7 @@ python -c "import pyscf; print(pyscf.__version__)"
 python -c "import scipy; print(scipy.__version__)"
 python -c "import numpy; print(numpy.__version__)"
 
-export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
+export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 
-cp ../../src/fft_isdf_mpi.py fft_isdf.py
-srun -n 4 python fft_isdf.py
-
+cp ../../src/fft_isdf.py fft_isdf.py
+kernprof -l fft_isdf.py
