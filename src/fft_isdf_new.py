@@ -79,6 +79,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         df_obj: The FFT-ISDF object to build.
     """
     log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
 
     cell = df_obj.cell
     assert numpy.allclose(cell.get_kpts(kmesh), kpts)
@@ -96,6 +97,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     inpv_kpt = numpy.asarray(inpv_kpt, dtype=numpy.complex128)
     assert inpv_kpt.shape == (nkpt, nip, nao)
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
+    t1 = log.timer("get interpolating vectors")
 
     coul_kpt = []
     for q in range(nkpt):

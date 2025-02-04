@@ -37,6 +37,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         df_obj: The FFT-ISDF object to build.
     """
     log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
 
     cell = df_obj.cell
     assert numpy.allclose(cell.get_kpts(kmesh), kpts)
@@ -54,6 +55,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     inpv_kpt = numpy.asarray(inpv_kpt, dtype=numpy.complex128)
     assert inpv_kpt.shape == (nkpt, nip, nao)
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
+    t1 = log.timer("get interpolating vectors")
 
     coul_kpt = []
     for q in range(nkpt):
@@ -114,6 +116,9 @@ class WithMPI(fft_isdf_new.FFTISDF):
 FFTISDF = ISDF = WithMPI
 
 if __name__ == "__main__":
+    TMPDIR = lib.param.TMPDIR
+    stdout = sys.stdout if rank == 0 else open(TMPDIR + "/fft_isdf_mpi_%d.log" % rank, "w")
+
     DATA_PATH = os.getenv("DATA_PATH", "../data/")
     from utils import cell_from_poscar
 
@@ -128,6 +133,8 @@ if __name__ == "__main__":
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
+    cell.stdout = stdout
+
     kmesh = [4, 4, 4]
     nkpt = nimg = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
@@ -136,19 +143,15 @@ if __name__ == "__main__":
     scf_obj.exxdiv = None
     dm_kpts = scf_obj.get_init_guess()
 
-    from 
-    stdout = sys.stdout if rank == 0 else open(TMPDIR + "/fft_isdf_mpi_%d.log" % rank, "w")
-    cell.stdout = stdout
-
     scf_obj.with_df = ISDF(cell, kpts=kpts)
     scf_obj.with_df.c0 = 10.0
     scf_obj.with_df.verbose = 5
-    # scf_obj.with_df.stdout = stdout
+    scf_obj.with_df.stdout = stdout
     scf_obj.with_df.tol = 1e-10
     scf_obj.with_df.build()
 
-    log = logger.new_logger(None, 5)
-    t0 = (process_clock(), perf_counter())
-    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    c0 = scf_obj.with_df.c0
-    t1 = log.timer("-> ISDF JK", *t0)
+    # log = logger.new_logger(None, 5)
+    # t0 = (process_clock(), perf_counter())
+    # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    # c0 = scf_obj.with_df.c0
+    # t1 = log.timer("-> ISDF JK", *t0)
