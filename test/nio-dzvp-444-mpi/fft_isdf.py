@@ -93,12 +93,8 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
 
         coul_kpt.append((q, coul_q))
         log.timer("solving Coulomb kernel", *t0)
-        print("q = %d, rank = %d / %d" % (q, rank, size))
+        # print("q = %d, rank = %d / %d" % (q, rank, size))
         log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, res[1], nip)
-
-    print("haha")
-    for i, x in coul_kpt:
-        print("i = %d, x = %s" % (i, x.shape))
 
     comm.Barrier()
     if rank == 0:
