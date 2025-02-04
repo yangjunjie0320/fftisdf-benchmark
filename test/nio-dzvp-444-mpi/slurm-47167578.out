@@ -5,3 +5,99 @@ TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47167578/
 PYSCF_TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47167578/
 
 /home/junjiey/anaconda3/envs/fftisdf-with-mpich/bin/python
+2.8.0
+1.13.1
+1.26.4
+rank = 0, size = 4
+
+
+******** <class 'pyscf.pbc.df.fft.FFTDF'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 8
+rank = 2, size = 4
+
+
+******** <class 'pyscf.pbc.df.fft.FFTDF'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 8
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+    CPU time for -> FFTDF JK      0.02 sec, wall time      0.00 sec
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+    CPU time for -> FFTDF JK      0.03 sec, wall time      0.00 sec
+rank = 1, size = 4
+
+
+******** <class 'pyscf.pbc.df.fft.FFTDF'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 8
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+    CPU time for -> FFTDF JK      0.02 sec, wall time      0.00 sec
+rank = 3, size = 4
+
+
+******** <class 'pyscf.pbc.df.fft.FFTDF'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 8
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+    CPU time for -> FFTDF JK      0.03 sec, wall time      0.00 sec
+q = 2, rank = 2
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 165, in <module>
+    df_obj.build()
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 452, in build
+    inpv_kpt, coul_kpt = build(
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 86, in build
+    kern_q = get_coul(
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 218, in get_coul
+    nkpt = len(kpts)
+NameError: name 'kpts' is not defined
+q = 0, rank = 0
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 165, in <module>
+    df_obj.build()
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 452, in build
+    inpv_kpt, coul_kpt = build(
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 86, in build
+    kern_q = get_coul(
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 218, in get_coul
+    nkpt = len(kpts)
+NameError: name 'kpts' is not defined
+q = 3, rank = 3
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 165, in <module>
+    df_obj.build()
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 452, in build
+    inpv_kpt, coul_kpt = build(
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 86, in build
+    kern_q = get_coul(
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 218, in get_coul
+    nkpt = len(kpts)
+NameError: name 'kpts' is not defined
+q = 1, rank = 1
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 165, in <module>
+    df_obj.build()
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 452, in build
+    inpv_kpt, coul_kpt = build(
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/test/nio-dzvp-444-mpi/fft_isdf.py", line 86, in build
+    kern_q = get_coul(
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py", line 218, in get_coul
+    nkpt = len(kpts)
+NameError: name 'kpts' is not defined
+srun: error: hpc-35-01: tasks 0-3: Exited with exit code 1
