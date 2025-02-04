@@ -587,12 +587,12 @@ if __name__ == "__main__":
     cell.unit = 'aa'
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
-    cell.ke_cutoff = 80.0
+    cell.ke_cutoff = 40.0
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
-    # kmesh = [4, 4, 4]
-    kmesh = [2, 2, 2]
+    kmesh = [4, 4, 4]
+    # kmesh = [2, 2, 2]
     nkpt = nspc = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
@@ -608,11 +608,11 @@ if __name__ == "__main__":
     scf_obj.with_df.dump_flags()
     scf_obj.with_df.check_sanity()
 
-    vj1 = numpy.zeros((nkpt, nao, nao))
-    vk1 = numpy.zeros((nkpt, nao, nao))
-    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
+    vj0 = numpy.zeros((nkpt, nao, nao))
+    vk0 = numpy.zeros((nkpt, nao, nao))
+    # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0 = vj0.reshape(nkpt, nao, nao)
+    vk0 = vk0.reshape(nkpt, nao, nao)
     t1 = log.timer("-> FFTDF JK", *t0)
 
     for c0 in [5.0, 10.0, 15.0, 20.0]:
@@ -620,8 +620,8 @@ if __name__ == "__main__":
         # c0 = 40.0
         scf_obj.with_df = ISDF(cell, kpts=kpts)
         scf_obj.with_df.c0 = c0
-        scf_obj.with_df.verbose = 0
-        scf_obj.with_df.tol = 1e-12
+        scf_obj.with_df.verbose = 5
+        scf_obj.with_df.tol = 1e-10
         df_obj = scf_obj.with_df
         df_obj.build()
         t1 = log.timer("-> ISDF build", *t0)
