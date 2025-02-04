@@ -26,7 +26,7 @@ import fft_isdf_new
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
-print("rank = %d, size = %d" % (rank, size))
+# print("rank = %d, size = %d" % (rank, size))
 comm.Barrier()
 
 def build(df_obj, c0=None, kpts=None, kmesh=None):
