@@ -607,8 +607,9 @@ if __name__ == "__main__":
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.dump_flags()
-    scf_obj.with_df.check_sanity()
+    scf_obj.with_df.stdout = cell.stdout
+    # scf_obj.with_df.dump_flags()
+    # scf_obj.with_df.check_sanity()
 
     vj0 = numpy.zeros((nkpt, nao, nao))
     vk0 = numpy.zeros((nkpt, nao, nao))

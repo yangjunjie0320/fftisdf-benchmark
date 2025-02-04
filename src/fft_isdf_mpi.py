@@ -26,8 +26,6 @@ import fft_isdf_new
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
-# print("rank = %d, size = %d" % (rank, size))
-comm.Barrier()
 
 def build(df_obj, c0=None, kpts=None, kmesh=None):
     """
@@ -96,24 +94,12 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         # print("q = %d, rank = %d / %d" % (q, rank, size))
         log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, res[1], nip)
 
-    comm.Barrier()
-    if rank == 0:
-        coul_kpt = comm.gather(coul_kpt, root=0)
-
-        for i, x in coul_kpt:
-            print("i = %d, x = %s" % (i, x.shape))
-
-        coul_kpt = sorted(coul_kpt, key=lambda x: x[0])
-        coul_kpt = [x[1] for x in coul_kpt]
-        coul_kpt = numpy.asarray(coul_kpt)
-        comm.bcast(coul_kpt, root=0)
-
+    comm.barrier()
+    coul_kpt = comm.allreduce(coul_kpt)
+    coul_kpt = [x[1] for x in sorted(coul_kpt, key=lambda x: x[0])]
     coul_kpt = numpy.asarray(coul_kpt)
     coul_kpt = coul_kpt.reshape(nkpt, nip, nip)
-    print("coul_kpt = %s" % str(coul_kpt.shape))
-
-    assert 1 == 2
-    comm.Barrier()
+    comm.barrier()
     return inpv_kpt, coul_kpt
 
 fft_isdf_new.build = build
@@ -143,32 +129,38 @@ if __name__ == "__main__":
     nao = cell.nao_nr()
 
     # kmesh = [4, 4, 4]
-    kmesh = [2, 2, 2]
+    kmesh = [4, 4, 4]
     nkpt = nspc = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
     scf_obj = pyscf.pbc.scf.KRHF(cell, kpts=kpts)
     scf_obj.exxdiv = None
+    scf_obj.stdout = cell.stdout
     dm_kpts = scf_obj.get_init_guess(key="minao")
 
-    log = logger.new_logger(None, 5)
+    log = logger.new_logger(cell, 5)
+    log.stdout = cell.stdout
 
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
+    scf_obj.with_df.stdout = cell.stdout
     scf_obj.with_df.dump_flags()
     scf_obj.with_df.check_sanity()
 
-    vj1 = numpy.zeros((nkpt, nao, nao))
-    vk1 = numpy.zeros((nkpt, nao, nao))
-    # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
-    # t1 = log.timer("-> FFTDF JK", *t0)
+    vj0 = numpy.zeros((nkpt, nao, nao))
+    vk0 = numpy.zeros((nkpt, nao, nao))
+    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj0 = vj0.reshape(nkpt, nao, nao)
+    vk0 = vk0.reshape(nkpt, nao, nao)
+
+    if rank == 0:
+        t1 = log.timer("-> FFTDF JK", *t0)
 
     for c0 in [5.0, 10.0, 15.0, 20.0]:
+        comm.barrier()
+
         t0 = (process_clock(), perf_counter())
-        # c0 = 40.0
         scf_obj.with_df = ISDF(cell, kpts=kpts)
         scf_obj.with_df.c0 = c0
         scf_obj.with_df.verbose = 5
@@ -176,19 +168,22 @@ if __name__ == "__main__":
         df_obj = scf_obj.with_df
         df_obj.build()
 
+        t1 = log.timer("-> ISDF build", *t0)
+
+        t0 = (process_clock(), perf_counter())
+        vj1 = numpy.zeros((nkpt, nao, nao))
+        vk1 = numpy.zeros((nkpt, nao, nao))
+        vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+        vj1 = vj1.reshape(nkpt, nao, nao)
+        vk1 = vk1.reshape(nkpt, nao, nao)
+
         if rank == 0:
-            t1 = log.timer("-> ISDF build", *t0)
+            t1 = log.timer("-> ISDF JK", *t0)
 
-        # t0 = (process_clock(), perf_counter())
-        # vj1 = numpy.zeros((nkpt, nao, nao))
-        # vk1 = numpy.zeros((nkpt, nao, nao))
-        # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-        # vj1 = vj1.reshape(nkpt, nao, nao)
-        # vk1 = vk1.reshape(nkpt, nao, nao)
-        # t1 = log.timer("-> ISDF JK", *t0)
+            err = abs(vj0 - vj1).max()
+            print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
 
-        # err = abs(vj0 - vj1).max()
-        # print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+            err = abs(vk0 - vk1).max()
+            print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
 
-        # err = abs(vk0 - vk1).max()
-        # print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
+        comm.barrier()

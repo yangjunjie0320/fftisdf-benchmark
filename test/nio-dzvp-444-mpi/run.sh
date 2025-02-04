@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=nio-dzvp-444
 #SBATCH --ntasks=4
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=32
 #SBATCH --mem=200GB
 #SBATCH --time=00:10:00 
 #SBATCH --reservation=changroup_standingres
