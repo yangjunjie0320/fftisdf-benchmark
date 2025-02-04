@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=nio-dzvp-444
-#SBATCH --cpus-per-task=64 
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=480GB 
 #SBATCH --time=40:00:00 
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
 #SBATCH --reservation=changroup_standingres
 
 # Load environment configuration
@@ -36,5 +36,5 @@ python -c "import numpy; print(numpy.__version__)"
 
 export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 
-cp ../../src/fft_isdf_new.py fft_isdf.py
-kernprof -l fft_isdf.py
+cp ../../src/fft_isdf_mpi.py fft_isdf.py
+mpiexec -n 4 python fft_isdf.py

@@ -10,7 +10,6 @@ dependencies:
   - ase
   - mp-api
   - mpi4py
-  - openmpi
   - cotengra
   - opt_einsum
   - pytorch

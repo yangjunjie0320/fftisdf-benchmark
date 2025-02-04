@@ -116,9 +116,6 @@ class WithMPI(fft_isdf_new.FFTISDF):
 FFTISDF = ISDF = WithMPI
 
 if __name__ == "__main__":
-    TMPDIR = lib.param.TMPDIR
-    stdout = sys.stdout if rank == 0 else open(TMPDIR + "/fft_isdf_mpi_%d.log" % rank, "w")
-
     DATA_PATH = os.getenv("DATA_PATH", "../data/")
     from utils import cell_from_poscar
 
@@ -133,25 +130,53 @@ if __name__ == "__main__":
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
-    cell.stdout = stdout
-
-    kmesh = [4, 4, 4]
-    nkpt = nimg = numpy.prod(kmesh)
+    # kmesh = [4, 4, 4]
+    kmesh = [2, 2, 2]
+    nkpt = nspc = numpy.prod(kmesh)
     kpts = cell.get_kpts(kmesh)
 
     scf_obj = pyscf.pbc.scf.KRHF(cell, kpts=kpts)
     scf_obj.exxdiv = None
-    dm_kpts = scf_obj.get_init_guess()
+    dm_kpts = scf_obj.get_init_guess(key="minao")
 
-    scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = 10.0
+    log = logger.new_logger(None, 5)
+
+    t0 = (process_clock(), perf_counter())
+    scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.stdout = stdout
-    scf_obj.with_df.tol = 1e-10
-    scf_obj.with_df.build()
+    scf_obj.with_df.dump_flags()
+    scf_obj.with_df.check_sanity()
 
-    # log = logger.new_logger(None, 5)
-    # t0 = (process_clock(), perf_counter())
+    vj1 = numpy.zeros((nkpt, nao, nao))
+    vk1 = numpy.zeros((nkpt, nao, nao))
     # vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    # c0 = scf_obj.with_df.c0
-    # t1 = log.timer("-> ISDF JK", *t0)
+    vj1 = vj1.reshape(nkpt, nao, nao)
+    vk1 = vk1.reshape(nkpt, nao, nao)
+    t1 = log.timer("-> FFTDF JK", *t0)
+
+    for c0 in [5.0, 10.0, 15.0, 20.0]:
+        t0 = (process_clock(), perf_counter())
+        # c0 = 40.0
+        scf_obj.with_df = ISDF(cell, kpts=kpts)
+        scf_obj.with_df.c0 = c0
+        scf_obj.with_df.verbose = 0
+        scf_obj.with_df.tol = 1e-12
+        df_obj = scf_obj.with_df
+        df_obj.build()
+
+        if rank == 0:
+            t1 = log.timer("-> ISDF build", *t0)
+
+        # t0 = (process_clock(), perf_counter())
+        # vj1 = numpy.zeros((nkpt, nao, nao))
+        # vk1 = numpy.zeros((nkpt, nao, nao))
+        # vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+        # vj1 = vj1.reshape(nkpt, nao, nao)
+        # vk1 = vk1.reshape(nkpt, nao, nao)
+        # t1 = log.timer("-> ISDF JK", *t0)
+
+        # err = abs(vj0 - vj1).max()
+        # print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+
+        # err = abs(vk0 - vk1).max()
+        # print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
