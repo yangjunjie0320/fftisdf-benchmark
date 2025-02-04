@@ -35,4 +35,5 @@ python -c "import numpy; print(numpy.__version__)"
 
 export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
 
+cp ../../src/fft_isdf_new.py fft_isdf.py
 kernprof -l fft_isdf.py
