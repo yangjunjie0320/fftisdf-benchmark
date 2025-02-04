@@ -1,0 +1,29 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 204800
+TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47171767/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//nio-dzvp-444/47171767/
+
+/home/junjiey/anaconda3/envs/fftisdf-with-mpich/bin/python
+2.8.0
+1.13.1
+1.26.4
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+******** <class 'pyscf.pbc.df.fft.FFTDF'> ********
+mesh = [21 21 21] (9261 PWs)
+len(kpts) = 64
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+WARN: ke_cutoff/mesh (80 / [21 21 21]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 2.2 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
