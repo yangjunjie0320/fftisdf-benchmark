@@ -216,6 +216,7 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     t0 = (process_clock(), perf_counter())
 
     kpts = df_obj.kpts
+    kmesh = df_obj.kmesh
     nkpt = len(kpts)
     pcell = df_obj.cell
     nao = pcell.nao_nr()
