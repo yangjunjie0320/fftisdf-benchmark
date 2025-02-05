@@ -1,8 +1,8 @@
 OMP_NUM_THREADS = 64
 MKL_NUM_THREADS = 1
 PYSCF_MAX_MEMORY = 491520
-TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179742/
-PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179742/
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179787/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179787/
 rm: invalid option -- 'p'
 Try 'rm --help' for more information.
 
@@ -95,54 +95,54 @@ Parent grid mesh = [7 5 7], grid size = 245
 
 WARN: The parent grid might be too coarse.
 
-    CPU time for select interpolation points    131.22 sec, wall time      2.08 sec
+    CPU time for select interpolation points    122.56 sec, wall time      1.93 sec
 Pivoted Cholesky rank = 245, nip = 80, estimated error = 7.48e-02
 Number of interpolation points = 80, effective CISDF =  10.00
-    CPU time for building left-hand side      2.49 sec, wall time      0.04 sec
+    CPU time for building left-hand side      1.76 sec, wall time      0.03 sec
 
 kpt = 64, ngrid = 3375, nao = 8
-ngrid = 3375, blksize = 599643, nip = 80
+ngrid = 3375, blksize = 599626, nip = 80
 required disk space = 0 GB
-finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/szv/fftisdf-10-40/4-4-4/47179742/rvlpgv6d
-blksize = 599643, memory for aoR_loop = 49122 MB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/szv/fftisdf-10-40/4-4-4/47179787/ba7y447n
+blksize = 599626, memory for aoR_loop = 49121 MB
 finished aoR_loop[       0:    3375]
-    CPU time for building right-hand side     56.51 sec, wall time      0.94 sec
+    CPU time for building right-hand side     56.93 sec, wall time      0.93 sec
 w[  0], rank =   70 /   80
-    CPU time for w[  0]      3.73 sec, wall time      0.06 sec
+    CPU time for w[  0]      4.43 sec, wall time      0.08 sec
 w[  1], rank =   71 /   80
-    CPU time for w[  1]      1.57 sec, wall time      0.02 sec
+    CPU time for w[  1]      1.74 sec, wall time      0.03 sec
 w[  2], rank =   71 /   80
-    CPU time for w[  2]      2.90 sec, wall time      0.05 sec
+    CPU time for w[  2]      1.72 sec, wall time      0.03 sec
 w[  3], rank =   71 /   80
-    CPU time for w[  3]      1.51 sec, wall time      0.02 sec
+    CPU time for w[  3]      1.35 sec, wall time      0.02 sec
 w[  4], rank =   71 /   80
-    CPU time for w[  4]      1.23 sec, wall time      0.02 sec
+    CPU time for w[  4]      1.19 sec, wall time      0.02 sec
 w[  5], rank =   71 /   80
-    CPU time for w[  5]      1.22 sec, wall time      0.02 sec
+    CPU time for w[  5]      1.29 sec, wall time      0.02 sec
 w[  6], rank =   71 /   80
-    CPU time for w[  6]      1.23 sec, wall time      0.02 sec
+    CPU time for w[  6]      1.20 sec, wall time      0.02 sec
 w[  7], rank =   71 /   80
-    CPU time for w[  7]      1.22 sec, wall time      0.02 sec
+    CPU time for w[  7]      1.41 sec, wall time      0.02 sec
 w[  8], rank =   71 /   80
-    CPU time for w[  8]      1.23 sec, wall time      0.02 sec
+    CPU time for w[  8]      2.44 sec, wall time      0.04 sec
 w[  9], rank =   71 /   80
-    CPU time for w[  9]      1.24 sec, wall time      0.02 sec
+    CPU time for w[  9]      1.41 sec, wall time      0.02 sec
 w[ 10], rank =   71 /   80
-    CPU time for w[ 10]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 10]      1.29 sec, wall time      0.02 sec
 w[ 11], rank =   71 /   80
-    CPU time for w[ 11]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 11]      1.22 sec, wall time      0.02 sec
 w[ 12], rank =   71 /   80
-    CPU time for w[ 12]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 12]      1.21 sec, wall time      0.02 sec
 w[ 13], rank =   71 /   80
-    CPU time for w[ 13]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 13]      1.21 sec, wall time      0.02 sec
 w[ 14], rank =   71 /   80
-    CPU time for w[ 14]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 14]      1.21 sec, wall time      0.02 sec
 w[ 15], rank =   71 /   80
-    CPU time for w[ 15]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 15]      1.21 sec, wall time      0.02 sec
 w[ 16], rank =   71 /   80
-    CPU time for w[ 16]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 16]      1.21 sec, wall time      0.02 sec
 w[ 17], rank =   71 /   80
-    CPU time for w[ 17]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 17]      1.21 sec, wall time      0.02 sec
 w[ 18], rank =   71 /   80
     CPU time for w[ 18]      1.22 sec, wall time      0.02 sec
 w[ 19], rank =   71 /   80
@@ -150,110 +150,91 @@ w[ 19], rank =   71 /   80
 w[ 20], rank =   71 /   80
     CPU time for w[ 20]      1.22 sec, wall time      0.02 sec
 w[ 21], rank =   71 /   80
-    CPU time for w[ 21]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 21]      1.21 sec, wall time      0.02 sec
 w[ 22], rank =   71 /   80
-    CPU time for w[ 22]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 22]      1.22 sec, wall time      0.02 sec
 w[ 23], rank =   71 /   80
-    CPU time for w[ 23]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 23]      1.21 sec, wall time      0.02 sec
 w[ 24], rank =   71 /   80
-    CPU time for w[ 24]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 24]      1.22 sec, wall time      0.02 sec
 w[ 25], rank =   71 /   80
     CPU time for w[ 25]      1.22 sec, wall time      0.02 sec
 w[ 26], rank =   71 /   80
     CPU time for w[ 26]      1.23 sec, wall time      0.02 sec
 w[ 27], rank =   71 /   80
-    CPU time for w[ 27]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 27]      1.22 sec, wall time      0.02 sec
 w[ 28], rank =   71 /   80
-    CPU time for w[ 28]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 28]      1.21 sec, wall time      0.02 sec
 w[ 29], rank =   71 /   80
-    CPU time for w[ 29]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 29]      1.22 sec, wall time      0.02 sec
 w[ 30], rank =   71 /   80
-    CPU time for w[ 30]      1.26 sec, wall time      0.02 sec
+    CPU time for w[ 30]      1.24 sec, wall time      0.02 sec
 w[ 31], rank =   71 /   80
     CPU time for w[ 31]      1.22 sec, wall time      0.02 sec
 w[ 32], rank =   71 /   80
-    CPU time for w[ 32]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 32]      1.21 sec, wall time      0.02 sec
 w[ 33], rank =   71 /   80
     CPU time for w[ 33]      1.46 sec, wall time      0.02 sec
 w[ 34], rank =   71 /   80
     CPU time for w[ 34]      1.33 sec, wall time      0.02 sec
 w[ 35], rank =   71 /   80
-    CPU time for w[ 35]      1.29 sec, wall time      0.02 sec
+    CPU time for w[ 35]      1.22 sec, wall time      0.02 sec
 w[ 36], rank =   71 /   80
-    CPU time for w[ 36]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 36]      1.20 sec, wall time      0.02 sec
 w[ 37], rank =   71 /   80
-    CPU time for w[ 37]      1.23 sec, wall time      0.02 sec
+    CPU time for w[ 37]      1.21 sec, wall time      0.02 sec
 w[ 38], rank =   71 /   80
     CPU time for w[ 38]      1.20 sec, wall time      0.02 sec
 w[ 39], rank =   71 /   80
-    CPU time for w[ 39]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 39]      1.26 sec, wall time      0.02 sec
 w[ 40], rank =   71 /   80
-    CPU time for w[ 40]      1.21 sec, wall time      0.02 sec
+    CPU time for w[ 40]      1.22 sec, wall time      0.02 sec
 w[ 41], rank =   71 /   80
-    CPU time for w[ 41]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 41]      1.21 sec, wall time      0.02 sec
 w[ 42], rank =   71 /   80
-    CPU time for w[ 42]      1.21 sec, wall time      0.02 sec
+    CPU time for w[ 42]      1.20 sec, wall time      0.02 sec
 w[ 43], rank =   71 /   80
-    CPU time for w[ 43]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 43]      1.21 sec, wall time      0.02 sec
 w[ 44], rank =   71 /   80
     CPU time for w[ 44]      1.20 sec, wall time      0.02 sec
 w[ 45], rank =   71 /   80
-    CPU time for w[ 45]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 45]      1.22 sec, wall time      0.02 sec
 w[ 46], rank =   71 /   80
-    CPU time for w[ 46]      1.21 sec, wall time      0.02 sec
+    CPU time for w[ 46]      1.20 sec, wall time      0.02 sec
 w[ 47], rank =   71 /   80
-    CPU time for w[ 47]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 47]      1.30 sec, wall time      0.02 sec
 w[ 48], rank =   71 /   80
     CPU time for w[ 48]      1.22 sec, wall time      0.02 sec
 w[ 49], rank =   71 /   80
-    CPU time for w[ 49]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 49]      1.23 sec, wall time      0.02 sec
 w[ 50], rank =   71 /   80
-    CPU time for w[ 50]      1.20 sec, wall time      0.02 sec
+    CPU time for w[ 50]      1.21 sec, wall time      0.02 sec
 w[ 51], rank =   71 /   80
-    CPU time for w[ 51]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 51]      2.91 sec, wall time      0.05 sec
 w[ 52], rank =   71 /   80
-    CPU time for w[ 52]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 52]      1.67 sec, wall time      0.03 sec
 w[ 53], rank =   71 /   80
-    CPU time for w[ 53]      1.24 sec, wall time      0.02 sec
+    CPU time for w[ 53]      1.21 sec, wall time      0.02 sec
 w[ 54], rank =   71 /   80
     CPU time for w[ 54]      1.21 sec, wall time      0.02 sec
 w[ 55], rank =   71 /   80
-    CPU time for w[ 55]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 55]      1.22 sec, wall time      0.02 sec
 w[ 56], rank =   71 /   80
     CPU time for w[ 56]      1.19 sec, wall time      0.02 sec
 w[ 57], rank =   71 /   80
-    CPU time for w[ 57]      1.26 sec, wall time      0.02 sec
+    CPU time for w[ 57]      1.20 sec, wall time      0.02 sec
 w[ 58], rank =   71 /   80
-    CPU time for w[ 58]      1.22 sec, wall time      0.02 sec
+    CPU time for w[ 58]      1.20 sec, wall time      0.02 sec
 w[ 59], rank =   71 /   80
-    CPU time for w[ 59]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 59]      1.22 sec, wall time      0.02 sec
 w[ 60], rank =   71 /   80
-    CPU time for w[ 60]      1.21 sec, wall time      0.02 sec
+    CPU time for w[ 60]      1.20 sec, wall time      0.02 sec
 w[ 61], rank =   71 /   80
-    CPU time for w[ 61]      1.25 sec, wall time      0.02 sec
+    CPU time for w[ 61]      1.21 sec, wall time      0.02 sec
 w[ 62], rank =   71 /   80
-    CPU time for w[ 62]      1.21 sec, wall time      0.02 sec
+    CPU time for w[ 62]      1.20 sec, wall time      0.02 sec
 w[ 63], rank =   71 /   80
-    CPU time for w[ 63]      1.24 sec, wall time      0.02 sec
-Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179742/tmp.chk
-    CPU time for building ISDF    279.60 sec, wall time      4.47 sec
-(64, 8, 8) (64, 8, 8) (1, 64, 8, 8)
-Traceback (most recent call last):
-  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/szv/fftisdf-10-40/4-4-4/main.py", line 46, in <module>
-    main(args)
-  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/szv/fftisdf-10-40/4-4-4/main.py", line 33, in main
-    scf(cell, kmesh, df_obj=df_obj, tmp=df_obj._isdf)
-  File "/home/junjiey/work/fftisdf-benchmark-new/src/utils.py", line 126, in scf
-    e_tot = scf_obj.kernel(dm0)
-  File "<string>", line 2, in kernel
-  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/hf.py", line 2016, in scf
-    kernel(self, self.conv_tol, self.conv_tol_grad,
-  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/hf.py", line 130, in kernel
-    e_tot = mf.energy_tot(dm, h1e, vhf)
-  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/addons.py", line 242, in energy_tot
-    e_tot = self.energy_elec(dm, h1e, vhf)[0] + self.energy_nuc()
-  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/pbc/scf/khf.py", line 250, in energy_elec
-    e_coul = 1./nkpts * np.einsum('kij,kji', dm_kpts, vhf_kpts) * 0.5
-  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/numpy/core/einsumfunc.py", line 1371, in einsum
-    return c_einsum(*operands, **kwargs)
-ValueError: operand has more dimensions than subscripts given in einstein sum, but no '...' ellipsis provided to broadcast the extra dimensions.
+    CPU time for w[ 63]      1.22 sec, wall time      0.02 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-10-40/4-4-4//47179787/tmp.chk
+    CPU time for building ISDF    270.70 sec, wall time      4.31 sec
+Dumping vj and vk to vjk.chk

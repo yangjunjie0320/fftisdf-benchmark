@@ -31,6 +31,7 @@ python -c "import scipy; print(scipy.__version__)"
 python -c "import numpy; print(numpy.__version__)"
 
 export PYTHONPATH=$PREFIX/src/:$PYTHONPATH;
+krhf-fftdf 40
 
 cp /home/junjiey/work/fftisdf-benchmark-new/src/main-krhf-fftdf.py main.py
 python main.py --ke_cutoff=40.00 --cell=diamond-prim.vasp --kmesh=2-2-2 --basis=gth-szv-molopt-sr --pseudo=gth-pade

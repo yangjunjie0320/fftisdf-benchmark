@@ -1,4 +1,4 @@
-    CPU time for build      0.06 sec, wall time      0.00 sec
-    CPU time for scf   3125.91 sec, wall time     49.81 sec
+    CPU time for build      0.41 sec, wall time      0.01 sec
+    CPU time for scf   3028.51 sec, wall time     48.42 sec
 ncycle =  8, e_tot =      -9.49502581
 chk file size: 0.00e+00 GB
