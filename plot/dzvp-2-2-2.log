@@ -1,0 +1,59 @@
+./fftisdf-30-40/2-2-2/out.log
+    CPU time for build    284.08 sec, wall time      4.57 sec
+    CPU time for scf    232.37 sec, wall time      3.77 sec
+ncycle =  8, e_tot =      -9.49461529
+chk file size: 8.05e-02 GB
+--
+./fftisdf-10-40/2-2-2/out.log
+    CPU time for build    100.87 sec, wall time      1.62 sec
+    CPU time for scf    108.05 sec, wall time      1.78 sec
+ncycle =  7, e_tot =      -9.49400225
+chk file size: 9.52e-03 GB
+--
+./fftisdf-20-40/2-2-2/out.log
+    CPU time for build    170.23 sec, wall time      2.74 sec
+    CPU time for scf    172.27 sec, wall time      2.83 sec
+ncycle =  9, e_tot =      -9.49462206
+chk file size: 3.63e-02 GB
+--
+./fftisdf-5-40/2-2-2/out.log
+    CPU time for build     60.74 sec, wall time      0.97 sec
+    CPU time for scf    140.50 sec, wall time      2.31 sec
+ncycle = 10, e_tot =      -9.48046100
+chk file size: 2.60e-03 GB
+--
+./fftisdf-35-40/2-2-2/out.log
+    CPU time for build    343.73 sec, wall time      5.52 sec
+    CPU time for scf    255.48 sec, wall time      4.12 sec
+ncycle =  8, e_tot =      -9.49461448
+chk file size: 1.09e-01 GB
+--
+./fftisdf-40-40/2-2-2/out.log
+    CPU time for build    410.65 sec, wall time      6.68 sec
+    CPU time for scf    298.88 sec, wall time      4.80 sec
+ncycle =  8, e_tot =      -9.49461356
+chk file size: 1.42e-01 GB
+--
+./fftdf-40/2-2-2/out.log
+    CPU time for build      0.06 sec, wall time      0.00 sec
+    CPU time for scf   4855.69 sec, wall time     81.70 sec
+ncycle =  8, e_tot =      -9.49461349
+chk file size: 0.00e+00 GB
+--
+./fftisdf-25-40/2-2-2/out.log
+    CPU time for build    250.49 sec, wall time      4.03 sec
+    CPU time for scf    223.59 sec, wall time      3.59 sec
+ncycle =  8, e_tot =      -9.49461294
+chk file size: 5.62e-02 GB
+--
+./fftisdf-15-40/2-2-2/out.log
+    CPU time for build    132.77 sec, wall time      2.13 sec
+    CPU time for scf    157.88 sec, wall time      2.59 sec
+ncycle =  9, e_tot =      -9.49420803
+chk file size: 2.08e-02 GB
+--
+./gdf/2-2-2/out.log
+    CPU time for build   1210.35 sec, wall time    128.65 sec
+    CPU time for scf    375.57 sec, wall time     21.46 sec
+ncycle =  8, e_tot =      -9.49468379
+chk file size: 1.05e-01 GB
