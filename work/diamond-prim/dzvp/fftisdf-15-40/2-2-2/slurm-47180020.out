@@ -1,0 +1,72 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/dzvp/fftisdf-15-40/2-2-2//47180020/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/dzvp/fftisdf-15-40/2-2-2//47180020/
+rm: invalid option -- 'p'
+Try 'rm --help' for more information.
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 8
+    kpts = [[ 0.          0.          0.        ]
+ [-0.38121014 -0.26955632  0.66027542]
+ [ 0.          0.80866896  0.        ]
+ [-0.38121014  0.53911264  0.66027542]
+ [ 0.76242029 -0.26955632  0.        ]
+ [ 0.38121014 -0.53911264  0.66027542]
+ [ 0.76242029  0.53911264  0.        ]
+ [ 0.38121014  0.26955632  0.66027542]]
+Overwritten attributes  tol kmesh c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [8, 8, 8], ke_cutoff =  28.02
+Final parent grid size = [9 7 9]
+
+Selecting interpolation points
+nkpts = 8, nao = 26, c0 =  15.00
+Parent grid mesh = [9 7 9], grid size = 567
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     12.72 sec, wall time      0.21 sec
+Pivoted Cholesky rank = 567, nip = 390, estimated error = 5.51e-03
+Number of interpolation points = 390, effective CISDF =  15.00
+    CPU time for building left-hand side      3.62 sec, wall time      0.06 sec
+
+kpt = 8, ngrid = 3375, nao = 26
+ngrid = 3375, blksize = 984033, nip = 390
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/dzvp/fftisdf-15-40/2-2-2/47180020/6tirh8k1
+blksize = 984033, memory for aoR_loop = 49122 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side     28.31 sec, wall time      0.46 sec
+w[  0], rank =  201 /  390
+    CPU time for w[  0]     11.03 sec, wall time      0.20 sec
+w[  1], rank =  201 /  390
+    CPU time for w[  1]     10.07 sec, wall time      0.16 sec
+w[  2], rank =  201 /  390
+    CPU time for w[  2]     11.26 sec, wall time      0.18 sec
+w[  3], rank =  201 /  390
+    CPU time for w[  3]     10.26 sec, wall time      0.16 sec
+w[  4], rank =  201 /  390
+    CPU time for w[  4]      9.86 sec, wall time      0.15 sec
+w[  5], rank =  201 /  390
+    CPU time for w[  5]      9.62 sec, wall time      0.15 sec
+w[  6], rank =  201 /  390
+    CPU time for w[  6]     10.34 sec, wall time      0.16 sec
+w[  7], rank =  201 /  390
+    CPU time for w[  7]      9.54 sec, wall time      0.15 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/dzvp/fftisdf-15-40/2-2-2//47180020/tmp.chk
+    CPU time for building ISDF    132.38 sec, wall time      2.13 sec
+Dumping vj and vk to vjk.chk

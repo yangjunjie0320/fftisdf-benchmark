@@ -25,7 +25,7 @@ function submit() {
 
 
 for cell in diamond-prim; do
-    for basis in szv; do
+    for basis in dzvp; do
         for kmesh in 2-2-2 4-4-4; do
             method=gdf
             submit $cell $kmesh $basis $method
