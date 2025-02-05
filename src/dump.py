@@ -33,6 +33,7 @@ if __name__ == "__main__":
         k0 = method.split("-")[-1]
         method = method.split("-")[:-1]
         method = "-".join(method)
+        print(method, k0)
         main_path = "%s/src/main-%s.py" % (args.prefix, method)
         assert os.path.exists(main_path), "%s does not exist" % main_path
 

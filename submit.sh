@@ -1,4 +1,4 @@
-export PREFIX=/home/junjiey/work/fftisdf-benchmark/
+export PREFIX=$(pwd)
 
 function submit() {
     cell=$1

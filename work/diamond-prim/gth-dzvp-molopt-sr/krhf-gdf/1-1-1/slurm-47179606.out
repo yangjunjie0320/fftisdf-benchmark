@@ -1,0 +1,16 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/krhf-gdf/1-1-1//47179606/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/gth-dzvp-molopt-sr/krhf-gdf/1-1-1//47179606/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/gth-dzvp-molopt-sr/krhf-gdf/1-1-1/main.py", line 42, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/gth-dzvp-molopt-sr/krhf-gdf/1-1-1/main.py", line 29, in main
+    from utils import scf
+ImportError: cannot import name 'scf' from 'utils' (/home/junjiey/work/fftisdf-benchmark/src/utils.py)
