@@ -24,39 +24,20 @@ function submit() {
 }
 
 
-for cell in diamond-prim nio-prim; do
+for cell in diamond-prim; do
     for basis in gth-szv-molopt-sr gth-dzvp-molopt-sr; do
-        for kmesh in 1-1-2 1-2-2 2-2-2 2-2-4 2-4-4 4-4-4; do
-            method=gdf
+        for kmesh in 1-1-1 2-2-2 4-4-4; do
+            method=krhf-gdf
             submit $cell $kmesh $basis $method
 
             ke_cutoff=40
-            method=fftdf
+            method=krhf-fftdf
             submit $cell $kmesh $basis $method-$ke_cutoff
 
-            for c0 in 40 60 80; do
-                method=fftisdf-yang-$c0
-                submit $cell $kmesh $basis $method-$ke_cutoff
+            for c0 in 5 10 15 20 25 30 35 40; do
+                method=krhf-fftisdf
+                submit $cell $kmesh $basis $method-$c0-$ke_cutoff
             done
-
-            ke_cutoff=80
-            method=fftdf
-            submit $cell $kmesh $basis $method-$ke_cutoff
-
-            for c0 in 40 60 80; do
-                method=fftisdf-yang-$c0
-                submit $cell $kmesh $basis $method-$ke_cutoff
-            done
-
-            ke_cutoff=120
-            method=fftdf
-            submit $cell $kmesh $basis $method-$ke_cutoff
-
-            for c0 in 40 60 80; do
-                method=fftisdf-yang-$c0
-                submit $cell $kmesh $basis $method-$ke_cutoff
-            done
-
         done
     done
 done

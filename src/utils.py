@@ -105,15 +105,15 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
     log = logger.Logger(stdout, 5)
 
     if kmesh is not None:
-        from pyscf.pbc.scf import KRKS
+        from pyscf.pbc.scf import KRHF
         kpts = cell.get_kpts(kmesh)
-        scf_obj = KRKS(cell, kpts=kpts)
+        scf_obj = KRHF(cell, kpts=kpts)
         scf_obj.exxdiv = None
-        scf_obj.xc = "PBE0"
         dm0 = scf_obj.get_init_guess(key="minao")
 
         from pyscf.pbc.scf.addons import smearing_
         scf_obj = smearing_(scf_obj, sigma=0.1, method="fermi")
+        
     else:
         raise NotImplementedError
 
@@ -127,7 +127,7 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
 
     dm = scf_obj.make_rdm1()
     ncycle = scf_obj.cycles
-    
+
     log.info("ncycle = %2d, e_tot = %16.8f", ncycle, e_tot)
     log.info("chk file size: %6.2e GB", os.path.getsize(tmp) / 1e9)
 

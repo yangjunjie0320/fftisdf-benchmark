@@ -17,38 +17,40 @@ if __name__ == "__main__":
     assert os.path.exists(prefix)
 
     cmd = "\n"
-    if "fftisdf-yang" in method:
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")), "%s/src/main-%s.py" % (args.prefix, "fftisdf-yang")
-        method = method.split("-")
+    if "fftisdf" in method:
+        c0 = method.split("-")[-2]
+        k0 = method.split("-")[-1]
+        method = method.split("-")[:-2]
+        method = "-".join(method)
+        main_path = "%s/src/main-%s.py" % (args.prefix, method)
+        assert os.path.exists(main_path), "%s does not exist" % main_path
 
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "-".join(method[:2]))
+        cmd += "cp %s main.py\n" % main_path
         cmd += "python main.py "
-        cmd += "--c0=%.2f --ke_cutoff=%.2f " % (float(method[2]), float(method[3]))
+        cmd += "--c0=%.2f --ke_cutoff=%.2f " % (float(c0), float(k0))
 
     elif "fftdf" in method:
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "fftdf"))
-        method = method.split("-")
+        k0 = method.split("-")[-1]
+        method = method.split("-")[:-1]
+        method = "-".join(method)
+        main_path = "%s/src/main-%s.py" % (args.prefix, method)
+        assert os.path.exists(main_path), "%s does not exist" % main_path
 
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, method[0])
+        cmd += "cp %s main.py\n" % main_path
         cmd += "python main.py "
-        cmd += "--ke_cutoff=%.2f " % float(method[1])
+        cmd += "--ke_cutoff=%.2f " % float(k0)
 
     elif "gdf" in method:
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "gdf"))
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "gdf")
-        cmd += "python main.py "
-
-    elif "fftisdf-ning" in method:
-        # is now abandoned
-        raise RuntimeError("fftisdf-ning is now abandoned")
         method = method.split("-")
-        assert os.path.exists("%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))), "%s/src/main-%s.py" % (args.prefix, "-".join(method[:-1]))
+        method = "-".join(method)
+        main_path = "%s/src/main-%s.py" % (args.prefix, method)
+        assert os.path.exists(main_path), "%s does not exist" % main_path
 
-        cmd += "export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/\n"
-        cmd += "cp %s/src/main-%s.py main.py\n" % (args.prefix, "-".join(method[:-1]))
-        c0 = float(method[-1])
+        cmd += "cp %s main.py\n" % main_path
         cmd += "python main.py "
-        cmd += "--c0=%.2f " % c0
+
+    else:
+        raise NotImplementedError
 
     cmd += "--cell=%s --kmesh=%s --basis=%s --pseudo=gth-pade" % (args.cell, args.kmesh, args.basis)
     cmd += "\n"

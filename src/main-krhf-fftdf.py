@@ -15,26 +15,28 @@ def main(args):
     cell = cell_from_poscar(path)
     cell.basis = args.basis
     cell.pseudo = args.pseudo
+    cell.ke_cutoff = args.ke_cutoff
     cell.build(dump_input=False)
 
     kmesh = [int(x) for x in args.kmesh.split("-")]
     kmesh = numpy.array(kmesh)
     kpts = cell.get_kpts(kmesh)
 
-    from pyscf.pbc.df import GDF
-    df_obj = GDF(cell, kpts=kpts)
+    from pyscf.pbc.df.fft import FFTDF
+    df_obj = FFTDF(cell, kpts=kpts)
     df_obj.verbose = 10
-    df_obj._cderi_to_save = os.path.join(TMPDIR, "gdf.chk")
 
-    from utils import get_jk_time
-    get_jk_time(cell, kmesh, df_obj=df_obj, tmp=df_obj._cderi_to_save)
+    from utils import scf
+    tmp = os.path.join(TMPDIR, "fftdf.chk")
+    os.system("touch %s" % tmp)
+    scf(cell, kmesh, df_obj=df_obj, tmp=tmp)
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--cell", type=str, default="diamond-prim.vasp")
     parser.add_argument("--kmesh", type=str, default="2-2-2")
-    # parser.add_argument("--ke_cutoff", type=float, default=200)
+    parser.add_argument("--ke_cutoff", type=float, default=200)
     parser.add_argument("--basis", type=str, default="gth-dzvp-molopt-sr")
     parser.add_argument("--pseudo", type=str, default="gth-pade")
 
