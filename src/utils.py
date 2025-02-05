@@ -65,6 +65,7 @@ def get_jk_time(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=No
         kpts = cell.get_kpts(kmesh)
         scf_obj = KRHF(cell, kpts=kpts)
         scf_obj.exxdiv = None
+        scf_obj.verbose = 4
         dm0 = scf_obj.get_init_guess(key="minao")
     else:
         from pyscf.pbc.scf import RHF
@@ -113,7 +114,7 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
 
         from pyscf.pbc.scf.addons import smearing_
         scf_obj = smearing_(scf_obj, sigma=0.1, method="fermi")
-        
+
     else:
         raise NotImplementedError
 

@@ -1,0 +1,91 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-25-40/2-2-2//47179735/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-25-40/2-2-2//47179735/
+rm: invalid option -- 'p'
+Try 'rm --help' for more information.
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 8
+    kpts = [[ 0.          0.          0.        ]
+ [-0.38121014 -0.26955632  0.66027542]
+ [ 0.          0.80866896  0.        ]
+ [-0.38121014  0.53911264  0.66027542]
+ [ 0.76242029 -0.26955632  0.        ]
+ [ 0.38121014 -0.53911264  0.66027542]
+ [ 0.76242029  0.53911264  0.        ]
+ [ 0.38121014  0.26955632  0.66027542]]
+Overwritten attributes  c0 tol kmesh  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+kmesh = [2 2 2]
+Input parent grid mesh = [6, 6, 6], ke_cutoff =  12.45
+Final parent grid size = [7 5 7]
+
+Selecting interpolation points
+nkpts = 8, nao = 8, c0 =  25.00
+Parent grid mesh = [7 5 7], grid size = 245
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points     21.21 sec, wall time      0.34 sec
+Pivoted Cholesky rank = 245, nip = 200, estimated error = 1.71e-03
+Number of interpolation points = 200, effective CISDF =  25.00
+    CPU time for building left-hand side      2.71 sec, wall time      0.05 sec
+
+kpt = 8, ngrid = 3375, nao = 8
+ngrid = 3375, blksize = 1919010, nip = 200
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/work/diamond-prim/szv/fftisdf-25-40/2-2-2/47179735/113f0liv
+blksize = 1919010, memory for aoR_loop = 49126 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side     21.52 sec, wall time      0.34 sec
+w[  0], rank =   53 /  200
+    CPU time for w[  0]     12.07 sec, wall time      0.19 sec
+w[  1], rank =   52 /  200
+    CPU time for w[  1]      6.07 sec, wall time      0.10 sec
+w[  2], rank =   52 /  200
+    CPU time for w[  2]      7.40 sec, wall time      0.12 sec
+w[  3], rank =   51 /  200
+    CPU time for w[  3]      5.06 sec, wall time      0.08 sec
+w[  4], rank =   52 /  200
+    CPU time for w[  4]      5.78 sec, wall time      0.09 sec
+w[  5], rank =   52 /  200
+    CPU time for w[  5]      6.03 sec, wall time      0.09 sec
+w[  6], rank =   51 /  200
+    CPU time for w[  6]      6.20 sec, wall time      0.10 sec
+w[  7], rank =   52 /  200
+    CPU time for w[  7]      5.99 sec, wall time      0.09 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//work/diamond-prim/szv/fftisdf-25-40/2-2-2//47179735/tmp.chk
+    CPU time for building ISDF    108.25 sec, wall time      1.74 sec
+(8, 8, 8) (8, 8, 8) (1, 8, 8, 8)
+Traceback (most recent call last):
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/szv/fftisdf-25-40/2-2-2/main.py", line 46, in <module>
+    main(args)
+  File "/central/home/junjiey/work/fftisdf-benchmark-new/work/diamond-prim/szv/fftisdf-25-40/2-2-2/main.py", line 33, in main
+    scf(cell, kmesh, df_obj=df_obj, tmp=df_obj._isdf)
+  File "/home/junjiey/work/fftisdf-benchmark-new/src/utils.py", line 126, in scf
+    e_tot = scf_obj.kernel(dm0)
+  File "<string>", line 2, in kernel
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/hf.py", line 2016, in scf
+    kernel(self, self.conv_tol, self.conv_tol_grad,
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/hf.py", line 130, in kernel
+    e_tot = mf.energy_tot(dm, h1e, vhf)
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/scf/addons.py", line 242, in energy_tot
+    e_tot = self.energy_elec(dm, h1e, vhf)[0] + self.energy_nuc()
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf/pbc/scf/khf.py", line 250, in energy_elec
+    e_coul = 1./nkpts * np.einsum('kij,kji', dm_kpts, vhf_kpts) * 0.5
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/numpy/core/einsumfunc.py", line 1371, in einsum
+    return c_einsum(*operands, **kwargs)
+ValueError: operand has more dimensions than subscripts given in einstein sum, but no '...' ellipsis provided to broadcast the extra dimensions.

@@ -222,7 +222,7 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
 
     if is_zero(kpts_band):
         vj_kpts = vj_kpts.real
-    return _format_jks(vj_kpts, dms, input_band, kpts)
+    return _format_jks(vj_kpts, dm_kpts, input_band, kpts)
 
 @line_profiler.profile
 def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
@@ -281,7 +281,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         vk_kpts.append([x.conj().T @ v @ x for x, v in zip(x_k, v_k)])
 
     vk_kpts = numpy.asarray(vk_kpts).reshape(nset, nkpt, nao, nao)
-    return _format_jks(vk_kpts, dms, input_band, kpts)
+    return _format_jks(vk_kpts, dm_kpts, input_band, kpts)
 
 def lstsq(a, b, tol=1e-10):
     """
@@ -562,8 +562,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         from pyscf.pbc.df.aft import _check_kpts
         kpts, is_single_kpt = _check_kpts(self, kpts)
-        if is_single_kpt:
-            raise NotImplementedError
+        assert not is_single_kpt
 
         vj = vk = None
         if with_k:
