@@ -145,8 +145,10 @@ if __name__ == "__main__":
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
     scf_obj.with_df.stdout = cell.stdout
-    scf_obj.with_df.dump_flags()
-    scf_obj.with_df.check_sanity()
+
+    if rank == 0:
+        scf_obj.with_df.dump_flags()
+        scf_obj.with_df.check_sanity()
 
     vj0 = numpy.zeros((nkpt, nao, nao))
     vk0 = numpy.zeros((nkpt, nao, nao))

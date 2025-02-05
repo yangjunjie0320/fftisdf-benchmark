@@ -93,9 +93,9 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     assert g0.shape == (nip, 3)
     nao = cell.nao_nr()
 
-    inpv_kpt = cell.pbc_eval_gto("GTOval", g0, kpts=kpts)
-    inpv_kpt = numpy.asarray(inpv_kpt, dtype=numpy.complex128)
-    assert inpv_kpt.shape == (nkpt, nip, nao)
+    inpf_kpt = cell.pbc_eval_gto("GTOval", g0, kpts=kpts)
+    inpf_kpt = numpy.asarray(inpf_kpt, dtype=numpy.complex128)
+    assert inpf_kpt.shape == (nkpt, nip, nao)
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
     t1 = log.timer("get interpolating vectors")
 
@@ -108,12 +108,12 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         # metx_q: metric for least-squares
         # eta_q: right-hand side for least-squares
         metx_q, eta_q = get_lhs_and_rhs(
-            df_obj, inpv_kpt, kpt=kpts[q], 
+            df_obj, inpf_kpt, kpt=kpts[q], 
             fswp=fswp
         )
 
         # xi_q: solution for least-squares fitting
-        # rho = xi_q * inpv_kpt.conj().T * inpv_kpt
+        # rho = xi_q * inpf_kpt.conj().T * inpf_kpt
         # but we would not explicitly compute
 
         ngrid = eta_q.shape[0]
@@ -132,10 +132,10 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, rank, nip)
 
     coul_kpt = numpy.asarray(coul_kpt)
-    return inpv_kpt, coul_kpt
+    return inpf_kpt, coul_kpt
 
 @line_profiler.profile
-def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
+def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
 
@@ -158,8 +158,8 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
 
     pcell = df_obj.cell
     nao = pcell.nao_nr()
-    nip = inpv_kpt.shape[1]
-    assert inpv_kpt.shape == (nkpt, nip, nao)
+    nip = inpf_kpt.shape[1]
+    assert inpf_kpt.shape == (nkpt, nip, nao)
 
     wrap_around = df_obj.wrap_around
     scell, phase = get_phase(
@@ -172,7 +172,7 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
     log.debug("ngrid = %d, blksize = %d", ngrid, blksize)
     log.debug("required disk space = %d GB", ngrid * nip * 16 / 1e9)
 
-    t_kpt = numpy.asarray([xk.conj() @ xk.T for xk in inpv_kpt])
+    t_kpt = numpy.asarray([xk.conj() @ xk.T for xk in inpf_kpt])
     assert t_kpt.shape == (nkpt, nip, nip)
 
     t_spc = kpt_to_spc(t_kpt, phase)
@@ -184,16 +184,18 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
 
     bq = None
     if fswp is not None:
-        bq = fswp.create_dataset("bq", data=numpy.zeros((ngrid, nip), dtype=numpy.complex128))
-        log.debug("Saving bq to %s, memory for bq = %d GB", fswp.filename, bq.size * 16 / 1e9)
+        bq = fswp.create_dataset("rhs_q", data=numpy.zeros((ngrid, nip), dtype=numpy.complex128))
+        log.debug("Saving rhs_q to %s, memory for rhs_q = %6.2e GB", fswp.filename, bq.size * 16 / 1e9)
     else:
         bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
-        log.debug("Memory for bq = %d GB", bq.size * 16 / 1e9)
+        log.debug("Memory for rhs_q = %6.2e GB", bq.size * 16 / 1e9)
     assert bq is not None
 
-    log.debug("blksize = %d, memory for aoR_loop = %d MB", blksize, blksize * nip * nkpt * 16 / 1e6)
+    l = len("%s" % ngrid)
+    info = f"aoR_loop: [% {l}d, % {l}d]"
+    log.debug("blksize = %d, ngrid = %d", blksize, ngrid)
     for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
-        t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], inpv_kpt)])
+        t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], inpf_kpt)])
         assert t_kpt.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
 
         t_spc = kpt_to_spc(t_kpt, phase)
@@ -201,6 +203,8 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
 
         for s, ts in enumerate(t_spc):
             bq[g0:g1] += phase[s, q] * ts * ts
+
+        log.debug(info, g0, g1)
 
     log.timer("get_lhs_and_rhs", *t0)
     return aq, bq
@@ -309,17 +313,17 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     nband = len(kpts_band)
     assert nband == nkpt, "not supporting kpts_band"
 
-    inpv_kpt = df_obj._inpv_kpt
+    inpf_kpt = df_obj._inpf_kpt
     coul_kpt = df_obj._coul_kpt
 
-    nip = inpv_kpt.shape[1]
-    assert inpv_kpt.shape == (nkpt, nip, nao)
+    nip = inpf_kpt.shape[1]
+    assert inpf_kpt.shape == (nkpt, nip, nao)
     assert coul_kpt.shape == (nkpt, nip, nip)
 
     coul0 = coul_kpt[0]
     assert coul0.shape == (nip, nip)
 
-    rho = numpy.einsum("kIm,kIn,xkmn->xI", inpv_kpt, inpv_kpt.conj(), dms, optimize=True)
+    rho = numpy.einsum("kIm,kIn,xkmn->xI", inpf_kpt, inpf_kpt.conj(), dms, optimize=True)
     rho *= 1.0 / nkpt
     assert rho.shape == (nset, nip)
 
@@ -330,7 +334,7 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     nband = len(kpts_band)
     assert nband == nkpt, "not supporting kpts_band"
 
-    vj_kpts = numpy.einsum("kIm,kIn,xI->xkmn", inpv_kpt.conj(), inpv_kpt, v0, optimize=True)
+    vj_kpts = numpy.einsum("kIm,kIn,xI->xkmn", inpf_kpt.conj(), inpf_kpt, v0, optimize=True)
     assert vj_kpts.shape == (nset, nkpt, nao, nao)
 
     if is_zero(kpts_band):
@@ -364,21 +368,21 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
     assert nband == nkpt, "not supporting kpts_band"
     assert exxdiv is None, f"exxdiv = {exxdiv}"
 
-    inpv_kpt = df_obj._inpv_kpt
+    inpf_kpt = df_obj._inpf_kpt
     coul_kpt = df_obj._coul_kpt
 
-    nip = inpv_kpt.shape[1]
+    nip = inpf_kpt.shape[1]
     coul_spc = kpt_to_spc(coul_kpt, phase)
     coul_spc = coul_spc * numpy.sqrt(nkpt)
     coul_spc = coul_spc.reshape(nspc, nip, nip)
     
-    assert inpv_kpt.shape == (nkpt, nip, nao)
+    assert inpf_kpt.shape == (nkpt, nip, nao)
     assert coul_kpt.shape == (nkpt, nip, nip)
     assert coul_spc.shape == (nspc, nip, nip)
 
     vks = []
     for dm_kpt in dms:
-        rho_kpt = [x @ d @ x.conj().T for x, d in zip(inpv_kpt, dm_kpt)]
+        rho_kpt = [x @ d @ x.conj().T for x, d in zip(inpf_kpt, dm_kpt)]
         rho_kpt = numpy.asarray(rho_kpt) / nkpt
         assert rho_kpt.shape == (nkpt, nip, nip)
 
@@ -389,11 +393,12 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         v_spc = coul_spc * rho_spc
         v_spc = numpy.asarray(v_spc).reshape(nspc, nip, nip)
 
-        v_kpt = phase.T.conj() @ v_spc.reshape(nspc, -1)
+        # v_kpt = phase.T.conj() @ v_spc.reshape(nspc, -1)
+        v_kpt = spc_to_kpt(v_spc, phase).conj()
         v_kpt = v_kpt.reshape(nkpt, nip, nip)
         assert v_kpt.shape == (nkpt, nip, nip)
 
-        vks.append([xk.conj().T @ vk @ xk for xk, vk in zip(inpv_kpt, v_kpt)])
+        vks.append([xk.conj().T @ vk @ xk for xk, vk in zip(inpf_kpt, v_kpt)])
 
     vks = numpy.asarray(vks).reshape(nset, nkpt, nao, nao)
     return _format_jks(vks, dms, input_band, kpts)
@@ -408,7 +413,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     _w = None
     _fswap = None
 
-    _keys = ['_isdf', '_coul_kpt', '_inpv_kpt']
+    _keys = ['_isdf', '_coul_kpt', '_inpf_kpt']
 
     def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0):
         FFTDF.__init__(self, cell, kpts)
@@ -449,9 +454,10 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             "kpts mismatch, only uniform kpts is supported"
 
         if self._isdf is not None:
-            raise NotImplementedError
+            pass
+            # raise NotImplementedError
 
-        inpv_kpt, coul_kpt = build(
+        inpf_kpt, coul_kpt = build(
             df_obj=self,
             c0=self.c0,
             kpts=kpts,
@@ -459,7 +465,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         )
 
         self._coul_kpt = coul_kpt
-        self._inpv_kpt = inpv_kpt
+        self._inpf_kpt = inpf_kpt
 
         if self._isdf_to_save is not None:
             self._isdf = self._isdf_to_save
@@ -472,7 +478,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         log.info("Saving FFTISDF results to %s", self._isdf)
         from pyscf.lib.chkfile import dump
         dump(self._isdf, "coul_kpt", coul_kpt)
-        dump(self._isdf, "inpv_kpt", inpv_kpt)
+        dump(self._isdf, "inpf_kpt", inpf_kpt)
 
         t1 = log.timer("building ISDF", *t0)
         return self
@@ -532,10 +538,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
         nao = pcell.nao_nr()
         ng = len(g0)
 
-        # x2 = numpy.zeros((ng, ng))
-        # x2 = pcell.pbc_eval_gto("GTOval", g0)
-        # x2 = (x2.conj() @ x2.T).real
-        # x4 = (x2 * x2) / nkpt
         t0 = numpy.zeros((ng, ng))
         for q in range(nkpt):
             xq = pcell.pbc_eval_gto("GTOval", g0, kpts=self.kpts[q])

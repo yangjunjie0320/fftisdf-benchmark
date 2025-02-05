@@ -1,0 +1,1034 @@
+OMP_NUM_THREADS = 64
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 491520
+TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47179404/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47179404/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+
+
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 64
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.90605072e-01 -1.34778159e-01  3.30137712e-01]
+ [-3.81210144e-01 -2.69556319e-01  6.60275424e-01]
+ [-5.71815216e-01 -4.04334478e-01  9.90413137e-01]
+ [ 0.00000000e+00  4.04334478e-01  0.00000000e+00]
+ [-1.90605072e-01  2.69556319e-01  3.30137712e-01]
+ [-3.81210144e-01  1.34778159e-01  6.60275424e-01]
+ [-5.71815216e-01 -2.77555756e-17  9.90413137e-01]
+ [ 0.00000000e+00  8.08668956e-01  0.00000000e+00]
+ [-1.90605072e-01  6.73890797e-01  3.30137712e-01]
+ [-3.81210144e-01  5.39112637e-01  6.60275424e-01]
+ [-5.71815216e-01  4.04334478e-01  9.90413137e-01]
+ [ 0.00000000e+00  1.21300343e+00  0.00000000e+00]
+ [-1.90605072e-01  1.07822527e+00  3.30137712e-01]
+ [-3.81210144e-01  9.43447115e-01  6.60275424e-01]
+ [-5.71815216e-01  8.08668956e-01  9.90413137e-01]
+ [ 3.81210144e-01 -1.34778159e-01  0.00000000e+00]
+ [ 1.90605072e-01 -2.69556319e-01  3.30137712e-01]
+ [ 5.55111512e-17 -4.04334478e-01  6.60275424e-01]
+ [-1.90605072e-01 -5.39112637e-01  9.90413137e-01]
+ [ 3.81210144e-01  2.69556319e-01  0.00000000e+00]
+ [ 1.90605072e-01  1.34778159e-01  3.30137712e-01]
+ [ 5.55111512e-17  0.00000000e+00  6.60275424e-01]
+ [-1.90605072e-01 -1.34778159e-01  9.90413137e-01]
+ [ 3.81210144e-01  6.73890797e-01  0.00000000e+00]
+ [ 1.90605072e-01  5.39112637e-01  3.30137712e-01]
+ [ 5.55111512e-17  4.04334478e-01  6.60275424e-01]
+ [-1.90605072e-01  2.69556319e-01  9.90413137e-01]
+ [ 3.81210144e-01  1.07822527e+00  0.00000000e+00]
+ [ 1.90605072e-01  9.43447115e-01  3.30137712e-01]
+ [ 5.55111512e-17  8.08668956e-01  6.60275424e-01]
+ [-1.90605072e-01  6.73890797e-01  9.90413137e-01]
+ [ 7.62420288e-01 -2.69556319e-01  0.00000000e+00]
+ [ 5.71815216e-01 -4.04334478e-01  3.30137712e-01]
+ [ 3.81210144e-01 -5.39112637e-01  6.60275424e-01]
+ [ 1.90605072e-01 -6.73890797e-01  9.90413137e-01]
+ [ 7.62420288e-01  1.34778159e-01  0.00000000e+00]
+ [ 5.71815216e-01  2.77555756e-17  3.30137712e-01]
+ [ 3.81210144e-01 -1.34778159e-01  6.60275424e-01]
+ [ 1.90605072e-01 -2.69556319e-01  9.90413137e-01]
+ [ 7.62420288e-01  5.39112637e-01  0.00000000e+00]
+ [ 5.71815216e-01  4.04334478e-01  3.30137712e-01]
+ [ 3.81210144e-01  2.69556319e-01  6.60275424e-01]
+ [ 1.90605072e-01  1.34778159e-01  9.90413137e-01]
+ [ 7.62420288e-01  9.43447115e-01  0.00000000e+00]
+ [ 5.71815216e-01  8.08668956e-01  3.30137712e-01]
+ [ 3.81210144e-01  6.73890797e-01  6.60275424e-01]
+ [ 1.90605072e-01  5.39112637e-01  9.90413137e-01]
+ [ 1.14363043e+00 -4.04334478e-01  0.00000000e+00]
+ [ 9.53025361e-01 -5.39112637e-01  3.30137712e-01]
+ [ 7.62420288e-01 -6.73890797e-01  6.60275424e-01]
+ [ 5.71815216e-01 -8.08668956e-01  9.90413137e-01]
+ [ 1.14363043e+00  5.55111512e-17  0.00000000e+00]
+ [ 9.53025361e-01 -1.34778159e-01  3.30137712e-01]
+ [ 7.62420288e-01 -2.69556319e-01  6.60275424e-01]
+ [ 5.71815216e-01 -4.04334478e-01  9.90413137e-01]
+ [ 1.14363043e+00  4.04334478e-01  0.00000000e+00]
+ [ 9.53025361e-01  2.69556319e-01  3.30137712e-01]
+ [ 7.62420288e-01  1.34778159e-01  6.60275424e-01]
+ [ 5.71815216e-01  2.77555756e-17  9.90413137e-01]
+ [ 1.14363043e+00  8.08668956e-01  0.00000000e+00]
+ [ 9.53025361e-01  6.73890797e-01  3.30137712e-01]
+ [ 7.62420288e-01  5.39112637e-01  6.60275424e-01]
+ [ 5.71815216e-01  4.04334478e-01  9.90413137e-01]]
+Overwritten attributes  tol kmesh c0  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+kmesh = [4 4 4]
+Input parent grid mesh = [6, 6, 6], ke_cutoff =  12.45
+Final parent grid size = [7 5 7]
+
+Selecting interpolation points
+nkpts = 64, nao = 8, c0 =  20.00
+Parent grid mesh = [7 5 7], grid size = 245
+
+WARN: The parent grid might be too coarse.
+
+    CPU time for select interpolation points    149.47 sec, wall time      2.38 sec
+Pivoted Cholesky rank = 245, nip = 160, estimated error = 1.21e-02
+Number of interpolation points = 160, effective CISDF =  20.00
+    CPU time for building left-hand side     10.12 sec, wall time      0.16 sec
+
+kpt = 64, ngrid = 3375, nao = 8
+ngrid = 3375, blksize = 299777, nip = 160
+required disk space = 0 GB
+finished creating fswp: /central/scratch/yangjunjie/diamond-dzvp-444/47179404/2h6msgii
+blksize = 299777, memory for aoR_loop = 49115 MB
+finished aoR_loop[       0:    3375]
+    CPU time for building right-hand side    168.17 sec, wall time      2.89 sec
+w[  0], rank =   76 /  160
+    CPU time for w[  0]      4.70 sec, wall time      0.08 sec
+w[  1], rank =   76 /  160
+    CPU time for w[  1]      2.45 sec, wall time      0.04 sec
+w[  2], rank =   76 /  160
+    CPU time for w[  2]      2.49 sec, wall time      0.04 sec
+w[  3], rank =   76 /  160
+    CPU time for w[  3]      2.44 sec, wall time      0.04 sec
+w[  4], rank =   76 /  160
+    CPU time for w[  4]      2.30 sec, wall time      0.04 sec
+w[  5], rank =   76 /  160
+    CPU time for w[  5]      2.34 sec, wall time      0.04 sec
+w[  6], rank =   76 /  160
+    CPU time for w[  6]      2.21 sec, wall time      0.03 sec
+w[  7], rank =   76 /  160
+    CPU time for w[  7]      2.65 sec, wall time      0.04 sec
+w[  8], rank =   76 /  160
+    CPU time for w[  8]      2.81 sec, wall time      0.04 sec
+w[  9], rank =   76 /  160
+    CPU time for w[  9]      2.86 sec, wall time      0.04 sec
+w[ 10], rank =   76 /  160
+    CPU time for w[ 10]      2.78 sec, wall time      0.04 sec
+w[ 11], rank =   76 /  160
+    CPU time for w[ 11]      2.95 sec, wall time      0.05 sec
+w[ 12], rank =   76 /  160
+    CPU time for w[ 12]      2.92 sec, wall time      0.05 sec
+w[ 13], rank =   76 /  160
+    CPU time for w[ 13]      2.97 sec, wall time      0.05 sec
+w[ 14], rank =   76 /  160
+    CPU time for w[ 14]      2.86 sec, wall time      0.04 sec
+w[ 15], rank =   76 /  160
+    CPU time for w[ 15]      3.01 sec, wall time      0.05 sec
+w[ 16], rank =   76 /  160
+    CPU time for w[ 16]      2.97 sec, wall time      0.05 sec
+w[ 17], rank =   76 /  160
+    CPU time for w[ 17]      3.01 sec, wall time      0.05 sec
+w[ 18], rank =   76 /  160
+    CPU time for w[ 18]      2.84 sec, wall time      0.04 sec
+w[ 19], rank =   76 /  160
+    CPU time for w[ 19]      2.88 sec, wall time      0.05 sec
+w[ 20], rank =   76 /  160
+    CPU time for w[ 20]      3.28 sec, wall time      0.05 sec
+w[ 21], rank =   76 /  160
+    CPU time for w[ 21]      3.05 sec, wall time      0.05 sec
+w[ 22], rank =   76 /  160
+    CPU time for w[ 22]      2.80 sec, wall time      0.04 sec
+w[ 23], rank =   76 /  160
+    CPU time for w[ 23]      3.03 sec, wall time      0.05 sec
+w[ 24], rank =   76 /  160
+    CPU time for w[ 24]      3.07 sec, wall time      0.05 sec
+w[ 25], rank =   76 /  160
+    CPU time for w[ 25]      3.00 sec, wall time      0.05 sec
+w[ 26], rank =   76 /  160
+    CPU time for w[ 26]      3.00 sec, wall time      0.05 sec
+w[ 27], rank =   76 /  160
+    CPU time for w[ 27]      2.99 sec, wall time      0.05 sec
+w[ 28], rank =   76 /  160
+    CPU time for w[ 28]      3.14 sec, wall time      0.05 sec
+w[ 29], rank =   76 /  160
+    CPU time for w[ 29]      3.01 sec, wall time      0.05 sec
+w[ 30], rank =   76 /  160
+    CPU time for w[ 30]      3.05 sec, wall time      0.05 sec
+w[ 31], rank =   76 /  160
+    CPU time for w[ 31]      2.99 sec, wall time      0.05 sec
+w[ 32], rank =   76 /  160
+    CPU time for w[ 32]      3.11 sec, wall time      0.05 sec
+w[ 33], rank =   76 /  160
+    CPU time for w[ 33]      3.02 sec, wall time      0.05 sec
+w[ 34], rank =   76 /  160
+    CPU time for w[ 34]      3.56 sec, wall time      0.06 sec
+w[ 35], rank =   76 /  160
+    CPU time for w[ 35]      3.01 sec, wall time      0.05 sec
+w[ 36], rank =   76 /  160
+    CPU time for w[ 36]      3.07 sec, wall time      0.05 sec
+w[ 37], rank =   76 /  160
+    CPU time for w[ 37]      2.99 sec, wall time      0.05 sec
+w[ 38], rank =   76 /  160
+    CPU time for w[ 38]      3.05 sec, wall time      0.05 sec
+w[ 39], rank =   76 /  160
+    CPU time for w[ 39]      2.98 sec, wall time      0.05 sec
+w[ 40], rank =   76 /  160
+    CPU time for w[ 40]      3.06 sec, wall time      0.05 sec
+w[ 41], rank =   76 /  160
+    CPU time for w[ 41]      2.98 sec, wall time      0.05 sec
+w[ 42], rank =   76 /  160
+    CPU time for w[ 42]      2.96 sec, wall time      0.05 sec
+w[ 43], rank =   76 /  160
+    CPU time for w[ 43]      2.93 sec, wall time      0.05 sec
+w[ 44], rank =   76 /  160
+    CPU time for w[ 44]      3.03 sec, wall time      0.05 sec
+w[ 45], rank =   76 /  160
+    CPU time for w[ 45]      2.98 sec, wall time      0.05 sec
+w[ 46], rank =   76 /  160
+    CPU time for w[ 46]      3.02 sec, wall time      0.05 sec
+w[ 47], rank =   76 /  160
+    CPU time for w[ 47]      2.95 sec, wall time      0.05 sec
+w[ 48], rank =   76 /  160
+    CPU time for w[ 48]      3.04 sec, wall time      0.05 sec
+w[ 49], rank =   76 /  160
+    CPU time for w[ 49]      2.98 sec, wall time      0.05 sec
+w[ 50], rank =   76 /  160
+    CPU time for w[ 50]      3.01 sec, wall time      0.05 sec
+w[ 51], rank =   76 /  160
+    CPU time for w[ 51]      2.99 sec, wall time      0.05 sec
+w[ 52], rank =   76 /  160
+    CPU time for w[ 52]      3.04 sec, wall time      0.05 sec
+w[ 53], rank =   76 /  160
+    CPU time for w[ 53]      3.01 sec, wall time      0.05 sec
+w[ 54], rank =   76 /  160
+    CPU time for w[ 54]      3.01 sec, wall time      0.05 sec
+w[ 55], rank =   76 /  160
+    CPU time for w[ 55]      3.02 sec, wall time      0.05 sec
+w[ 56], rank =   76 /  160
+    CPU time for w[ 56]      2.99 sec, wall time      0.05 sec
+w[ 57], rank =   76 /  160
+    CPU time for w[ 57]      2.96 sec, wall time      0.05 sec
+w[ 58], rank =   76 /  160
+    CPU time for w[ 58]      3.02 sec, wall time      0.05 sec
+w[ 59], rank =   76 /  160
+    CPU time for w[ 59]      2.95 sec, wall time      0.05 sec
+w[ 60], rank =   76 /  160
+    CPU time for w[ 60]      3.00 sec, wall time      0.05 sec
+w[ 61], rank =   76 /  160
+    CPU time for w[ 61]      2.98 sec, wall time      0.05 sec
+w[ 62], rank =   76 /  160
+    CPU time for w[ 62]      3.01 sec, wall time      0.05 sec
+w[ 63], rank =   76 /  160
+    CPU time for w[ 63]      2.95 sec, wall time      0.05 sec
+Saving FFTISDF results to /central/scratch/yangjunjie//diamond-dzvp-444/47179404/isdf-old.chk
+    CPU time for building ISDF    526.69 sec, wall time      8.57 sec
+Dumping vj and vk to /central/scratch/yangjunjie//diamond-dzvp-444/47179404/vjk-old.chk
+
+
+******** <class 'fft_isdf_new.InterpolativeSeparableDensityFitting'> ********
+mesh = [15 15 15] (3375 PWs)
+len(kpts) = 64
+    kpts = [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.90605072e-01 -1.34778159e-01  3.30137712e-01]
+ [-3.81210144e-01 -2.69556319e-01  6.60275424e-01]
+ [-5.71815216e-01 -4.04334478e-01  9.90413137e-01]
+ [ 0.00000000e+00  4.04334478e-01  0.00000000e+00]
+ [-1.90605072e-01  2.69556319e-01  3.30137712e-01]
+ [-3.81210144e-01  1.34778159e-01  6.60275424e-01]
+ [-5.71815216e-01 -2.77555756e-17  9.90413137e-01]
+ [ 0.00000000e+00  8.08668956e-01  0.00000000e+00]
+ [-1.90605072e-01  6.73890797e-01  3.30137712e-01]
+ [-3.81210144e-01  5.39112637e-01  6.60275424e-01]
+ [-5.71815216e-01  4.04334478e-01  9.90413137e-01]
+ [ 0.00000000e+00  1.21300343e+00  0.00000000e+00]
+ [-1.90605072e-01  1.07822527e+00  3.30137712e-01]
+ [-3.81210144e-01  9.43447115e-01  6.60275424e-01]
+ [-5.71815216e-01  8.08668956e-01  9.90413137e-01]
+ [ 3.81210144e-01 -1.34778159e-01  0.00000000e+00]
+ [ 1.90605072e-01 -2.69556319e-01  3.30137712e-01]
+ [ 5.55111512e-17 -4.04334478e-01  6.60275424e-01]
+ [-1.90605072e-01 -5.39112637e-01  9.90413137e-01]
+ [ 3.81210144e-01  2.69556319e-01  0.00000000e+00]
+ [ 1.90605072e-01  1.34778159e-01  3.30137712e-01]
+ [ 5.55111512e-17  0.00000000e+00  6.60275424e-01]
+ [-1.90605072e-01 -1.34778159e-01  9.90413137e-01]
+ [ 3.81210144e-01  6.73890797e-01  0.00000000e+00]
+ [ 1.90605072e-01  5.39112637e-01  3.30137712e-01]
+ [ 5.55111512e-17  4.04334478e-01  6.60275424e-01]
+ [-1.90605072e-01  2.69556319e-01  9.90413137e-01]
+ [ 3.81210144e-01  1.07822527e+00  0.00000000e+00]
+ [ 1.90605072e-01  9.43447115e-01  3.30137712e-01]
+ [ 5.55111512e-17  8.08668956e-01  6.60275424e-01]
+ [-1.90605072e-01  6.73890797e-01  9.90413137e-01]
+ [ 7.62420288e-01 -2.69556319e-01  0.00000000e+00]
+ [ 5.71815216e-01 -4.04334478e-01  3.30137712e-01]
+ [ 3.81210144e-01 -5.39112637e-01  6.60275424e-01]
+ [ 1.90605072e-01 -6.73890797e-01  9.90413137e-01]
+ [ 7.62420288e-01  1.34778159e-01  0.00000000e+00]
+ [ 5.71815216e-01  2.77555756e-17  3.30137712e-01]
+ [ 3.81210144e-01 -1.34778159e-01  6.60275424e-01]
+ [ 1.90605072e-01 -2.69556319e-01  9.90413137e-01]
+ [ 7.62420288e-01  5.39112637e-01  0.00000000e+00]
+ [ 5.71815216e-01  4.04334478e-01  3.30137712e-01]
+ [ 3.81210144e-01  2.69556319e-01  6.60275424e-01]
+ [ 1.90605072e-01  1.34778159e-01  9.90413137e-01]
+ [ 7.62420288e-01  9.43447115e-01  0.00000000e+00]
+ [ 5.71815216e-01  8.08668956e-01  3.30137712e-01]
+ [ 3.81210144e-01  6.73890797e-01  6.60275424e-01]
+ [ 1.90605072e-01  5.39112637e-01  9.90413137e-01]
+ [ 1.14363043e+00 -4.04334478e-01  0.00000000e+00]
+ [ 9.53025361e-01 -5.39112637e-01  3.30137712e-01]
+ [ 7.62420288e-01 -6.73890797e-01  6.60275424e-01]
+ [ 5.71815216e-01 -8.08668956e-01  9.90413137e-01]
+ [ 1.14363043e+00  5.55111512e-17  0.00000000e+00]
+ [ 9.53025361e-01 -1.34778159e-01  3.30137712e-01]
+ [ 7.62420288e-01 -2.69556319e-01  6.60275424e-01]
+ [ 5.71815216e-01 -4.04334478e-01  9.90413137e-01]
+ [ 1.14363043e+00  4.04334478e-01  0.00000000e+00]
+ [ 9.53025361e-01  2.69556319e-01  3.30137712e-01]
+ [ 7.62420288e-01  1.34778159e-01  6.60275424e-01]
+ [ 5.71815216e-01  2.77555756e-17  9.90413137e-01]
+ [ 1.14363043e+00  8.08668956e-01  0.00000000e+00]
+ [ 9.53025361e-01  6.73890797e-01  3.30137712e-01]
+ [ 7.62420288e-01  5.39112637e-01  6.60275424e-01]
+ [ 5.71815216e-01  4.04334478e-01  9.90413137e-01]]
+<class 'fft_isdf_new.InterpolativeSeparableDensityFitting'> does not have attributes  blksize tol kmesh c0
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+kmesh = [4 4 4]
+
+WARN: The parent grid might be too coarse.
+
+Pivoted Cholesky rank = 245, nip = 160, estimated error = 1.21e-02
+nip = 160, cisdf =  20.00
+    CPU time for get interpolating vectors    147.12 sec
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/eg98yh3i, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     98.48 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel    102.66 sec, wall time      1.94 sec
+Finished solving Coulomb kernel for q =   1 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/w3k1df14, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.50 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel    100.42 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =   2 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/yq576a4n, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.10 sec, wall time      1.82 sec
+    CPU time for solving Coulomb kernel    101.54 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =   3 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/l7ye5aoh, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     90.53 sec, wall time      1.77 sec
+    CPU time for solving Coulomb kernel     95.15 sec, wall time      1.85 sec
+Finished solving Coulomb kernel for q =   4 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/ufp7j841, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.69 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     97.78 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =   5 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/59164951, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.90 sec, wall time      1.79 sec
+    CPU time for solving Coulomb kernel     97.91 sec, wall time      1.86 sec
+Finished solving Coulomb kernel for q =   6 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/im4m7q0w, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.34 sec, wall time      1.79 sec
+    CPU time for solving Coulomb kernel     97.80 sec, wall time      1.87 sec
+Finished solving Coulomb kernel for q =   7 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/pn980a59, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.48 sec, wall time      1.76 sec
+    CPU time for solving Coulomb kernel     97.20 sec, wall time      1.84 sec
+Finished solving Coulomb kernel for q =   8 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/53p42d4t, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.00 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel    100.41 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =   9 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/t3xyddah, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.33 sec, wall time      1.83 sec
+    CPU time for solving Coulomb kernel     99.64 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =  10 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/z9nl6phb, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.10 sec, wall time      1.87 sec
+    CPU time for solving Coulomb kernel    100.89 sec, wall time      1.93 sec
+Finished solving Coulomb kernel for q =  11 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/qqboztdp, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    102.33 sec, wall time      2.16 sec
+    CPU time for solving Coulomb kernel    106.25 sec, wall time      2.23 sec
+Finished solving Coulomb kernel for q =  12 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/c4a0nwxv, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.34 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     98.86 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  13 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/7vyp807g, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     90.73 sec, wall time      1.76 sec
+    CPU time for solving Coulomb kernel     94.80 sec, wall time      1.83 sec
+Finished solving Coulomb kernel for q =  14 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/lydw8dmc, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    100.29 sec, wall time      2.16 sec
+    CPU time for solving Coulomb kernel    105.01 sec, wall time      2.25 sec
+Finished solving Coulomb kernel for q =  15 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/68a1913q, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.05 sec, wall time      1.83 sec
+    CPU time for solving Coulomb kernel     96.14 sec, wall time      1.90 sec
+Finished solving Coulomb kernel for q =  16 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/xt3hf66d, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     98.88 sec, wall time      2.11 sec
+    CPU time for solving Coulomb kernel    103.11 sec, wall time      2.18 sec
+Finished solving Coulomb kernel for q =  17 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/7wr61smc, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.84 sec, wall time      1.94 sec
+    CPU time for solving Coulomb kernel     99.11 sec, wall time      2.02 sec
+Finished solving Coulomb kernel for q =  18 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/o8quz5en, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     91.69 sec, wall time      1.82 sec
+    CPU time for solving Coulomb kernel     96.37 sec, wall time      1.90 sec
+Finished solving Coulomb kernel for q =  19 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/0ibsk5wu, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.46 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel     98.58 sec, wall time      1.93 sec
+Finished solving Coulomb kernel for q =  20 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/z0srklj8, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.72 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     97.84 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =  21 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/uzrvcavd, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.06 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     98.87 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =  22 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/v9sxe5kw, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.45 sec, wall time      1.79 sec
+    CPU time for solving Coulomb kernel     96.41 sec, wall time      1.86 sec
+Finished solving Coulomb kernel for q =  23 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/05w2bwph, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     91.47 sec, wall time      1.80 sec
+    CPU time for solving Coulomb kernel     95.38 sec, wall time      1.86 sec
+Finished solving Coulomb kernel for q =  24 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/1ukb6u7p, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     90.94 sec, wall time      1.74 sec
+    CPU time for solving Coulomb kernel     95.02 sec, wall time      1.82 sec
+Finished solving Coulomb kernel for q =  25 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/xdwc23re, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.62 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel     99.72 sec, wall time      1.93 sec
+Finished solving Coulomb kernel for q =  26 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/je8f7orr, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.60 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel    100.75 sec, wall time      1.93 sec
+Finished solving Coulomb kernel for q =  27 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/8f8ro86g, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.92 sec, wall time      1.92 sec
+    CPU time for solving Coulomb kernel    102.22 sec, wall time      2.01 sec
+Finished solving Coulomb kernel for q =  28 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/3vgevjde, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.74 sec, wall time      1.89 sec
+    CPU time for solving Coulomb kernel    100.74 sec, wall time      1.96 sec
+Finished solving Coulomb kernel for q =  29 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/z7606fwi, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     89.25 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel     93.54 sec, wall time      1.94 sec
+Finished solving Coulomb kernel for q =  30 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/gcn4ubws, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     98.00 sec, wall time      1.91 sec
+    CPU time for solving Coulomb kernel    102.03 sec, wall time      1.98 sec
+Finished solving Coulomb kernel for q =  31 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/y96xx1pw, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    103.74 sec, wall time      2.18 sec
+    CPU time for solving Coulomb kernel    108.70 sec, wall time      2.27 sec
+Finished solving Coulomb kernel for q =  32 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/8ecccj0n, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     98.42 sec, wall time      1.93 sec
+    CPU time for solving Coulomb kernel    102.77 sec, wall time      2.01 sec
+Finished solving Coulomb kernel for q =  33 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/6wsl9ida, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.90 sec, wall time      1.96 sec
+    CPU time for solving Coulomb kernel     97.06 sec, wall time      2.04 sec
+Finished solving Coulomb kernel for q =  34 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/cnx9zug9, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.20 sec, wall time      1.86 sec
+    CPU time for solving Coulomb kernel     98.46 sec, wall time      1.93 sec
+Finished solving Coulomb kernel for q =  35 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/on52a3ee, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.09 sec, wall time      1.85 sec
+    CPU time for solving Coulomb kernel     98.95 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  36 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/xkncc6ud, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.49 sec, wall time      1.81 sec
+    CPU time for solving Coulomb kernel     98.32 sec, wall time      1.88 sec
+Finished solving Coulomb kernel for q =  37 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/6lc3z0kx, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.05 sec, wall time      1.85 sec
+    CPU time for solving Coulomb kernel    100.23 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  38 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/liy3iybx, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     91.64 sec, wall time      1.81 sec
+    CPU time for solving Coulomb kernel     95.70 sec, wall time      1.88 sec
+Finished solving Coulomb kernel for q =  39 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/r0a5yeoc, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     91.74 sec, wall time      1.80 sec
+    CPU time for solving Coulomb kernel     96.18 sec, wall time      1.88 sec
+Finished solving Coulomb kernel for q =  40 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/btlugmkh, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.27 sec, wall time      1.83 sec
+    CPU time for solving Coulomb kernel     98.53 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  41 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/fq6jv709, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     91.53 sec, wall time      1.79 sec
+    CPU time for solving Coulomb kernel     95.63 sec, wall time      1.86 sec
+Finished solving Coulomb kernel for q =  42 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/7kosidm6, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     99.07 sec, wall time      2.02 sec
+    CPU time for solving Coulomb kernel    103.05 sec, wall time      2.08 sec
+Finished solving Coulomb kernel for q =  43 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/zvz9l4ti, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.62 sec, wall time      1.80 sec
+    CPU time for solving Coulomb kernel     97.64 sec, wall time      1.88 sec
+Finished solving Coulomb kernel for q =  44 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/zyui424s, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    102.37 sec, wall time      2.17 sec
+    CPU time for solving Coulomb kernel    106.39 sec, wall time      2.24 sec
+Finished solving Coulomb kernel for q =  45 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/9cwky5km, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     90.88 sec, wall time      1.92 sec
+    CPU time for solving Coulomb kernel     94.87 sec, wall time      1.99 sec
+Finished solving Coulomb kernel for q =  46 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/l2btn8qt, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.44 sec, wall time      1.88 sec
+    CPU time for solving Coulomb kernel     99.63 sec, wall time      1.95 sec
+Finished solving Coulomb kernel for q =  47 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/occwsrph, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.38 sec, wall time      1.82 sec
+    CPU time for solving Coulomb kernel     96.62 sec, wall time      1.89 sec
+Finished solving Coulomb kernel for q =  48 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/vine7ul3, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.24 sec, wall time      1.88 sec
+    CPU time for solving Coulomb kernel     99.56 sec, wall time      1.96 sec
+Finished solving Coulomb kernel for q =  49 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/d1avjtq1, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.32 sec, wall time      1.94 sec
+    CPU time for solving Coulomb kernel     98.10 sec, wall time      2.01 sec
+Finished solving Coulomb kernel for q =  50 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/zlxgard2, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.03 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     98.18 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  51 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/ztujkglw, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.83 sec, wall time      1.90 sec
+    CPU time for solving Coulomb kernel    101.59 sec, wall time      1.96 sec
+Finished solving Coulomb kernel for q =  52 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/cxzxgsn1, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    102.11 sec, wall time      2.19 sec
+    CPU time for solving Coulomb kernel    106.07 sec, wall time      2.26 sec
+Finished solving Coulomb kernel for q =  53 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/k894cnl0, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.62 sec, wall time      2.07 sec
+    CPU time for solving Coulomb kernel    103.71 sec, wall time      2.18 sec
+Finished solving Coulomb kernel for q =  54 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/1193mp2o, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs    102.60 sec, wall time      2.57 sec
+    CPU time for solving Coulomb kernel    106.78 sec, wall time      2.65 sec
+Finished solving Coulomb kernel for q =  55 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/b7w3c5zv, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     93.91 sec, wall time      1.84 sec
+    CPU time for solving Coulomb kernel     98.13 sec, wall time      1.91 sec
+Finished solving Coulomb kernel for q =  56 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/x2ofe1co, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     94.10 sec, wall time      1.79 sec
+    CPU time for solving Coulomb kernel     98.85 sec, wall time      1.87 sec
+Finished solving Coulomb kernel for q =  57 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/y8x6aqyb, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     95.32 sec, wall time      1.81 sec
+    CPU time for solving Coulomb kernel     99.25 sec, wall time      1.88 sec
+Finished solving Coulomb kernel for q =  58 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/9ywt8bn5, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.70 sec, wall time      1.91 sec
+    CPU time for solving Coulomb kernel    102.21 sec, wall time      1.99 sec
+Finished solving Coulomb kernel for q =  59 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/21gfqf1n, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     98.87 sec, wall time      2.04 sec
+    CPU time for solving Coulomb kernel    103.00 sec, wall time      2.11 sec
+Finished solving Coulomb kernel for q =  60 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/43wx4vm3, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.73 sec, wall time      1.89 sec
+    CPU time for solving Coulomb kernel    102.06 sec, wall time      1.97 sec
+Finished solving Coulomb kernel for q =  61 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/rwcq14ll, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     97.49 sec, wall time      1.89 sec
+    CPU time for solving Coulomb kernel    101.09 sec, wall time      1.95 sec
+Finished solving Coulomb kernel for q =  62 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/b6zpy4t5, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     96.66 sec, wall time      1.85 sec
+    CPU time for solving Coulomb kernel    100.73 sec, wall time      1.92 sec
+Finished solving Coulomb kernel for q =  63 /  64, rank = 76 / 160
+
+nkpt = 64, nao = 8
+ngrid = 3375, blksize = 8000
+required disk space = 0 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47179404/2jh7a5ry, memory for rhs_q = 8.64e-03 GB
+blksize = 8000, ngrid = 3375
+aoR_loop: [   0,  3375]
+    CPU time for get_lhs_and_rhs     92.67 sec, wall time      1.88 sec
+    CPU time for solving Coulomb kernel     96.93 sec, wall time      1.96 sec
+Finished solving Coulomb kernel for q =  64 /  64, rank = 76 / 160
+Saving FFTISDF results to /central/scratch/yangjunjie//diamond-dzvp-444/47179404/isdf-new.chk
+    CPU time for building ISDF   6527.42 sec, wall time    128.47 sec
+Dumping vj and vk to /central/scratch/yangjunjie//diamond-dzvp-444/47179404/vjk-new.chk
+
+WARN: ke_cutoff/mesh (40 / [15 15 15]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 8.8 Eh.
+Recommended ke_cutoff/mesh are 635.334 / [55 55 55].
+
+fft_jk: get_k_kpts max_memory 491015.335936  blksize 8
+    CPU time for get_k_kpts: make_kpt (0,*)    319.69 sec, wall time      5.06 sec
+    CPU time for get_k_kpts: make_kpt (1,*)    290.72 sec, wall time      4.61 sec
+    CPU time for get_k_kpts: make_kpt (2,*)    327.97 sec, wall time      5.19 sec
+    CPU time for get_k_kpts: make_kpt (3,*)    314.74 sec, wall time      4.97 sec
+    CPU time for get_k_kpts: make_kpt (4,*)    297.68 sec, wall time      4.72 sec
+    CPU time for get_k_kpts: make_kpt (5,*)    281.61 sec, wall time      4.47 sec
+    CPU time for get_k_kpts: make_kpt (6,*)    274.16 sec, wall time      4.36 sec
+    CPU time for get_k_kpts: make_kpt (7,*)    267.71 sec, wall time      4.25 sec
+    CPU time for get_k_kpts: make_kpt (8,*)    271.32 sec, wall time      4.29 sec
+    CPU time for get_k_kpts: make_kpt (9,*)    269.39 sec, wall time      4.28 sec
+    CPU time for get_k_kpts: make_kpt (10,*)    273.13 sec, wall time      4.33 sec
+    CPU time for get_k_kpts: make_kpt (11,*)    264.76 sec, wall time      4.21 sec
+    CPU time for get_k_kpts: make_kpt (12,*)    261.07 sec, wall time      4.16 sec
+    CPU time for get_k_kpts: make_kpt (13,*)    262.02 sec, wall time      4.16 sec
+    CPU time for get_k_kpts: make_kpt (14,*)    260.66 sec, wall time      4.15 sec
+    CPU time for get_k_kpts: make_kpt (15,*)    264.44 sec, wall time      4.21 sec
+    CPU time for get_k_kpts: make_kpt (16,*)    260.38 sec, wall time      4.14 sec
+    CPU time for get_k_kpts: make_kpt (17,*)    258.83 sec, wall time      4.12 sec
+    CPU time for get_k_kpts: make_kpt (18,*)    258.56 sec, wall time      4.13 sec
+    CPU time for get_k_kpts: make_kpt (19,*)    269.64 sec, wall time      4.28 sec
+    CPU time for get_k_kpts: make_kpt (20,*)    280.86 sec, wall time      4.47 sec
+    CPU time for get_k_kpts: make_kpt (21,*)    273.88 sec, wall time      4.35 sec
+    CPU time for get_k_kpts: make_kpt (22,*)    292.88 sec, wall time      4.65 sec
+    CPU time for get_k_kpts: make_kpt (23,*)    294.39 sec, wall time      4.65 sec
+    CPU time for get_k_kpts: make_kpt (24,*)    280.62 sec, wall time      4.46 sec
+    CPU time for get_k_kpts: make_kpt (25,*)    262.59 sec, wall time      4.18 sec
+    CPU time for get_k_kpts: make_kpt (26,*)    262.94 sec, wall time      4.18 sec
+    CPU time for get_k_kpts: make_kpt (27,*)    255.62 sec, wall time      4.06 sec
+    CPU time for get_k_kpts: make_kpt (28,*)    262.82 sec, wall time      4.17 sec
+    CPU time for get_k_kpts: make_kpt (29,*)    276.03 sec, wall time      4.39 sec
+    CPU time for get_k_kpts: make_kpt (30,*)    264.19 sec, wall time      4.20 sec
+    CPU time for get_k_kpts: make_kpt (31,*)    262.25 sec, wall time      4.19 sec
+    CPU time for get_k_kpts: make_kpt (32,*)    271.14 sec, wall time      4.32 sec
+    CPU time for get_k_kpts: make_kpt (33,*)    265.34 sec, wall time      4.22 sec
+    CPU time for get_k_kpts: make_kpt (34,*)    259.75 sec, wall time      4.13 sec
+    CPU time for get_k_kpts: make_kpt (35,*)    263.71 sec, wall time      4.20 sec
+    CPU time for get_k_kpts: make_kpt (36,*)    251.87 sec, wall time      4.03 sec
+    CPU time for get_k_kpts: make_kpt (37,*)    253.82 sec, wall time      4.03 sec
+    CPU time for get_k_kpts: make_kpt (38,*)    259.26 sec, wall time      4.13 sec
+    CPU time for get_k_kpts: make_kpt (39,*)    260.98 sec, wall time      4.15 sec
+    CPU time for get_k_kpts: make_kpt (40,*)    267.43 sec, wall time      4.24 sec
+    CPU time for get_k_kpts: make_kpt (41,*)    256.84 sec, wall time      4.08 sec
+    CPU time for get_k_kpts: make_kpt (42,*)    261.99 sec, wall time      4.16 sec
+    CPU time for get_k_kpts: make_kpt (43,*)    286.59 sec, wall time      4.54 sec
+    CPU time for get_k_kpts: make_kpt (44,*)    260.88 sec, wall time      4.14 sec
+    CPU time for get_k_kpts: make_kpt (45,*)    266.30 sec, wall time      4.22 sec
+    CPU time for get_k_kpts: make_kpt (46,*)    262.86 sec, wall time      4.17 sec
+    CPU time for get_k_kpts: make_kpt (47,*)    269.63 sec, wall time      4.29 sec
+    CPU time for get_k_kpts: make_kpt (48,*)    277.36 sec, wall time      4.41 sec
+    CPU time for get_k_kpts: make_kpt (49,*)    283.41 sec, wall time      4.53 sec
+    CPU time for get_k_kpts: make_kpt (50,*)    270.46 sec, wall time      4.31 sec
+    CPU time for get_k_kpts: make_kpt (51,*)    263.63 sec, wall time      4.21 sec
+    CPU time for get_k_kpts: make_kpt (52,*)    258.72 sec, wall time      4.13 sec
+    CPU time for get_k_kpts: make_kpt (53,*)    256.36 sec, wall time      4.08 sec
+    CPU time for get_k_kpts: make_kpt (54,*)    257.42 sec, wall time      4.12 sec
+    CPU time for get_k_kpts: make_kpt (55,*)    279.98 sec, wall time      4.47 sec
+    CPU time for get_k_kpts: make_kpt (56,*)    284.97 sec, wall time      4.53 sec
+    CPU time for get_k_kpts: make_kpt (57,*)    269.67 sec, wall time      4.33 sec
+    CPU time for get_k_kpts: make_kpt (58,*)    260.65 sec, wall time      4.15 sec
+    CPU time for get_k_kpts: make_kpt (59,*)    262.13 sec, wall time      4.19 sec
+    CPU time for get_k_kpts: make_kpt (60,*)    294.64 sec, wall time      4.72 sec
+    CPU time for get_k_kpts: make_kpt (61,*)    262.51 sec, wall time      4.16 sec
+    CPU time for get_k_kpts: make_kpt (62,*)    269.74 sec, wall time      4.28 sec
+    CPU time for get_k_kpts: make_kpt (63,*)    275.88 sec, wall time      4.39 sec
+Dumping vj and vk to /central/scratch/yangjunjie//diamond-dzvp-444/47179404/vjk-ref.chk
