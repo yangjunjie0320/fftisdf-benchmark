@@ -98,6 +98,13 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     assert inpf_kpt.shape == (nkpt, nip, nao)
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
     t1 = log.timer("get interpolating vectors")
+    
+    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.2
+    blksize = max(max_memory * 1e6 / (nkpt * nip * 16), 8000)
+    blksize = int(blksize)
+
+    print("blksize = ", blksize)
+    print("nkpt * nip * 16 * blksize = %6.2f GB" % (nkpt * nip * 16 * blksize / 1e9))
 
     coul_kpt = []
     for q in range(nkpt):
@@ -109,7 +116,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         # eta_q: right-hand side for least-squares
         metx_q, eta_q = get_lhs_and_rhs(
             df_obj, inpf_kpt, kpt=kpts[q], 
-            fswp=fswp
+            fswp=fswp, blksize=blksize
         )
 
         # xi_q: solution for least-squares fitting
@@ -184,11 +191,12 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
 
     bq = None
     if fswp is not None:
-        bq = fswp.create_dataset("rhs_q", data=numpy.zeros((ngrid, nip), dtype=numpy.complex128))
-        log.debug("Saving rhs_q to %s, memory for rhs_q = %6.2e GB", fswp.filename, bq.size * 16 / 1e9)
+        bq = fswp.create_dataset("rhs_q", data=(ngrid, nip), dtype=numpy.complex128)
+        log.debug("Saving rhs_q to %s", fswp.filename)
+        log.debug("Disk space for rhs_q = %6.2e GB", os.path.getsize(fswp.filename) / 1e9)
     else:
         bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
-        log.debug("Memory for rhs_q = %6.2e GB", bq.size * 16 / 1e9)
+        log.debug("Memory for rhs_q = %6.2e GB", bq.nbytes / 1e9)
     assert bq is not None
 
     l = len("%s" % ngrid)
@@ -196,15 +204,24 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
     log.debug("blksize = %d, ngrid = %d", blksize, ngrid)
     for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
         t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], inpf_kpt)])
-        assert t_kpt.shape == (nkpt, g1 - g0, nip) # this term scale as O(nkpt * nip * nao * ng)
+        assert t_kpt.shape == (nkpt, g1 - g0, nip)
 
         t_spc = kpt_to_spc(t_kpt, phase)
         t_spc = t_spc.reshape(nspc, g1 - g0, nip)
 
+        print("t_spc.nbytes = %d GB", t_spc.nbytes / 1e9)
+        print("t_kpt.nbytes = %d GB", t_kpt.nbytes / 1e9)
+
         for s, ts in enumerate(t_spc):
-            bq[g0:g1] += phase[s, q] * ts * ts
+            print(f"{ts.shape = }")
+            print(f"{phase.shape = }")
+            print(f"{phase[s, q] = }")
+            print(f"{g0 = }, {g1 = }, {nip = }")
+            bq[g0:g1, :] += phase[s, q] * ts * ts
 
         log.debug(info, g0, g1)
+        t_kpt = None
+        t_spc = None
 
     log.timer("get_lhs_and_rhs", *t0)
     return aq, bq

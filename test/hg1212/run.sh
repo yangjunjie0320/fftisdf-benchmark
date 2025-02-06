@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --reservation=changroup_standingres
+#SBATCH --reservation=changroup_debug
 
 # Load environment configuration
 source /home/junjiey/anaconda3/bin/activate fftisdf
@@ -29,7 +29,7 @@ python -c "import pyscf; print(pyscf.__version__)"
 python -c "import scipy; print(scipy.__version__)"
 python -c "import numpy; print(numpy.__version__)"
 
-export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark/src/:$PYTHONPATH;
+export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
 export PYTHONPATH=/central/home/junjiey/packages/libdmet/libdmet2-main/:$PYTHONPATH;
 export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 # cp $PYSCF_EXT_PATH/pyscf/isdf/tests/04-00-isdf_local.py main.py
