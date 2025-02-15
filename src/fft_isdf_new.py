@@ -191,9 +191,8 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
 
     bq = None
     if fswp is not None:
-        bq = fswp.create_dataset("rhs_q", data=(ngrid, nip), dtype=numpy.complex128)
+        bq = fswp.create_dataset("rhs_q", shape=(ngrid, nip), dtype=numpy.complex128)
         log.debug("Saving rhs_q to %s", fswp.filename)
-        log.debug("Disk space for rhs_q = %6.2e GB", os.path.getsize(fswp.filename) / 1e9)
     else:
         bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
         log.debug("Memory for rhs_q = %6.2e GB", bq.nbytes / 1e9)
@@ -209,15 +208,10 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
         t_spc = kpt_to_spc(t_kpt, phase)
         t_spc = t_spc.reshape(nspc, g1 - g0, nip)
 
-        print("t_spc.nbytes = %d GB", t_spc.nbytes / 1e9)
-        print("t_kpt.nbytes = %d GB", t_kpt.nbytes / 1e9)
-
         for s, ts in enumerate(t_spc):
-            print(f"{ts.shape = }")
-            print(f"{phase.shape = }")
-            print(f"{phase[s, q] = }")
-            print(f"{g0 = }, {g1 = }, {nip = }")
-            bq[g0:g1, :] += phase[s, q] * ts * ts
+            bq_g0_g1 = phase[s, q] * ts * ts
+            bq[g0:g1, :] += bq_g0_g1
+            bq_g0_g1 = None
 
         log.debug(info, g0, g1)
         t_kpt = None
@@ -261,10 +255,11 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     kern_q = numpy.zeros((nip, nip), dtype=numpy.complex128)
 
     gv = pcell.get_Gv(mesh)
-    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.1
+    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.2
     blksize = max(max_memory * 1e6 // (ngrid * 16), 1)
     blksize = min(int(blksize), nip)
 
+    print("blksize = ", blksize, "nip = ", nip)
     for i0, i1 in lib.prange(0, nip, blksize):
         eta_qi = eta_q[:, i0:i1]
         assert eta_qi.shape == (ngrid, i1 - i0)
