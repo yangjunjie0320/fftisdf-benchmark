@@ -61,9 +61,19 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     a_k = df_obj._make_lhs(x_k, kpts=kpts, kmesh=kmesh)
     b_k = df_obj._make_rhs(x_k, kpts=kpts, kmesh=kmesh)
 
+    for q in range(nkpt):
+        from pyscf.lib.chkfile import dump
+        dump(df_obj._isdf_to_save, "metx-q-%d" % q, a_k[q])
+        dump(df_obj._isdf_to_save, "eta-q-%d" % q, b_k[q])
+
     # solve the linear equation
     # a_k is a numpy array, b_k is a hdf5 dataset
     w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
+
+    for q in range(nkpt):
+        from pyscf.lib.chkfile import dump
+        dump(df_obj._isdf_to_save, "coul-q-%d" % q, w_k[q])
+
     assert w_k.shape == (nkpt, nip, nip)
 
     return x_k, w_k
@@ -546,6 +556,9 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             from pyscf.pbc.tools.pbc import ifft
             coul = ifft(zeta, mesh) * f.conj()
             assert coul.shape == (nip, ngrid)
+
+            from pyscf.lib.chkfile import dump
+            dump(self._isdf_to_save, "kern-q-%d" % q, coul)
 
             w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
             w_k.append(w)

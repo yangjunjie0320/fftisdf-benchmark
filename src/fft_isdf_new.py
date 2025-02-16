@@ -134,9 +134,12 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
             df_obj, eta_q, kpt=kpts[q], 
             tol=tol, fswp=fswp
         )
+        dump(df_obj._isdf_to_save, "kern-q-%d" % q, kern_q)
+        
         coul_q, rank = lstsq(metx_q, kern_q, tol=tol)
         assert coul_q.shape == (nip, nip)
-
+        dump(df_obj._isdf_to_save, "coul-q-%d" % q, coul_q)
+        
         coul_kpt.append(coul_q)
         log.timer("solving Coulomb kernel", *t0)
         log.info("Finished solving Coulomb kernel for q = %3d / %3d, rank = %d / %d", q + 1, nkpt, rank, nip)
