@@ -558,7 +558,7 @@ class InterpolativeSeparableDensityFitting(FFTDF):
             assert coul.shape == (nip, ngrid)
 
             from pyscf.lib.chkfile import dump
-            dump(self._isdf_to_save, "kern-q-%d" % q, coul)
+            dump(self._isdf_to_save, "kern-q-%d" % q, coul @ b.conj())
 
             w, rank = lstsq(a, coul @ b.conj(), tol=self.tol)
             w_k.append(w)

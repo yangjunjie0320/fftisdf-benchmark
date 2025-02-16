@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=diamond-dzvp-444
-#SBATCH --cpus-per-task=64
-#SBATCH --mem=480GB 
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=200GB 
 #SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --reservation=changroup_standingres
@@ -33,6 +33,6 @@ python -c "import pyscf; print(pyscf.__version__)"
 python -c "import scipy; print(scipy.__version__)"
 python -c "import numpy; print(numpy.__version__)"
 
-export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
-python main.py --c0=10.00 --ke_cutoff=40.00 --cell=diamond-prim.vasp --kmesh=4-4-4 --basis=gth-szv-molopt-sr --pseudo=gth-pade
+# export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
+# python main.py --c0=10.00 --ke_cutoff=40.00 --cell=diamond-prim.vasp --kmesh=4-4-4 --basis=gth-szv-molopt-sr --pseudo=gth-pade
 

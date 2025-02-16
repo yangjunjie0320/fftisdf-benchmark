@@ -120,7 +120,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         )
         from pyscf.lib.chkfile import dump
         dump(df_obj._isdf_to_save, "metx-q-%d" % q, metx_q)
-        dump(df_obj._isdf_to_save, "eta-q-%d" % q, eta_q)
+        dump(df_obj._isdf_to_save, "eta-q-%d" % q, eta_q[:])
 
         # xi_q: solution for least-squares fitting
         # rho = xi_q * inpf_kpt.conj().T * inpf_kpt
@@ -191,11 +191,9 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
     t_spc = kpt_to_spc(t_kpt, phase)
     assert t_spc.shape == (nspc, nip, nip)
 
-    aq = numpy.zeros((nip, nip), dtype=numpy.complex128)
-    for s, ts in enumerate(t_spc):
-        aq += phase[s, q] * ts * ts
-
+    aq = spc_to_kpt(t_spc * t_spc, phase)[q]
     bq = None
+
     if fswp is not None:
         bq = fswp.create_dataset("rhs_q", shape=(ngrid, nip), dtype=numpy.complex128)
         log.debug("Saving rhs_q to %s", fswp.filename)
