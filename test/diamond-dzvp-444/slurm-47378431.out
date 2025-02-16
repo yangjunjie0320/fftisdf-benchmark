@@ -1,0 +1,36 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 204800
+TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47378431/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47378431/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+
+
+******** <class '__main__.InterpolativeSeparableDensityFitting'> ********
+mesh = [45 45 45] (91125 PWs)
+len(kpts) = 64
+<class '__main__.InterpolativeSeparableDensityFitting'> does not have attributes  kmesh blksize c0 tol
+
+WARN: ke_cutoff/mesh (400 / [45 45 45]) is not enough for FFTDF to get integral accuracy 1e-10.
+Coulomb integral error is ~ 1.6e-05 Eh.
+Recommended ke_cutoff/mesh are 679.828 / [57 57 57].
+
+kmesh = [4 4 4]
+
+WARN: The parent grid might be too coarse.
+
+Pivoted Cholesky rank = 1859, nip = 1040, estimated error = 3.60e-04
+nip = 1040, cisdf =  40.00
+    CPU time for get interpolating vectors    115.49 sec
+blksize =  38411
+nkpt * nip * 16 * blksize =  40.91 GB
+
+nkpt = 64, nao = 26
+ngrid = 91125, blksize = 38411
+required disk space = 1 GB
+Saving rhs_q to /central/scratch/yangjunjie/diamond-dzvp-444/47378431/jevytrxo
+blksize = 38411, ngrid = 91125

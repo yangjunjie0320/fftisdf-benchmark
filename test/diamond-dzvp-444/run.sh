@@ -37,5 +37,4 @@ export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
 # python main.py --c0=10.00 --ke_cutoff=40.00 --cell=diamond-prim.vasp --kmesh=4-4-4 --basis=gth-szv-molopt-sr --pseudo=gth-pade
 
 cp /home/junjiey/work/fftisdf-benchmark-new/src/fft_isdf_new.py main.py
-python main.py
-# python -c "import sys; print(sys.path); import utils; print(utils.__file__)"
+kernprof -l main.py

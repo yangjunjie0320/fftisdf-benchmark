@@ -603,7 +603,7 @@ if __name__ == "__main__":
     cell.unit = 'aa'
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
-    cell.ke_cutoff = 40.0
+    cell.ke_cutoff = 400.0
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
@@ -625,34 +625,27 @@ if __name__ == "__main__":
     # scf_obj.with_df.dump_flags()
     # scf_obj.with_df.check_sanity()
 
-    vj0 = numpy.zeros((nkpt, nao, nao))
-    vk0 = numpy.zeros((nkpt, nao, nao))
-    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj0 = vj0.reshape(nkpt, nao, nao)
-    vk0 = vk0.reshape(nkpt, nao, nao)
-    t1 = log.timer("-> FFTDF JK", *t0)
+    c0 = 40.0
+    t0 = (process_clock(), perf_counter())
+    # c0 = 40.0
+    scf_obj.with_df = ISDF(cell, kpts=kpts)
+    scf_obj.with_df.c0 = c0
+    scf_obj.with_df.verbose = 5
+    scf_obj.with_df.tol = 1e-8
+    df_obj = scf_obj.with_df
+    df_obj.build()
+    t1 = log.timer("-> ISDF build", *t0)
 
-    for c0 in [5.0, 10.0, 15.0, 20.0]:
-        t0 = (process_clock(), perf_counter())
-        # c0 = 40.0
-        scf_obj.with_df = ISDF(cell, kpts=kpts)
-        scf_obj.with_df.c0 = c0
-        scf_obj.with_df.verbose = 5
-        scf_obj.with_df.tol = 1e-8
-        df_obj = scf_obj.with_df
-        df_obj.build()
-        t1 = log.timer("-> ISDF build", *t0)
+    t0 = (process_clock(), perf_counter())
+    vj1 = numpy.zeros((nkpt, nao, nao))
+    vk1 = numpy.zeros((nkpt, nao, nao))
+    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vj1 = vj1.reshape(nkpt, nao, nao)
+    vk1 = vk1.reshape(nkpt, nao, nao)
+    t1 = log.timer("-> ISDF JK", *t0)
 
-        t0 = (process_clock(), perf_counter())
-        vj1 = numpy.zeros((nkpt, nao, nao))
-        vk1 = numpy.zeros((nkpt, nao, nao))
-        vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-        vj1 = vj1.reshape(nkpt, nao, nao)
-        vk1 = vk1.reshape(nkpt, nao, nao)
-        t1 = log.timer("-> ISDF JK", *t0)
+    err = abs(vj0 - vj1).max()
+    print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
 
-        err = abs(vj0 - vj1).max()
-        print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
-
-        err = abs(vk0 - vk1).max()
-        print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
+    err = abs(vk0 - vk1).max()
+    print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
