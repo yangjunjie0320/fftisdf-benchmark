@@ -118,6 +118,9 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
             df_obj, inpf_kpt, kpt=kpts[q], 
             fswp=fswp, blksize=blksize
         )
+        from pyscf.lib.chkfile import dump
+        dump(df_obj._isdf_to_save, "metx-q-%d" % q, metx_q)
+        dump(df_obj._isdf_to_save, "eta-q-%d" % q, eta_q)
 
         # xi_q: solution for least-squares fitting
         # rho = xi_q * inpf_kpt.conj().T * inpf_kpt
@@ -220,6 +223,7 @@ def get_lhs_and_rhs(df_obj, inpf_kpt, kpt=None, blksize=8000, fswp=None):
     log.timer("get_lhs_and_rhs", *t0)
     return aq, bq
 
+@line_profiler.profile
 def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     log = logger.new_logger(df_obj, df_obj.verbose)
     t0 = (process_clock(), perf_counter())
