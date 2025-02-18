@@ -65,9 +65,6 @@ def build(df_obj, c0=None, m0=None, kpts=None, kmesh=None):
     # a_k is a numpy array, b_k is a hdf5 dataset
     w_k = df_obj.solve(a_k, b_k, kpts=kpts, kmesh=kmesh)
 
-    for q in range(nkpt):
-        from pyscf.lib.chkfile import dump
-        dump(df_obj._isdf_to_save, "coul-q-%d" % q, w_k[q])
 
     assert w_k.shape == (nkpt, nip, nip)
 

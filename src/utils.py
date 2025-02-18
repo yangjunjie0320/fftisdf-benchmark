@@ -107,9 +107,13 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None, read
 
     if kmesh is not None:
         from pyscf.pbc.scf import KRHF
+        from pyscf.pbc.scf import KRKS
         kpts = cell.get_kpts(kmesh)
-        scf_obj = KRHF(cell, kpts=kpts)
+        # scf_obj = KRHF(cell, kpts=kpts)
+        scf_obj = KRKS(cell, kpts=kpts)
+        scf_obj.xc = "PBE0"
         scf_obj.exxdiv = None
+        scf_obj.verbose = 5
 
         dm0 = None
         if read_dm_from is not None:
@@ -141,6 +145,8 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None, read
     t1 = log.timer("scf", *t0)
 
     dm = scf_obj.make_rdm1()
+    vj, vk = scf_obj.get_jk(cell, dm, with_j=True, with_k=True)
+    vf = scf_obj.get_fock(dm=dm)
     ncycle = scf_obj.cycles
 
     log.info("ncycle = %2d, e_tot = %16.8f", ncycle, e_tot)
@@ -152,6 +158,11 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None, read
     
     from pyscf.lib.chkfile import dump
     dump(chkfile, "dm", dm)
+    dump(chkfile, "ncycle", ncycle)
+    dump(chkfile, "e_tot", e_tot)
+    dump(chkfile, "vj", vj)
+    dump(chkfile, "vk", vk)
+    dump(chkfile, "vf", vf)
     return scf_obj
 
 # Example usage:

@@ -1,7 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=diamond
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=400GB
+#SBATCH --time=04:00:00
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
 #SBATCH --reservation=changroup_standingres
+#SBATCH --ntasks-per-node=1
 
 # Load environment configuration
 source /home/junjiey/anaconda3/bin/activate fftisdf
