@@ -125,10 +125,11 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     coul_kpt = []
     lhs_and_rhs = gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=kpts, blksize=blksize, fswp=df_obj._fswap)
     for q, (metx_q, eta_q) in enumerate(lhs_and_rhs):
+        t0 = (process_clock(), perf_counter())
+
         # xi_q: solution for least-squares fitting
         # rho = xi_q * inpv_kpt.conj().T * inpv_kpt
         # but we would not explicitly compute
-
         ngrid = eta_q.shape[0]
         assert metx_q.shape == (nip, nip)
         assert eta_q.shape == (ngrid, nip)
@@ -229,14 +230,18 @@ def gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=None, blksize=8000, fswp=None):
 
             t1 = log.timer(info % (g0, g1), *t0)
 
-    # for q in range(nkpt):
-    #     yield metx_kpt[q], eta_kpt[q]
-    def load(q):
-        return metx_kpt[q], eta_kpt[q]
+    buf1 = None
+    buf2 = None
     
-    with call_in_background(load) as bload:
-        for q in range(nkpt):
-            bload(q)
+    for q in range(nkpt):
+        yield metx_kpt[q], eta_kpt[q]
+
+    # def load(q):
+    #     return metx_kpt[q], eta_kpt[q]
+    
+    # with call_in_background(load) as bload:
+    #     for q in range(nkpt):
+    #         yield bload(q)
 
 @line_profiler.profile
 def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
@@ -245,9 +250,6 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
 
     ngrid, nip = eta_q.shape
     assert eta_q.shape == (ngrid, nip)
-
-    log = logger.new_logger(df_obj, df_obj.verbose)
-    t0 = (process_clock(), perf_counter())
 
     kpts = df_obj.kpts
     kmesh = df_obj.kmesh
@@ -276,7 +278,7 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     gv = pcell.get_Gv(mesh)
     max_memory = max(2000, df_obj.max_memory - current_memory()[0])
 
-    eta_q = eta_q[:]
+    eta_q = numpy.asarray(eta_q)
     assert eta_q.shape == (ngrid, nip)
     log.debug("eta_q.nbytes = %6.2e GB", eta_q.nbytes / 1e9)
 
@@ -621,8 +623,7 @@ if __name__ == "__main__":
     cell.unit = 'aa'
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
-    cell.ke_cutoff = 400.0
-    cell.precision = 1e-8
+    cell.ke_cutoff = 40.0
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
@@ -640,31 +641,42 @@ if __name__ == "__main__":
     t0 = (process_clock(), perf_counter())
     scf_obj.with_df = FFTDF(cell, kpts)
     scf_obj.with_df.verbose = 5
-    scf_obj.with_df.stdout = cell.stdout
-    # scf_obj.with_df.dump_flags()
-    # scf_obj.with_df.check_sanity()
+    scf_obj.with_df.dump_flags()
+    scf_obj.with_df.check_sanity()
 
-    c0 = 40.0
-    t0 = (process_clock(), perf_counter())
-    # c0 = 40.0
-    scf_obj.with_df = ISDF(cell, kpts=kpts)
-    scf_obj.with_df.c0 = c0
-    scf_obj.with_df.verbose = 5
-    scf_obj.with_df.tol = 1e-8
-    df_obj = scf_obj.with_df
-    df_obj.build()
-    t1 = log.timer("-> ISDF build", *t0)
+    vj0 = numpy.zeros((nkpt, nao, nao))
+    vk0 = numpy.zeros((nkpt, nao, nao))
+    vj0, vk0 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+    vjk0 = vj0 - 0.5 * vk0
+    vj0 = vj0.reshape(nkpt, nao, nao)
+    vk0 = vk0.reshape(nkpt, nao, nao)
+    t1 = log.timer("-> FFTDF JK", *t0)
 
-    t0 = (process_clock(), perf_counter())
-    vj1 = numpy.zeros((nkpt, nao, nao))
-    vk1 = numpy.zeros((nkpt, nao, nao))
-    vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
-    vj1 = vj1.reshape(nkpt, nao, nao)
-    vk1 = vk1.reshape(nkpt, nao, nao)
-    t1 = log.timer("-> ISDF JK", *t0)
+    for c0 in [5.0, 10.0, 15.0, 20.0]:
+        t0 = (process_clock(), perf_counter())
+        # c0 = 40.0
+        scf_obj.with_df = ISDF(cell, kpts=kpts)
+        scf_obj.with_df.c0 = c0
+        scf_obj.with_df.verbose = 5
+        scf_obj.with_df.tol = 1e-10
+        df_obj = scf_obj.with_df
+        df_obj.build()
+        t1 = log.timer("-> ISDF build", *t0)
 
-    err = abs(vj0 - vj1).max()
-    print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+        t0 = (process_clock(), perf_counter())
+        vj1 = numpy.zeros((nkpt, nao, nao))
+        vk1 = numpy.zeros((nkpt, nao, nao))
+        vj1, vk1 = scf_obj.get_jk(dm_kpts=dm_kpts, with_j=True, with_k=True)
+        vjk1 = vj1 - 0.5 * vk1
+        vj1 = vj1.reshape(nkpt, nao, nao)
+        vk1 = vk1.reshape(nkpt, nao, nao)
+        t1 = log.timer("-> ISDF JK", *t0)
 
-    err = abs(vk0 - vk1).max()
-    print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
+        err = abs(vj0 - vj1).max()
+        print("-> ISDF c0 = % 6.2f, vj err = % 6.4e" % (c0, err))
+
+        err = abs(vk0 - vk1).max()
+        print("-> ISDF c0 = % 6.2f, vk err = % 6.4e" % (c0, err))
+
+        err = abs(vjk0 - vjk1).max()
+        print("-> ISDF c0 = % 6.2f, vjk err = % 6.4e" % (c0, err))

@@ -114,6 +114,7 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
 
         from pyscf.pbc.scf.addons import smearing_
         scf_obj = smearing_(scf_obj, sigma=0.1, method="fermi")
+        scf_obj.conv_tol = 1e-6
 
     else:
         raise NotImplementedError

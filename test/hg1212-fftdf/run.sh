@@ -1,7 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=hg1212
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=400GB 
+#SBATCH --time=04:00:00
 #SBATCH --nodes=1
+#SBATCH --reservation=changroup_standingres
 #SBATCH --ntasks-per-node=1
-#SBATCH --reservation=changroup_debug
 
 # Load environment configuration
 source /home/junjiey/anaconda3/bin/activate fftisdf
@@ -23,6 +27,7 @@ export PYSCF_TMPDIR=$TMPDIR
 mkdir -p $TMPDIR
 echo TMPDIR       = $TMPDIR
 echo PYSCF_TMPDIR = $PYSCF_TMPDIR
+unlink tmp; ln -s $PYSCF_TMPDIR tmp
 
 echo ""; which python
 python -c "import pyscf; print(pyscf.__version__)"
@@ -33,5 +38,5 @@ export PYTHONPATH=/home/junjiey/work/fftisdf-benchmark-new/src/:$PYTHONPATH;
 export PYTHONPATH=/central/home/junjiey/packages/libdmet/libdmet2-main/:$PYTHONPATH;
 export PYSCF_EXT_PATH=$HOME/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 # cp $PYSCF_EXT_PATH/pyscf/isdf/tests/04-00-isdf_local.py main.py
-kernprof -l main.py
-
+# kernprof -l main.py
+python main.py
