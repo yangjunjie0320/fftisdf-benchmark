@@ -244,6 +244,9 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     ngrid, nip = eta_q.shape
     assert eta_q.shape == (ngrid, nip)
 
+    log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
+
     kpts = df_obj.kpts
     kmesh = df_obj.kmesh
     nkpt = len(kpts)
@@ -269,39 +272,28 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     kern_q = numpy.zeros((nip, nip), dtype=numpy.complex128)
 
     gv = pcell.get_Gv(mesh)
-    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.2
-    blksize = max(max_memory * 1e6 // (ngrid * 16), 1)
-    blksize = min(int(blksize), nip)
 
-    print("df_obj.max_memory = %6.2f GB", df_obj.max_memory / 1e3)
-    print("current_memory()[0] = %6.2f GB", current_memory()[0] / 1e3)
-
-    log.debug("blksize = %d, nip = %d, max_memory = %6.2f GB", blksize, nip, max_memory / 1e3)
-    log.debug("ngrid * 16 * blksize = %6.2f GB", ngrid * 16 * blksize / 1e9)
+    eta_q = eta_q[:]
+    assert eta_q.shape == (ngrid, nip)
+    log.debug("eta_q.nbytes = %6.2e GB", eta_q.nbytes / 1e9)
 
     t = numpy.dot(coord, kpt)
     f = numpy.exp(-1j * t)
     assert f.shape == (ngrid, )
 
-    for i0, i1 in lib.prange(0, nip, blksize):
-        eta_qi = eta_q[:, i0:i1]
+    v_qi = pbctools.fft(eta_q.T * f, mesh)
+    v_qi *= pbctools.get_coulG(pcell, k=kpt, mesh=mesh, Gv=gv)
+    v_qi *= pcell.vol / ngrid
 
-        v_qi = pbctools.fft(eta_qi.T * f, mesh)
-        v_qi *= pbctools.get_coulG(pcell, k=kpt, mesh=mesh, Gv=gv)
-        v_qi *= pcell.vol / ngrid
+    from pyscf.pbc.tools.pbc import ifft
+    w_qi = ifft(v_qi, mesh) * f.conj()
+    w_qi = w_qi.T
+    assert w_qi.shape == (ngrid, nip)
 
-        from pyscf.pbc.tools.pbc import ifft
-        w_qi = ifft(v_qi, mesh) * f.conj()
-        w_qi = w_qi.T
-        assert w_qi.shape == (ngrid, i1 - i0)
-
-        for j0, j1 in lib.prange(0, nip, blksize):
-            eta_qj = eta_q[:, j0:j1]
-            kern_qij = numpy.dot(w_qi.T, eta_qj.conj())
-            assert kern_qij.shape == (i1 - i0, j1 - j0)
-            kern_q[i0:i1, j0:j1] = kern_qij
-
+    kern_q = numpy.dot(w_qi.T, eta_q.conj())
+    assert kern_q.shape == (nip, nip)
     return kern_q
+
 
 
 @line_profiler.profile
