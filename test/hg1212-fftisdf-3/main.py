@@ -36,17 +36,17 @@ for ke_cutoff in [50, 100, 150, 200]:
     kmesh = [1, 1, 1]
     cell.spin = 0
     cell.verbose = 5
-    cell.precision = 1e-8
+    cell.precision = 1e-6
     cell.ke_cutoff = ke_cutoff
     cell.max_memory = PYSCF_MAX_MEMORY * 0.6
     cell.build()
 
     kpts = cell.get_kpts(kmesh)
 
-    from fft_isdf_new import ISDF
+    from fft_isdf import ISDF
     df_obj = ISDF(cell, kpts=kpts)
     df_obj.c0 = 5.0
-    df_obj.tol = 1e-8
+    df_obj.tol = 1e-6
     df_obj.verbose = 10
     df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 

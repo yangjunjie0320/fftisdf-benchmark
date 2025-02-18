@@ -95,7 +95,7 @@ def get_jk_time(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=No
     dump(chkfile, "vj", vj1)
     dump(chkfile, "vk", vk1)
 
-def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
+def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None, read_dm_from=None):
     from pyscf import lib
     from pyscf.lib import logger
     from pyscf.lib.logger import perf_counter
@@ -110,7 +110,16 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
         kpts = cell.get_kpts(kmesh)
         scf_obj = KRHF(cell, kpts=kpts)
         scf_obj.exxdiv = None
-        dm0 = scf_obj.get_init_guess(key="minao")
+
+        dm0 = None
+        if read_dm_from is not None:
+            assert os.path.exists(read_dm_from), f"DM file {read_dm_from} does not exist"
+            from pyscf.lib.chkfile import load
+            dm0 = load(read_dm_from, "dm")
+            print("using DM from file %s" % read_dm_from)
+        else:
+            dm0 = scf_obj.get_init_guess(key="minao")
+            print("using DM from minao")
 
         from pyscf.pbc.scf.addons import smearing_
         scf_obj = smearing_(scf_obj, sigma=0.1, method="fermi")
@@ -119,9 +128,13 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
     else:
         raise NotImplementedError
 
-    t0 = (process_clock(), perf_counter())
-    scf_obj.with_df = df_obj.build()
-    t1 = log.timer("build", *t0)
+    if getattr(df_obj, "_cderi", None) is not None:
+        print("using pre-built cderi")
+        scf_obj.with_df = df_obj
+    else:
+        t0 = (process_clock(), perf_counter())
+        scf_obj.with_df = df_obj.build()
+        t1 = log.timer("build", *t0)
 
     t0 = (process_clock(), perf_counter())
     e_tot = scf_obj.kernel(dm0)
@@ -139,6 +152,7 @@ def scf(cell, kmesh=None, df_obj=None, tmp=None, chkfile=None, stdout=None):
     
     from pyscf.lib.chkfile import dump
     dump(chkfile, "dm", dm)
+    return scf_obj
 
 # Example usage:
 if __name__ == "__main__":

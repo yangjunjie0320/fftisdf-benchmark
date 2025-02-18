@@ -236,13 +236,6 @@ def gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=None, blksize=8000, fswp=None):
     for q in range(nkpt):
         yield metx_kpt[q], eta_kpt[q]
 
-    # def load(q):
-    #     return metx_kpt[q], eta_kpt[q]
-    
-    # with call_in_background(load) as bload:
-    #     for q in range(nkpt):
-    #         yield bload(q)
-
 @line_profiler.profile
 def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     log = logger.new_logger(df_obj, df_obj.verbose)
@@ -250,6 +243,9 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
 
     ngrid, nip = eta_q.shape
     assert eta_q.shape == (ngrid, nip)
+
+    log = logger.new_logger(df_obj, df_obj.verbose)
+    t0 = (process_clock(), perf_counter())
 
     kpts = df_obj.kpts
     kmesh = df_obj.kmesh
@@ -276,9 +272,8 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     kern_q = numpy.zeros((nip, nip), dtype=numpy.complex128)
 
     gv = pcell.get_Gv(mesh)
-    max_memory = max(2000, df_obj.max_memory - current_memory()[0])
 
-    eta_q = numpy.asarray(eta_q)
+    eta_q = eta_q[:]
     assert eta_q.shape == (ngrid, nip)
     log.debug("eta_q.nbytes = %6.2e GB", eta_q.nbytes / 1e9)
 
@@ -294,12 +289,6 @@ def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     w_qi = ifft(v_qi, mesh) * f.conj()
     w_qi = w_qi.T
     assert w_qi.shape == (ngrid, nip)
-
-    # for j0, j1 in lib.prange(0, nip, blksize):
-    #     kern_qij = numpy.dot(w_qi.T, eta_q[:, j0:j1].conj())
-    #     assert kern_qij.shape == (i1 - i0, j1 - j0)
-    #     kern_q[i0:i1, j0:j1] = kern_qij
-    #     # kern_q[j0:j1, i0:i1] = kern_qij.conj()
 
     kern_q = numpy.dot(w_qi.T, eta_q.conj())
     assert kern_q.shape == (nip, nip)
@@ -371,7 +360,7 @@ def get_j_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
 
     if is_zero(kpts_band):
         vj_kpts = vj_kpts.real
-    return _format_jks(vj_kpts, dms, input_band, kpts)
+    return _format_jks(vj_kpts, dm_kpts, input_band, kpts)
 
 @line_profiler.profile
 def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=None,
@@ -433,7 +422,7 @@ def get_k_kpts(df_obj, dm_kpts, hermi=1, kpts=numpy.zeros((1, 3)), kpts_band=Non
         vks.append([xk.conj().T @ vk @ xk for xk, vk in zip(inpv_kpt, v_kpt)])
 
     vks = numpy.asarray(vks).reshape(nset, nkpt, nao, nao)
-    return _format_jks(vks, dms, input_band, kpts)
+    return _format_jks(vks, dm_kpts, input_band, kpts)
 
 class InterpolativeSeparableDensityFitting(FFTDF):
     wrap_around = False

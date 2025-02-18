@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=hg1212
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=800GB 
+#SBATCH --mem=400GB 
 #SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --reservation=changroup_standingres

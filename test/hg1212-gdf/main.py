@@ -38,17 +38,14 @@ for ke_cutoff in [50, 100, 150, 200]:
     cell.verbose = 5
     cell.precision = 1e-8
     cell.ke_cutoff = ke_cutoff
-    cell.max_memory = PYSCF_MAX_MEMORY * 0.6
+    cell.max_memory = PYSCF_MAX_MEMORY
     cell.build()
 
     kpts = cell.get_kpts(kmesh)
 
-    from fft_isdf_new import ISDF
-    df_obj = ISDF(cell, kpts=kpts)
-    df_obj.c0 = 5.0
-    df_obj.tol = 1e-8
+    from pyscf.pbc.df import GDF
+    df_obj = GDF(cell, kpts=kpts)
     df_obj.verbose = 10
-    df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 
     from utils import scf
-    scf(cell, kmesh=kmesh, df_obj=df_obj, tmp=TMPDIR, chkfile="hg1212-fftisdf-%d.chk" % ke_cutoff)
+    scf(cell, kmesh=kmesh, df_obj=df_obj, tmp=TMPDIR, chkfile="hg1212-fftdf-%d.chk" % ke_cutoff)

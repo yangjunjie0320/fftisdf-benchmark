@@ -385,3 +385,4 @@ Smearing method = fermi
 DF object = <pyscf.pbc.df.fft.FFTDF object at 0x7f6079152dc0>
 Set gradient conv threshold to 0.001
 fft_jk: get_k_kpts max_memory 407088.279552  blksize 35
+slurmstepd: error: *** JOB 47401474 ON hpc-35-02 CANCELLED AT 2025-02-17T22:50:50 ***

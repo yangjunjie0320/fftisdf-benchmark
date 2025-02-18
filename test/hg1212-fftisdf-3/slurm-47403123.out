@@ -1,8 +1,8 @@
-OMP_NUM_THREADS = 64
+OMP_NUM_THREADS = 32
 MKL_NUM_THREADS = 1
-PYSCF_MAX_MEMORY = 409600
-TMPDIR = /central/scratch/yangjunjie//hg1212/47401481/
-PYSCF_TMPDIR = /central/scratch/yangjunjie//hg1212/47401481/
+PYSCF_MAX_MEMORY = 819200
+TMPDIR = /central/scratch/yangjunjie//hg1212/47403123/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//hg1212/47403123/
 
 /home/junjiey/anaconda3/envs/fftisdf/bin/python
 2.8.0
@@ -13,7 +13,7 @@ WARNING!
   linear dependence and numerical instability.  You can set  cell.exp_to_discard=0.1
   to remove the diffused Gaussians whose exponents are less than 0.1.
 
-#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark-new/test/hg1212-fftisdf/main.py ****
+#INFO: **** input file is /central/home/junjiey/work/fftisdf-benchmark-new/test/hg1212-fftisdf-3/main.py ****
 import os, sys
 import time
 
@@ -52,42 +52,39 @@ for ke_cutoff in [50, 100, 150, 200]:
     kmesh = [1, 1, 1]
     cell.spin = 0
     cell.verbose = 5
-    cell.precision = 1e-8
+    cell.precision = 1e-6
     cell.ke_cutoff = ke_cutoff
     cell.max_memory = PYSCF_MAX_MEMORY * 0.6
     cell.build()
 
     kpts = cell.get_kpts(kmesh)
 
-    print("nao = ", cell.nao_nr())
-
-    from fft_isdf_new import ISDF
+    from fft_isdf import ISDF
     df_obj = ISDF(cell, kpts=kpts)
-    df_obj.c0 = 10.0
-    df_obj.tol = 1e-8
+    df_obj.c0 = 5.0
+    df_obj.tol = 1e-6
     df_obj.verbose = 10
     df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
-    df_obj.build()
 
     from utils import scf
     scf(cell, kmesh=kmesh, df_obj=df_obj, tmp=TMPDIR, chkfile="hg1212-fftisdf-%d.chk" % ke_cutoff)
 #INFO: ******************** input file end ********************
 
 
-System: uname_result(system='Linux', node='hpc-35-01.cm.cluster', release='5.14.0-362.24.1.el9_3.x86_64', version='#1 SMP PREEMPT_DYNAMIC Thu Feb 15 07:18:13 EST 2024', machine='x86_64')  Threads 64
+System: uname_result(system='Linux', node='hpc-81-37.cm.cluster', release='5.14.0-427.13.1.el9_4.x86_64', version='#1 SMP PREEMPT_DYNAMIC Wed Apr 10 10:29:16 EDT 2024', machine='x86_64')  Threads 32
 Python 3.9.0 (default, Nov 15 2020, 14:28:56) 
 [GCC 7.3.0]
 numpy 1.26.4  scipy 1.13.1  h5py 3.12.1
-Date: Mon Feb 17 22:33:13 2025
+Date: Tue Feb 18 00:44:05 2025
 PySCF version 2.8.0
 PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pyscf
 
-[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//hg1212/47401481/
-[ENV] PYSCF_MAX_MEMORY 409600
+[ENV] PYSCF_TMPDIR /central/scratch/yangjunjie//hg1212/47403123/
+[ENV] PYSCF_MAX_MEMORY 819200
 [ENV] PYSCF_EXT_PATH /home/junjiey/packages/pyscf-forge/pyscf-forge-yangjunjie-non-orth/
 [CONFIG] conf_file None
 [INPUT] verbose = 5
-[INPUT] max_memory = 245760.0 
+[INPUT] max_memory = 491520.0 
 [INPUT] num. atoms = 48
 [INPUT] num. electrons = 464
 [INPUT] charge = 0
@@ -145,24 +142,6 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
 [INPUT] 48 Ca     7.710400000000   0.000000000000   6.332550000000 AA   14.570544310846   0.000000000000  11.966785170114 Bohr   0.0
 [INPUT] ---------------- BASIS SET ---------------- 
 [INPUT] l, kappa, [nprim/nctr], expnt,             c_1 c_2 ...
-[INPUT] Cu4
-[INPUT] 0    0    [4    /2   ]  9.083669          -0.3622183 0.1093857
-                                2.375895          0.7613242 -0.1645715
-                                0.936687          0.5169596 0.03951353
-                                0.116029          -0.08984813 -0.6615456
-[INPUT] 0    0    [1    /1   ]  0.041075             1
-[INPUT] 1    0    [5    /2   ]  11.566615         -0.1354626 0.02324231
-                                4.918638          0.4749338 -0.075312
-                                2.290556          0.709813 -0.02250031
-                                1.043427          0.4923407 -0.1498897
-                                0.429044          0.09926123 0.1645767
-[INPUT] 1    0    [1    /1   ]  0.13904              1
-[INPUT] 2    0    [3    /1   ]  8.082843          -0.3663286
-                                3.149999          -0.5868172
-                                1.067441          -0.6124219
-[INPUT] 2    0    [1    /1   ]  0.308911             1
-[INPUT] 3    0    [2    /1   ]  4.078302          -0.4962922
-                                1.072255          -0.8681555
 [INPUT] Cu3
 [INPUT] 0    0    [4    /2   ]  9.083669          -0.3622183 0.1093857
                                 2.375895          0.7613242 -0.1645715
@@ -181,7 +160,7 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
 [INPUT] 2    0    [1    /1   ]  0.308911             1
 [INPUT] 3    0    [2    /1   ]  4.078302          -0.4962922
                                 1.072255          -0.8681555
-[INPUT] O1
+[INPUT] O3
 [INPUT] 0    0    [5    /1   ]  14.482841         -0.03658934
                                 6.284704          -0.1303224
                                 1.164884          0.3769821
@@ -195,7 +174,55 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
                                 0.157848          0.208873
 [INPUT] 1    0    [1    /1   ]  0.27467              1
 [INPUT] 2    0    [1    /1   ]  1.200187             1
-[INPUT] Cu1
+[INPUT] Hg
+[INPUT] 0    0    [2    /1   ]  1.9157            0.135789
+                                0.979308          -0.4520937
+[INPUT] 0    0    [1    /1   ]  0.150255             1
+[INPUT] 0    0    [1    /1   ]  0.054019             1
+[INPUT] 1    0    [2    /1   ]  2.173806          -0.008329602
+                                0.867935          0.04694467
+[INPUT] 1    0    [1    /1   ]  0.34654              1
+[INPUT] 1    0    [1    /1   ]  0.138363             1
+[INPUT] 2    0    [3    /1   ]  3.674806          0.02455544
+                                1.622342          -0.6047205
+                                0.768788          -0.6547334
+[INPUT] 2    0    [1    /1   ]  0.339247             1
+[INPUT] 2    0    [1    /1   ]  0.136379             1
+[INPUT] 3    0    [2    /1   ]  1.330141          0.5428473
+                                0.507359          0.8398314
+[INPUT] Cu2
+[INPUT] 0    0    [4    /2   ]  9.083669          -0.3622183 0.1093857
+                                2.375895          0.7613242 -0.1645715
+                                0.936687          0.5169596 0.03951353
+                                0.116029          -0.08984813 -0.6615456
+[INPUT] 0    0    [1    /1   ]  0.041075             1
+[INPUT] 1    0    [5    /2   ]  11.566615         -0.1354626 0.02324231
+                                4.918638          0.4749338 -0.075312
+                                2.290556          0.709813 -0.02250031
+                                1.043427          0.4923407 -0.1498897
+                                0.429044          0.09926123 0.1645767
+[INPUT] 1    0    [1    /1   ]  0.13904              1
+[INPUT] 2    0    [3    /1   ]  8.082843          -0.3663286
+                                3.149999          -0.5868172
+                                1.067441          -0.6124219
+[INPUT] 2    0    [1    /1   ]  0.308911             1
+[INPUT] 3    0    [2    /1   ]  4.078302          -0.4962922
+                                1.072255          -0.8681555
+[INPUT] O2
+[INPUT] 0    0    [5    /1   ]  14.482841         -0.03658934
+                                6.284704          -0.1303224
+                                1.164884          0.3769821
+                                0.468441          0.5431582
+                                0.184961          0.208414
+[INPUT] 0    0    [1    /1   ]  0.221262             1
+[INPUT] 1    0    [5    /1   ]  10.213949         0.06086918
+                                3.622324          0.1870524
+                                1.299051          0.3714779
+                                0.463791          0.4256889
+                                0.157848          0.208873
+[INPUT] 1    0    [1    /1   ]  0.27467              1
+[INPUT] 2    0    [1    /1   ]  1.200187             1
+[INPUT] Cu4
 [INPUT] 0    0    [4    /2   ]  9.083669          -0.3622183 0.1093857
                                 2.375895          0.7613242 -0.1645715
                                 0.936687          0.5169596 0.03951353
@@ -227,22 +254,6 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
                                 0.157848          0.208873
 [INPUT] 1    0    [1    /1   ]  0.27467              1
 [INPUT] 2    0    [1    /1   ]  1.200187             1
-[INPUT] Hg
-[INPUT] 0    0    [2    /1   ]  1.9157            0.135789
-                                0.979308          -0.4520937
-[INPUT] 0    0    [1    /1   ]  0.150255             1
-[INPUT] 0    0    [1    /1   ]  0.054019             1
-[INPUT] 1    0    [2    /1   ]  2.173806          -0.008329602
-                                0.867935          0.04694467
-[INPUT] 1    0    [1    /1   ]  0.34654              1
-[INPUT] 1    0    [1    /1   ]  0.138363             1
-[INPUT] 2    0    [3    /1   ]  3.674806          0.02455544
-                                1.622342          -0.6047205
-                                0.768788          -0.6547334
-[INPUT] 2    0    [1    /1   ]  0.339247             1
-[INPUT] 2    0    [1    /1   ]  0.136379             1
-[INPUT] 3    0    [2    /1   ]  1.330141          0.5428473
-                                0.507359          0.8398314
 [INPUT] Ca
 [INPUT] 0    0    [4    /2   ]  7.213557          -0.04811677 0.06509227
                                 3.953199          0.2795449 -0.3375291
@@ -259,7 +270,7 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
                                 0.31668           0.210131
                                 0.175804          -0.03737671
 [INPUT] 2    0    [1    /1   ]  0.073715             1
-[INPUT] O2
+[INPUT] O1
 [INPUT] 0    0    [5    /1   ]  14.482841         -0.03658934
                                 6.284704          -0.1303224
                                 1.164884          0.3769821
@@ -273,21 +284,7 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
                                 0.157848          0.208873
 [INPUT] 1    0    [1    /1   ]  0.27467              1
 [INPUT] 2    0    [1    /1   ]  1.200187             1
-[INPUT] O3
-[INPUT] 0    0    [5    /1   ]  14.482841         -0.03658934
-                                6.284704          -0.1303224
-                                1.164884          0.3769821
-                                0.468441          0.5431582
-                                0.184961          0.208414
-[INPUT] 0    0    [1    /1   ]  0.221262             1
-[INPUT] 1    0    [5    /1   ]  10.213949         0.06086918
-                                3.622324          0.1870524
-                                1.299051          0.3714779
-                                0.463791          0.4256889
-                                0.157848          0.208873
-[INPUT] 1    0    [1    /1   ]  0.27467              1
-[INPUT] 2    0    [1    /1   ]  1.200187             1
-[INPUT] Cu2
+[INPUT] Cu1
 [INPUT] 0    0    [4    /2   ]  9.083669          -0.3622183 0.1093857
                                 2.375895          0.7613242 -0.1645715
                                 0.936687          0.5169596 0.03951353
@@ -324,57 +321,62 @@ PySCF path  /home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/pys
                                 0.128386          0.1435246
 [INPUT] 2    0    [1    /1   ]  0.067493             1
 
-Ewald components = 514.671494873007, -1896.43816646742, 440.44678037039
+Ewald components = 514.671494873006, -1896.43816646742, 440.44678037039
 nuclear repulsion = -941.319891224022
 number of shells = 304
 number of NR pGTOs = 1976
 number of NR cGTOs = 952
 basis = cc-pvdz.dat
 ecp = {}
-CPU time:        16.02
+CPU time:         4.77
 lattice vectors  a1 [14.570544311, 0.000000000, 0.000000000]
                  a2 [0.000000000, 14.570544311, 0.000000000]
                  a3 [0.000000000, 0.000000000, 23.933570340]
 dimension = 3
 low_dim_ft_type = None
 Cell volume = 5081.12
-rcut = 37.04881233010331 (nimgs = [3 3 2])
-lattice sum = 447 cells
-precision = 1e-08
+rcut = 32.82594169550489 (nimgs = [3 3 2])
+lattice sum = 431 cells
+precision = 1e-06
 pseudo = {'Cu1': 'GTH-PBE-q19', 'Cu2': 'GTH-PBE-q19', 'O1': 'gth-pbe', 'O2': 'gth-pbe', 'Cu3': 'GTH-PBE-q19', 'Cu4': 'GTH-PBE-q19', 'O3': 'gth-pbe', 'O4': 'gth-pbe', 'Hg': 'gth-pbe', 'Ba': 'gth-pbe', 'Ca': 'gth-pbe'}
 ke_cutoff = 50
     = [49 49 79] mesh (189679 PWs)
-nao =  952
+Density of valence part of ANO basis will be used as initial guess for Hg
+Density of valence part of ANO basis will be used as initial guess for Ba
+Density of valence part of ANO basis will be used as initial guess for Ca
+Big error detected in the electron number of initial guess density matrix (Ne/cell = 457.562)!
+  This can cause huge error in Fock matrix and lead to instability in SCF for low-dimensional systems.
+  DM is normalized wrt the number of electrons 464.0
+using DM from minao
 
 
-******** <class 'fft_isdf_new.InterpolativeSeparableDensityFitting'> ********
+******** <class 'fft_isdf.InterpolativeSeparableDensityFitting'> ********
 mesh = [49 49 79] (189679 PWs)
 len(kpts) = 1
     kpts = [[0. 0. 0.]]
-<class 'fft_isdf_new.InterpolativeSeparableDensityFitting'> does not have attributes  tol blksize c0 kmesh
+Overwritten attributes  c0 tol kmesh  of <class 'fft_isdf.InterpolativeSeparableDensityFitting'>
 
-WARN: ke_cutoff/mesh (50 / [49 49 79]) is not enough for FFTDF to get integral accuracy 1e-08.
+WARN: ke_cutoff/mesh (50 / [49 49 79]) is not enough for FFTDF to get integral accuracy 1e-06.
 Coulomb integral error is ~ 6.2e+03 Eh.
-Recommended ke_cutoff/mesh are 1200.94 / [229 229 375].
+Recommended ke_cutoff/mesh are 982.934 / [207 207 339].
 
 kmesh = [1 1 1]
+Input parent grid mesh = [17, 17, 17], ke_cutoff =  21.25
+Final parent grid size = [19 17 29]
+
+Selecting interpolation points
+nkpts = 1, nao = 952, c0 =   5.00
+Parent grid mesh = [19 17 29], grid size = 9367
 
 WARN: The parent grid might be too coarse.
 
-Pivoted Cholesky rank = 15435, nip = 9520, estimated error = 5.01e-04
-nip = 9520, cisdf =  10.00
-    CPU time for get interpolating vectors    499.51 sec
-blksize =  161002
-nkpt * nip * 16 * blksize =  24.52 GB
+    CPU time for select interpolation points     84.42 sec, wall time      4.68 sec
+Pivoted Cholesky rank = 9367, nip = 4760, estimated error = 6.04e-03
+Number of interpolation points = 4760, effective CISDF =   5.00
+    CPU time for building left-hand side     10.20 sec, wall time      0.74 sec
 
-nkpt = 1, nao = 952
-ngrid = 189679, blksize = 161002
-Saving eta_kpt to /central/scratch/yangjunjie/hg1212/47401481/63y9sae1
-eta_kpt.nbytes = 2.89e+01 GB
-blksize = 161002, ngrid = 189679
-    CPU time for aoR_loop: [       0,   161002]    776.01 sec, wall time     35.97 sec
-    CPU time for aoR_loop: [  161002,   189679]    178.51 sec, wall time     14.92 sec
-df_obj.max_memory = %6.2f GB 245.76
-current_memory()[0] = %6.2f GB 44.454510592
-blksize = 9520, nip = 9520, max_memory =  40.26 GB
-ngrid * 16 * blksize =  28.89 GB
+kpt = 1, ngrid = 189679, nao = 952
+ngrid = 189679, blksize = 644302, nip = 4760
+required disk space = 14 GB
+finished creating fswp: /central/scratch/yangjunjie/hg1212/47403123/tfga3j4e
+blksize = 644302, memory for aoR_loop = 49070 MB

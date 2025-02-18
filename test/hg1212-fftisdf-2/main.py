@@ -18,7 +18,7 @@ nelec_dop = 0
 
 cell = read_poscar(fname="./Hg1212-2x2.vasp")
 
-for ke_cutoff in [50, 100, 150, 200]:
+for ke_cutoff in [300, 400, 500, 600]:
     cell.basis = 'cc-pvdz.dat'
     cell.pseudo = {
                 'Cu1': 'GTH-PBE-q19', 
@@ -51,4 +51,4 @@ for ke_cutoff in [50, 100, 150, 200]:
     df_obj._isdf = os.path.join(TMPDIR, "tmp.chk")
 
     from utils import scf
-    scf(cell, kmesh=kmesh, df_obj=df_obj, tmp=TMPDIR, chkfile="hg1212-fftisdf-%d.chk" % ke_cutoff)
+    scf(cell, kmesh=kmesh, df_obj=df_obj, tmp=TMPDIR, chkfile="hg1212-fftisdf-%d.chk" % ke_cutoff, read_dm_from="/central/home/junjiey/work/fftisdf-benchmark-new/test/hg1212.chk")
