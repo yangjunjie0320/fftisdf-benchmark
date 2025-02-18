@@ -78,8 +78,8 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
         assert metx_q.shape == (nip, nip)
         assert eta_q.shape == (ngrid, nip)
 
-        from fft_isdf_new import get_coul
-        kern_q = get_coul(
+        from fft_isdf_new import get_kern
+        kern_q = get_kern(
             df_obj, eta_q, kpt=kpts[q], 
             tol=tol, fswp=fswp
         )

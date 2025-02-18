@@ -229,18 +229,14 @@ def gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=None, blksize=8000, fswp=None):
 
             t1 = log.timer(info % (g0, g1), *t0)
 
-    buf1 = None
-    buf2 = None
+    # for q in range(nkpt):
+    #     yield metx_kpt[q], eta_kpt[q]
+    def load(q):
+        return metx_kpt[q], eta_kpt[q]
     
-    for q in range(nkpt):
-        yield metx_kpt[q], eta_kpt[q]
-
-    # def load(q):
-    #     return metx_kpt[q], eta_kpt[q]
-    
-    # with call_in_background(load) as bload:
-    #     for q in range(nkpt):
-    #         yield bload(q)
+    with call_in_background(load) as bload:
+        for q in range(nkpt):
+            bload(q)
 
 @line_profiler.profile
 def get_kern(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):

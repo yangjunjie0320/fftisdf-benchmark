@@ -1,0 +1,62 @@
+OMP_NUM_THREADS = 32
+MKL_NUM_THREADS = 1
+PYSCF_MAX_MEMORY = 204800
+TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47396627/
+PYSCF_TMPDIR = /central/scratch/yangjunjie//diamond-dzvp-444/47396627/
+
+/home/junjiey/anaconda3/envs/fftisdf/bin/python
+2.8.0
+1.13.1
+1.26.4
+
+
+******** <class '__main__.InterpolativeSeparableDensityFitting'> ********
+mesh = [45 45 45] (91125 PWs)
+len(kpts) = 64
+<class '__main__.InterpolativeSeparableDensityFitting'> does not have attributes  tol kmesh blksize c0
+
+WARN: ke_cutoff/mesh (400 / [45 45 45]) is not enough for FFTDF to get integral accuracy 1e-08.
+Coulomb integral error is ~ 1.6e-05 Eh.
+Recommended ke_cutoff/mesh are 569.817 / [53 53 53].
+
+kmesh = [4 4 4]
+
+WARN: The parent grid might be too coarse.
+
+Pivoted Cholesky rank = 1859, nip = 1040, estimated error = 3.60e-04
+nip = 1040, cisdf =  40.00
+    CPU time for get interpolating vectors    134.10 sec
+blksize =  19202
+nkpt * nip * 16 * blksize =  20.45 GB
+
+nkpt = 64, nao = 26
+ngrid = 91125, blksize = 19202
+Saving eta_kpt to /central/scratch/yangjunjie/diamond-dzvp-444/47396627/55k7tmlb
+eta_kpt.nbytes = 9.70e+01 GB
+blksize = 19202, ngrid = 91125
+    CPU time for aoR_loop: [      0,   19202]    365.88 sec, wall time     28.88 sec
+    CPU time for aoR_loop: [  19202,   38404]    404.08 sec, wall time     31.35 sec
+    CPU time for aoR_loop: [  38404,   57606]    391.00 sec, wall time     29.12 sec
+    CPU time for aoR_loop: [  57606,   76808]    393.99 sec, wall time     29.07 sec
+    CPU time for aoR_loop: [  76808,   91125]    295.62 sec, wall time     22.21 sec
+Wrote profile results to main.py.lprof
+Inspect results with:
+python -m line_profiler -rmt "main.py.lprof"
+Traceback (most recent call last):
+  File "/home/junjiey/anaconda3/envs/fftisdf/bin/kernprof", line 11, in <module>
+    sys.exit(main())
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/kernprof.py", line 381, in main
+    execfile(script_file, ns, ns)
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/kernprof.py", line 110, in execfile
+    exec(compile(f.read(), filename, 'exec'), globals, locals)
+  File "main.py", line 655, in <module>
+    df_obj.build()
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/line_profiler/line_profiler.py", line 150, in wrapper
+    result = func(*args, **kwds)
+  File "main.py", line 490, in build
+    inpv_kpt, coul_kpt = build(
+  File "/home/junjiey/anaconda3/envs/fftisdf/lib/python3.9/site-packages/line_profiler/line_profiler.py", line 150, in wrapper
+    result = func(*args, **kwds)
+  File "main.py", line 127, in build
+    for q, (metx_q, eta_q) in enumerate(lhs_and_rhs):
+TypeError: 'NoneType' object is not iterable

@@ -24,6 +24,22 @@ PYSCF_MAX_MEMORY = int(os.environ.get("PYSCF_MAX_MEMORY", 2000))
 # *_full: full array, shapes as (nspc * x, nspc * x)
 # *_k1, *_k2: the k-space array at specified k-point
 
+def kpts_to_kmesh(df_obj, kpts):
+    cell = df_obj.cell
+    from pyscf.pbc.tools.k2gamma import kpts_to_kmesh
+    kmesh = kpts_to_kmesh(cell, kpts)
+
+    # [1] check if kpts is identical to df_obj.kpts
+    assert numpy.allclose(kpts, df_obj.kpts)
+
+    # [2] check if kmesh is identical to df_obj.kmesh
+    assert numpy.allclose(kmesh, df_obj.kmesh)
+
+    # [3] check if kpts is uniform
+    assert numpy.allclose(kpts, cell.get_kpts(kmesh))
+
+    return kpts, kmesh
+
 def spc_to_kpt(m_spc, phase):
     """Convert a matrix from the stripe form (in super-cell)
     to the k-space form.
@@ -99,7 +115,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     log.debug("nip = %d, cisdf = %6.2f", nip, nip / nao)
     t1 = log.timer("get interpolating vectors")
     
-    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.2
+    max_memory = max(2000, df_obj.max_memory - current_memory()[0]) * 0.1
     blksize = max(max_memory * 1e6 / (nkpt * nip * 16), 8000)
     blksize = int(blksize)
 
@@ -107,18 +123,8 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     print("nkpt * nip * 16 * blksize = %6.2f GB" % (nkpt * nip * 16 * blksize / 1e9))
 
     coul_kpt = []
-    for q in range(nkpt):
-        t0 = (process_clock(), perf_counter())
-        from pyscf.lib import H5TmpFile
-        fswp = H5TmpFile()
-
-        # metx_q: metric for least-squares
-        # eta_q: right-hand side for least-squares
-        metx_q, eta_q = get_lhs_and_rhs(
-            df_obj, inpv_kpt, kpt=kpts[q], 
-            fswp=fswp, blksize=blksize
-        )
-
+    lhs_and_rhs = gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=kpts, blksize=blksize, fswp=df_obj._fswap)
+    for q, (metx_q, eta_q) in enumerate(lhs_and_rhs):
         # xi_q: solution for least-squares fitting
         # rho = xi_q * inpv_kpt.conj().T * inpv_kpt
         # but we would not explicitly compute
@@ -129,7 +135,7 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
 
         kern_q = get_coul(
             df_obj, eta_q, kpt=kpts[q], 
-            tol=tol, fswp=fswp
+            tol=tol, fswp=df_obj._fswap
         )
         
         coul_q, rank = lstsq(metx_q, kern_q, tol=tol)
@@ -143,9 +149,8 @@ def build(df_obj, c0=None, kpts=None, kmesh=None):
     return inpv_kpt, coul_kpt
 
 @line_profiler.profile
-def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
+def gen_lhs_and_rhs(df_obj, inpv_kpt, kpts=None, blksize=8000, fswp=None):
     log = logger.new_logger(df_obj, df_obj.verbose)
-    t0 = (process_clock(), perf_counter())
 
     grids = df_obj.grids
     assert grids is not None
@@ -154,15 +159,11 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
     ngrid = coord.shape[0]
 
     from pyscf.pbc.tools.k2gamma import kpts_to_kmesh
-    kpts = df_obj.kpts
-    kmesh = df_obj.kmesh
+    kmesh = kpts_to_kmesh(df_obj.cell, kpts)
+    assert numpy.allclose(kpts, df_obj.kpts)
+
     nkpt = nspc = len(kpts)
     assert numpy.prod(kmesh) == nkpt
-
-    ix = numpy.where(numpy.linalg.norm(kpts - kpt, axis=1) < 1e-10)[0]
-    assert len(ix) == 1
-    q = ix[0]
-    assert numpy.allclose(kpts[q], kpt)
 
     pcell = df_obj.cell
     nao = pcell.nao_nr()
@@ -178,7 +179,6 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
 
     log.debug("\nnkpt = %d, nao = %d", nkpt, nao)
     log.debug("ngrid = %d, blksize = %d", ngrid, blksize)
-    log.debug("required disk space = %d GB", ngrid * nip * 16 / 1e9)
 
     t_kpt = numpy.asarray([xk.conj() @ xk.T for xk in inpv_kpt])
     assert t_kpt.shape == (nkpt, nip, nip)
@@ -186,38 +186,41 @@ def get_lhs_and_rhs(df_obj, inpv_kpt, kpt=None, blksize=8000, fswp=None):
     t_spc = kpt_to_spc(t_kpt, phase)
     assert t_spc.shape == (nspc, nip, nip)
 
-    aq = spc_to_kpt(t_spc * t_spc, phase)[q]
-    bq = None
+    metx_kpt = spc_to_kpt(t_spc * t_spc, phase)
 
+    eta_kpt = None
     if fswp is not None:
-        bq = fswp.create_dataset("rhs_q", shape=(ngrid, nip), dtype=numpy.complex128)
-        log.debug("Saving rhs_q to %s", fswp.filename)
+        eta_kpt = fswp.create_dataset("eta_kpt", shape=(nkpt, ngrid, nip), dtype=numpy.complex128)
+        log.debug("Saving eta_kpt to %s", fswp.filename)
+        log.debug("eta_kpt.nbytes = %6.2e GB", eta_kpt.nbytes / 1e9)
     else:
-        bq = numpy.zeros((ngrid, nip), dtype=numpy.complex128)
-        log.debug("Memory for rhs_q = %6.2e GB", bq.nbytes / 1e9)
-    assert bq is not None
+        eta_kpt = numpy.zeros((nkpt, ngrid, nip), dtype=numpy.complex128)
+        log.debug("Use in-core when building lhs and rhs, memory used for eta_kpt = %6.2e GB", eta_kpt.nbytes / 1e9)
+    assert eta_kpt is not None
 
     l = len("%s" % ngrid)
-    info = f"aoR_loop: [% {l}d, % {l}d]"
+    info = f"aoR_loop: [% {l+2}d, % {l+2}d]"
+    print(info)
+
     log.debug("blksize = %d, ngrid = %d", blksize, ngrid)
     for ao_kpt, g0, g1 in df_obj.aoR_loop(grids, kpts, 0, blksize=blksize):
+        t0 = (process_clock(), perf_counter())
         t_kpt = numpy.asarray([fk.conj() @ xk.T for fk, xk in zip(ao_kpt[0], inpv_kpt)])
         assert t_kpt.shape == (nkpt, g1 - g0, nip)
 
         t_spc = kpt_to_spc(t_kpt, phase)
         t_spc = t_spc.reshape(nspc, g1 - g0, nip)
-
-        for s, ts in enumerate(t_spc):
-            bq_g0_g1 = phase[s, q] * ts * ts
-            bq[g0:g1, :] += bq_g0_g1
-            bq_g0_g1 = None
+        eta_spc = t_spc * t_spc
+        eta_kpt[:, g0:g1, :] += spc_to_kpt(eta_spc, phase).conj()
 
         log.debug(info, g0, g1)
         t_kpt = None
         t_spc = None
 
-    log.timer("get_lhs_and_rhs", *t0)
-    return aq, bq
+        t1 = log.timer(info % (g0, g1), *t0)
+
+    for q in range(nkpt):
+        yield metx_kpt[q], eta_kpt[q]
 
 @line_profiler.profile
 def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
@@ -259,7 +262,6 @@ def get_coul(df_obj, eta_q, kpt=None, tol=1e-10, fswp=None):
     blksize = max(max_memory * 1e6 // (ngrid * 16), 1)
     blksize = min(int(blksize), nip)
 
-    print("blksize = ", blksize, "nip = ", nip)
     for i0, i1 in lib.prange(0, nip, blksize):
         eta_qi = eta_q[:, i0:i1]
         assert eta_qi.shape == (ngrid, i1 - i0)
@@ -421,10 +423,6 @@ class InterpolativeSeparableDensityFitting(FFTDF):
     _isdf = None
     _isdf_to_save = None
 
-    _x = None
-    _w = None
-    _fswap = None
-
     _keys = ['_isdf', '_coul_kpt', '_inpv_kpt']
 
     def __init__(self, cell, kpts=numpy.zeros((1, 3)), kmesh=None, c0=20.0):
@@ -439,6 +437,10 @@ class InterpolativeSeparableDensityFitting(FFTDF):
 
         self.tol = 1e-10
         self.blksize = 800
+
+        from pyscf.lib import H5TmpFile
+        self._fswap = H5TmpFile()
+        self._keys = ['_isdf', '_coul_kpt', '_inpv_kpt', '_fswap']
 
     def dump_flags(self, verbose=None):
         log = logger.new_logger(self, verbose)
@@ -604,6 +606,7 @@ if __name__ == "__main__":
     cell.exp_to_discard = 0.1
     cell.max_memory = PYSCF_MAX_MEMORY
     cell.ke_cutoff = 400.0
+    cell.precision = 1e-8
     cell.build(dump_input=False)
     nao = cell.nao_nr()
 
